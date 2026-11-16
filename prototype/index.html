@@ -1727,7 +1727,7 @@ document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",
 document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.goto);$("tabBudget").scrollIntoView({behavior:"smooth"});}));
 $("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&metric!=="g1"){metric="price";$("metric").value="price";}
  $("timebar").scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>{stopPlay();setTime(0);TB.play.click();},500);});
-if(location.hash==="#budget")showTab("budget");
+if(location.hash==="#budget")setTimeout(()=>showTab("budget"),0);  // deferred: showTab reads tour state declared further down
 
 $("layersBtn").addEventListener("click",()=>{const o=$("lpanel").hidden;$("lpanel").hidden=!o;$("layersBtn").setAttribute("aria-expanded",o);});
 $("budChip").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a==="edit"){showTab("budget");$("tabBudget").scrollIntoView({behavior:"smooth"});}
