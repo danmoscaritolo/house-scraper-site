@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["PRETTY GULLY VIA TABULAM"]={"st":["Bruxner Rd","Crescent Hill Road"],"p":[[1,"","",null,null,0,485600,[[2434,2333,575000]]],[0,"LOT4","",null,null,0,400000,[[1936,1601,150000]]]]};

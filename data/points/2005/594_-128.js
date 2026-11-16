@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2005/594_-128"]={"loc":["EUMUNGERIE","GILGANDRA"],"st":["Balladoran St","Mahers Hill Rd"],"x":[-131213,-138024],"y":[224760,205618],"p":[130000,105000],"d":[1845,2029],"c":[1791,1949],"u":[0,0],"l":[1,0],"s":[1,0],"n":["440","1"],"un":["",""],"a":[510700,3465],"r":[1.3,0.6],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

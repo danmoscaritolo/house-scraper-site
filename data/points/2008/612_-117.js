@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2008/612_-117"]={"loc":["BUNGAWALBIN"],"st":["Bungawalbin Whiporie Rd"],"x":[319323],"y":[489936],"p":[345000],"d":[3219],"c":[3205],"u":[0],"l":[0],"s":[0],"n":["1256"],"un":[""],"a":[568400],"r":[1.131],"ra":[null],"pp":[null],"pd":[null],"m":[null]};

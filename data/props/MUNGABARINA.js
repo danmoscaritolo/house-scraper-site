@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["MUNGABARINA"]={"st":["Central Reserve Rd","Old Sydney Rd"],"p":[[1,"","",null,null,0,1302,[[2046,2015,175000],[2176,2147,227000]]],[0,"","",null,null,0,345700,[[874,830,390000]]]]};

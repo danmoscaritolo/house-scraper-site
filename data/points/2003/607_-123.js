@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2003/607_-123"]={"loc":["CASTLE DOYLE","HILLGROVE"],"st":["Castledoyle Rd","Scouler St"],"x":[176601,190800],"y":[340904,343089],"p":[297500,542500],"d":[1384,1439],"c":[1334,1404],"u":[0,0],"l":[0,1],"s":[0,1],"n":["1127","4"],"un":["",""],"a":[100000,2023],"r":[1.044,1.831],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

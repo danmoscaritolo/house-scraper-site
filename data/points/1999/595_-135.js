@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["1999/595_-135"]={"loc":["MANDURAMA","PANUARA"],"st":["Belubula Way","Four Mile Creek Rd"],"x":[-105684,-105006],"y":[35188,47435],"p":[58000,840000],"d":[-240,-15],"c":[-282,-57],"u":[0,0],"l":[0,1],"s":[0,1],"n":["1235","2305"],"un":["",""],"a":[20000,5782000],"r":[1.0,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

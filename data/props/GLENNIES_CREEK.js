@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["GLENNIES CREEK"]={"st":["Glennies Creek Rd House No: Lot 101","Middle Falbrook Rd"],"p":[[1,"","",null,null,0,429900,[[1672,1609,1925000]]],[0,"","",null,null,0,440500,[[1259,1234,175000]]]]};

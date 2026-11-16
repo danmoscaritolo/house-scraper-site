@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["SOUTHERN DISTRICT"]={"st":["Old Hwy","Princes Highway Sh1","Punkalla Tilba Rd"],"p":[[0,"","",null,null,0,30000,[[-3063,-3105,70000]]],[1,"","",null,null,0,1040000,[[-3352,-3394,90000]]],[2,"","",null,null,0,20000,[[-2845,-2887,56000]]]]};

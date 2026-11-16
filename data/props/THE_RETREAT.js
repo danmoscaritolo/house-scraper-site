@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["THE RETREAT"]={"st":["Brigadier Hammett Rd","Nawaday Way","Stacy Cl"],"p":[[0,"","",null,null,0,9801,[[1404,1349,102000]]],[1,"","",null,null,0,9765,[[2335,2293,245000]]],[1,"","",null,null,0,8028,[[2496,2480,840000]]],[2,"24","",null,null,0,9583,[[2672,2634,651500]]]]};

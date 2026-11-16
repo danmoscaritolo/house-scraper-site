@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["NORTH ST IVES"]={"st":["Chapala Cl","Green Valley Ave","Warrabina Ave","Woodbury Rd"],"p":[[0,"7","",null,null,0,923,[[970,928,570000]]],[1,"1","",null,null,0,1094,[[913,885,735000]]],[2,"23","",null,null,0,948,[[902,867,1377000]]],[3,"33","",null,null,0,1074,[[888,844,875000]]],[3,"50","",null,null,0,1246,[[698,656,705000]]]]};

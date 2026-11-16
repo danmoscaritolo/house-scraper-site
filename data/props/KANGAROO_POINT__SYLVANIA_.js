@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["KANGAROO POINT (SYLVANIA)"]={"st":["Kangaroo Point Rd"],"p":[[0,"110 - 112","",null,null,0,1043,[[-2363,-2405,780000]]],[0,"73 - 75","",null,null,0,null,[[-86,-128,2200000]]],[0,"97","",null,null,0,518,[[-144,-186,312500]]]]};

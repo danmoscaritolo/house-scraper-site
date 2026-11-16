@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["PERRADENYA"]={"st":["Perradenya Way","Sandalwood Dr"],"p":[[0,"","",null,null,0,2505,[[866,850,225000]]],[0,"","",null,null,0,1045,[[853,823,70000]]],[0,"","",null,null,0,1221,[[916,888,228500]]],[1,"","",null,null,0,2467,[[1614,1584,145000]]]]};

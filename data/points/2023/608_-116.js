@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2023/608_-116"]={"loc":["SANDY HILL","TENTERFIELD"],"st":["Mount Lindesay Rd","Snake Creek Rd"],"x":[218654,206514],"y":[503034,502728],"p":[375000,468750],"d":[8412,8754],"c":[8370,8735],"u":[0,0],"l":[0,1],"s":[1,0],"n":["35","943"],"un":["",""],"a":[197700,1101000],"r":[1.0,1.033],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

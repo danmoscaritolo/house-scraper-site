@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["WORTUMERTIE"]={"st":["Town Of Wortumertie","Village Of Wortumertie"],"p":[[0,"","",null,null,0,2023,[[2321,2253,130000]]],[0,"","",null,null,0,1012,[[1350,1283,65000]]],[1,"","",null,null,0,2023,[[1591,1556,85000]]]]};

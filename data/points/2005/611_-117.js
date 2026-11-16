@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2005/611_-117"]={"loc":["KIPPENDUFF","RAPPVILLE"],"st":["Nandabah St","Seery Rd"],"x":[282118,295181],"y":[489101,491241],"p":[310000,67000],"d":[1867,2141],"c":[1847,2106],"u":[0,0],"l":[0,1],"s":[1,0],"n":["552","21"],"un":["",""],"a":[1184000,null],"r":[1.0,0.867],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

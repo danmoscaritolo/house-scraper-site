@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2019/594_-142"]={"loc":["BRINDABELLA"],"st":["Brindabella Valley Rd"],"x":[-127600],"y":[-145131],"p":[870000],"d":[7104],"c":[7027],"u":[0],"l":[0],"s":[0],"n":["664"],"un":[""],"a":[905600],"r":[1.0],"ra":[null],"pp":[null],"pd":[null],"m":[null]};

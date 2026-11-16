@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2005/605_-120"]={"loc":["SPRING MOUNTAIN","STANNIFER"],"st":["Northcotts Rd","Old Armidale Rd"],"x":[147531,128502],"y":[417106,411145],"p":[365000,150000],"d":[1889,2130],"c":[1889,2095],"u":[0,0],"l":[0,1],"s":[0,1],"n":["170","573"],"un":["",""],"a":[5231000,802800],"r":[1.0,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2005/593_-136"]={"loc":["BUMBALDRY","GREENETHORPE"],"st":["Edward Sq","Mid Western Hwy"],"x":[-156558,-159773],"y":[8594,452],"p":[215000,40000],"d":[1993,2103],"c":[1887,2075],"u":[0,0],"l":[0,1],"s":[1,0],"n":["2715","10"],"un":["",""],"a":[1330000,923],"r":[1.0,1.067],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

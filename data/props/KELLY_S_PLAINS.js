@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["KELLY'S PLAINS"]={"st":["Corey Rd","Hariet Gully Rd","Heathersleigh Rd"],"p":[[1,"75","",null,null,0,53560,[[1831,1797,320000]]],[0,"9","",null,null,0,58880,[[1949,1889,345000]]],[2,"45","",null,null,0,103200,[[1640,1614,367000]]]]};

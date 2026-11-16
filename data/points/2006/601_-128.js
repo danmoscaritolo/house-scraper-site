@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2006/601_-128"]={"loc":["CATTLE CREEK","MERRIWA"],"st":["Dales Creek Rd","Phillips Creek Rd"],"x":[47687,29192],"y":[203338,219568],"p":[1600000,3430000],"d":[2211,2357],"c":[2168,2140],"u":[0,0],"l":[1,0],"s":[0,1],"n":["794","576"],"un":["",""],"a":[5323900,19860000],"r":[null,null],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[-1,2]};

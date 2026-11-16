@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2019/612_-117"]={"loc":["BUNGAWALBIN","GIBBERAGEE"],"st":["Bungawalbin Whiporie Rd"],"x":[316016,317219],"y":[481838,487651],"p":[270000,350000],"d":[7170,7184],"c":[7118,7087],"u":[0,0],"l":[1,0],"s":[0,0],"n":["2270","1530"],"un":["",""],"a":[421200,409000],"r":[1.403,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["BELLA VISTA WATERS"]={"st":["Edgewater Dr","Pipersbrook Crescent"],"p":[[1,"LOT1622","",null,null,0,null,[[1118,1081,435000]]],[0,"LOT1111","",null,null,0,null,[[1251,1166,475000]]]]};

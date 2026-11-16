@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["BULLAMILITA"]={"st":["Bullamalito Ave","Bullamilita Rd"],"p":[[0,"","",null,null,0,403100,[[1325,1223,145000]]],[1,"1112","",null,null,0,769000,[[783,720,148000]]],[0,"","",null,null,0,412500,[[1959,1907,235000]]]]};

@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["RAWDON VALE"]={"st":["Moppy Rd","Off Moppey Rd","Rawdon Vale Rd","Scone Rd"],"p":[[3,"","",null,null,0,1295000,[[915,885,165000]]],[1,"","",null,null,0,1988000,[[1531,1503,100000]]],[2,"","",null,null,0,1837000,[[8189,8026,1700000]]],[0,"","",null,null,0,23150,[[-1149,-1191,30000]]]]};

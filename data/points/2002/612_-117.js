@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2002/612_-117"]={"loc":["COOMBELL","ELLANGOWAN"],"st":["Ellangowan Rd","Summerland Way"],"x":[307352,300675],"y":[497090,499927],"p":[200000,120000],"d":[866,1056],"c":[838,1052],"u":[0,0],"l":[1,0],"s":[0,1],"n":["1715","8575"],"un":["",""],"a":[1316000,160000],"r":[1.606,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

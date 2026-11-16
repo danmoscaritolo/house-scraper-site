@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["MT MITCHELL"]={"st":["Aqua Park Rd","Aqua Park Rd Aqua Park Estate","Mcgarrys Lane"],"p":[[1,"","",null,null,0,781400,[[1413,1381,227780]]],[0,"","",null,null,0,408600,[[1235,1193,120000]]],[0,"","",null,null,0,99080,[[2390,2348,37500]]],[2,"","",null,null,0,95080,[[2712,2686,75000]]]]};

@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["CENTRAL DISTRICT"]={"st":["Maulbrooks Rd","Princes Highway Sh1","Woodbridge Rd"],"p":[[0,"","",null,null,0,20000,[[-2985,-3027,48000]]],[1,"","",null,null,0,50000,[[-2979,-3021,56000],[-2797,-2839,68000],[-2698,-2740,63000]]],[2,"","",null,null,0,240000,[[-2584,-2626,80000]]]]};

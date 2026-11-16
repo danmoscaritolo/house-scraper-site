@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["GREENVALLEY"]={"st":["Crocker Place","Lyrebird Crescent","Whistler Street","Wilsonroad"],"p":[[0,"10A","",null,null,0,null,[[-632,-674,100000]]],[1,"37","",null,null,0,531,[[-764,-806,197000]]],[2,"8","",null,null,0,600,[[-419,-461,235000]]],[3,"237","",null,null,0,582,[[-332,-374,193000]]]]};

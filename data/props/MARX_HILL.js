@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["MARX HILL"]={"st":["Marx Hill Rd","Old Brierfield Rd","Waterfall Wy 2"],"p":[[2,"917","",null,null,0,20360,[[842,800,360000]]],[1,"40","",null,null,0,20000,[[2369,2334,500000]]],[1,"58","",null,null,0,20000,[[998,956,391000]]],[0,"48","",null,null,0,46860,[[1084,1056,500000]]]]};

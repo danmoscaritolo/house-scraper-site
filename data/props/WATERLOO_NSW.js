@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["WATERLOO NSW"]={"st":["2-4 Powell St","810-822 Elizabeth St"],"p":[[1,"B215 GARDE","",null,null,1,null,[[6197,5207,781500]]],[0,"UNIT301","",null,null,1,null,[[1196,586,355000,2]]]]};

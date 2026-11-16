@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2001/609_-126"]={"loc":["ELLENBOROUGH","PAPPINBARRA"],"st":["Pappinbarra Rd","Toms Creek Rd"],"x":[248792,246528],"y":[263169,254542],"p":[199500,395000],"d":[690,703],"c":[648,675],"u":[0,0],"l":[1,0],"s":[0,1],"n":["2203","160"],"un":["",""],"a":[153600,226500],"r":[1.095,1.285],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["CALARIE"]={"st":["Calarie Rd","Daroobalgie Rd","Darrobalgie Rd","Dunstan St"],"p":[[3,"","",null,null,0,3035,[[2631,2391,220000]]],[1,"","",null,null,0,2023,[[3884,3843,70000]]],[2,"","",null,null,0,7124,[[3488,3468,270000]]],[0,"","",null,null,0,20310,[[4198,3499,399000]]]]};

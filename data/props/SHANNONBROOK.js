@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["SHANNONBROOK"]={"st":["Ph Shannon Dp 5059","Shannonbrook Rd"],"p":[[1,"705","",null,null,0,95380,[[2279,2250,215000]]],[1,"425","",null,null,0,396600,[[1798,1756,310000]]],[0,"","",null,null,0,20000,[[-3161,-3203,31500]]]]};

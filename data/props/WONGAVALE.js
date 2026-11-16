@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["WONGAVALE"]={"st":["Boundary Creek Rd","Cawongla Rd","Mckellar Range","Warby Rd"],"p":[[0,"","",null,null,0,404700,[[-2171,-2213,78000]]],[1,"","",null,null,0,430800,[[-1436,-1478,107000]]],[2,"","",null,null,0,400000,[[-1121,-1163,205000]]],[3,"315","",null,null,0,64450,[[-3258,-3300,45000]]]]};

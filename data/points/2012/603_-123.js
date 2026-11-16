@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2012/603_-123"]={"loc":["HALLS CREEK","NAMOI RIVER"],"st":["Halls Creek Rd","Namoi River Rd"],"x":[77638,81364],"y":[335039,328158],"p":[560000,660000],"d":[4493,4736],"c":[4465,4694],"u":[0,0],"l":[1,0],"s":[1,0],"n":["1275","1080"],"un":["",""],"a":[2485990,1985000],"r":[1.0,1.189],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

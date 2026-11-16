@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2015/591_-139"]={"loc":["COOTAMUNDRA","STOCKINBINGAL"],"st":["Old Cootamundra Rd","Troy St"],"x":[-201436,-212067],"y":[-60309,-50159],"p":[411000,180000],"d":[5627,5648],"c":[5534,5630],"u":[0,0],"l":[0,1],"s":[0,1],"n":["172","29"],"un":["",""],"a":[43740,1012],"r":[2.02,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

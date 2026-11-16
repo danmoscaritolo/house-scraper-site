@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2016/605_-126"]={"loc":["NIANGALA","WEABONGA"],"st":["Niangala-weabonga Rd","Weabonga Rd"],"x":[130710,139323],"y":[271747,270250],"p":[3000000,320000],"d":[6145,6201],"c":[6089,6158],"u":[0,0],"l":[1,0],"s":[1,0],"n":["381","1033"],"un":["",""],"a":[11539340,209920],"r":[1.0,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["SUNNYSIDE"]={"st":["Bruxner Hwy","Kildare Rd","Roos Rd","Sunnyside Platform Rd"],"p":[[1,"","",null,null,0,5326000,[[2727,2635,1000000]]],[0,"1085","",null,null,0,100800,[[2820,2795,400000]]],[3,"","",null,null,0,20400,[[3147,3119,220000]]],[2,"","",null,null,0,197800,[[4246,4227,350000]]]]};

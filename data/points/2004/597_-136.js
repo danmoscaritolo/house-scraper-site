@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2004/597_-136"]={"loc":["BALD RIDGE","TRUNKEY CREEK"],"st":["Arthur St","Bald Ridge Rd"],"x":[-56301,-67441],"y":[8754,18001],"p":[210000,55000],"d":[1539,1804],"c":[1525,1769],"u":[0,0],"l":[0,1],"s":[1,0],"n":["1076","18"],"un":["",""],"a":[1120600,1012],"r":[1.12,null],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,2]};

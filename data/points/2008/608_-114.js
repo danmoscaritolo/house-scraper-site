@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2008/608_-114"]={"loc":["LOWER ACACIA CREEK"],"st":["Barlows Gate Rd"],"x":[224559],"y":[557010],"p":[98000],"d":[3097],"c":[3077],"u":[0],"l":[0],"s":[0],"n":["24"],"un":[""],"a":[2023],"r":[1.032],"ra":[null],"pp":[null],"pd":[null],"m":[null]};

@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["NAROOMA WEST"]={"st":["Old Highway","Old Highway (narooma)","Old Highway Narooma","The Slipway"],"p":[[1,"83","",null,null,0,1431,[[220,178,245000]]],[2,"","",null,null,0,1431,[[-940,-982,47000]]],[0,"","",null,null,0,20390,[[-718,-760,159000],[-541,-583,67000]]],[3,"10","",null,null,0,3083,[[-1028,-1070,125000],[346,304,389000]]]]};

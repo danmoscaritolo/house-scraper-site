@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2010/599_-136"]={"loc":["GINGKIN","NORWAY"],"st":["Abercrombie Rd","Sheepstation Forest Rd"],"x":[-20222,-3489],"y":[20411,6806],"p":[470000,540000],"d":[3898,3915],"c":[3856,3849],"u":[0,0],"l":[1,0],"s":[0,1],"n":["1460","375"],"un":["",""],"a":[106400,1408000],"r":[1.062,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

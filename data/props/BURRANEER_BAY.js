@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["BURRANEER BAY"]={"st":["Fernleigh Rd","Off Fernleigh Rd"],"p":[[0,"48","",null,null,0,9178,[[90,48,2200000]]],[1,"48","",null,null,0,1948,[[-3011,-3053,1180000],[-3011,-3053,270000]]]]};

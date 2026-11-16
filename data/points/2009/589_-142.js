@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2009/589_-142"]={"loc":["BIG SPRINGS","MANGOPLAH"],"st":["Kane St","Livingstone Gully Rd"],"x":[-274542,-253658],"y":[-138015,-129552],"p":[160000,1025000],"d":[3385,3461],"c":[3336,3433],"u":[0,0],"l":[1,0],"s":[0,1],"n":["13","793"],"un":["",""],"a":[2023,1809000],"r":[1.0,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

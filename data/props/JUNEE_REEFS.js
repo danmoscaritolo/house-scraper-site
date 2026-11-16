@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["JUNEE REEFS"]={"st":["Coffin Rock Lane","Goldfields Way","Junee Reefs Tr 57","Ph Trevethin"],"p":[[1,"","",null,null,0,1391100,[[2320,2286,429687]]],[0,"268","",null,null,0,8094,[[546,546,80000]]],[2,"2651","",null,null,0,9343000,[[1060,1004,1528399]]],[3,"","",null,null,0,6222000,[[-508,-550,192043],[-506,-548,875797]]]]};

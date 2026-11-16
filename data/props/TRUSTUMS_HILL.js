@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["TRUSTUMS HILL"]={"st":["Sharpe Rd","Trustums Hill Rd","Williams Rd"],"p":[[2,"55","",null,null,0,12730,[[8608,8594,375000]]],[1,"32","",null,null,0,9972,[[7592,7564,500000]]],[0,"","",null,null,0,10000,[[3988,3968,340000]]]]};

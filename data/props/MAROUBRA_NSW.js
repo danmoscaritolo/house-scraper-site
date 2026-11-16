@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["MAROUBRA NSW"]={"st":["Alma Road","Anzac Parade"],"p":[[1,"APT505/717","",null,null,1,null,[[1937,944,565000,2]]],[1,"27/693-693","",null,null,1,null,[[3908,3644,600000,2]]],[0,"59","",null,null,0,343,[[-701,-743,877000]]]]};

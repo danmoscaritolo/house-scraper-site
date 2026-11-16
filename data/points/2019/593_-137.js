@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2019/593_-137"]={"loc":["BENDICK MURRELL","MONTEAGLE"],"st":["Dawes Lane","Monteagle Stock Rte E"],"x":[-165631,-155464],"y":[-19311,-16030],"p":[250000,125000],"d":[7034,7188],"c":[7009,7153],"u":[0,0],"l":[1,0],"s":[1,0],"n":["930","6"],"un":["",""],"a":[10450,1840],"r":[1.0,1.19],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

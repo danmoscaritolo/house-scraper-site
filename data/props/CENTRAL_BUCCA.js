@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["CENTRAL BUCCA"]={"st":["Central Bucca Rd","Mardells Rd"],"p":[[1,"","",null,null,0,161900,[[740,709,185000]]],[0,"69","",null,null,0,196600,[[979,887,393000]]],[0,"410","",null,null,0,180200,[[1521,1446,550000]]]]};

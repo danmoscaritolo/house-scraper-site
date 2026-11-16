@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["KING STREET WHARF"]={"st":["North Apartment,shelley Street","Shelley St","Shelley St South Apartment Tow","Shelley Street"],"p":[[3,"23","12.07",null,null,1,null,[[1346,1307,638888]]],[2,"S1003/35","",null,null,1,null,[[1651,1595,1850000]]],[1,"N3.04/23","",null,null,1,null,[[723,457,595800],[2049,2007,900000],[2336,2288,550000],[2503,2470,470000]]]]};

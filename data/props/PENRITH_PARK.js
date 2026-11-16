@@ -1,0 +1,1 @@
+(window.PR=window.PR||{})["PENRITH PARK"]={"st":["Gadara Dr","Kiparra Cr","Kiparra Cres","Lindsay Cr","Lindsay Cres"],"p":[[2,"15","",null,null,0,573,[[825,782,238000]]],[4,"25","",null,null,0,625,[[566,499,237000]]],[0,"7","",null,null,0,636,[[352,310,178700]]],[1,"4","",null,null,0,640,[[-596,-638,220000]]],[3,"22","",null,null,0,793,[[-697,-739,175000]]]]};

@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["2023/597_-137"]={"loc":["CROOKED CORNER","TUENA"],"st":["Bathurst St","Bridge Creek Rd"],"x":[-67078,-65418],"y":[-1718,-20889],"p":[250000,650000],"d":[8511,8640],"c":[8502,8605],"u":[0,0],"l":[1,0],"s":[0,1],"n":["7","940"],"un":["",""],"a":[1915,27100],"r":[1.0,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};

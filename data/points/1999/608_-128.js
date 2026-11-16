@@ -1,0 +1,1 @@
+(window.SP=window.SP||{})["1999/608_-128"]={"loc":["MOUNT GEORGE","TUGRABAKH"],"st":["Black Flat Ln","Bundook Rd"],"x":[200144,223247],"y":[203484,214783],"p":[75000,80000],"d":[-234,-18],"c":[-276,-60],"u":[0,0],"l":[1,0],"s":[1,0],"n":["319","653"],"un":["",""],"a":[34280,809400],"r":[1.0,1.0],"ra":[null,null],"pp":[null,null],"pd":[null,null],"m":[null,null]};
