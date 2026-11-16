@@ -637,6 +637,7 @@ const dollars=v=>v==null?"–":(v<0?"−":"")+"$"+Math.abs(Math.round(v)).toLoca
 const pct=(v,d=1)=>v==null||!isFinite(v)?"–":(v<0?"−":"")+Math.abs(v*100).toFixed(d)+"%";
 const signed=(v,d=1)=>v==null||!isFinite(v)?"–":(v>0?"+":v<0?"−":"")+Math.abs(v*100).toFixed(d)+"%";
 const cls=v=>v==null||!isFinite(v)?"":v>0?"pos":"neg";
+let tourS=null,tourMap=null;  // guided tour state; declared early because showTab can run before the tour code
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let seg="house", metric="g1", sel=null, maxP=null, dtab="overview";
 
@@ -1466,7 +1467,7 @@ function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=
  document.getElementById("mc3").innerHTML=multiLine(rq,[{v:rq.map(q=>(h.rent||{})[q]??null),c:"#1F6E68",name:"Houses"},{v:rq.map(q=>(u.rent||{})[q]??null),c:"#86B3A9",name:"Units"}],v=>"$"+Math.round(v),{mark:tmark()});}
 
 /* ---------- headline ---------- */
-function headline(){const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=8&&r[C.growth_1y]!=null&&inArea(r)),up=rs.filter(r=>r[C.growth_1y]>0).length,m=mkt(mreg(),seg),noun=seg==="house"?"house":"unit";
+function headline(){const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=15&&r[C.growth_1y]!=null&&inArea(r)),up=rs.filter(r=>r[C.growth_1y]>0).length,m=mkt(mreg(),seg),noun=seg==="house"?"house":"unit";
  document.getElementById("headline").innerHTML=`Over the last 12 months, ${noun} prices rose in <b>${up} of ${rs.length}</b> suburbs in ${areaDef()[1].replace(/ \(.*\)$/,"")}${m&&m.median?`, and the median ${noun} in ${mregName()} sold for <b>${money(m.median)}</b> (${signed(m.growth_1y)} on the year before)`:""}.`;}
 
 /* ---------- table ---------- */
@@ -1568,7 +1569,7 @@ if(SPM&&MS&&MS.ad&&window.maplibregl){document.querySelectorAll("#spsw button").
 else document.getElementById("spsw").hidden=true;
 
 /* ---------- tabs ---------- */
-function showTab(t){if(typeof tourS!=="undefined"&&tourS)tourEnd();setTimeout(()=>{if(t==="budget"&&SIM&&!store.get("hs_tour_budget")&&!tourS)tourStart("budget");},700);document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+function showTab(t){if(tourS)tourEnd();setTimeout(()=>{if(t==="budget"&&typeof SIM!=="undefined"&&SIM&&!store.get("hs_tour_budget")&&!tourS)tourStart("budget");},700);document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
  $("tabMap").hidden=t!=="map";$("tabBudget").hidden=t!=="budget";try{history.replaceState(null,"",t==="budget"?"#budget":location.pathname+location.search);}catch(e){}
  if(t==="map"&&map)setTimeout(()=>map.resize(),0);if(t==="budget")planUI();}
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
@@ -1625,7 +1626,7 @@ budget:[
  ["#bxCards","Side by side","Buying on the left, renting on the right: money in and out that year, then where each leaves you. Click a row to chart it."],
  [".bx-chart","Over time","The row you clicked, across every year of the loan."],
  ["#assume","More assumptions","Price growth, rent rises, inflation, investment returns and running costs. Typical values are set; change any of them here."]]};
-let tourS=null,tourMap=null;const tourEls=sel=>sel.split("|").map(x=>document.querySelector(x)).filter(Boolean);
+const tourEls=sel=>sel.split("|").map(x=>document.querySelector(x)).filter(Boolean);
 function tourStart(name){const steps=TOURS[name].filter(st=>{const el=tourEls(st[0])[0];return el&&el.getClientRects().length;});if(!steps.length)return;tourS={name,steps,i:0};
  let o=$("tourO");if(!o){o=document.createElement("div");o.id="tourO";o.innerHTML='<div class="tr-hole"></div><div class="tr-card" role="dialog" aria-label="Guided tour"><div class="tr-n"></div><h4></h4><p></p><div class="tr-b"><button class="tr-skip">Skip tour</button><span><button class="tr-back">Back</button><button class="tr-next">Next</button></span></div></div>';document.body.appendChild(o);
   o.querySelector(".tr-skip").onclick=()=>tourEnd();o.querySelector(".tr-back").onclick=()=>tourGo(-1);o.querySelector(".tr-next").onclick=()=>tourGo(1);
