@@ -1630,7 +1630,7 @@ function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=
  document.getElementById("mc3").innerHTML=multiLine(rq,[{v:rq.map(q=>(h.rent||{})[q]??null),c:"#1F6E68",name:"Houses"},{v:rq.map(q=>(u.rent||{})[q]??null),c:"#86B3A9",name:"Units"}],v=>"$"+Math.round(v),{mark:tmark()});}
 
 /* ---------- headline ---------- */
-function headline(){const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=8&&r[C.growth_1y]!=null&&inArea(r)),up=rs.filter(r=>r[C.growth_1y]>0).length,m=mkt(mreg(),seg),noun=seg==="house"?"house":"unit";
+function headline(){const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=15&&r[C.growth_1y]!=null&&inArea(r)),up=rs.filter(r=>r[C.growth_1y]>0).length,m=mkt(mreg(),seg),noun=seg==="house"?"house":"unit";
  document.getElementById("headline").innerHTML=`Over the last 12 months, ${noun} prices rose in <b>${up} of ${rs.length}</b> suburbs in ${areaDef()[1].replace(/ \(.*\)$/,"")}${m&&m.median?`, and the median ${noun} in ${mregName()} sold for <b>${money(m.median)}</b> (${signed(m.growth_1y)} on the year before)`:""}.`;}
 
 /* ---------- table ---------- */
