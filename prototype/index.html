@@ -468,7 +468,7 @@ select:hover,input:hover{border-color:var(--slate)}
 .mapbox,aside#detail{box-shadow:0 14px 34px -22px rgba(14,26,22,.35)}
 #detail h2{font:800 34px/1 var(--serif);font-stretch:78%;text-transform:uppercase;letter-spacing:-.005em}
 .stat .v,.cards2 .v,.mstats .v,.bx-tile .v,.tdate,.lim b{font-weight:700}
-.movers h3,.chart h3,.bx-lab,.legend .t,.t th,.stat .l,.mstats .l,.cards2 .l{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
+.movers h3,.chart h3,.bx-lab,.legend .t,.t th{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
 .t th{background:var(--wash)}
 .t tbody tr.sel{background:#EEF7D2}
 .movers button{font-size:14.5px;padding:7px 0}
@@ -534,6 +534,12 @@ details.assume,details.how{border-top-color:var(--ink)}
  .bx-verdict{font-size:26px}
  .gh-foot{grid-template-columns:1fr;padding:22px 20px}.gh-foot small{grid-column:1}
  .timebar{gap:10px}
+ header.gh h1{font-size:40px}
+ .gh-ask .s{display:none}.gh-ask button{flex-basis:auto;padding:12px 14px}.gh-ask b{white-space:nowrap}
+ .gh-bar{gap:10px}.gh-bar .tourBtn{white-space:nowrap;padding:5px 11px}
+ .chip{font-size:13px;gap:8px;white-space:nowrap;justify-content:space-between}
+ .legend{bottom:66px}
+ .bx-sbs .sb-a b,.bx-sbs .sb-b b{font-size:15px;white-space:nowrap}
 }
 @media(prefers-reduced-motion:reduce){.gh-ask button{transition:none}.gh-ask button:hover{transform:none}}
 </style></head><body>
@@ -544,7 +550,7 @@ details.assume,details.how{border-top-color:var(--ink)}
 <div class="gh-ask">
 <button class="pri" data-goto="budget"><span class="n">01</span><span><b>What can I afford?</b><span class="s">Your borrowing limit, then buy against rent, year by year.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askFind"><span class="n">02</span><span><b>What did it really sell for?</b><span class="s">Any NSW address or suburb, every recorded sale.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="ctaPlay"><span class="n">03</span><span><b>Where are prices moving?</b><span class="s">Watch 35 years of prices play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="ctaPlay"><span class="n">03</span><span><b>Where are prices moving?</b><span class="s">Watch every month since 1990 play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div></div>
 <div class="gh-stats num" id="ghStats"></div>
 <p class="prov" id="prov" hidden></p>
@@ -987,9 +993,9 @@ if(window.maplibregl){
   map.addSource("sub",{type:"geojson",data:GEO});
   map.addLayer({id:"fill",type:"fill",source:"sub",paint:{"fill-color":["coalesce",["feature-state","c"],"#D9D7CF"],
    "fill-opacity":["case",["boolean",["feature-state","has"],false],opac,0]}},firstSym);
-  {const cv=document.createElement("canvas");cv.width=cv.height=8;const cx=cv.getContext("2d");cx.strokeStyle="rgba(85,98,92,.6)";cx.lineWidth=1;cx.beginPath();for(const o of[-8,0,8]){cx.moveTo(o,8);cx.lineTo(o+8,0);}cx.stroke();
-   map.addImage("hatch",cx.getImageData(0,0,8,8));
-   map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["case",["boolean",["feature-state","has"],false],0,.55]}},firstSym);}
+  {const cv=document.createElement("canvas");cv.width=cv.height=12;const cx=cv.getContext("2d");cx.strokeStyle="rgba(85,98,92,.38)";cx.lineWidth=1;cx.beginPath();for(const o of[-12,0,12]){cx.moveTo(o,12);cx.lineTo(o+12,0);}cx.stroke();
+   map.addImage("hatch",cx.getImageData(0,0,12,12));
+   map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["case",["boolean",["feature-state","has"],false],0,.45]}},firstSym);}
   map.addLayer({id:"edge",type:"line",source:"sub",paint:{"line-color":["case",["boolean",["feature-state","hover"],false],"#1C2B3A","#FFFFFF"],
    "line-width":["interpolate",["linear"],["zoom"],9,["case",["boolean",["feature-state","hover"],false],1.8,.3],13,["case",["boolean",["feature-state","hover"],false],2.2,1]],"line-opacity":.9}},firstSym);
   map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#1C2B3A","line-width":3}},firstSym);
@@ -1150,7 +1156,7 @@ A.rent_growth=A.rent_growth??.035;A.cost_growth=A.cost_growth??.03;A.let_pct=A.l
 function growthChoice(){const unit=seg==="unit",syd=Math.min(mkt(mreg(),seg).cagr_10y||.04,A.growth_cap),r=sel?rowFor(sel):null,sg=r?growth(r):null;
  const opts=[["sydney",`${mregName().replace(/^r/,"R")} ${unit?"units":"houses"}, last 10 years (${pct(syd,1)})`,syd]];if(r&&sg!=null)opts.unshift(["suburb",`${title(sel)} expected (${pct(sg,1)})`,sg]);opts.push(["custom","Your own figure",gCust]);
  const pick=gSrc==="auto"?opts[0][0]:opts.some(o=>o[0]===gSrc)?gSrc:opts[0][0];return{opts,pick,g:opts.find(o=>o[0]===pick)[2]};}
-function lineChart(series,{years,fmt,lab,h=220,tick=null,w=520,mark=null,band=null}){if(window.innerWidth<=720&&w>400){h=Math.round(Math.max(h*380/w,250));w=380;}const L0=60,R=14,T=10,B0=24,sv_=series.flatMap(s=>s.v),pad_=band?(Math.max(...sv_)-Math.min(...sv_))*.9||1:0,all=sv_,mx=Math.max(1,...all)+pad_,mn=Math.min(0,...all)-(band&&Math.min(...band.lo)<0?pad_:0),cl_=v=>Math.max(mn,Math.min(mx,v)),X=i=>L0+i*(w-L0-R)/years,Y=v=>T+(h-T-B0)*(1-(v-mn)/(mx-mn));let g="";
+function lineChart(series,{years,fmt,lab,h=220,tick=null,w=520,mark=null,band=null}){if(window.innerWidth<=720&&w>400){h=Math.round(Math.max(h*380/w,250));w=380;}else if(w>600){const cw=($("bxChart")||{}).clientWidth||w;w=Math.max(480,Math.min(w,cw));h=Math.round(Math.max(h,Math.min(360,w*.46)));}const L0=60,R=w<=400?26:18,T=10,B0=24,sv_=series.flatMap(s=>s.v),pad_=band?(Math.max(...sv_)-Math.min(...sv_))*.9||1:0,all=sv_,mx=Math.max(1,...all)+pad_,mn=Math.min(0,...all)-(band&&Math.min(...band.lo)<0?pad_:0),cl_=v=>Math.max(mn,Math.min(mx,v)),X=i=>L0+i*(w-L0-R)/years,Y=v=>T+(h-T-B0)*(1-(v-mn)/(mx-mn));let g="";
  if(mn<0)g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(0)}" y2="${Y(0)}" stroke="#8A97A3"/>`;
  for(let k=0;k<=4;k++){const v=mn+(mx-mn)*k/4;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#ECEBE5"/><text x="${L0-8}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
  const st=years>20?5:years>10?5:2;for(let y=0;y<=years;y+=st)g+=`<text x="${X(y)}" y="${h-6}" text-anchor="middle">${tick?tick(y):y?y+" yrs":"Now"}</text>`;
@@ -1835,5 +1841,7 @@ market();all();
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;
+ if(!matchMedia("(prefers-reduced-motion:reduce)").matches){const els=[...$("ghStats").querySelectorAll("b")],t0=performance.now();els.forEach(e=>{const m=e.textContent.match(/^([\d.,]+)(.*)$/);e._v=m?parseFloat(m[1].replace(/,/g,"")):null;e._s=m?m[2]:"";e._d=m&&m[1].includes(".")?1:0;e._c=m&&m[1].includes(",");e._t=e.textContent;});
+  const step=t=>{const k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);els.forEach(e=>{if(e._v==null)return;const v=e._v*q;e.textContent=k===1?e._t:(e._c?Math.round(v).toLocaleString("en-AU"):v.toFixed(e._d))+e._s;});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
  $("askFind").addEventListener("click",()=>{showTab("map");const f=$("find");f.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f.focus({preventScroll:true}),350);});}
 </script></body></html>
