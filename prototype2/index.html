@@ -472,7 +472,8 @@ header.mast .tabs button[aria-selected=true] span{background:linear-gradient(101
 /* front page */
 .front{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(280px,1fr);gap:0;padding:30px 0 0}
 .lead{padding:0 40px 30px 0;border-right:1px solid var(--hair);min-width:0}
-.kick{font:600 13.5px/1.4 var(--sans);color:var(--slate);margin:0 0 12px}
+.kick{font:600 13.5px/1.4 var(--sans);color:var(--slate);margin:0 0 14px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between}
+.kick .seg button{padding:4px 11px;font-size:13px}
 .front h1{font:800 clamp(40px,5.3vw,80px)/.98 var(--serif);letter-spacing:-.024em;margin:0 0 20px;text-wrap:balance}
 .front h1 .then2{display:block}
 .front h1 .pen-c::after{inset:-.1em -.3em -.14em}
@@ -1791,19 +1792,19 @@ function viewNames(){const area=new Set(D.rows.filter(inArea).map(r=>r[C.localit
  let inA=0;for(const n of area)if(s.has(n))inA++;const named=[...s].filter(n=>rowFor(n)||D.rows.some(r=>r[C.locality]===n)).length;
  return{names:[...s],name:area.size&&inA/area.size>=.8&&named<=area.size*1.3?areaDef()[1]:"Suburbs in view"};}
 function areaSummary(){const noun=seg==="house"?"house":"unit",{names,name}=viewNames();
- const MN=15,val=n=>{const k=n+"|"+seg;if(!MS||isLatest()){const r=rowFor(n);return r&&r[C.n_now]>=MN?r[C.growth_1y]:null;}
+ const MN=15,val=n=>{const k=n+"|"+seg;if(!MS||isLatest()){const r=rowFor(n);return r&&r[C.n_now]>=MN?r[metric==="g6"?C.growth_6m:C.growth_1y]:null;}
   if(RNG){if((sv(k,4,RNG.b)||0)<MN||(sv(k,4,RNG.a)||0)<MN)return null;const v=pg(k);return v==null?null:pgTotal(v);}return(sv(k,4)||0)>=MN&&(sv(k,4,ti-12)||0)>=MN?tg(k,12):null;};
  const vs=names.map(n=>[n,val(n)]).filter(x=>x[1]!=null&&isFinite(x[1])).sort((a,b)=>b[1]-a[1]),rows=names;
  const when=!MS||isLatest()?`Sales ${MS?mshift(TL,-12)+" to "+mlabel(TL):"in the last 12 months"}`:RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`Sales ${mshift(ti,-12)} to ${mlabel()}`;
  let h=`<h2>${esc(name)}</h2><p class="sub">${noun==="house"?"Houses":"Units"} · ${when}</p>`;
  if(!vs.length)h+=`<p class="empty">${rows.length?"Too few sales in view at this date to compare suburbs.":"Zoom or pan the map to a populated area."}</p>`;
- else{const strict=(!MS||isLatest())&&!RNG,nm=strict?vs.filter(x=>{const r=rowFor(x[0]);return r&&r[C.n_now]>=FP.minNamed&&Math.abs(x[1])<=FP.maxMove;}):vs,up=vs.filter(x=>x[1]>0).length,mid=vs[Math.floor(vs.length/2)][1],fall=nm.filter(x=>x[1]<0).slice(-5).reverse();
+ else{const strict=(!MS||isLatest())&&!RNG,nm=strict?vs.filter(x=>{const r=rowFor(x[0]);return r&&r[C.n_now]>=FP.minNamed*(metric==="g6"?2:1)&&Math.abs(x[1])<=FP.maxMove;}):vs,up=vs.filter(x=>x[1]>0).length,mid=vs[Math.floor(vs.length/2)][1],fall=nm.filter(x=>x[1]<0).slice(-5).reverse();
   const li=x=>`<button data-n="${esc(x[0])}"><span>${esc(title(x[0]))}</span><b class="num ${x[1]<0?"neg":"pos"}">${signed(x[1],1)}</b></button>`;
   h+=`<div class="stats num"><div class="stat"><div class="v">${up} of ${vs.length}</div><div class="l">Suburbs where prices rose</div></div>
    <div class="stat"><div class="v ${mid<0?"neg":"pos"}">${signed(mid,1)}</div><div class="l">The typical suburb</div></div></div>
    <div class="movers"><div><h3>Biggest rises</h3>${nm.slice(0,5).filter(x=>x[1]>0).map(li).join("")||'<p class="note">None</p>'}</div>
    <div><h3>Biggest falls</h3>${fall.map(li).join("")||'<p class="note">No suburb fell</p>'}</div></div>
-   <p class="note">Change in each suburb's median ${noun} price ${RNG?"across the period":"over 12 months"}. <b>${vs.length} of the ${names.length} suburbs in view</b> are compared: the rest had fewer than 15 ${noun} sales ${RNG?"at the start or end of the period":"in this 12 months or the one before"}, and with so few sales one unusual home can swing the median.${strict?` The two lists name suburbs with ${FP.minNamed} or more sales and moves of ${FP.maxMove*100}% or less; bigger swings usually mean different homes sold.`:""} Pan or zoom the map to summarise another area, or click a suburb.</p>`;}
+   <p class="note">Change in each suburb's median ${noun} price ${RNG?"across the period":strict&&metric==="g6"?"over 6 months (the 6 months to now against the 6 before)":"over 12 months"}. <b>${vs.length} of the ${names.length} suburbs in view</b> are compared: the rest had fewer than 15 ${noun} sales ${RNG?"at the start or end of the period":"in this 12 months or the one before"}, and with so few sales one unusual home can swing the median.${strict?` The two lists name suburbs with ${FP.minNamed*(metric==="g6"?2:1)} or more sales and moves of ${FP.maxMove*100}% or less; bigger swings usually mean different homes sold.`:""} Pan or zoom the map to summarise another area, or click a suburb.</p>`;}
  return h+`<details style="margin-top:14px"><summary style="cursor:pointer;font:500 13px var(--sans)">Ways to use this</summary><ul class="tips"><li><b>Press play</b> above the map to watch prices move since 1991. <b>Hover</b> the chart to read any month.</li><li><b>Press and hold</b> on that chart, then drag, to pick a period and see growth across it.</li><li><b>Search a street address</b> to see every recorded sale of that home and a rough value today.</li><li>Open <b>Layers</b> and turn on <b>Individual sales</b> to see every sale as a dot.</li><li>Enter your numbers on the <b>Budget</b> tab and the map can show what's within reach.</li></ul></details>`;}
 // suburbs with too few recent sales for a summary: show the sales themselves, and the long-run chart if there is one
 async function thinPanel(el,n){const noun=seg==="house"?"house":"unit",k=n+"|"+seg;
@@ -1854,9 +1855,14 @@ function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=
 /* ---------- headline: the front page, written from the data ---------- */
 // Rules, so the page can't overclaim: the count uses suburbs with 15+ sales (same as the side panel);
 // suburbs named in a story need 30+ sales and a move of 25% or less, because bigger swings usually mean different homes sold.
+// The front page reads either the last 6 months (each suburb's median for the 6 months to now against the 6 before)
+// or the last 12 (against the 12 before). The map's colours follow whichever is showing.
 const FP={min:15,minNamed:30,maxMove:.25};
-function fpHist(rs,up,dn,mid){const W=720,H=214,L=6,R=6,T=50,Bm=26,lo=-30,hi=30,bw=2.5,nb=(hi-lo)/bw,c=new Array(nb).fill(0);
- for(const r of rs){const g=Math.max(lo,Math.min(hi-.001,r[C.growth_1y]*100));c[Math.floor((g-lo)/bw)]++;}
+let fpW=store.get("hs_fpw")===12?12:6;
+if(fpW===6){metric="g6";document.getElementById("metric").value="g6";}
+const fpCol=()=>fpW===6?C.growth_6m:C.growth_1y;
+function fpHist(rs,up,dn,mid){const G=fpCol();const W=720,H=214,L=6,R=6,T=50,Bm=26,lo=-30,hi=30,bw=2.5,nb=(hi-lo)/bw,c=new Array(nb).fill(0);
+ for(const r of rs){const g=Math.max(lo,Math.min(hi-.001,r[G]*100));c[Math.floor((g-lo)/bw)]++;}
  const mx=Math.max(1,...c),X=v=>L+(v-lo)/(hi-lo)*(W-L-R),Y=n=>H-Bm-n/mx*(H-T-Bm);let g="";
  c.forEach((n,i)=>{if(!n)return;const v=lo+i*bw,x=X(v)+1,w=X(v+bw)-X(v)-2;g+=`<rect x="${x.toFixed(1)}" y="${Y(n).toFixed(1)}" width="${w.toFixed(1)}" height="${(H-Bm-Y(n)).toFixed(1)}" fill="${v<0?"#C4222B":"#171717"}"><title>${n} suburb${n>1?"s":""}: ${v<0?"−":"+"}${Math.abs(v<0?v+bw:v)}% to ${v<0?"−":"+"}${Math.abs(v<0?v:v+bw)}%${i===0?" or lower":i===nb-1?" or higher":""}</title></rect>`;});
  g+=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="#171717"/>`;
@@ -1866,31 +1872,36 @@ function fpHist(rs,up,dn,mid){const W=720,H=214,L=6,R=6,T=50,Bm=26,lo=-30,hi=30,
  if(dn)g+=`<text class="h r" x="${X(0)-12}" y="${T-22}" text-anchor="end">${dn} fell</text>`;
  g+=`<text class="h" x="${X(0)+12}" y="${T-22}">${up} rose</text>`;
  const right=xm<W*.62;g+=`<path d="M${xm+(right?46:-46)} ${Math.max(T+2,ym-34)}Q${xm+(right?14:-14)} ${Math.max(T+2,ym-36)} ${xm+(right?5:-5)} ${Math.max(T+14,ym-7)}" fill="none" stroke="#1F2D5C" stroke-width="1.8" stroke-linecap="round"/><text class="h" style="font-size:18px" x="${xm+(right?52:-52)}" y="${Math.max(T+8,ym-28)}" text-anchor="${right?"start":"end"}">typical suburb ${signed(mid,1)}</text>`;
- return`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Suburbs counted by how far their median price moved in 12 months: ${up} rose and ${dn} fell.">${g}</svg>`;}
-function headline(){const noun=seg==="house"?"house":"unit",Noun=noun==="house"?"House":"Unit",area=areaDef()[1].replace(/ \(.*\)$/,""),m=mkt(mreg(),seg),asof=dt(D.asof);
- const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=FP.min&&r[C.growth_1y]!=null&&inArea(r)),n=rs.length,up=rs.filter(r=>r[C.growth_1y]>0).length,dn=rs.filter(r=>r[C.growth_1y]<0).length,rest=n-up,sh=n?up/n:0;
+ return`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Suburbs counted by how far their median price moved in ${fpW} months: ${up} rose and ${dn} fell.">${g}</svg>`;}
+function headline(){const noun=seg==="house"?"house":"unit",Noun=noun==="house"?"House":"Unit",area=areaDef()[1].replace(/ \(.*\)$/,""),m=mkt(mreg(),seg),asof=dt(D.asof),G=fpCol(),six=fpW===6,span=six?"six months":"a year",last=six?"the last six months":"the last year",mn=FP.minNamed*(six?2:1);   // half-year medians need twice the sales
+
+ const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=FP.min&&r[G]!=null&&inArea(r)),n=rs.length,up=rs.filter(r=>r[G]>0).length,dn=rs.filter(r=>r[G]<0).length,rest=n-up,sh=n?up/n:0;
  const circ=t=>`<span class="pen-c">${t}</span>`,go=x=>{select(x.dataset.n);document.querySelector(".main").scrollIntoView({behavior:"smooth",block:"start"});};
- $("fpKick").textContent=`${area}, ${noun}s. Sales settled in the 12 months to ${asof}.`;
- $("fpHead").innerHTML=n<10?`Too few ${noun} sales in ${esc(area)} to call it`:sh<.4?`${Noun} prices fell in ${circ(`${dn} of ${n}`)} suburbs`:sh<.6?`A split market: ${noun} prices rose in ${circ(`${up} of ${n}`)} suburbs`:
-  `${Noun} prices rose in ${circ(`${up} of ${n}`)} suburbs. <span class="then2">${rest>1?`The other ${rest} did not.`:rest?"One did not.":"None fell."}</span>`;
- $("headline").innerHTML=m&&m.median?`The median ${noun} in ${mregName()} sold for <b class="hl">${money(m.median)}</b> in the year to ${asof}, ${m.growth_1y>=0?"up":"down"} ${pct(Math.abs(m.growth_1y))} on the year before. That is what buyers paid${m.n?` across ${Math.round(m.n).toLocaleString("en-AU")} recorded sales`:""}, not what anyone asked.`:"";
- const sorted=rs.slice().sort((a,b)=>a[C.growth_1y]-b[C.growth_1y]),mid=n?sorted[Math.floor(n/2)][C.growth_1y]:0;
+ $("fpKick").innerHTML=`<span>${esc(area)}, ${noun}s. Sales settled to ${asof}.</span><span class="seg" role="group" aria-label="Period for the front page"><button data-fpw="6" aria-pressed="${six}">Last 6 months</button><button data-fpw="12" aria-pressed="${!six}">Last 12 months</button></span>`;
+ $("fpHead").innerHTML=n<10?`Too few ${noun} sales in ${esc(area)} to call it`:sh<.4?`${Noun} prices fell in ${circ(`${dn} of ${n}`)} suburbs in ${span}`:sh<.6?`A split market: ${noun} prices rose in ${circ(`${up} of ${n}`)} suburbs in ${span}`:
+  `${Noun} prices rose in ${circ(`${up} of ${n}`)} suburbs in ${span}. <span class="then2">${rest>1?`The other ${rest} did not.`:rest?"One did not.":"None fell."}</span>`;
+ const sorted=rs.slice().sort((a,b)=>a[G]-b[G]),mid=n?sorted[Math.floor(n/2)][G]:0;
+ const yr=m&&m.median?`${six?"Over the full year the":"The"} median ${noun} in ${mregName()} ${six?"still ":""}sold for <b class="hl">${money(m.median)}</b>${six?"":` in the year to ${asof}`}, ${m.growth_1y>=0?"up":"down"} ${pct(Math.abs(m.growth_1y))} on the year before.`:"";
+ $("headline").innerHTML=!six?`${yr}${yr?` That is what buyers paid${m.n?` across ${Math.round(m.n).toLocaleString("en-AU")} recorded sales`:""}, not what anyone asked.`:""}`:
+  n<10?yr:`${yr} ${m&&m.median&&(m.growth_1y>=0)!==(mid>=0)?"The last six months point the other way":"The last six months"}: the typical suburb's median is ${mid>=0?"up":"down"} <b>${pct(Math.abs(mid))}</b> on the six months before. These are prices paid, not prices asked.`;
  $("fpFig").innerHTML=n>=10?fpHist(rs,up,dn,mid):"";
- $("fpCap").textContent=n>=10?`Each bar counts suburbs by how far their median ${noun} price moved: the 12 months to ${asof} against the 12 months before. Red bars fell. ${n} suburbs with ${FP.min} or more sales. Source: NSW Valuer General.`:"";
+ $("fpCap").textContent=n>=10?`Each bar counts suburbs by how far their median ${noun} price moved: the ${fpW} months to ${asof} against the ${fpW} months before. Red bars fell. ${n} suburbs with ${FP.min} or more sales in the year.${six?" Half-year medians rest on fewer sales and are not adjusted for the season, so read them as a direction, not a valuation.":""} Source: NSW Valuer General.`:"";
  const cl=$("fpClaim");cl.hidden=!(dn>0&&n>=10);
- if(!cl.hidden)cl.innerHTML=`<p class="lab">What you hear</p><span class="pen-x"><q>Property always goes up.</q></span><span class="fix">Not in ${dn} of ${n} suburbs last year<small>${esc(area)} ${noun}s, by median price, 12 months to ${asof}</small></span>`;
+ if(!cl.hidden)cl.innerHTML=`<p class="lab">What you hear</p><span class="pen-x"><q>Property always goes up.</q></span><span class="fix">Not in ${dn} of ${n} suburbs in ${last}<small>${esc(area)} ${noun}s, by median price, ${fpW} months to ${asof}</small></span>`;
  // three stories under the fold
- const named=sorted.filter(r=>r[C.n_now]>=FP.minNamed&&Math.abs(r[C.growth_1y])<=FP.maxMove),rises=named.filter(r=>r[C.growth_1y]>0).slice(-5).reverse(),falls=named.filter(r=>r[C.growth_1y]<0).slice(0,5);
- const li=(r,v)=>`<button data-n="${esc(r[C.locality])}"><span>${esc(title(r[C.locality]))}<small>${money(r[C.med_now])}, ${Math.round(r[C.n_now])} sales</small></span>${v}</button>`,gv=r=>`<b class="${r[C.growth_1y]<0?"neg":"pos"}">${signed(r[C.growth_1y],1)}</b>`;
- const foot=`<p class="cap">Median ${noun} price, 12 months against the 12 before. Suburbs with ${FP.minNamed} or more sales. Moves over ${FP.maxMove*100}% are left off this list: they usually mean different homes sold, not that values moved.</p>`;
+ const named=sorted.filter(r=>r[C.n_now]>=mn&&Math.abs(r[G])<=FP.maxMove),rises=named.filter(r=>r[G]>0).slice(-5).reverse(),falls=named.filter(r=>r[G]<0).slice(0,5);
+ const li=(r,v)=>`<button data-n="${esc(r[C.locality])}"><span>${esc(title(r[C.locality]))}<small>${money(r[C.med_now])}, ${Math.round(r[C.n_now])} sales</small></span>${v}</button>`,gv=r=>`<b class="${r[G]<0?"neg":"pos"}">${signed(r[G],1)}</b>`;
+ const foot=`<p class="cap">Median ${noun} price, ${fpW} months against the ${fpW} before. Suburbs with ${mn} or more sales in the year. Moves over ${FP.maxMove*100}% are left off this list: they usually mean different homes sold, not that values moved.</p>`;
  let h="";
- h+=`<article class="story">${rises.length?`<h3>${esc(title(rises[0][C.locality]))} led the rises, up ${pct(rises[0][C.growth_1y],1)}</h3><p>The median ${noun} there sold for ${money(rises[0][C.med_now])}, across ${Math.round(rises[0][C.n_now])} sales in the year.</p><div class="rows">${rises.map(r=>li(r,gv(r))).join("")}</div>${foot}`:`<h3>No suburb with ${FP.minNamed} or more sales rose</h3>${foot}`}</article>`;
- h+=`<article class="story">${falls.length?`<h3>${esc(title(falls[0][C.locality]))} fell furthest, down ${pct(-falls[0][C.growth_1y],1)}</h3><p>The median ${noun} there sold for ${money(falls[0][C.med_now])}, across ${Math.round(falls[0][C.n_now])} sales in the year.</p><div class="rows">${falls.map(r=>li(r,gv(r))).join("")}</div>${foot}`:`<h3>No suburb with ${FP.minNamed} or more sales fell</h3>${foot}`}</article>`;
- const ys=rs.filter(r=>r[C.n_now]>=FP.minNamed&&r._m&&r._m.yield!=null&&r[C.rent_pw]!=null).sort((a,b)=>a._m.yield-b._m.yield);
+ h+=`<article class="story">${rises.length?`<h3>${esc(title(rises[0][C.locality]))} led the rises, up ${pct(rises[0][G],1)}</h3><p>The median ${noun} there sold for ${money(rises[0][C.med_now])}, across ${Math.round(rises[0][C.n_now])} sales in the last 12 months.</p><div class="rows">${rises.map(r=>li(r,gv(r))).join("")}</div>${foot}`:`<h3>No suburb with ${mn} or more sales rose</h3>${foot}`}</article>`;
+ h+=`<article class="story">${falls.length?`<h3>${esc(title(falls[0][C.locality]))} fell furthest, down ${pct(-falls[0][G],1)}</h3><p>The median ${noun} there sold for ${money(falls[0][C.med_now])}, across ${Math.round(falls[0][C.n_now])} sales in the last 12 months.</p><div class="rows">${falls.map(r=>li(r,gv(r))).join("")}</div>${foot}`:`<h3>No suburb with ${mn} or more sales fell</h3>${foot}`}</article>`;
+ const ys=rs.filter(r=>r[C.n_now]>=mn&&r._m&&r._m.yield!=null&&r[C.rent_pw]!=null).sort((a,b)=>a._m.yield-b._m.yield);
  if(ys.length>=6){const lo=ys[0],hi=ys[ys.length-1],yv=r=>`<b>${pct(r._m.yield,1)}</b>`;
-  h+=`<article class="story"><h3>In ${esc(title(lo[C.locality]))}, a year's rent is ${pct(lo._m.yield,1)} of the price</h3><p>The median ${noun} there rents for about $${Math.round(lo[C.rent_pw]).toLocaleString("en-AU")} a week and sells for ${money(lo[C.med_now])}. In ${esc(title(hi[C.locality]))} a year's rent is ${pct(hi._m.yield,1)} of the price. The lower the figure, the cheaper renting is next to buying.</p><div class="rows">${ys.slice(0,5).map(r=>li(r,yv(r))).join("")}</div><p class="cap">Yearly rent on new leases as a share of the median ${noun} price. Rents are by postcode. Suburbs with ${FP.minNamed} or more sales.</p></article>`;}
+  h+=`<article class="story"><h3>In ${esc(title(lo[C.locality]))}, a year's rent is ${pct(lo._m.yield,1)} of the price</h3><p>The median ${noun} there rents for about $${Math.round(lo[C.rent_pw]).toLocaleString("en-AU")} a week and sells for ${money(lo[C.med_now])}. In ${esc(title(hi[C.locality]))} a year's rent is ${pct(hi._m.yield,1)} of the price. The lower the figure, the cheaper renting is next to buying.</p><div class="rows">${ys.slice(0,5).map(r=>li(r,yv(r))).join("")}</div><p class="cap">Yearly rent on new leases as a share of the median ${noun} price. Rents are by postcode. Suburbs with ${mn} or more sales.</p></article>`;}
  else h+=`<article class="story"><h3>Too little rent data here to compare renting with buying</h3><p>Rents come from bonds lodged since 2021, by postcode.</p></article>`;
+ $("fpKick").querySelectorAll("[data-fpw]").forEach(b=>b.addEventListener("click",()=>fpSet(+b.dataset.fpw)));
  const mo=$("fpMore");mo.innerHTML=h;mo.querySelectorAll("[data-n]").forEach(x=>x.addEventListener("click",()=>go(x)));}
+function fpSet(w){fpW=w===12?12:6;store.set("hs_fpw",fpW);metric=fpW===6?"g6":"g1";$("metric").value=metric;autoFrom=null;paintMap();planChip();headline();detail();}
 
 /* ---------- table ---------- */
 const COLS=[["Suburb",r=>title(r[C.locality])],["Median price",r=>r[C.med_now],money],["Sales, 12 mths",r=>r[C.n_now]],
@@ -2137,6 +2148,8 @@ market();all();
   else{fl.addEventListener("click",turn);let t;new IntersectionObserver(es=>es.forEach(e=>{clearTimeout(t);if(e.isIntersecting)t=setTimeout(turn,500);}),{rootMargin:"0px 0px -30% 0px"}).observe(bk);}}
  $("toMap").addEventListener("click",()=>document.querySelector(".ev").scrollIntoView({behavior:"smooth",block:"start"}));
  $("howBtn").addEventListener("click",()=>{const d=document.querySelector("details.how");d.open=true;d.scrollIntoView({behavior:"smooth",block:"start"});});
+ // Choosing a 6 or 12 month price change for the map moves the front page with it.
+ $("metric").addEventListener("change",e=>{const v=e.target.value;if(v==="g6"||v==="g1"){fpW=v==="g6"?6:12;store.set("hs_fpw",fpW);headline();}detail();});
  // Tip jar: shows only once there is somewhere to send people.
  const TIP_URL="";if(TIP_URL){$("tipLink").href=TIP_URL;$("tipJar").hidden=false;}}
 </script></body></html>
