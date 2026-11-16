@@ -480,6 +480,12 @@ select:hover,input:hover{border-color:var(--slate)}
 .tcur{border-left-color:var(--ink)}.tcur i{background:var(--hi);border-color:var(--ink)}.tcur b{color:var(--ink)}
 .chip button.on{background:var(--hi);color:var(--night)}
 section.market{border-top:2px solid var(--ink)}
+#tourO .tr-hole{outline:3px solid var(--hi);box-shadow:0 0 0 9999px rgba(8,14,12,.66)}
+.legend .t{padding-right:24px}
+.lg-x{position:absolute;top:6px;right:6px;width:26px;height:26px;border:0;background:none;color:var(--slate);font-size:17px;line-height:1;cursor:pointer;border-radius:6px;padding:0}
+.lg-x:hover{background:var(--wash);color:var(--ink)}
+.legend.min{min-width:0;padding:0;border:0;background:none;box-shadow:none}
+#detail .chart svg[data-hov]{cursor:pointer}
 .mcharts svg text{font-size:14.5px}
 @media(max-width:1000px){.mcharts svg text{font-size:11.5px}}
 details.assume,details.how{border-top-color:var(--ink)}
@@ -833,11 +839,14 @@ const minDep=p=>schemeOK(p)?.05:BB.min_deposit;
 // For an investment, lenders count about 80% of the expected rent as income and your own rent as a cost.
 // The rent depends on the price and the price on the loan, so the two are settled together.
 function invYield(){const r=sel?rowFor(sel):null,ys=r&&r[C.rent_pw]&&r[C.med_now]?r[C.rent_pw]*52/r[C.med_now]:null;return ys!=null&&ys>.015&&ys<.08?ys:medYield(seg);}
+// The lender's test uses one cautious yield, the lower of houses and units here, so the borrowing limit
+// doesn't move when you flip between house and unit. The buy-or-rent figures still use each type's own rent.
+function testYield(){const ok=y=>y!=null&&y>.015&&y<.08;return Math.min(...["house","unit"].map(sg=>{const r=sel?byKey[sel+"|"+sg]:null,y=r&&r[C.rent_pw]&&r[C.med_now]?r[C.rent_pw]*52/r[C.med_now]:null;return ok(y)?y:medYield(sg);}));}
 function borrowing(){const g=grossPA();if(!g)return null;const inv=isInv();
  const spare=netPM()-livingPM()-(B.debts_pm||0)-(inv?(B.own_rent||0)*52/12:0);
  const svc=x=>Math.max(0,x/pmt(A.mortgage_rate+BB.buffer,BB.term_years)),cap=BB.max_dti>0?g*BB.max_dti:Infinity;
  let loan=svc(spare),rentPM=0;
- if(inv)for(let k=0;k<6;k++){const pw=B.inv_rent||plan(Math.min(loan,cap)).price*invYield()/52;rentPM=pw*52/12;loan=svc(spare+.8*rentPM);}
+ if(inv)for(let k=0;k<6;k++){const pw=B.inv_rent||plan(Math.min(loan,cap)).price*testYield()/52;rentPM=pw*52/12;loan=svc(spare+.8*rentPM);}
  return{gross:g,spare,loan:Math.min(loan,cap),capped:cap<loan,rentPM};}
 // A plan for a total loan L (including any capitalised LMI): the price it buys with your cash.
 function plan(L){const c=cashAvail();let lmi=0,price=0,base=L;
@@ -962,7 +971,10 @@ function valueText(r,k){const M=METRICS[metric];
  if(M.cat){if(!maxP||!maxP.price)return"Enter your budget to see";const b=bBand(r);
   return b==null?"–":`${BL[b]}: your ${money(maxP.price)} against a median of ${money(r[C.med_now])}`;}
  const v=M.get(r);return v==null?"–":M.fmt(v);}
-function legend(){legend0();if(spMode!=="off")document.getElementById("legend").insertAdjacentHTML("beforeend",spLegend());}
+let lgMin=(()=>{const v=store.get("hs_lg");return v==null?innerWidth<=720:!!v;})();
+function legend(){const el=document.getElementById("legend");legend0();el.classList.toggle("min",lgMin);
+ if(lgMin){el.innerHTML='<button class="lbtn lg-open" aria-expanded="false">Colour key</button>';return;}
+ if(spMode!=="off")el.insertAdjacentHTML("beforeend",spLegend());el.insertAdjacentHTML("beforeend",'<button class="lg-x" aria-label="Hide the colour key" title="Hide">×</button>');}
 function legend0(){const M=METRICS[metric],el=document.getElementById("legend");{const pr=$("palrow");if(pr)pr.hidden=M.stops!=="PRICE";}
  const na=`<div class="na"><i class="hatch"></i>${M.cat?"No sales, or budget not entered":metric==="g5"&&ti<60?"Needs 5 years of history before this date":metric==="yield"&&!isLatest()?"Not enough sales or rent data (rents start 2021)":"Not enough sales or rent data"}</div>`;
  if(M.cat){const has=M.rent?!!rb:!!(maxP&&maxP.price);el.innerHTML=`<div class="t">${M.label}${M.rent&&rb?`: $${Math.round(rb.pw)} a week`:""}</div>`+(has?`<div class="cats">${CAT[metric].map(([l,c])=>`<div><i style="background:${c}"></i>${l}</div>`).join("")}</div>`:`<div>${M.rent?"Enter your income or a rent budget above.":"Enter your cash and income above."}</div>`)+na;return;}
@@ -1229,7 +1241,7 @@ function bxUI(){const cap=$("bxCap"),has=!!(ML&&maxP&&maxP.price>0);
   `<div class="bx-lab">You could buy up to ${tipI(`The lower of two limits. Income: your pay after tax, living costs and other repayments must cover the loan at ${pct(A.mortgage_rate+BB.buffer,2)}, your rate plus the lender's buffer${ML.bw.capped?`, capped at ${BB.max_dti} times income`:""}. Cash: it has to cover stamp duty, fees and at least a ${pct(minDep(mx.price),0)} deposit. A rough guide, not a lender's assessment.${inv?" For an investment, lenders also count most of the rent it earns and your own rent as a cost.":""}`)}</div>
   <div class="bx-big num">${money(mx.price)}</div>
   <p class="bx-sub">A <b>${money(mx.L)}</b> loan plus a <b>${money(mx.dep)}</b> deposit${mx.lmi?", including mortgage insurance":""}.</p>
-  <p class="bx-sub">${byCash?`Cash is the limit. About <b>${money(cashNeeded(incL))}</b> would unlock everything your income allows.`:`Income is the limit${ML.bw.capped?`, capped at ${BB.max_dti}× income`:""}.`}</p>`;
+  <p class="bx-sub">${byCash?`Cash is the limit. About <b>${money(cashNeeded(incL))}</b> would unlock everything your income allows.`:`Income is the limit${ML.bw.capped?`, capped at ${BB.max_dti}× income`:""}.`}${isInv()&&ML.bw.rentPM?` Counts 80% of <b>$${Math.round(ML.bw.rentPM*12/52/10)*10}</b> a week in expected rent${B.inv_rent?"":`, at a cautious ${pct(testYield(),1)} yield`}.`:""}</p>`;
  if(!has){SIM=null;return;}
  // ---- 2. the home
  {const k=seg,dl=$("bxSubs");if(dl.dataset.k!==k){dl.dataset.k=k;dl.innerHTML=D.rows.filter(r=>r[C.segment]===seg).map(r=>r[C.locality]).sort().map(n=>`<option value="${esc(title(n))}">`).join("");}
@@ -1412,7 +1424,7 @@ function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="
  const mi=mark?pts.findIndex(p=>p[0]===mark):-1;
  if(mi>=0)g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#2F5C8A" stroke-width="1.5" stroke-dasharray="3 3"/>`;
  const mdot=mi>=0&&pts[mi][1]!=null?`<circle cx="${X(mi)}" cy="${Y(pts[mi][1])}" r="4" fill="#2F5C8A" stroke="#fff" stroke-width="1.5"/>`:"";
- const hov={vw:w,t:T,b:h-B_,xs:pts.map((p,i)=>+X(i).toFixed(1)),lab:pts.map(p=>qlab(p[0])),rows:pts.map(p=>p[1]==null?[]:[[stroke,+Y(p[1]).toFixed(1),`Median ${fmt(p[1])}`+(p[2]!=null&&p[3]!=null?`<br><span style="color:var(--slate)">Middle half ${fmt(p[2])}–${fmt(p[3])}</span>`:"")+(p[4]?`<br><span style="color:var(--slate)">${p[4]} sales</span>`:"")]])};
+ const hov={vw:w,t:T,b:h-B_,q:pts.map(p=>p[0]),xs:pts.map((p,i)=>+X(i).toFixed(1)),lab:pts.map(p=>qlab(p[0])),rows:pts.map(p=>p[1]==null?[]:[[stroke,+Y(p[1]).toFixed(1),`Median ${fmt(p[1])}`+(p[2]!=null&&p[3]!=null?`<br><span style="color:var(--slate)">Middle half ${fmt(p[2])}–${fmt(p[3])}</span>`:"")+(p[4]?`<br><span style="color:var(--slate)">${p[4]} sales</span>`:"")]])};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band||`<path d="${d}L${X(pts.length-1)},${h-B_}L${L0},${h-B_}Z" fill="${fill}"/>`}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/>
  <circle cx="${X(pts.length-1)}" cy="${Y(last[1])}" r="3.5" fill="${stroke}"/><text x="${X(pts.length-1)+7}" y="${Y(last[1])+4}" style="fill:${stroke};font-weight:600">${fmt(last[1])}</text>${mdot}</svg>`;}
 function rangeStrip(label,v,fmt,col,mark,markLbl,note){let[mn,p10,p25,md,p75,p90,mx]=v;if(md==null||p25==null)return"";const half=p10==null;if(half){p10=p25-(p75-p25)*.6;p90=p75+(p75-p25)*.6;}
@@ -1519,7 +1531,7 @@ function detail(){const el=document.getElementById("detail");
  else if(dtab==="trends"){const L=k[0].match(/[A-Z]/)?k[0]:"_",DT=window.DET&&window.DET[L];if(!DT)detLoad(L);
  const zc=RNG&&zoomP,cr=pts=>{if(!zc||!pts)return pts;const a=qOf(RNG.a),b=qOf(RNG.b);return pts.filter(p=>p[0]>=a&&p[0]<=b);},mk=zc?null:tmark();
  const rsC=cr(rs);
- body=!DT?`<p class="note">Loading charts…</p>`:`${RNG?`<p class="note" style="margin:0 0 6px">${zc?`Charts show ${mlabel(RNG.a)} to ${mlabel(RNG.b)}. <a href="#" data-zoomp>Show all years</a>`:`The shaded band is the chosen period. <a href="#" data-zoomp>Zoom to it</a>`}</p>`:""}<div class="chart"><h3>Sale prices by quarter: median, middle half of sales shaded</h3>${chart(cr((DT[k]||[]).map(x=>[x[0],x[1],x[3],x[4],x[2]])),money,"#1C2B3A","rgba(28,43,58,.11)",mk)}
+ body=!DT?`<p class="note">Loading charts…</p>`:`${RNG?`<p class="note" style="margin:0 0 6px">${zc?`Charts show ${mlabel(RNG.a)} to ${mlabel(RNG.b)}. <a href="#" data-zoomp>Show all years</a>`:`The shaded band is the chosen period. <a href="#" data-zoomp>Zoom to it</a>`}</p>`:""}<p class="note" style="margin:0 0 6px">Click a chart to show that quarter on the map.</p><div class="chart"><h3>Sale prices by quarter: median, middle half of sales shaded</h3>${chart(cr((DT[k]||[]).map(x=>[x[0],x[1],x[3],x[4],x[2]])),money,"#1C2B3A","rgba(28,43,58,.11)",mk)}
   <h3>Weekly rent on new leases, postcode ${r[C.postcode]}: median, middle half shaded</h3>${rsC&&rsC.length>=3?chart(rsC,v=>"$"+Math.round(v),"#1F6E68","rgba(31,110,104,.14)",mk):`<p class="note">${zc?"Rent records start in 2021, so there are none for most of this period.":"Not enough rent data for a chart."}</p>`}</div>`;}
  const hist=MS&&!isLatest();
  if(dtab==="sales")body='<div id="salesList"><p class="note">Loading sales…</p></div>';
@@ -1757,14 +1769,14 @@ $("area").addEventListener("change",e=>{AREA=e.target.value;try{localStorage.set
 /* ---------- guided tour ---------- */
 // One tour per tab: shown once automatically (map on first visit, budget once figures are in), replayable from "Take the tour".
 const TOURS={map:[
- [".tabs","Two views","The map of suburbs, and a budget planner that compares buying with renting."],
+ ['.tabs button[data-tab="map"]|.tabs button[data-tab="budget"]',"Two views","The map of suburbs, and a budget planner that compares buying with renting."],
  ['.seg[aria-label="Dwelling type"]',"Houses or units","Everything on the page switches between houses and units."],
  ["#area","Area","Greater Sydney, all of NSW or one region. The map, table and headline follow it."],
  ["#metric","Colour the map","Choose what the colours show: prices, price changes, rental yield, or what fits your budget once you've entered it."],
  ["#find","Search","Jump to a suburb or a street address and see its sales history."],
  ["#map|#detail","The map","Hover a suburb for its figure and click it for the full story in the panel on the right."],
  [".spbar|#map","Every sale, on the map","Switch on Individual sales to see every home sold in the last month or 12 months as a dot, coloured by price. Click a dot for the address, the price and that home's earlier sales.",{enter(){tourMap=map?{sp:spMode,c:map.getCenter(),z:map.getZoom()}:{sp:spMode};if(map)map.jumpTo({center:[151.214,-33.886],zoom:13.6});setSp("year");},exit(){if(!tourMap)return;setSp(tourMap.sp);if(map&&tourMap.c)map.jumpTo({center:tourMap.c,zoom:tourMap.z});tourMap=null;}}],
- ["#legend","Colour key","What each colour means. Grey means too few sales to say."],
+ ["#legend","Colour key","What each colour means. Hatched means too few sales to say. Hide it with the × and bring it back with the Colour key button.",{enter(){window._lg=lgMin;lgMin=false;legend();},exit(){lgMin=!!window._lg;legend();}}],
  ["#timebar","Travel in time","Press play to watch prices since 1990, or drag to any month. Press, hold and drag to pick a period and colour the map by growth across it."],
  ["#layersBtn","Layers","Turn on individual sales, change the colour scheme or switch to aerial photos."],
  ["#detail","Suburb details","Prices, trends, recent sales and rents for the suburb you pick. Until then it sums up the suburbs in view."],
@@ -1846,5 +1858,8 @@ market();all();
  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){const els=[...$("ghStats").querySelectorAll("b")],t0=performance.now();els.forEach(e=>{const m=e.textContent.match(/^([\d.,]+)(.*)$/);e._v=m?parseFloat(m[1].replace(/,/g,"")):null;e._s=m?m[2]:"";e._d=m&&m[1].includes(".")?1:0;e._c=m&&m[1].includes(",");e._t=e.textContent;});
   const step=t=>{const k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);els.forEach(e=>{if(e._v==null)return;const v=e._v*q;e.textContent=k===1?e._t:(e._c?Math.round(v).toLocaleString("en-AU"):v.toFixed(e._d))+e._s;});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
  let rzT;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(SIM&&!$("tabBudget").hidden)bxChart();},200);});
+ $("legend").addEventListener("click",e=>{if(e.target.closest(".lg-x,.lg-open")){lgMin=!lgMin;store.set("hs_lg",lgMin);legend();}});
+ $("detail").addEventListener("click",e=>{const svg=e.target.closest&&e.target.closest(".chart svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov);if(!hov.q)return;
+  const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
  $("askFind").addEventListener("click",()=>{showTab("map");const f=$("find");f.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f.focus({preventScroll:true}),350);});}
 </script></body></html>
