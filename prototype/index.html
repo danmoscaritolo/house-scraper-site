@@ -480,6 +480,8 @@ select:hover,input:hover{border-color:var(--slate)}
 .tcur{border-left-color:var(--ink)}.tcur i{background:var(--hi);border-color:var(--ink)}.tcur b{color:var(--ink)}
 .chip button.on{background:var(--hi);color:var(--night)}
 section.market{border-top:2px solid var(--ink)}
+.mcharts svg text{font-size:14.5px}
+@media(max-width:1000px){.mcharts svg text{font-size:11.5px}}
 details.assume,details.how{border-top-color:var(--ink)}
 
 /* planner */
@@ -538,7 +540,7 @@ details.assume,details.how{border-top-color:var(--ink)}
  .gh-ask .s{display:none}.gh-ask button{flex-basis:auto;padding:12px 14px}.gh-ask b{white-space:nowrap}
  .gh-bar{gap:10px}.gh-bar .tourBtn{white-space:nowrap;padding:5px 11px}
  .chip{font-size:13px;gap:8px;white-space:nowrap;justify-content:space-between}
- .legend{bottom:66px}
+ .legend{bottom:86px}
  .bx-sbs .sb-a b,.bx-sbs .sb-b b{font-size:15px;white-space:nowrap}
 }
 @media(prefers-reduced-motion:reduce){.gh-ask button{transition:none}.gh-ask button:hover{transform:none}}
@@ -1843,5 +1845,6 @@ market();all();
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;
  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){const els=[...$("ghStats").querySelectorAll("b")],t0=performance.now();els.forEach(e=>{const m=e.textContent.match(/^([\d.,]+)(.*)$/);e._v=m?parseFloat(m[1].replace(/,/g,"")):null;e._s=m?m[2]:"";e._d=m&&m[1].includes(".")?1:0;e._c=m&&m[1].includes(",");e._t=e.textContent;});
   const step=t=>{const k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);els.forEach(e=>{if(e._v==null)return;const v=e._v*q;e.textContent=k===1?e._t:(e._c?Math.round(v).toLocaleString("en-AU"):v.toFixed(e._d))+e._s;});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+ let rzT;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(SIM&&!$("tabBudget").hidden)bxChart();},200);});
  $("askFind").addEventListener("click",()=>{showTab("map");const f=$("find");f.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f.focus({preventScroll:true}),350);});}
 </script></body></html>
