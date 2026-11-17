@@ -484,21 +484,12 @@ header.gh h2#ghH1 mark{background:none;color:var(--hi);padding:0}
 .gh-key{display:flex;gap:18px;font:400 13px var(--sans);color:var(--mist);margin:10px 0 0}
 .gh-key i{display:inline-block;width:12px;height:9px;margin-right:6px;vertical-align:0}
 .gh-key i.b6{background:linear-gradient(90deg,#E5484D 50%,#9DB0A6 50%)}.gh-key i.b12{border:1.5px solid #EAF0EA;height:7px;width:10px}
-#ghTier{margin-top:44px}
-#ghTier>p{margin:0 0 16px;font:400 16.5px/1.5 var(--sans);color:#C9D4CD}#ghTier>p b{color:#fff;font-weight:600}
-.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.tiers div{border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.03)}
-.tiers small{display:block;font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
-.tiers em{display:block;font:400 13px var(--sans);font-style:normal;color:var(--mist);margin-top:3px}
-.tiers b{display:block;font:700 28px/1.1 var(--serif);font-stretch:85%;margin:12px 0 4px;color:#fff}.tiers b.up{color:#7FDCA4}.tiers b.dn{color:#FF8A7A}
-.tiers span{font:400 13px var(--sans);color:var(--mist)}
 .gh-cap{margin:26px 0 0;font:400 13px/1.55 var(--sans);color:var(--mist)}.gh-cap summary{cursor:pointer;display:inline-block;color:#C9D4CD}.gh-cap p{margin:8px 0 0;max-width:100ch}
 header.gh .gh-ask{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 30px}
 @media(max-width:1000px){header.gh .gh-ask{grid-template-columns:1fr}.gh-mgrid{grid-template-columns:1fr}}
 @media(max-width:720px){.gh-hero{padding:34px 0 34px}header.gh .gh-hero h1{font-size:46px;margin-bottom:16px}.gh-sub{font-size:16.5px;margin-bottom:16px}.gh-fresh{font-size:13px;padding:9px 14px;border-radius:14px;flex-wrap:wrap;text-align:left;gap:4px 10px}
  .gh-mkt{padding:28px 0 26px}.gh-kick{margin-bottom:20px;font-size:11.5px}#ghArea{max-width:150px}
  .gh-mgrid{gap:28px}.gh-tiles b{font-size:24px}.gh-tiles div{padding:14px 8px 0 0}.gh-tiles div+div{padding-left:10px}.gh-tiles span{font-size:11.5px}
- #ghTier{margin-top:30px}#ghTier>p{font-size:14.5px}.tiers{gap:8px}.tiers div{padding:12px 10px}.tiers b{font-size:21px}.tiers em,.tiers span{font-size:11.5px}
  header.gh .gh-ask{display:flex;margin-bottom:16px}}
 .togs{display:flex;flex-wrap:wrap;gap:6px}
 .tog{position:relative;display:inline-flex}.tog input{position:absolute;opacity:0;width:1px;height:1px}
@@ -647,12 +638,11 @@ details.how.lic{margin-top:0;border-top:0}
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
 <div class="gh-mgrid"><div class="gh-ans"><h2 id="ghH1"></h2><p id="headline"></p><div class="gh-tiles num" id="ghTiles"></div></div>
 <div class="gh-ev" id="ghEv"><p class="gh-lab">Suburbs by price change</p><div id="ghFig"></div><div class="gh-key"><span><i class="b6"></i>Last 6 months</span><span><i class="b12"></i>Last 12 months</span></div></div></div>
-<div id="ghTier"></div>
 <details class="gh-cap"><summary>How this is worked out</summary><p id="ghCap"></p></details>
 </section>
 <div class="gh-ask">
 <button class="pri" id="ctaPlay"><span class="n">01</span><span><b>Where are prices moving?</b><span class="s">Watch every month since 1990 play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="askFind"><span class="n">02</span><span><b>What did it really sell for?</b><span class="s">Any NSW address or suburb, every recorded sale.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="askFind"><span class="n">02</span><span><b>Sales in the last week</b><span class="s">Every home that settled in the past seven days, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button data-goto="budget"><span class="n">03</span><span><b>What can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div>
 <div class="gh-stats num" id="ghStats"></div>
@@ -1786,20 +1776,13 @@ function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].re
  const up12=r12.filter(r=>r[C.growth_1y]>0).length,dn6=r6.filter(r=>r[C.growth_6m]<0).length,near=rp.filter(r=>r[C.from_peak]>-MK.near).length;
  const ok=r12.length>=10&&r6.length>=10,mt=m&&m.median?`The median ${noun} in ${mregName()} sold for <b>${money(m.median)}</b> in the 12 months to ${asof}, ${signed(m.growth_1y)} on the year before.`:"";
  $("ghEv").hidden=!ok;{const f=$("ghFresh");f.hidden=!(MS&&MS.ad);f.innerHTML=`<i></i>Sales settled to ${asof} <u>See the past week on the map →</u>`;}
- if(!ok){$("ghH1").innerHTML=`Too few ${noun} sales here <mark>to call it</mark>`;$("headline").innerHTML=`Fewer than 10 suburbs in ${esc(area)} had ${MK.min} or more ${noun} sales in the last year. ${mt}`;$("ghTiles").innerHTML="";$("ghTier").innerHTML="";$("ghCap").textContent="";return;}
+ if(!ok){$("ghH1").innerHTML=`Too few ${noun} sales here <mark>to call it</mark>`;$("headline").innerHTML=`Fewer than 10 suburbs in ${esc(area)} had ${MK.min} or more ${noun} sales in the last year. ${mt}`;$("ghTiles").innerHTML="";$("ghCap").textContent="";return;}
  const [h,why]=mRead(g1,g6),ud=(v,a,b)=>`<b>${v>=0?a:b} ${pct(Math.abs(v))}</b>`;
  $("ghH1").innerHTML=h;
  $("headline").innerHTML=why;
  const cl=v=>v>.0005?"up":v<-.0005?"dn":"";
  $("ghTiles").innerHTML=`<div><small>Last 12 months</small><b class="${cl(g1)}">${signed(g1)}</b><span>Rose in ${up12} of ${r12.length} suburbs</span></div><div><small>Last 6 months</small><b class="${cl(g6)}">${signed(g6)}</b><span>Fell in ${dn6} of ${r6.length} suburbs</span></div><div><small>Below 3-year peak</small><b>${pk==null?"–":pk>-.0005?"At peak":pct(-pk)}</b><span>${near} of ${rp.length} within ${MK.near*100}%</span></div>`;
  ghHist(r6.map(r=>r[C.growth_6m]),r12.map(r=>r[C.growth_1y]),g6);
- // where is the momentum: suburbs split into thirds by median price
- const both=rs.filter(r=>r[C.growth_6m]!=null&&r[C.growth_1y]!=null&&r[C.med_now]!=null).sort((a,b)=>a[C.med_now]-b[C.med_now]),k=Math.floor(both.length/3);
- if(k>=10){const ts=[both.slice(0,k),both.slice(k,2*k),both.slice(2*k)].map((t,i)=>({n:["Cheaper third","Middle third","Dearer third"][i],lim:i===0?`under ${money(both[k][C.med_now])}`:i===2?`over ${money(both[2*k][C.med_now])}`:`${money(t[0][C.med_now])}–${money(t[t.length-1][C.med_now])}`,g1:mid(t.map(r=>r[C.growth_1y])),g6:mid(t.map(r=>r[C.growth_6m]))}));
-  const best=ts.reduce((a,b)=>b.g6>a.g6?b:a),worst=ts.reduce((a,b)=>b.g6<a.g6?b:a),S=Math.max(.04,...ts.map(t=>Math.abs(t.g6))),lc=s=>s.toLowerCase();
-  const lead=best===worst?"":worst.g6>0?`Over the last six months, prices rose most in the <b>${lc(best.n)}</b> of suburbs by price (${signed(best.g6)}) and least in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:best.g6<0?`Over the last six months, prices fell least in the <b>${lc(best.n)}</b> of suburbs by price (${signed(best.g6)}) and most in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:`Over the last six months, prices did best in the <b>${lc(best.n)}</b> of suburbs by price (${signed(best.g6)}) and worst in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`;
-  $("ghTier").innerHTML=`<p>${lead}</p><div class="tiers num">`+ts.map(t=>`<div><small>${t.n}</small><em>Suburbs ${t.lim}</em><b class="${cl(t.g6)}">${signed(t.g6)}</b><span>6 months · ${signed(t.g1)} over 12</span></div>`).join("")+"</div>";}
- else $("ghTier").innerHTML="";
  $("ghCap").innerHTML=`All figures are for the typical suburb. ${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. ${mt} Source: NSW Valuer General.`;}
 
 /* ---------- table ---------- */
@@ -2034,5 +2017,5 @@ $("bxPrint").addEventListener("click",()=>window.print());
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
  document.querySelectorAll(".gh-ask button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll(".gh-ask button").forEach(x=>x.classList.toggle("pri",x===b))));
  $("ghFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});});
- $("askFind").addEventListener("click",()=>{showTab("map");const f=$("find");f.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f.focus({preventScroll:true}),350);});}
+ $("askFind").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});if(map)map.flyTo({center:[151.225,-33.852],zoom:12.3,duration:900});});}
 </script></body></html>
