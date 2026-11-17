@@ -621,6 +621,20 @@ details.assume,details.how{border-top-color:var(--ink)}
  .bx-sbs .sb-a b,.bx-sbs .sb-b b{font-size:15px;white-space:nowrap}
 }
 @media(prefers-reduced-motion:reduce){.gh-ask button{transition:none}.gh-ask button:hover{transform:none}}
+
+/* legal: calculator statement, licences, footer links */
+.bx-legal{margin:16px 0 0;padding:12px 14px;border-left:3px solid var(--hi);background:var(--sheet);font-size:13px;line-height:1.55;color:var(--ink);max-width:92ch}
+.bx-legal b{font-weight:600}
+.bx-legal-a{display:inline-flex;gap:14px;margin-left:6px;white-space:nowrap}
+.bx-legal a,footer .src a,details.lic a{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--mist)}
+.bx-fine{margin:10px 0 0;font-size:11.5px;color:var(--slate)}
+details.how.lic{margin-top:0;border-top:0}
+@media print{
+ header.gh,nav.tabs,#tabMap,footer,.tourBtn,#bxPlay,.bx-legal-a{display:none!important}
+ #tabBudget{display:block!important}
+ body{background:#fff}
+ .bx-step{break-inside:avoid}
+}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
@@ -715,6 +729,7 @@ details.assume,details.how{border-top-color:var(--ink)}
  <header class="bx-top">
   <h2 class="sec">Buy or rent, on your numbers</h2>
   <p class="lede">Four steps: what you can borrow, the home, the loan, then buying against renting for every year of the loan. Shorthand like 250k or 1.2m works. Nothing leaves this browser.</p>
+  <aside class="bx-legal" role="note"><b>A calculator, not advice.</b> It shows what happens to your money under the assumptions on this page, all of which you can change. It doesn't know your full situation and doesn't recommend any property, loan or lender. Results are estimates, not a forecast or a lender's assessment. Don't rely on them to make a decision: get advice from a licensed financial adviser first. Amounts in future years are in future dollars; the verdict in step 4 also gives today's dollars, using your inflation rate. <span class="bx-legal-a"><button type="button" class="bx-link" id="bxPrint">Print or save as PDF</button><a href="terms.html">Terms of use</a></span></aside>
  </header>
 
  <section class="bx-step" aria-label="Your money">
@@ -798,6 +813,7 @@ details.assume,details.how{border-top-color:var(--ink)}
 </div>
    <div id="bxCards"></div>
    <div class="bx-chart"><div class="bx-ch"><h4 id="bxCT"></h4><span class="seg" id="bxCum" role="group" aria-label="Each year or running total" hidden><button data-cum="0">Each year</button><button data-cum="1">Running total</button></span></div><div class="k" id="bxCK"></div><div id="bxChart"></div><p class="note" id="bxCN" style="margin:6px 0 0"></p></div>
+   <p class="bx-fine">Estimates under the assumptions on this page, not financial advice. Property prices can fall as well as rise.</p>
   </div>
  </section>
  </div>
@@ -849,7 +865,25 @@ details.assume,details.how{border-top-color:var(--ink)}
 <dd>The 1990 to 2000 records have no settlement date (estimated at contract plus 6 weeks) and no residence or strata flags, so they're classified from zoning and the land description.</dd>
 </dl>
 </details>
-<p class="src">Sales: NSW Valuer General (CC BY-NC-ND 4.0). Rents: NSW Fair Trading rental bonds. Boundaries: ABS. Addresses: Geoscape G-NAF. Map: OpenFreeMap, © OpenMapTiles, © OpenStreetMap contributors. Aerial imagery: © Spatial Services NSW. For personal research, not financial advice.</p>
+<details class="how lic" id="licences"><summary>Data and licences<span>Where every figure comes from, and the terms it's used under</span></summary>
+<dl>
+<dt>Property sales</dt>
+<dd>Bulk Property Sales Information, © Crown in right of NSW through the Valuer General, from 1990. Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank">Creative Commons BY-NC-ND 4.0</a>. <a href="https://valuation.property.nsw.gov.au/embed/propertySalesInformation" rel="noopener" target="_blank">Source</a>.</dd>
+<dt>Rents</dt>
+<dd>Rental bond lodgements, NSW Fair Trading, from 2021. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">Creative Commons Attribution</a>. <a href="https://www.fairtrading.nsw.gov.au/about-fair-trading/rental-bond-data" rel="noopener" target="_blank">Source</a>.</dd>
+<dt>Addresses</dt>
+<dd>Incorporates or developed using G-NAF © Geoscape Australia, licensed by the Commonwealth of Australia under the <a href="https://data.gov.au/data/dataset/geocoded-national-address-file-g-naf/resource/09f74802-08b1-4214-a6ea-3591b2753d30" rel="noopener" target="_blank">Open G-NAF End User Licence Agreement</a>.</dd>
+<dt>Suburb boundaries</dt>
+<dd>Suburbs and Localities 2021, Australian Statistical Geography Standard, © Commonwealth of Australia (Australian Bureau of Statistics). Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">Creative Commons Attribution 4.0</a>.</dd>
+<dt>Aerial imagery</dt>
+<dd>© State of New South Wales (Spatial Services, a business unit of the Department of Customer Service NSW). Licensed under Creative Commons Attribution. For current information go to <a href="https://www.spatial.nsw.gov.au" rel="noopener" target="_blank">spatial.nsw.gov.au</a>.</dd>
+<dt>Street map</dt>
+<dd><a href="https://openfreemap.org" rel="noopener" target="_blank">OpenFreeMap</a>, © <a href="https://openmaptiles.org" rel="noopener" target="_blank">OpenMapTiles</a>, data © <a href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OpenStreetMap contributors</a> (Open Database Licence).</dd>
+<dt>What we've done to it</dt>
+<dd>Glasshouse has cleaned and combined these records and calculated the medians, growth rates, value estimates and budget results shown here. None of the agencies above has endorsed this site, and none guarantees the data. Government records can contain errors.</dd>
+</dl>
+</details>
+<p class="src"><a href="terms.html">Terms of use</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:hello@glasshouse.example?subject=Wrong%20record">Report a wrong record</a> · General information only, not financial advice. © 2026 Glasshouse.</p>
 </footer>
 </div>
 
@@ -1384,7 +1418,7 @@ function bxYear(){if(!SIM)return;const M=SIM.m,N=M.N,Y=Math.min(bxYr,N),inv=isIn
  $("bxCur").style.left=`calc(8px + (100% - 16px) * ${Y/N})`;$("bxFill").style.width=`${Y/N*100}%`;$("bxY").value=Y;
  const d=M.nwB[Y]-M.nwR[Y];
  $("bxVerdict").innerHTML=Y===0?`On day one, buying leaves you <b class="neg">${fM(-d)} behind</b> renting: stamp duty and buying costs are spent.`:
-  `After ${Y} year${Y>1?"s":""}, ${inv?"buying to rent out":"buying"} ${d>=0?"puts you":"leaves you"} <b class="${d>=0?"pos":"neg"}">${fM(Math.abs(d))} ${d>=0?"ahead of":"behind"}</b> ${inv?"investing the cash instead":"renting"}, at ${pct(SIM.g,1)} price growth. <span class="rng">With growth 2% lower or higher: ${fM(SIM.lo.nwB[Y]-SIM.lo.nwR[Y])} to ${fM(SIM.hi.nwB[Y]-SIM.hi.nwR[Y])}.</span>`;
+  `After ${Y} year${Y>1?"s":""}, ${inv?"buying to rent out":"buying"} ${d>=0?"puts you":"leaves you"} <b class="${d>=0?"pos":"neg"}">${fM(Math.abs(d))} ${d>=0?"ahead of":"behind"}</b> ${inv?"investing the cash instead":"renting"}, at ${pct(SIM.g,1)} price growth. In today's dollars, that's about ${fM(Math.abs(d)/Math.pow(1+A.cost_growth,Y))}. <span class="rng">With growth 2% lower or higher: ${fM(SIM.lo.nwB[Y]-SIM.lo.nwR[Y])} to ${fM(SIM.hi.nwB[Y]-SIM.hi.nwR[Y])}.</span>`;
  // The statement: buying on the left, the alternative on the right. Bars share one scale within each block, so
  // you can see where the money goes; hover a coloured part for its name and amount.
  const per=bxPer==="y"?12:1,pw=per===12?"a year":"a month",fm=v=>per===12?fM(v):f$(v),An=inv?"Property":"Owning",Bn=inv?"Investing elsewhere":"Renting";
@@ -1722,16 +1756,15 @@ function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=
 const MK={min:15,flat12:.02,flat6:.01,pace:.02,near:.02};
 const mid=a=>{const s=a.filter(v=>v!=null).sort((x,y)=>x-y);return s.length?s[Math.floor(s.length/2)]:null;};
 function mRead(g1,g6){const d=(v,t)=>v>t?1:v<-t?-1:0,a=d(g1,MK.flat12),b=d(g6,MK.flat6),p=2*g6-g1,sp=p>MK.pace?1:p<-MK.pace?-1:0;
- const T={"1,1":sp>0?["Rising, and <mark>picking up</mark>","The last six months rose faster than the year as a whole: momentum is building."]:sp<0?["Still rising, <mark>more slowly</mark>","The last six months rose at a slower pace than the year: momentum is slowing, but prices are still going up."]:["Rising <mark>steadily</mark>","The last six months kept pace with the year: momentum is steady."],
-  "1,0":["Up on the year, <mark>flat lately</mark>","Rising over the year but flat over the last six months suggests momentum has stalled: most of the year's rise came in its first half."],
-  "1,-1":["Up on the year, <mark>easing lately</mark>","Rising over the year but falling over the last six months suggests momentum has turned: the year's rise came in its first half, and some of it has been given back."],
-  "0,1":["Flat on the year, <mark>rising lately</mark>","Flat over the year but rising over the last six months suggests momentum is building."],
-  "0,0":["Holding <mark>steady</mark>","Neither the year nor the last six months shows a clear move either way."],
-  "0,-1":["Flat on the year, <mark>easing lately</mark>","Flat over the year but falling over the last six months suggests momentum has turned slightly down."],
-  "-1,1":["Down on the year, <mark>recovering lately</mark>","Falling over the year but rising over the last six months suggests momentum has turned up."],
-  "-1,0":["Down on the year, <mark>steadying lately</mark>","Falling over the year but flat over the last six months suggests the fall has paused."],
-  "-1,-1":sp<0?["Falling, and <mark>faster lately</mark>","The last six months fell faster than the year as a whole: momentum is still downward."]:sp>0?["Still falling, <mark>more slowly</mark>","The last six months fell at a slower pace than the year: the fall is easing."]:["Falling <mark>steadily</mark>","The last six months fell at about the year's pace."]};
- return T[a+","+b];}
+ const W=["down","flat","up"],h12=W[a+1],h6=W[b+1],ph=(v,k)=>k?`${k>0?"up":"down"} ${pct(Math.abs(v))}`:`little changed (${signed(v)})`;
+ const h=a===b?`Prices ${h12} over 12 months <mark>and over the last 6</mark>`:`Prices ${h12} over 12 months, <mark>${h6} over the last 6</mark>`;
+ const fact=`In the typical suburb, prices are ${ph(g1,a)} on a year ago, and ${ph(g6,b)} over the last six months.`;
+ const T={"1,1":sp>0?"They are rising faster now than earlier in the year.":sp<0?"They are still rising, but more slowly than earlier in the year.":"They are rising at a steady pace.",
+  "1,0":"Most of the year's rise came in its first half.","1,-1":"The rise came earlier in the year, and some of it has since been lost.",
+  "0,1":"They have started to rise in recent months.","0,0":"There is no clear move either way.","0,-1":"They have started to slip in recent months.",
+  "-1,1":"They have started to recover in recent months.","-1,0":"The fall has paused in recent months.",
+  "-1,-1":sp<0?"They are falling faster now than earlier in the year.":sp>0?"They are still falling, but more slowly than earlier in the year.":"They are falling at a steady pace."};
+ return[h,fact+" "+T[a+","+b]];}
 function ghHist(r6,r12,g6m){const el=$("ghFig"),W=Math.max(300,Math.round(el.clientWidth||600)),H=W<480?170:230,L=4,R=4,T=26,Bm=22,lo=-20,hi=20,bw=2,nb=(hi-lo)/bw;
  const bin=vs=>{const c=new Array(nb).fill(0);for(const v of vs){const g=Math.max(lo,Math.min(hi-.001,v*100));c[Math.floor((g-lo)/bw)]++;}return c;},c6=bin(r6),c12=bin(r12);
  const mx=Math.max(1,...c6,...c12),X=v=>L+(v-lo)/(hi-lo)*(W-L-R),Y=n=>H-Bm-n/mx*(H-T-Bm),dn=r6.filter(v=>v<0).length,up=r6.filter(v=>v>0).length;let g="";
@@ -1764,7 +1797,7 @@ function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].re
  const both=rs.filter(r=>r[C.growth_6m]!=null&&r[C.growth_1y]!=null&&r[C.med_now]!=null).sort((a,b)=>a[C.med_now]-b[C.med_now]),k=Math.floor(both.length/3);
  if(k>=10){const ts=[both.slice(0,k),both.slice(k,2*k),both.slice(2*k)].map((t,i)=>({n:["Cheaper third","Middle third","Dearer third"][i],lim:i===0?`under ${money(both[k][C.med_now])}`:i===2?`over ${money(both[2*k][C.med_now])}`:`${money(t[0][C.med_now])}–${money(t[t.length-1][C.med_now])}`,g1:mid(t.map(r=>r[C.growth_1y])),g6:mid(t.map(r=>r[C.growth_6m]))}));
   const best=ts.reduce((a,b)=>b.g6>a.g6?b:a),worst=ts.reduce((a,b)=>b.g6<a.g6?b:a),S=Math.max(.04,...ts.map(t=>Math.abs(t.g6))),lc=s=>s.toLowerCase();
-  const lead=best===worst?"":best.g6>MK.flat6?`Momentum is strongest in the <b>${lc(best.n)}</b> of suburbs (${signed(best.g6)}) and weakest in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:`Prices are holding up best in the <b>${lc(best.n)}</b> of suburbs (${signed(best.g6)}) and softest in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`;
+  const lead=best===worst?"":worst.g6>0?`Over the last six months, prices rose most in the <b>${lc(best.n)}</b> of suburbs by price (${signed(best.g6)}) and least in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:best.g6<0?`Over the last six months, prices fell least in the <b>${lc(best.n)}</b> of suburbs by price (${signed(best.g6)}) and most in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:`Over the last six months, prices did best in the <b>${lc(best.n)}</b> of suburbs by price (${signed(best.g6)}) and worst in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`;
   $("ghTier").innerHTML=`<p>${lead}</p><div class="tiers num">`+ts.map(t=>`<div><small>${t.n}</small><em>Suburbs ${t.lim}</em><b class="${cl(t.g6)}">${signed(t.g6)}</b><span>6 months · ${signed(t.g1)} over 12</span></div>`).join("")+"</div>";}
  else $("ghTier").innerHTML="";
  $("ghCap").innerHTML=`All figures are for the typical suburb. ${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. ${mt} Source: NSW Valuer General.`;}
@@ -1988,6 +2021,8 @@ const dt=s=>new Date(s).toLocaleDateString("en-AU",{day:"numeric",month:"long",y
 document.getElementById("prov").textContent=`${D.n_sales.toLocaleString("en-AU")} sales to ${dt(D.asof)} and ${D.n_leases.toLocaleString("en-AU")} new leases to ${dt(D.rent_asof)}, from NSW Government records.`;
 market();all();
 
+
+$("bxPrint").addEventListener("click",()=>window.print());
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;
