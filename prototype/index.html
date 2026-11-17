@@ -452,6 +452,46 @@ header.gh h1 mark{background:var(--hi);color:var(--night);padding:0 .1em;-webkit
 .gh-stats{display:flex;flex-wrap:wrap;gap:12px 44px;align-items:flex-end;padding:18px 0 20px;border-top:1px solid rgba(255,255,255,.13)}
 .gh-stats div b{display:block;font:700 28px/1 var(--serif);font-stretch:85%;color:#fff;letter-spacing:-.01em}
 .gh-stats div span{font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
+/* market read (hero) */
+.gh-hero{grid-template-columns:minmax(0,1.05fr) minmax(320px,1fr);align-items:start;padding:40px 0 18px;gap:28px 56px}
+.gh-kick{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:0 0 16px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hi)}
+.gh-ctl{display:inline-flex;gap:8px;align-items:center}
+.gh-ctl .seg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:2px;display:inline-flex}
+.gh-ctl .seg button{background:transparent;border:0;color:var(--mist);font:500 12px var(--sans);letter-spacing:0;text-transform:none;padding:5px 10px;border-radius:6px;cursor:pointer}
+.gh-ctl .seg button[aria-pressed=true]{background:#fff;color:var(--night)}
+#ghArea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;color:#fff;font:500 12px var(--sans);padding:6px 8px;max-width:210px}
+#ghArea option{color:var(--ink)}
+header.gh h1#ghH1{font-size:clamp(40px,5.2vw,76px);margin:0 0 16px}
+.gh-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.gh-tiles div{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.03)}
+.gh-tiles small{display:block;font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
+.gh-tiles b{display:block;font:700 28px/1.1 var(--serif);font-stretch:85%;color:#fff;margin:6px 0 4px}
+.gh-tiles b.up{color:#7FDCA4}.gh-tiles b.dn{color:#FF8A7A}
+.gh-tiles span{font:400 13px/1.35 var(--sans);color:#C9D4CD}
+.gh-ev{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:16px 18px 14px}
+.gh-lab{margin:0 0 6px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+#ghFig svg{display:block;width:100%;height:auto;overflow:visible}
+#ghFig text{font:500 11.5px var(--mono);fill:var(--mist)}
+#ghFig text.dn{fill:#FF8A7A;font:600 13px var(--sans)}#ghFig text.up{fill:#EAF0EA;font:600 13px var(--sans)}#ghFig text.hi{fill:var(--hi)}
+.gh-key{display:flex;gap:16px;font:400 12px var(--sans);color:var(--mist);margin:4px 0 0}
+.gh-key i{display:inline-block;width:12px;height:9px;margin-right:6px;vertical-align:0}
+.gh-key i.b6{background:linear-gradient(90deg,#E5484D 50%,#9DB0A6 50%)}.gh-key i.b12{border:1.5px solid #EAF0EA;height:7px;width:10px}
+#ghTier{margin-top:14px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
+#ghTier p{margin:0 0 8px;font:400 13px/1.45 var(--sans);color:#C9D4CD}#ghTier p b{color:#fff;font-weight:600}
+.tier{display:grid;grid-template-columns:minmax(0,1.3fr) 56px minmax(0,1fr);gap:10px;align-items:center;font:400 13px var(--sans);color:#EAF0EA;padding:3px 0}
+.tier small{color:var(--mist);font-size:11.5px;margin-left:4px}
+.tier .y{font:500 12px var(--mono);color:var(--mist);text-align:right}
+.tier .t{position:relative;height:16px}.tier .t::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;border-left:1px dashed rgba(210,255,58,.6)}
+.tier .t i{position:absolute;top:3px;height:10px;border-radius:2px}
+.tier .t em{position:absolute;top:0;font:500 12px var(--mono);font-style:normal;line-height:16px}
+.tier.h{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mist)}
+.gh-cap{font:400 12px/1.5 var(--sans);color:var(--mist);margin:0 0 18px;max-width:110ch}
+header.gh .gh-ask{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:22px}
+@media(max-width:1000px){header.gh .gh-ask{grid-template-columns:1fr}}
+@media(max-width:720px){.gh-tiles{gap:6px;margin-top:14px}.gh-tiles div{padding:9px 9px}.gh-tiles b{font-size:21px;margin:4px 0 2px}.gh-tiles span{font-size:11.5px}
+ .gh-kick{gap:8px 10px;margin-bottom:12px}#ghArea{max-width:170px}header.gh h1#ghH1{font-size:36px}
+ .gh-ev{padding:12px 12px 10px}.tier{grid-template-columns:minmax(0,1.2fr) 44px minmax(0,1fr);font-size:12px}
+ header.gh .gh-ask{display:flex;margin-bottom:16px}.gh-cap{font-size:11.5px}.tier small{display:block;margin:0}}
 header.gh .prov{color:var(--mist);font-size:13px;margin:0 0 0 auto;max-width:44ch;text-align:right}
 header.gh .tabs{margin-top:0;gap:0;border-top:1px solid rgba(255,255,255,.13)}
 header.gh .tabs button{color:var(--mist);font:600 15px var(--sans);padding:15px 22px 13px;border-bottom:3px solid transparent;margin:0}
@@ -553,13 +593,18 @@ details.assume,details.how{border-top-color:var(--ink)}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-proto">Prototype</span><span class="gh-tag">Every sale on the record. No agents.</span><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
-<div class="gh-hero"><div><h1>See <mark>straight through</mark> the property market</h1>
-<p id="headline"></p></div>
+<div class="gh-hero"><div class="gh-ans">
+<div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
+<h1 id="ghH1">See <mark>straight through</mark> the property market</h1>
+<p id="headline"></p>
+<div class="gh-tiles num" id="ghTiles"></div></div>
+<div class="gh-ev" id="ghEv"><p class="gh-lab">Suburbs by price change</p><div id="ghFig"></div><div class="gh-key"><span><i class="b6"></i>Last 6 months</span><span><i class="b12"></i>Last 12 months</span></div><div id="ghTier"></div></div></div>
+<p class="gh-cap" id="ghCap"></p>
 <div class="gh-ask">
 <button class="pri" data-goto="budget"><span class="n">01</span><span><b>What can I afford?</b><span class="s">Your borrowing limit, then buy against rent, year by year.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askFind"><span class="n">02</span><span><b>What did it really sell for?</b><span class="s">Any NSW address or suburb, every recorded sale.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="ctaPlay"><span class="n">03</span><span><b>Where are prices moving?</b><span class="s">Watch every month since 1990 play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-</div></div>
+</div>
 <div class="gh-stats num" id="ghStats"></div>
 <p class="prov" id="prov" hidden></p>
 <nav class="tabs" role="tablist"><button role="tab" data-tab="map" aria-selected="true">Map and suburbs</button><button role="tab" data-tab="budget" aria-selected="false">Budget: buy or rent</button></nav>
@@ -1629,9 +1674,61 @@ function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=
  mClick("mc1",qs);mClick("mc2",qs);mClick("mc3",rq);
  document.getElementById("mc3").innerHTML=multiLine(rq,[{v:rq.map(q=>(h.rent||{})[q]??null),c:"#1F6E68",name:"Houses"},{v:rq.map(q=>(u.rent||{})[q]??null),c:"#86B3A9",name:"Units"}],v=>"$"+Math.round(v),{mark:tmark()});}
 
-/* ---------- headline ---------- */
-function headline(){const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=15&&r[C.growth_1y]!=null&&inArea(r)),up=rs.filter(r=>r[C.growth_1y]>0).length,m=mkt(mreg(),seg),noun=seg==="house"?"house":"unit";
- document.getElementById("headline").innerHTML=`Over the last 12 months, ${noun} prices rose in <b>${up} of ${rs.length}</b> suburbs in ${areaDef()[1].replace(/ \(.*\)$/,"")}${m&&m.median?`, and the median ${noun} in ${mregName()} sold for <b>${money(m.median)}</b> (${signed(m.growth_1y)} on the year before)`:""}.`;}
+/* ---------- headline: which way is the market going? ----------
+   Same suburbs as the side panel: this segment, 15+ sales in the year, in the chosen area.
+   "Typical suburb" = the middle suburb's change. 12 months: last 12 v the 12 before (growth_1y).
+   6 months: last 6 v the 6 before (growth_6m). Under steady growth 2 x the 6-month change ~ the 12-month change,
+   so pace = 2*g6 - g1 says whether the latest half-year ran faster or slower than the year. */
+const MK={min:15,flat12:.02,flat6:.01,pace:.02,near:.02};
+const mid=a=>{const s=a.filter(v=>v!=null).sort((x,y)=>x-y);return s.length?s[Math.floor(s.length/2)]:null;};
+function mRead(g1,g6){const d=(v,t)=>v>t?1:v<-t?-1:0,a=d(g1,MK.flat12),b=d(g6,MK.flat6),p=2*g6-g1,sp=p>MK.pace?1:p<-MK.pace?-1:0;
+ const T={"1,1":sp>0?["Rising, and <mark>picking up</mark>","The last six months rose faster than the year as a whole: momentum is building."]:sp<0?["Still rising, <mark>more slowly</mark>","The last six months rose at a slower pace than the year: momentum is slowing, but prices are still going up."]:["Rising <mark>steadily</mark>","The last six months kept pace with the year: momentum is steady."],
+  "1,0":["Up on the year, <mark>flat lately</mark>","Rising over the year but flat over the last six months suggests momentum has stalled: most of the year's rise came in its first half."],
+  "1,-1":["Up on the year, <mark>easing lately</mark>","Rising over the year but falling over the last six months suggests momentum has turned: the year's rise came in its first half, and some of it has been given back."],
+  "0,1":["Flat on the year, <mark>rising lately</mark>","Flat over the year but rising over the last six months suggests momentum is building."],
+  "0,0":["Holding <mark>steady</mark>","Neither the year nor the last six months shows a clear move either way."],
+  "0,-1":["Flat on the year, <mark>easing lately</mark>","Flat over the year but falling over the last six months suggests momentum has turned slightly down."],
+  "-1,1":["Down on the year, <mark>recovering lately</mark>","Falling over the year but rising over the last six months suggests momentum has turned up."],
+  "-1,0":["Down on the year, <mark>steadying lately</mark>","Falling over the year but flat over the last six months suggests the fall has paused."],
+  "-1,-1":sp<0?["Falling, and <mark>faster lately</mark>","The last six months fell faster than the year as a whole: momentum is still downward."]:sp>0?["Still falling, <mark>more slowly</mark>","The last six months fell at a slower pace than the year: the fall is easing."]:["Falling <mark>steadily</mark>","The last six months fell at about the year's pace."]};
+ return T[a+","+b];}
+function ghHist(r6,r12,g6m){const el=$("ghFig"),W=Math.max(300,Math.round(el.clientWidth||600)),H=W<480?150:178,L=4,R=4,T=26,Bm=22,lo=-20,hi=20,bw=2,nb=(hi-lo)/bw;
+ const bin=vs=>{const c=new Array(nb).fill(0);for(const v of vs){const g=Math.max(lo,Math.min(hi-.001,v*100));c[Math.floor((g-lo)/bw)]++;}return c;},c6=bin(r6),c12=bin(r12);
+ const mx=Math.max(1,...c6,...c12),X=v=>L+(v-lo)/(hi-lo)*(W-L-R),Y=n=>H-Bm-n/mx*(H-T-Bm),dn=r6.filter(v=>v<0).length,up=r6.filter(v=>v>0).length;let g="";
+ c6.forEach((n,i)=>{if(!n)return;const v=lo+i*bw,x=X(v)+1,w=Math.max(1,X(v+bw)-X(v)-2);
+  g+=`<rect x="${x.toFixed(1)}" y="${Y(n).toFixed(1)}" width="${w.toFixed(1)}" height="${(H-Bm-Y(n)).toFixed(1)}" rx="1.5" fill="${v<0?"#E5484D":"#9DB0A6"}"><title>${n} suburb${n>1?"s":""} ${v<0?"fell":"rose"} ${Math.abs(v<0?v+bw:v)}% to ${Math.abs(v<0?v:v+bw)}%${i===0?" or more":i===nb-1?" or more":""} in 6 months</title></rect>`;});
+ let d=`M${X(lo)},${H-Bm}`;c12.forEach((n,i)=>{const v=lo+i*bw;d+=`L${X(v).toFixed(1)},${Y(n).toFixed(1)}L${X(v+bw).toFixed(1)},${Y(n).toFixed(1)}`;});d+=`L${X(hi)},${H-Bm}`;
+ g+=`<path d="${d}" fill="none" stroke="#EAF0EA" stroke-width="1.4" stroke-linejoin="round" opacity=".8"/>`;
+ g+=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="rgba(255,255,255,.3)"/>`;
+ for(let v=lo;v<=hi;v+=10)g+=`<text x="${X(v)}" y="${H-5}" text-anchor="${v===lo?"start":v===hi?"end":"middle"}">${v===0?"0%":(v<0?"−":"+")+Math.abs(v)+"%"}</text>`;
+ g+=`<line x1="${X(0)}" x2="${X(0)}" y1="${T-12}" y2="${H-Bm}" stroke="#D2FF3A" stroke-width="1.2" stroke-dasharray="3 3"/>`;
+ g+=`<text class="dn" x="${X(0)-8}" y="${T-14}" text-anchor="end">${dn} fell</text><text class="up" x="${X(0)+8}" y="${T-14}">${up} rose</text>`;
+ if(g6m!=null){const xm=X(Math.max(lo,Math.min(hi,g6m*100)));g+=`<path d="M${xm-5},${H-Bm+9}L${xm+5},${H-Bm+9}L${xm},${H-Bm+2}Z" fill="#D2FF3A"/>`;}
+ el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Suburbs counted by price change. Last 6 months: ${dn} fell and ${up} rose.">${g}</svg>`;}
+function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].replace(/ \(.*\)$/,""),m=mkt(mreg(),seg),asof=dt(D.asof);
+ document.querySelectorAll(".gh-ctl [data-seg]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.seg===seg));
+ const ga=$("ghArea");if(!ga.options.length){ga.innerHTML=$("area").innerHTML;ga.hidden=D.areas.length<2;ga.addEventListener("change",()=>{const a=$("area");a.value=ga.value;a.dispatchEvent(new Event("change"));});}ga.value=AREA;
+ const rs=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=MK.min&&inArea(r)),r12=rs.filter(r=>r[C.growth_1y]!=null),r6=rs.filter(r=>r[C.growth_6m]!=null),rp=rs.filter(r=>r[C.from_peak]!=null);
+ const g1=mid(r12.map(r=>r[C.growth_1y])),g6=mid(r6.map(r=>r[C.growth_6m])),pk=mid(rp.map(r=>r[C.from_peak]));
+ const up12=r12.filter(r=>r[C.growth_1y]>0).length,dn6=r6.filter(r=>r[C.growth_6m]<0).length,near=rp.filter(r=>r[C.from_peak]>-MK.near).length;
+ const ok=r12.length>=10&&r6.length>=10,mt=m&&m.median?`The median ${noun} in ${mregName()} sold for <b>${money(m.median)}</b> in the 12 months to ${asof}, ${signed(m.growth_1y)} on the year before.`:"";
+ $("ghEv").hidden=!ok;
+ if(!ok){$("ghH1").innerHTML=`Too few ${noun} sales here <mark>to call it</mark>`;$("headline").innerHTML=`Fewer than 10 suburbs in ${esc(area)} had ${MK.min} or more ${noun} sales in the last year. ${mt}`;$("ghTiles").innerHTML="";$("ghCap").textContent="";return;}
+ const [h,why]=mRead(g1,g6),ud=(v,a,b)=>`<b>${v>=0?a:b} ${pct(Math.abs(v))}</b>`;
+ $("ghH1").innerHTML=h;
+ $("headline").innerHTML=`In the typical ${esc(area)} suburb, the median ${noun} price is ${ud(g1,"up","down")} on the year before and ${ud(g6,"up","down")} over the last six months against the six before. ${why}${pk!=null?` ${pk>-.0005?"It is at its peak of the last three years.":`It sits <b>${pct(-pk)} below</b> its peak of the last three years.`}`:""}`;
+ const cl=v=>v>.0005?"up":v<-.0005?"dn":"";
+ $("ghTiles").innerHTML=`<div><small>12 months</small><b class="${cl(g1)}">${signed(g1)}</b><span>Rose in ${up12} of ${r12.length}</span></div><div><small>6 months</small><b class="${cl(g6)}">${signed(g6)}</b><span>Fell in ${dn6} of ${r6.length}</span></div><div><small>Below peak</small><b>${pk==null?"–":pk>-.0005?"At peak":pct(-pk)}</b><span>${near} of ${rp.length} at or within ${MK.near*100}%</span></div>`;
+ ghHist(r6.map(r=>r[C.growth_6m]),r12.map(r=>r[C.growth_1y]),g6);
+ // where is the momentum: suburbs split into thirds by median price
+ const both=rs.filter(r=>r[C.growth_6m]!=null&&r[C.growth_1y]!=null&&r[C.med_now]!=null).sort((a,b)=>a[C.med_now]-b[C.med_now]),k=Math.floor(both.length/3);
+ if(k>=10){const ts=[both.slice(0,k),both.slice(k,2*k),both.slice(2*k)].map((t,i)=>({n:["Cheaper third","Middle third","Dearer third"][i],lim:i===0?`under ${money(both[k][C.med_now])}`:i===2?`over ${money(both[2*k][C.med_now])}`:`${money(t[0][C.med_now])}–${money(t[t.length-1][C.med_now])}`,g1:mid(t.map(r=>r[C.growth_1y])),g6:mid(t.map(r=>r[C.growth_6m]))}));
+  const best=ts.reduce((a,b)=>b.g6>a.g6?b:a),worst=ts.reduce((a,b)=>b.g6<a.g6?b:a),S=Math.max(.04,...ts.map(t=>Math.abs(t.g6))),lc=s=>s.toLowerCase();
+  const lead=best===worst?"":best.g6>MK.flat6?`Momentum is strongest in the <b>${lc(best.n)}</b> of suburbs (${signed(best.g6)}) and weakest in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:`Prices are holding up best in the <b>${lc(best.n)}</b> of suburbs (${signed(best.g6)}) and softest in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`;
+  $("ghTier").innerHTML=`<p>${lead}</p><div class="tier h"><span>By price</span><span class="y">12 mo</span><span>6 months</span></div>`+ts.map(t=>{const w=Math.abs(t.g6)/S*46,n=t.g6<0;
+   return`<div class="tier"><span>${t.n}<small>${t.lim}</small></span><span class="y">${signed(t.g1)}</span><span class="t"><i style="${n?"right":"left"}:50%;width:${w.toFixed(1)}%;background:${n?"#E5484D":"#9DB0A6"}"></i><em style="${n?"left":"right"}:calc(50% + 5px);color:${n?"#FF8A7A":"#EAF0EA"}">${signed(t.g6)}</em></span></div>`;}).join("");}
+ else $("ghTier").innerHTML="";
+ $("ghCap").innerHTML=`${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. ${mt} Source: NSW Valuer General.`;}
 
 /* ---------- table ---------- */
 const COLS=[["Suburb",r=>title(r[C.locality])],["Median price",r=>r[C.med_now],money],["Sales, 12 mths",r=>r[C.n_now]],
@@ -1857,7 +1954,7 @@ market();all();
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;
  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){const els=[...$("ghStats").querySelectorAll("b")],t0=performance.now();els.forEach(e=>{const m=e.textContent.match(/^([\d.,]+)(.*)$/);e._v=m?parseFloat(m[1].replace(/,/g,"")):null;e._s=m?m[2]:"";e._d=m&&m[1].includes(".")?1:0;e._c=m&&m[1].includes(",");e._t=e.textContent;});
   const step=t=>{const k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);els.forEach(e=>{if(e._v==null)return;const v=e._v*q;e.textContent=k===1?e._t:(e._c?Math.round(v).toLocaleString("en-AU"):v.toFixed(e._d))+e._s;});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
- let rzT;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(SIM&&!$("tabBudget").hidden)bxChart();},200);});
+ let rzT,rzW=innerWidth;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(SIM&&!$("tabBudget").hidden)bxChart();if(innerWidth!==rzW){rzW=innerWidth;headline();}},200);});
  $("legend").addEventListener("click",e=>{if(e.target.closest(".lg-x,.lg-open")){lgMin=!lgMin;store.set("hs_lg",lgMin);legend();}});
  $("detail").addEventListener("click",e=>{const svg=e.target.closest&&e.target.closest(".chart svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov);if(!hov.q)return;
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
