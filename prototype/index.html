@@ -16,7 +16,7 @@
 <script src="../data/web/geo.js"></script><script src="../data/web/hist_6.js"></script><script src="../data/web/hist_7.js"></script>
 <style>
 :root{color-scheme:light;
---paper:#F6F6F2;--sheet:#FFFFFF;--ink:#1C2B3A;--slate:#6A7480;--hair:#DEDDD6;--wash:#EEEDE7;
+--paper:#F6F6F2;--sheet:#FFFFFF;--ink:#0E1A16;--slate:#6A7480;--hair:#DEDDD6;--wash:#EEEDE7;
 --buy:#5B4BA8;--rent:#C9650F;--gain:#2E7D4F;--loss:#B23A3A;--sand:#E9E4D8;--focus:#2F5C8A;
 --serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
@@ -351,7 +351,7 @@ table.t{border-collapse:collapse;width:100%;font-size:14.5px}
 .tcur{position:absolute;top:0;height:50px;width:0;border-left:2px solid var(--focus);pointer-events:none}
 .pals{display:flex;gap:6px}.pals button{width:34px;height:18px;border-radius:4px;border:1px solid var(--hair);cursor:pointer;padding:0}
 .pals button[aria-pressed=true]{outline:2px solid var(--focus);outline-offset:1px}
-.thov{position:absolute;top:0;height:50px;width:0;border-left:1px dashed #8A97A3;pointer-events:none;display:none}
+.thov{position:absolute;top:0;height:50px;width:0;border-left:1px dashed #8FA39A;pointer-events:none;display:none}
 .thov b{position:absolute;top:-3px;left:6px;font:600 11.5px var(--sans);background:var(--paper);padding:0 4px;white-space:nowrap;color:var(--slate)}
 .thov.flip b{left:auto;right:6px}.ttrack.hov .thov{display:block}.ttrack.hov .tcur b{opacity:0}
 .dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
@@ -380,7 +380,7 @@ table.t{border-collapse:collapse;width:100%;font-size:14.5px}
 #tlatest{font:500 13px var(--sans);color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:6px;padding:7px 12px;cursor:pointer}
 #tlatest:disabled{color:var(--slate);cursor:default;opacity:.6}
 .timebar.off #play,.timebar.off .ttrack,.timebar.off #tlatest{opacity:.35;pointer-events:none}
-.then{background:#EEF2F6;border:1px solid #D5DEE8;border-radius:6px;padding:12px 14px;margin:0 0 18px}
+.then{background:var(--wash);border:1px solid #D5DEE8;border-radius:6px;padding:12px 14px;margin:0 0 18px}
 .then .l0{font:500 13px var(--sans);color:var(--focus);margin-bottom:8px}
 .then .stats{border:0;padding:0}
 .then .stat .v.sm{font-size:16.5px;white-space:nowrap;line-height:1.5}
@@ -453,45 +453,64 @@ header.gh h1 mark{background:var(--hi);color:var(--night);padding:0 .1em;-webkit
 .gh-stats div b{display:block;font:700 28px/1 var(--serif);font-stretch:85%;color:#fff;letter-spacing:-.01em}
 .gh-stats div span{font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
 /* market read (hero) */
-.gh-hero{grid-template-columns:minmax(0,1.05fr) minmax(320px,1fr);align-items:start;padding:40px 0 18px;gap:28px 56px}
-.gh-kick{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:0 0 16px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hi)}
+.gh-hero{display:block;padding:72px 0 64px}
+header.gh .gh-hero h1{margin:0 0 26px;max-width:17ch}
+.gh-sub{font:400 21px/1.4 var(--sans);color:#C9D4CD;margin:0 0 22px}.gh-sub b{color:#fff;font-weight:600}
+.gh-fresh{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;color:#EAF0EA;font:500 14.5px var(--sans);cursor:pointer;transition:border-color .15s,background .15s}
+.gh-fresh:hover{border-color:var(--hi);background:rgba(210,255,58,.08)}
+.gh-fresh i{width:8px;height:8px;border-radius:50%;background:var(--hi);box-shadow:0 0 0 4px rgba(210,255,58,.18)}.gh-fresh u{text-decoration:none;color:var(--hi)}
+.gh-mkt{border-top:1px solid rgba(255,255,255,.13);padding:44px 0 40px}
+.gh-kick{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin:0 0 30px;font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hi)}
 .gh-ctl{display:inline-flex;gap:8px;align-items:center}
 .gh-ctl .seg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:2px;display:inline-flex}
-.gh-ctl .seg button{background:transparent;border:0;color:var(--mist);font:500 12px var(--sans);letter-spacing:0;text-transform:none;padding:5px 10px;border-radius:6px;cursor:pointer}
+.gh-ctl .seg button{background:transparent;border:0;color:var(--mist);font:500 13px var(--sans);letter-spacing:0;text-transform:none;padding:6px 12px;border-radius:6px;cursor:pointer}
 .gh-ctl .seg button[aria-pressed=true]{background:#fff;color:var(--night)}
-#ghArea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;color:#fff;font:500 12px var(--sans);padding:6px 8px;max-width:210px}
+#ghArea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;color:#fff;font:500 13px var(--sans);padding:7px 8px;max-width:210px}
 #ghArea option{color:var(--ink)}
-header.gh h1#ghH1{font-size:clamp(40px,5.2vw,76px);margin:0 0 16px}
-.gh-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
-.gh-tiles div{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.03)}
+.gh-mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px 64px;align-items:center}
+header.gh h2#ghH1{font:800 clamp(30px,3.6vw,50px)/1 var(--serif);font-stretch:76%;text-transform:uppercase;letter-spacing:-.01em;color:#fff;margin:0 0 16px}
+header.gh h2#ghH1 mark{background:none;color:var(--hi);padding:0}
+#headline{font:400 16.5px/1.55 var(--sans);color:#C9D4CD;max-width:46ch;margin:0}
+.gh-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:30px;border-top:1px solid rgba(255,255,255,.13)}
+.gh-tiles div{padding:18px 16px 0 0}.gh-tiles div+div{padding-left:18px;border-left:1px solid rgba(255,255,255,.13)}
 .gh-tiles small{display:block;font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
-.gh-tiles b{display:block;font:700 28px/1.1 var(--serif);font-stretch:85%;color:#fff;margin:6px 0 4px}
+.gh-tiles b{display:block;font:700 34px/1.1 var(--serif);font-stretch:85%;color:#fff;margin:8px 0 6px}
 .gh-tiles b.up{color:#7FDCA4}.gh-tiles b.dn{color:#FF8A7A}
-.gh-tiles span{font:400 13px/1.35 var(--sans);color:#C9D4CD}
-.gh-ev{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:16px 18px 14px}
-.gh-lab{margin:0 0 6px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+.gh-tiles span{font:400 13px/1.35 var(--sans);color:var(--mist)}
+.gh-lab{margin:0 0 14px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
 #ghFig svg{display:block;width:100%;height:auto;overflow:visible}
 #ghFig text{font:500 11.5px var(--mono);fill:var(--mist)}
-#ghFig text.dn{fill:#FF8A7A;font:600 13px var(--sans)}#ghFig text.up{fill:#EAF0EA;font:600 13px var(--sans)}#ghFig text.hi{fill:var(--hi)}
-.gh-key{display:flex;gap:16px;font:400 12px var(--sans);color:var(--mist);margin:4px 0 0}
+#ghFig text.dn{fill:#FF8A7A;font:600 14.5px var(--sans)}#ghFig text.up{fill:#EAF0EA;font:600 14.5px var(--sans)}
+.gh-key{display:flex;gap:18px;font:400 13px var(--sans);color:var(--mist);margin:10px 0 0}
 .gh-key i{display:inline-block;width:12px;height:9px;margin-right:6px;vertical-align:0}
 .gh-key i.b6{background:linear-gradient(90deg,#E5484D 50%,#9DB0A6 50%)}.gh-key i.b12{border:1.5px solid #EAF0EA;height:7px;width:10px}
-#ghTier{margin-top:14px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
-#ghTier p{margin:0 0 8px;font:400 13px/1.45 var(--sans);color:#C9D4CD}#ghTier p b{color:#fff;font-weight:600}
-.tier{display:grid;grid-template-columns:minmax(0,1.3fr) 56px minmax(0,1fr);gap:10px;align-items:center;font:400 13px var(--sans);color:#EAF0EA;padding:3px 0}
-.tier small{color:var(--mist);font-size:11.5px;margin-left:4px}
-.tier .y{font:500 12px var(--mono);color:var(--mist);text-align:right}
-.tier .t{position:relative;height:16px}.tier .t::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;border-left:1px dashed rgba(210,255,58,.6)}
-.tier .t i{position:absolute;top:3px;height:10px;border-radius:2px}
-.tier .t em{position:absolute;top:0;font:500 12px var(--mono);font-style:normal;line-height:16px}
-.tier.h{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mist)}
-.gh-cap{font:400 12px/1.5 var(--sans);color:var(--mist);margin:0 0 18px;max-width:110ch}
-header.gh .gh-ask{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:22px}
-@media(max-width:1000px){header.gh .gh-ask{grid-template-columns:1fr}}
-@media(max-width:720px){.gh-tiles{gap:6px;margin-top:14px}.gh-tiles div{padding:9px 9px}.gh-tiles b{font-size:21px;margin:4px 0 2px}.gh-tiles span{font-size:11.5px}
- .gh-kick{gap:8px 10px;margin-bottom:12px}#ghArea{max-width:170px}header.gh h1#ghH1{font-size:36px}
- .gh-ev{padding:12px 12px 10px}.tier{grid-template-columns:minmax(0,1.2fr) 44px minmax(0,1fr);font-size:12px}
- header.gh .gh-ask{display:flex;margin-bottom:16px}.gh-cap{font-size:11.5px}.tier small{display:block;margin:0}}
+#ghTier{margin-top:44px}
+#ghTier>p{margin:0 0 16px;font:400 16.5px/1.5 var(--sans);color:#C9D4CD}#ghTier>p b{color:#fff;font-weight:600}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tiers div{border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.03)}
+.tiers small{display:block;font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
+.tiers em{display:block;font:400 13px var(--sans);font-style:normal;color:var(--mist);margin-top:3px}
+.tiers b{display:block;font:700 28px/1.1 var(--serif);font-stretch:85%;margin:12px 0 4px;color:#fff}.tiers b.up{color:#7FDCA4}.tiers b.dn{color:#FF8A7A}
+.tiers span{font:400 13px var(--sans);color:var(--mist)}
+.gh-cap{margin:26px 0 0;font:400 13px/1.55 var(--sans);color:var(--mist)}.gh-cap summary{cursor:pointer;display:inline-block;color:#C9D4CD}.gh-cap p{margin:8px 0 0;max-width:100ch}
+header.gh .gh-ask{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 30px}
+@media(max-width:1000px){header.gh .gh-ask{grid-template-columns:1fr}.gh-mgrid{grid-template-columns:1fr}}
+@media(max-width:720px){.gh-hero{padding:34px 0 34px}header.gh .gh-hero h1{font-size:46px;margin-bottom:16px}.gh-sub{font-size:16.5px;margin-bottom:16px}.gh-fresh{font-size:13px;padding:9px 14px;border-radius:14px;flex-wrap:wrap;text-align:left;gap:4px 10px}
+ .gh-mkt{padding:28px 0 26px}.gh-kick{margin-bottom:20px;font-size:11.5px}#ghArea{max-width:150px}
+ .gh-mgrid{gap:28px}.gh-tiles b{font-size:24px}.gh-tiles div{padding:14px 8px 0 0}.gh-tiles div+div{padding-left:10px}.gh-tiles span{font-size:11.5px}
+ #ghTier{margin-top:30px}#ghTier>p{font-size:14.5px}.tiers{gap:8px}.tiers div{padding:12px 10px}.tiers b{font-size:21px}.tiers em,.tiers span{font-size:11.5px}
+ header.gh .gh-ask{display:flex;margin-bottom:16px}}
+/* map top row, sale popup, range strips */
+.hoverbar{top:10px;left:50px;width:min(250px,calc(100% - 60px))}
+.spbar select{padding:5px 6px}
+.maplibregl-popup.sale .maplibregl-popup-content{padding:16px 18px 14px;min-width:270px;border-radius:12px}
+.sale>b,.sale .maplibregl-popup-content>b{font:700 16.5px/1.25 var(--serif);padding-right:18px}
+.sale .pr{font:700 28px/1.1 var(--serif);font-stretch:85%;margin:10px 0 0}
+.sale dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 16px;margin:12px 0 0;padding-top:12px;border-top:1px solid var(--hair);font:400 13px/1.35 var(--sans)}
+.sale dt{color:var(--slate)}.sale dd{margin:0;text-align:right;color:var(--ink);font-weight:500}.sale dd small{display:block;font-weight:400;color:var(--slate);font-size:11.5px}
+.sale .ln.warn{margin-top:10px;line-height:1.4}
+.sale .ft{display:flex;justify-content:space-between;gap:12px;margin-top:12px;padding-top:10px;border-top:1px solid var(--hair)}
+.sale .ft a{font-weight:500;color:var(--ink)}
 header.gh .prov{color:var(--mist);font-size:13px;margin:0 0 0 auto;max-width:44ch;text-align:right}
 header.gh .tabs{margin-top:0;gap:0;border-top:1px solid rgba(255,255,255,.13)}
 header.gh .tabs button{color:var(--mist);font:600 15px var(--sans);padding:15px 22px 13px;border-bottom:3px solid transparent;margin:0}
@@ -593,17 +612,22 @@ details.assume,details.how{border-top-color:var(--ink)}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-proto">Prototype</span><span class="gh-tag">Every sale on the record. No agents.</span><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
-<div class="gh-hero"><div class="gh-ans">
+<div class="gh-hero">
+<h1>See <mark>straight through</mark> the property market</h1>
+<p class="gh-sub">Every NSW home sale since 1990, on the record. <b>Updated weekly.</b></p>
+<button class="gh-fresh" id="ghFresh" hidden></button>
+</div>
+<section class="gh-mkt" aria-label="Which way is the market going?">
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
-<h1 id="ghH1">See <mark>straight through</mark> the property market</h1>
-<p id="headline"></p>
-<div class="gh-tiles num" id="ghTiles"></div></div>
-<div class="gh-ev" id="ghEv"><p class="gh-lab">Suburbs by price change</p><div id="ghFig"></div><div class="gh-key"><span><i class="b6"></i>Last 6 months</span><span><i class="b12"></i>Last 12 months</span></div><div id="ghTier"></div></div></div>
-<p class="gh-cap" id="ghCap"></p>
+<div class="gh-mgrid"><div class="gh-ans"><h2 id="ghH1"></h2><p id="headline"></p><div class="gh-tiles num" id="ghTiles"></div></div>
+<div class="gh-ev" id="ghEv"><p class="gh-lab">Suburbs by price change</p><div id="ghFig"></div><div class="gh-key"><span><i class="b6"></i>Last 6 months</span><span><i class="b12"></i>Last 12 months</span></div></div></div>
+<div id="ghTier"></div>
+<details class="gh-cap"><summary>How this is worked out</summary><p id="ghCap"></p></details>
+</section>
 <div class="gh-ask">
-<button class="pri" data-goto="budget"><span class="n">01</span><span><b>What can I afford?</b><span class="s">Your borrowing limit, then buy against rent, year by year.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button class="pri" id="ctaPlay"><span class="n">01</span><span><b>Where are prices moving?</b><span class="s">Watch every month since 1990 play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askFind"><span class="n">02</span><span><b>What did it really sell for?</b><span class="s">Any NSW address or suburb, every recorded sale.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="ctaPlay"><span class="n">03</span><span><b>Where are prices moving?</b><span class="s">Watch every month since 1990 play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button data-goto="budget"><span class="n">03</span><span><b>What can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div>
 <div class="gh-stats num" id="ghStats"></div>
 <p class="prov" id="prov" hidden></p>
@@ -619,7 +643,7 @@ details.assume,details.how{border-top-color:var(--ink)}
   <optgroup label="Prices"><option value="price">Median price</option></optgroup>
   <optgroup label="Price changes"><option value="gp" disabled>Growth over the chosen period</option><option value="g1" selected>Price change, last 12 months</option><option value="g6">Price change, last 6 months</option><option value="g5">Average yearly price growth, last 5 years</option><option value="g10">Average yearly price growth, last 10 years</option><option value="peak">Below recent peak</option></optgroup>
   <optgroup label="Rental return"><option value="yield">Rental yield (yearly rent as % of price)</option></optgroup>
-  <optgroup label="My budget"><option value="afford">Homes I can afford to buy</option><option value="rent">Rents I can afford</option></optgroup></select></label>
+  <optgroup label="My budget"><option value="afford">Where I can afford to buy</option><option value="rent">Where I can afford to rent</option></optgroup></select></label>
  <div class="chip" id="budChip" hidden></div>
  <div class="field srch"><input id="find" placeholder="Search a suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div>
 </div>
@@ -637,7 +661,7 @@ details.assume,details.how{border-top-color:var(--ink)}
 <div class="main">
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
   <div class="maptools">
-   <div class="mtrow"><div class="spbar"><span class="lf">Individual sales</span><span class="ls">Sales</span><div class="seg" role="group" aria-label="Individual sales" id="spsw"><button data-sp="off" aria-pressed="true">Off</button><button data-sp="month" aria-pressed="false">That month</button><button data-sp="year" aria-pressed="false">12 months</button></div><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select></div>
+   <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><span class="ls">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select></div>
    <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>Layers</button></div>
    <div class="spnote" id="spnote" hidden></div>
    <div class="lpanel" id="lpanel" hidden>
@@ -658,8 +682,8 @@ details.assume,details.how{border-top-color:var(--ink)}
  <div class="mstats num" id="mstats"></div>
  <p class="note" style="margin:0 0 8px">Click any chart to show that date on the map. Unit figures start in 2002: records before then don't reliably say whether a home is a unit.</p>
  <div class="mcharts">
-  <div class="card"><h3>Median sale price</h3><div class="k"><span><i style="background:#1C2B3A"></i>Houses</span><span><i style="background:#8A97A3"></i>Units</span></div><div id="mc1"></div></div>
-  <div class="card"><h3>Sales each quarter</h3><div class="k"><span><i style="background:#1C2B3A"></i>Houses</span><span><i style="background:#8A97A3"></i>Units</span></div><div id="mc2"></div></div>
+  <div class="card"><h3>Median sale price</h3><div class="k"><span><i style="background:#0E1A16"></i>Houses</span><span><i style="background:#8FA39A"></i>Units</span></div><div id="mc1"></div></div>
+  <div class="card"><h3>Sales each quarter, since 2002</h3><div class="k"><span><i style="background:#0E1A16"></i>Houses</span><span><i style="background:#8FA39A"></i>Units</span></div><div id="mc2"></div></div>
   <div class="card"><h3>Median weekly rent, new leases</h3><div class="k"><span><i style="background:#1F6E68"></i>Houses</span><span><i style="background:#86B3A9"></i>Units</span></div><div id="mc3"></div></div>
  </div>
 </section>
@@ -690,7 +714,7 @@ details.assume,details.how{border-top-color:var(--ink)}
      <label>Your income before tax, a year<input type="text" inputmode="numeric" data-b="inc1" placeholder="e.g. 150,000"></label>
      <label>Partner's income before tax, a year<input type="text" inputmode="numeric" data-b="inc2" placeholder="Optional"></label>
      <label>Other loan repayments, a month<input type="text" inputmode="numeric" data-b="debts_pm" placeholder="0"></label>
-     <label><span>Rent you pay now, a week <span class="i" tabindex="0" data-tip="Sets &quot;Rents I can afford&quot; on the map (with $0 or blank, a guide of 30% of income is used instead). If you buy an investment, you keep paying it, so it counts as a cost.">i</span></span><input type="text" inputmode="numeric" id="ownRent" placeholder="$0 if none"></label>
+     <label><span>Rent you pay now, a week <span class="i" tabindex="0" data-tip="Sets &quot;Where I can afford to rent&quot; on the map (with $0 or blank, a guide of 30% of income is used instead). If you buy an investment, you keep paying it, so it counts as a cost.">i</span></span><input type="text" inputmode="numeric" id="ownRent" placeholder="$0 if none"></label>
      <div class="chks"><label class="chk" id="fhbLbl"><input type="checkbox" data-b="fhb"> First home buyer in NSW</label>
      <label class="chk" id="schemeLbl"><input type="checkbox" data-b="scheme"> Use the 5% Deposit Scheme</label></div>
     </div>
@@ -742,7 +766,7 @@ details.assume,details.how{border-top-color:var(--ink)}
     <p class="bx-sub" id="repNote"></p>
    </div>
    <div class="bx-panel">
-    <div class="bx-lab" style="justify-content:space-between"><span>Loan left to pay</span><span class="k" style="margin:0"><span><i style="background:#8A97A3"></i>Minimum</span><span id="poKeyX"><i style="background:#1F6E68"></i>With extra</span></span></div>
+    <div class="bx-lab" style="justify-content:space-between"><span>Loan left to pay</span><span class="k" style="margin:0"><span><i style="background:#8FA39A"></i>Minimum</span><span id="poKeyX"><i style="background:#1F6E68"></i>With extra</span></span></div>
     <div id="poBal"></div>
     <div class="bx-tiles two" id="poTiles"></div>
    </div>
@@ -973,7 +997,7 @@ const rowFor=n=>byKey[n+"|"+seg];
 /* ---------- colour ---------- */
 const lerp=(a,b,t)=>a.map((x,i)=>Math.round(x+(b[i]-x)*t)),hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 function ramp(stops,t){t=Math.max(0,Math.min(1,t));const n=stops.length-1,i=Math.min(n-1,Math.floor(t*n));const c=lerp(hex(stops[i]),hex(stops[i+1]),t*n-i);return`rgb(${c})`;}
-const DIV=["#A8201A","#E8866A","#F5F2E6","#62BC97","#0A6048"],SEQ=["#F3F1E2","#B4DDC2","#5DB590","#168060","#07402F"],INK=["#EDE8DA","#B9C0C3","#7D8B98","#44576A","#1C2B3A"];
+const DIV=["#A8201A","#E8866A","#F5F2E6","#62BC97","#0A6048"],SEQ=["#F3F1E2","#B4DDC2","#5DB590","#168060","#07402F"],INK=["#EDE8DA","#B9C0C3","#7D8B98","#44576A","#0E1A16"];
 const DIP=["#A8201A","#E8866A","#F5F2E6"];
 // colour schemes for the price maps (cheap to dear); growth keeps red and green so they never look alike
 const PALS={warm:["#F6F0DF","#EAC88C","#D9874E","#A8483F","#5B2435"],blue:["#EEF2F5","#B7CCDD","#6F9CC0","#33658F","#14324F"],
@@ -992,9 +1016,9 @@ const CAT={rent:[["Comfortably within: above most rents","#1F6E68",r=>rBand(r)==
   ["Affordable and below peak","#86B3A9",r=>fit(r)<=1&&dip(r)],["Affordable, not below peak","#E2DDD0",r=>fit(r)<=1],["Out of budget","#D8D3CC",()=>true]]};
 const METRICS={
  edge:{label:"Buying vs renting after 10 years, share of price",get:r=>r._m&&r._m.edge,dom:[-.2,.2],stops:DIV,fmt:v=>`${v>=0?"buying":"renting"} ahead by ${pct(Math.abs(v),0)} of the price`,ticks:["Renting ahead 20%","Even","Buying ahead 20%"]},
- afford:{label:"Homes I can afford to buy",cat:true,needs:true},
+ afford:{label:"Where I can afford to buy",cat:true,needs:true},
  shortlist:{label:"Worth a look",cat:true,needs:true},
- rent:{label:"Rents I can afford",cat:true,needs:true,rent:true},
+ rent:{label:"Where I can afford to rent",cat:true,needs:true,rent:true},
  plo:{label:"Low-end price (lower quartile)",time:true,tget:k=>sv(k,2),dom:[Math.log(5e5),Math.log(4e6)],stops:"PRICE",fmt:money,tf:Math.log,tickv:[5e5,1e6,2e6,4e6]},
  phi:{label:"High-end price (upper quartile)",time:true,tget:k=>sv(k,3),dom:[Math.log(5e5),Math.log(4e6)],stops:"PRICE",fmt:money,tf:Math.log,tickv:[5e5,1e6,2e6,4e6]},
  gp:{label:"Price growth over the chosen period",time:true,period:true,tget:k=>pg(k),dom:[-.08,.08],stops:DIV,fmt:v=>RNG&&RNG.b-RNG.a>=12?`${signed(v,1)} a year (${signed(pgTotal(v),0)} in all)`:signed(v,1),ticks:["−8% a year","0%","+8% a year"]},
@@ -1055,9 +1079,9 @@ if(window.maplibregl){
   {const cv=document.createElement("canvas");cv.width=cv.height=12;const cx=cv.getContext("2d");cx.strokeStyle="rgba(85,98,92,.38)";cx.lineWidth=1;cx.beginPath();for(const o of[-12,0,12]){cx.moveTo(o,12);cx.lineTo(o+12,0);}cx.stroke();
    map.addImage("hatch",cx.getImageData(0,0,12,12));
    map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["case",["boolean",["feature-state","has"],false],0,.45]}},firstSym);}
-  map.addLayer({id:"edge",type:"line",source:"sub",paint:{"line-color":["case",["boolean",["feature-state","hover"],false],"#1C2B3A","#FFFFFF"],
+  map.addLayer({id:"edge",type:"line",source:"sub",paint:{"line-color":["case",["boolean",["feature-state","hover"],false],"#0E1A16","#FFFFFF"],
    "line-width":["interpolate",["linear"],["zoom"],9,["case",["boolean",["feature-state","hover"],false],1.8,.3],13,["case",["boolean",["feature-state","hover"],false],2.2,1]],"line-opacity":.9}},firstSym);
-  map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#1C2B3A","line-width":3}},firstSym);
+  map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#0E1A16","line-width":3}},firstSym);
   ready=true;paintMap();});
  map.on("mousemove","fill",e=>{if(spHover(e))return;const f=e.features[0];if(!f)return;map.getCanvas().style.cursor="pointer";
   if(hoverId!==f.id){if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=f.id;map.setFeatureState({source:"sub",id:hoverId},{hover:true});}
@@ -1072,7 +1096,7 @@ let spMode="off",spErr=false;const spLoaded={},spLoading={};
 const spPop=window.maplibregl?new maplibregl.Popup({closeButton:true,closeOnClick:true,className:"tip sale",offset:8,maxWidth:"320px"}):null;
 const dday=n=>new Date(SP_EP+n*864e5).toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
 const yOf=n=>new Date(SP_EP+n*864e5).getUTCFullYear();
-function spWindow(){const ad=MS.ad;if(RNG)return[RNG.a>0?ad[RNG.a-1]:ad[0]-31,ad[RNG.b]];const hi=ad[ti];return[spMode==="year"?hi-365:(ti>0?ad[ti-1]:hi-31),hi];}
+function spWindow(){const ad=MS.ad;if(RNG)return[RNG.a>0?ad[RNG.a-1]:ad[0]-31,ad[RNG.b]];const hi=ad[ti];return[spMode==="year"?hi-365:spMode==="week"?hi-7:(ti>0?ad[ti-1]:hi-31),hi];}
 const SP_MINZ=10,LID={};
 function spKeys(){if(!SPM||!MS||!MS.ad||!ready||map.getZoom()<SP_MINZ)return[];const[lo,hi]=spWindow(),b=map.getBounds(),T=SPM.tile||4,out=[];
  const x0=Math.floor(b.getWest()*T),x1=Math.floor(b.getEast()*T),y0=Math.floor(b.getSouth()*T),y1=Math.floor(b.getNorth()*T);
@@ -1111,8 +1135,8 @@ function spStatus0(){const el=document.getElementById("spinfo");if(!el)return;if
  for(const y of spKeys()){const P=window.SP&&window.SP[y];if(!P)continue;for(let i=0;i<P.d.length;i++){const X=P.x[i],Y=P.y[i];if(X>=x0&&X<=x1&&Y>=y0&&Y<=y1&&P.d[i]>lo&&P.d[i]<=hi&&P.u[i]===u&&ok(P,i))n++;}}
  el.textContent=` · ${n.toLocaleString("en-AU")} ${spFilt==="loss"?"sold at a loss":spFilt==="odd"?"unusual sales":seg==="unit"?"units":"houses"} in view`;}
 function spLegend(){const abs=document.getElementById("spcol").value==="abs",st=abs?HEX:[HREL[0],HREL[1],"#D8D2C2",HREL[3],HREL[4]];
- if(spFilt!=="all")return`<div class="t" style="margin-top:10px"><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${spFilt==="loss"?"#B23A48":"#5E4B8B"};margin-right:6px"></i>Each dot is ${spFilt==="loss"?"a sale for less than the home last sold for":"an unusual sale (several homes at one price, or far from the suburb's typical price), left out of medians"}, settled ${RNG?`from ${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="year"?`from ${mshift(ti,-12)} to ${mlabel()}`:`in the month to ${mlabel()}`}. Click one for details.</div>`;
- return`<div class="t" style="margin-top:10px">Each dot is ${spFilt==="loss"?"a sale for less than the home last sold for":spFilt==="odd"?"an unusual sale (several homes at one price, or far from the suburb's typical price), left out of medians":"a sale"}, settled ${RNG?`from ${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="year"?`from ${mshift(ti,-12)} to ${mlabel()}`:`in the month to ${mlabel()}`}</div><div class="ramp" style="background:linear-gradient(90deg,${st.join(",")})"></div>
+ if(spFilt!=="all")return`<div class="t" style="margin-top:10px"><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${spFilt==="loss"?"#B23A48":"#5E4B8B"};margin-right:6px"></i>Each dot is ${spFilt==="loss"?"a sale for less than the home last sold for":"an unusual sale (several homes at one price, or far from the suburb's typical price), left out of medians"}, settled ${RNG?`from ${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="year"?`from ${mshift(ti,-12)} to ${mlabel()}`:spMode==="week"?`in the week to ${dday(MS.ad[ti])}`:`in the month to ${mlabel()}`}. Click one for details.</div>`;
+ return`<div class="t" style="margin-top:10px">Each dot is ${spFilt==="loss"?"a sale for less than the home last sold for":spFilt==="odd"?"an unusual sale (several homes at one price, or far from the suburb's typical price), left out of medians":"a sale"}, settled ${RNG?`from ${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="year"?`from ${mshift(ti,-12)} to ${mlabel()}`:spMode==="week"?`in the week to ${dday(MS.ad[ti])}`:`in the month to ${mlabel()}`}</div><div class="ramp" style="background:linear-gradient(90deg,${st.join(",")})"></div>
  <div class="ticks">${(abs?["$600k","$1.8m","$5.5m"]:document.getElementById("spcol").value==="size"?["30% under","Typical for its size","45% over"]:["30% under","Suburb median","45% over"]).map(t=>`<span>${t}</span>`).join("")}</div>`;}
 function spAt(e){const L=spLayers();if(!L.length)return null;const b=4;return map.queryRenderedFeatures([[e.point.x-b,e.point.y-b],[e.point.x+b,e.point.y+b]],{layers:L})[0]||null;}
 function spAddr(P,i){const st=P.st[P.s[i]]||"",n=P.n[i],un=P.un[i];return`${un?un.replace(/\s+/g,"")+"/":""}${n?n+" ":""}${st}`.trim();}
@@ -1121,22 +1145,23 @@ function spHover(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  hoverBar.setLngLat(e.lngLat).setHTML(`<b>${esc(spAddr(P,i))}</b>${dollars(P.p[i])}${P.m&&P.m[i]>1?` <span>(${P.m[i]}-property sale)</span>`:P.m&&P.m[i]<0?` <span>(unusual price)</span>`:""}<br><span>${esc(title(P.loc[P.l[i]]))} · settled ${dday(P.d[i])} · click for details</span>`).addTo(map);return true;}
 function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P=window.SP[y],i=f.properties.i;hoverBar.remove();
  const loc=P.loc[P.l[i]],unit=P.u[i]===1,noun=unit?"unit":"house",a=P.a[i],r=P.r[i],pp=P.pp[i],pd=P.pd[i];
- let h=`<b>${esc(spAddr(P,i))}</b><span>${esc(title(loc))} · ${unit?"Unit":"House"}</span><div class="pr num">${dollars(P.p[i])}</div>
-  <div class="ln">Contract <b>${dday(P.c[i])}</b> · settled <b>${dday(P.d[i])}</b></div>`;
- const ml=P.m?P.m[i]:null;if(ml>1)h+=`<div class="ln warn">Part of one sale of <b>${ml} properties</b> for ${dollars(P.p[i])} in total (about ${dollars(P.p[i]/ml)} each). Left out of medians and growth.</div>`;
- else if(ml<0)h+=`<div class="ln warn">Far from anything else sold in ${esc(title(loc))} that year (over 5 times or under a fifth of the median): often a development site, a big holding or a family transfer. Left out of medians and growth.</div>`;
- if(a)h+=`<div class="ln">${unit?"Strata lot":"Land"} <b>${a.toLocaleString("en-AU")} m²</b> · <b>${dollars(P.p[i]/a)}</b> a m²</div>`;
- const ra=P.ra?P.ra[i]:null,cmp=(v,what)=>`<div class="ln">${Math.abs(v-1)<.03?"In line with":`<b class="${v>1?"neg":"pos"}">${pct(Math.abs(v-1),0)} ${v>1?"above":"below"}</b>`} ${what}</div>`;
- if(ra!=null)h+=cmp(ra,`what similar-size ${unit?"units":"blocks"} in ${esc(title(loc))} sold for that year`);
- if(r!=null)h+=cmp(r,`the ${esc(title(loc))} median ${noun} price that year`);
+ const row=(k,v)=>`<dt>${k}</dt><dd>${v}</dd>`,ml=P.m?P.m[i]:null,ra=P.ra?P.ra[i]:null,cmp=v=>Math.abs(v-1)<.03?"In line":`<span class="${v>1?"neg":"pos"}">${pct(Math.abs(v-1),0)} ${v>1?"above":"below"}</span>`;
+ let h=`<b>${esc(spAddr(P,i))}</b><span>${esc(title(loc))} · ${unit?"Unit":"House"}</span><div class="pr num">${dollars(P.p[i])}</div><dl class="num">`;
+ h+=row("Settled",dday(P.d[i]))+row("Contract",dday(P.c[i]));
+ if(a)h+=row(unit?"Strata lot":"Land",`${a.toLocaleString("en-AU")} m² <small>${dollars(P.p[i]/a)} a m²</small>`);
+ if(ra!=null)h+=row(`Against similar-size ${unit?"units":"blocks"}`,cmp(ra));
+ if(r!=null)h+=row("Against the suburb median",cmp(r));
  if(pp&&pd){const yrs=(P.d[i]-pd)/365.25,ch=P.p[i]/pp-1,pa=yrs>=1?Math.pow(P.p[i]/pp,1/yrs)-1:null;
-  h+=`<div class="ln">Last sold <b>${dollars(pp)}</b>, settled ${dday(pd)}: <b class="${ch<0?"neg":"pos"}">${signed(ch,0)}</b>${pa!=null?` (${signed(pa,1)} a year over ${yrs.toFixed(1)} years)`:""}</div>`;}
- else if(!ml)h+=`<div class="ln">No earlier sale of this ${unit?"lot":"property"} on record (records start 1990).</div>`;
- h+=`<div class="ln" style="margin-top:6px"><a href="#" data-prop="1">Full history of this address</a> · <a href="#" data-sub="${esc(loc)}">${esc(title(loc))}</a></div>`;
+  h+=row("Last sold",`${dollars(pp)} <small>${dday(pd)}</small>`)+row("Change since",`<span class="${ch<0?"neg":"pos"}">${signed(ch,0)}</span>${pa!=null?` <small>${signed(pa,1)} a year over ${yrs.toFixed(1)} years</small>`:""}`);}
+ else if(!ml)h+=row("Last sold","No earlier sale on record");
+ h+="</dl>";
+ if(ml>1)h+=`<div class="ln warn">Part of one sale of <b>${ml} properties</b> for ${dollars(P.p[i])} in total (about ${dollars(P.p[i]/ml)} each). Left out of medians and growth.</div>`;
+ else if(ml<0)h+=`<div class="ln warn">Far from anything else sold in ${esc(title(loc))} that year: often a development site, a big holding or a family transfer. Left out of medians and growth.</div>`;
+ h+=`<div class="ft"><a href="#" data-prop="1">Full history of this address</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;
  spPop.setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
  const lk=spPop.getElement().querySelector("[data-sub]");lk&&lk.addEventListener("click",ev=>{ev.preventDefault();select(lk.dataset.sub,false);});
  const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});return true;}
-function setSp(m){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}document.querySelectorAll("#spsw button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.sp===m));document.getElementById("spopt").hidden=m==="off";
+function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(quiet){spApply();legend();return;}
  if(m==="off"&&spPop)spPop.remove();{const o=document.getElementById("opac");if(m!=="off"&&+o.value>40){o.value=30;setOpacity(.3);}else if(m==="off"&&+o.value<=30){o.value=72;setOpacity(.72);}}if(m!=="off"&&ready&&map.getZoom()<11)map.easeTo({zoom:11,duration:600});spApply();legend();}
 let sumT=0;if(window.maplibregl)setTimeout(()=>map&&map.on("moveend",()=>{if(spMode!=="off")spApply();if(!sel&&!P_SEL){clearTimeout(sumT);sumT=setTimeout(detail,150);}}),0);
 
@@ -1216,12 +1241,12 @@ function growthChoice(){const unit=seg==="unit",syd=Math.min(mkt(mreg(),seg).cag
  const opts=[["sydney",`${mregName().replace(/^r/,"R")} ${unit?"units":"houses"}, last 10 years (${pct(syd,1)})`,syd]];if(r&&sg!=null)opts.unshift(["suburb",`${title(sel)} expected (${pct(sg,1)})`,sg]);opts.push(["custom","Your own figure",gCust]);
  const pick=gSrc==="auto"?opts[0][0]:opts.some(o=>o[0]===gSrc)?gSrc:opts[0][0];return{opts,pick,g:opts.find(o=>o[0]===pick)[2]};}
 function lineChart(series,{years,fmt,lab,h=220,tick=null,w=520,mark=null,band=null}){if(window.innerWidth<=720&&w>400){h=Math.round(Math.max(h*380/w,250));w=380;}else if(w>600){const cw=($("bxChart")||{}).clientWidth||w;w=Math.max(480,Math.min(w,cw));h=Math.round(Math.max(h,Math.min(360,w*.46)));}const L0=60,R=w<=400?26:18,T=10,B0=24,sv_=series.flatMap(s=>s.v),pad_=band?(Math.max(...sv_)-Math.min(...sv_))*.9||1:0,all=sv_,mx=Math.max(1,...all)+pad_,mn=Math.min(0,...all)-(band&&Math.min(...band.lo)<0?pad_:0),cl_=v=>Math.max(mn,Math.min(mx,v)),X=i=>L0+i*(w-L0-R)/years,Y=v=>T+(h-T-B0)*(1-(v-mn)/(mx-mn));let g="";
- if(mn<0)g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(0)}" y2="${Y(0)}" stroke="#8A97A3"/>`;
- for(let k=0;k<=4;k++){const v=mn+(mx-mn)*k/4;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#ECEBE5"/><text x="${L0-8}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
+ if(mn<0)g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(0)}" y2="${Y(0)}" stroke="#8FA39A"/>`;
+ for(let k=0;k<=4;k++){const v=mn+(mx-mn)*k/4;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#E6EAE2"/><text x="${L0-8}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
  const st=years>20?5:years>10?5:2;for(let y=0;y<=years;y+=st)g+=`<text x="${X(y)}" y="${h-6}" text-anchor="middle">${tick?tick(y):y?y+" yrs":"Now"}</text>`;
  if(band)g+=`<path d="${band.hi.map((v,i)=>(i?"L":"M")+X(i).toFixed(1)+","+Y(cl_(v)).toFixed(1)).join("")}${band.lo.map((v,i)=>[i,v]).reverse().map(([i,v])=>"L"+X(i).toFixed(1)+","+Y(cl_(v)).toFixed(1)).join("")}Z" fill="${band.c}"/>`;
  for(const s of series)g+=`<path d="${s.v.map((v,i)=>(i?"L":"M")+X(i).toFixed(1)+","+Y(v).toFixed(1)).join("")}" fill="none" stroke="${s.c}" stroke-width="2.8" stroke-linejoin="round"${s.dash?' stroke-dasharray="5 4"':""}/>`;
- if(mark!=null){g+=`<line x1="${X(mark)}" x2="${X(mark)}" y1="${T}" y2="${h-B0}" stroke="#1C2B3A" stroke-width="1.2" stroke-dasharray="3 3"/>`;for(const s of series)if(!s.dash&&s.v[mark]!=null)g+=`<circle cx="${X(mark)}" cy="${Y(s.v[mark])}" r="4.5" fill="${s.c}" stroke="#fff" stroke-width="2"/>`;}
+ if(mark!=null){g+=`<line x1="${X(mark)}" x2="${X(mark)}" y1="${T}" y2="${h-B0}" stroke="#0E1A16" stroke-width="1.2" stroke-dasharray="3 3"/>`;for(const s of series)if(!s.dash&&s.v[mark]!=null)g+=`<circle cx="${X(mark)}" cy="${Y(s.v[mark])}" r="4.5" fill="${s.c}" stroke="#fff" stroke-width="2"/>`;}
  const hov={vw:w,t:T,b:h-B0,xs:series[0].v.map((v,i)=>+X(i).toFixed(1)),lab:series[0].v.map((v,i)=>lab(i)),rows:series[0].v.map((v,i)=>series.map(s=>[s.c,+Y(s.v[i]).toFixed(1),`${s.name}: ${fmt(s.v[i])}`]))};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}</svg>`;}
 /* ---------- buy or rent planner (tab 2) ---------- */
@@ -1268,7 +1293,7 @@ let SIM=null,bxYr=10,bxK="nw",bxLay=(()=>{try{return localStorage.getItem("hs_la
 function bxStop(){if(bxTimer){clearInterval(bxTimer);bxTimer=null;}const b=$("bxPlay");if(b){b.setAttribute("aria-pressed","false");$("bxPlayIco").setAttribute("d","M3 1.5v11l9-5.5z");}}
 const BXC={pay:{t:"Housing costs"},save:{t:"Money saved"},pot:{t:"Savings"},eq:{t:"Equity in the home"},bal:{t:"Loan still owed"},nw:{t:"Net worth"}};
 // one colour per kind of money, used everywhere: green is kept, red is spent, blue pays off the loan
-const CK={ret:"#9CC77A",take:"#1F6E68",tax:"#B9C0C3",int:"#8E3B46",rent:"#8E3B46",prin:"#2F5C8A",off:"#7FB5AC",run:"#C98F86",liv:"#B8A58F",inv:"#1F6E68",dep:"#1C2B3A",growth:"#C9A227",owed:"#CFD3D6",inc:"#5C9389"};
+const CK={ret:"#9CC77A",take:"#1F6E68",tax:"#B9C0C3",int:"#8E3B46",rent:"#8E3B46",prin:"#2F5C8A",off:"#7FB5AC",run:"#C98F86",liv:"#B8A58F",inv:"#1F6E68",dep:"#0E1A16",growth:"#C9A227",owed:"#CFD3D6",inc:"#5C9389"};
 let bxPer="m",bxEqOpen=false;const bxOpen=new Set();
 function bxUI(){const cap=$("bxCap"),has=!!(ML&&maxP&&maxP.price>0);
  $("livTot").textContent=dollars(livingPM());
@@ -1317,7 +1342,7 @@ function bxUI(){const cap=$("bxCap"),has=!!(ML&&maxP&&maxP.price>0);
  const a0=amort(ch.L,ch.repay,0),a1=amort(ch.L,ch.repay,ex),N=BB.term_years;
  $("repNote").innerHTML=exTop<=0?`<span class="warn">Nothing spare for extra at this price: the repayment and costs take all your pay.</span>`:ex?`Paying <b>${dollars(repMin+ex)}</b> a month in all.`:"Slide to see what paying extra saves.";
  $("poKeyX").hidden=!ex;
- $("poBal").innerHTML=lineChart(ex?[{name:"Minimum",c:"#8A97A3",v:a0.yb.slice(0,N+1)},{name:"With extra",c:"#1F6E68",v:a1.yb.slice(0,N+1)}]:[{name:"Loan",c:"#8A97A3",v:a0.yb.slice(0,N+1)}],{years:N,fmt:money,lab:i=>i?`After ${i} year${i>1?"s":""}`:"Now",h:190});
+ $("poBal").innerHTML=lineChart(ex?[{name:"Minimum",c:"#8FA39A",v:a0.yb.slice(0,N+1)},{name:"With extra",c:"#1F6E68",v:a1.yb.slice(0,N+1)}]:[{name:"Loan",c:"#8FA39A",v:a0.yb.slice(0,N+1)}],{years:N,fmt:money,lab:i=>i?`After ${i} year${i>1?"s":""}`:"Now",h:190});
  $("poTiles").innerHTML=`<div class="bx-tile"><div class="bx-lab">Paid off in</div><div class="v num">${ymTxt(ex?a1.months:a0.months)}</div><div class="s">${ex?`${ymTxt(a0.months-a1.months)} sooner`:"on minimum repayments"}</div></div>
   <div class="bx-tile"><div class="bx-lab">Interest in total</div><div class="v num">${money(ex?a1.interest:a0.interest)}</div><div class="s">${ex?`saves ${money(a0.interest-a1.interest)}`:`on a ${money(ch.L)} loan`}</div></div>`;
  // ---- 4. year by year
@@ -1399,7 +1424,7 @@ function setAsm(m,reset){asmMode=m;store.set("hs_asm",m);$("bxAsm").classList.to
 // Net worth bar: what it's made of, with selling costs (and any negative part) taken off the last parts
 function nwSegs(parts,less){const out=parts.map(p=>[Math.max(0,p[0]),p[1],p[2]]);let r=less+parts.reduce((t,p)=>t+Math.max(0,-p[0]),0);for(let i=out.length-1;i>=0&&r>0;i--){const t=Math.min(out[i][0],r);out[i][0]-=t;r-=t;}return out;}
 function bxChart(){if(!SIM)return;const M=SIM.m,N=M.N,inv=isInv(),k=BXC[bxK]?bxK:"nw",c=BXC[k],mon=k==="pay"||k==="save",cum=mon&&bxCum;
- const yb=inv?"if you buy it":"if you buy",yr=inv?"if you don't":"if you rent",BUY="#5B4BA8",RENT="#C9650F",GREY="#8A97A3";
+ const yb=inv?"if you buy it":"if you buy",yr=inv?"if you don't":"if you rent",BUY="#5B4BA8",RENT="#C9650F",GREY="#8FA39A";
  // Money in and out is sampled at the start of each year; shift so point i is year i (the year just finished) and 0 is "nothing yet",
  // matching the year slider and the statement. Running total adds up each year's 12 months.
  const sh=a=>[0,...a.slice(0,N)],acc=a=>{let t=0;return a.map((v,i)=>i?(t+=v*12):0);},fl=a=>cum?acc(sh(a)):sh(a),left=M.saveB.map((v,i)=>v-M.xB[i]);
@@ -1458,32 +1483,33 @@ function select(n,fly=true){if(P_SEL&&P_SEL.loc!==n){P_SEL=null;if(pMarker)pMark
 function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="note">Not enough data for a chart.</p>';
  const w=520,h=180,L0=52,R=50,T=10,B_=22,ys=pts.flatMap(p=>[p[1],p[2],p[3]]).filter(v=>v!=null),lo=Math.min(...ys)*.95,hi=Math.max(...ys)*1.04;
  const X=i=>L0+i*(w-L0-R)/(pts.length-1),Y=v=>T+(h-T-B_)*(1-(v-lo)/(hi-lo));let g="";
- for(let j=0;j<=2;j++){const v=lo+(hi-lo)*j/2;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#ECEBE5"/><text x="${L0-8}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
+ for(let j=0;j<=2;j++){const v=lo+(hi-lo)*j/2;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#E6EAE2"/><text x="${L0-8}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
  const yrs=[...new Set(pts.map(p=>p[0].slice(0,4)))],step=Math.ceil(yrs.length/6);
  pts.forEach((p,i)=>{if(p[0].endsWith("Q1")&&yrs.indexOf(p[0].slice(0,4))%step===0)g+=`<text x="${X(i)}" y="${h-5}" text-anchor="middle">${p[0].slice(0,4)}</text>`;});
  const d=pts.map((p,i)=>(i?"L":"M")+X(i).toFixed(1)+","+Y(p[1]).toFixed(1)).join(""),last=pts[pts.length-1];
  let band="";const seg_=[];let cur=[];pts.forEach((p,i)=>{if(p[2]!=null&&p[3]!=null)cur.push([i,p[2],p[3]]);else{if(cur.length>1)seg_.push(cur);cur=[];}});if(cur.length>1)seg_.push(cur);
  for(const sg of seg_)band+=`<path d="${sg.map(([i,,h_],j)=>(j?"L":"M")+X(i).toFixed(1)+","+Y(h_).toFixed(1)).join("")}${sg.slice().reverse().map(([i,l_])=>"L"+X(i).toFixed(1)+","+Y(l_).toFixed(1)).join("")}Z" fill="${fill}"/>`;
  if(mark&&typeof mark==="object"){const ia=pts.findIndex(p=>p[0]>=mark.a);let ib=pts.findIndex(p=>p[0]>mark.b);ib=ib<0?pts.length-1:ib-1;
-  if(ia>=0&&ib>=ia)g+=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(47,92,138,.12)"/>`;mark=null;}
+  if(ia>=0&&ib>=ia)g+=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(210,255,58,.3)"/>`;mark=null;}
  const mi=mark?pts.findIndex(p=>p[0]===mark):-1;
- if(mi>=0)g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#2F5C8A" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+ if(mi>=0)g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#0E1A16" stroke-width="1.2" stroke-dasharray="3 3"/>`;
  const mdot=mi>=0&&pts[mi][1]!=null?`<circle cx="${X(mi)}" cy="${Y(pts[mi][1])}" r="4" fill="#2F5C8A" stroke="#fff" stroke-width="1.5"/>`:"";
  const hov={vw:w,t:T,b:h-B_,q:pts.map(p=>p[0]),xs:pts.map((p,i)=>+X(i).toFixed(1)),lab:pts.map(p=>qlab(p[0])),rows:pts.map(p=>p[1]==null?[]:[[stroke,+Y(p[1]).toFixed(1),`Median ${fmt(p[1])}`+(p[2]!=null&&p[3]!=null?`<br><span style="color:var(--slate)">Middle half ${fmt(p[2])}–${fmt(p[3])}</span>`:"")+(p[4]?`<br><span style="color:var(--slate)">${p[4]} sales</span>`:"")]])};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band||`<path d="${d}L${X(pts.length-1)},${h-B_}L${L0},${h-B_}Z" fill="${fill}"/>`}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/>
  <circle cx="${X(pts.length-1)}" cy="${Y(last[1])}" r="3.5" fill="${stroke}"/><text x="${X(pts.length-1)+7}" y="${Y(last[1])+4}" style="fill:${stroke};font-weight:600">${fmt(last[1])}</text>${mdot}</svg>`;}
 function rangeStrip(label,v,fmt,col,mark,markLbl,note){let[mn,p10,p25,md,p75,p90,mx]=v;if(md==null||p25==null)return"";const half=p10==null;if(half){p10=p25-(p75-p25)*.6;p90=p75+(p75-p25)*.6;}
  const w=520,h=64,L0=56,R=56,lo=p10-(p90-p10)*.08,hi=p90+(p90-p10)*.08,X=x=>L0+(w-L0-R)*(Math.max(lo,Math.min(hi,x))-lo)/(hi-lo),y=30;
- let g=`<line x1="${X(p10)}" x2="${X(p90)}" y1="${y}" y2="${y}" stroke="${col}" stroke-opacity=".35" stroke-width="2"/>
- <rect x="${X(p25)}" y="${y-7}" width="${Math.max(2,X(p75)-X(p25))}" height="14" rx="2" fill="${col}" fill-opacity=".22" stroke="${col}" stroke-opacity=".5"/>
- <line x1="${X(md)}" x2="${X(md)}" y1="${y-10}" y2="${y+10}" stroke="${col}" stroke-width="2.5"/>
- <text x="${X(md)}" y="${y-14}" text-anchor="middle" style="fill:${col};font-weight:600">${fmt(md)}</text>
- <text x="${X(p25)}" y="${y+24}" text-anchor="middle">${fmt(p25)}</text><text x="${X(p75)}" y="${y+24}" text-anchor="middle">${fmt(p75)}</text>
- ${half?"":`<text x="${X(p10)}" y="${y+4}" text-anchor="end" dx="-4">${fmt(p10)}</text><text x="${X(p90)}" y="${y+4}" dx="4">${fmt(p90)}</text>`}`;
+ let g=`<line x1="${X(p10)}" x2="${X(p90)}" y1="${y}" y2="${y}" stroke="#C9D0C7" stroke-width="4" stroke-linecap="round"/>
+ <rect x="${X(p25)}" y="${y-7}" width="${Math.max(2,X(p75)-X(p25))}" height="14" rx="7" fill="${col}"/>
+ <circle cx="${X(md)}" cy="${y}" r="6.5" fill="#D2FF3A" stroke="${col}" stroke-width="2"/>
+ <text x="${X(md)}" y="${y-15}" text-anchor="middle" style="fill:${col};font-weight:600;font-size:14.5px">${fmt(md)}</text>
+ <text x="${X(p25)}" y="${y+25}" text-anchor="middle">${fmt(p25)}</text><text x="${X(p75)}" y="${y+25}" text-anchor="middle">${fmt(p75)}</text>
+ ${half?"":`<text x="${X(p10)}" y="${y+4}" text-anchor="end" dx="-8">${fmt(p10)}</text><text x="${X(p90)}" y="${y+4}" dx="8">${fmt(p90)}</text>`}`;
  if(half)g=g.replace(/^<line[^>]*\/>/,"");
- if(mark!=null&&mark>=lo&&mark<=hi)g+=`<line x1="${X(mark)}" x2="${X(mark)}" y1="${y-16}" y2="${y+16}" stroke="#8E3B46" stroke-dasharray="3 2" stroke-width="1.5"/>`;
+ if(mark!=null&&mark>=lo&&mark<=hi)g+=`<line x1="${X(mark)}" x2="${X(mark)}" y1="${y-16}" y2="${y+16}" stroke="#C2372B" stroke-dasharray="3 2" stroke-width="1.5"/>`;
+ const rentish=col!=="#0E1A16",what=rentish?"new leases":"sales";
  return`<div class="chart"><h3>${label}</h3><svg viewBox="0 0 ${w} ${h}" role="img" style="overflow:visible">${g}</svg>
- <p class="note" style="margin:2px 0 0">${note!=null?note:`Middle half ${fmt(p25)} to ${fmt(p75)} · most (80%) between ${fmt(p10)} and ${fmt(p90)}${mark!=null?` · dashed line: ${markLbl} ${fmt(mark)}`:""}. Recorded extremes ${fmt(mn)} and ${fmt(mx)}, which often include unusual deals${col==="#1C2B3A"?" such as part shares, development sites or whole buildings":""}.`}</p></div>`;}
+ <p class="note" style="margin:4px 0 0">${note!=null?note:`The dot is the median. Half of ${what} were between <b>${fmt(p25)}</b> and <b>${fmt(p75)}</b> (the bar); 8 in 10 were between ${fmt(p10)} and ${fmt(p90)} (the line).${mark!=null?` Dashed line: ${markLbl} ${fmt(mark)}.`:""}`}</p></div>`;}
 // the sales window shown: the chosen period, or the 12 months to the month on the slider (days since the epoch)
 function winDays(){const ad=MS.ad;if(RNG)return[RNG.a>0?ad[RNG.a-1]:ad[0]-31,ad[RNG.b]];return[ad[ti]-365,ad[ti]];}
 const dq=n=>{const d=new Date(SP_EP+n*864e5);return d.getUTCFullYear()+"Q"+(Math.floor(d.getUTCMonth()/3)+1);};
@@ -1498,10 +1524,10 @@ async function detailAsync(r){const tok=++detTok,loc=r[C.locality],u=seg==="unit
  let R;try{R=await propsOf(loc);}catch(e){if(strip)strip.innerHTML="";if(list)list.innerHTML='<p class="note">No sales file for this suburb.</p>';return;}
  if(tok!==detTok)return;let ws=winSales(R,u);const when=RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`${mshift(ti,-12)} to ${mlabel()}`;
  if(strip){const ps=ws.filter(([x])=>!x[3]).map(([x])=>x[2]).sort((a,b)=>a-b);
-  let h=ps.length>=5?rangeStrip(`Sale prices, ${when} (${ps.length} sales)`,[ps[0],qtl(ps,.1),qtl(ps,.25),qtl(ps,.5),qtl(ps,.75),qtl(ps,.9),ps[ps.length-1]],money,"#1C2B3A",maxP&&maxP.price?maxP.price:null,"your budget"):`<p class="note">Fewer than 5 ${noun} sales in this window, too few to show a spread.</p>`;
+  let h=ps.length>=5?rangeStrip(`Sale prices, ${when} (${ps.length} sales)`,[ps[0],qtl(ps,.1),qtl(ps,.25),qtl(ps,.5),qtl(ps,.75),qtl(ps,.9),ps[ps.length-1]],money,"#0E1A16",maxP&&maxP.price?maxP.price:null,"your budget"):`<p class="note">Fewer than 5 ${noun} sales in this window, too few to show a spread.</p>`;
   const rs=D.rent_series[r[C.postcode]+"|"+seg]||[],[lo,hi]=winDays(),qa=dq(lo+1),qb=dq(hi),rq=rs.filter(x=>x[0]>=qa&&x[0]<=qb);
   if(rq.length){const md=rq.map(x=>x[1]).sort((a,b)=>a-b),av=i=>rq.reduce((s,x)=>s+x[i],0)/rq.length;
-   h+=rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}, ${qlab(rq[0][0])} to ${qlab(rq[rq.length-1][0])}`,[null,null,av(2),qtl(md,.5),av(3),null,null],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent",`Middle half about $${Math.round(av(2))} to $${Math.round(av(3))} a week, from quarterly figures${rb?` · dashed line: your rent $${Math.round(rb.pw)}`:""}.`);}
+   h+=rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}, ${qlab(rq[0][0])} to ${qlab(rq[rq.length-1][0])}`,[null,null,av(2),qtl(md,.5),av(3),null,null],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent",`The dot is the median. Half of new leases were between about <b>$${Math.round(av(2))}</b> and <b>$${Math.round(av(3))}</b> a week.${rb?` Dashed line: your rent $${Math.round(rb.pw)}.`:""}`);}
   else h+=`<p class="note">No rent records for this window: they start in 2021.</p>`;
   strip.innerHTML=h;}
  if(list){const chg=([x,p])=>{const j=p[7].indexOf(x),pv=j>0?p[7][j-1]:null;return pv&&!x[3]&&!pv[3]&&x[0]-pv[0]>=60?x[2]/pv[2]-1:null;};
@@ -1543,7 +1569,7 @@ function detail(){const el=document.getElementById("detail");
  if(!sel){el.innerHTML=areaSummary();el.querySelectorAll("[data-n]").forEach(x=>x.addEventListener("click",()=>select(x.dataset.n)));return;}
  const r=rowFor(sel);if(!r){thinPanel(el,sel);return;}
  const m=r._m,k=r[C.locality]+"|"+r[C.segment],rs=D.rent_series[r[C.postcode]+"|"+r[C.segment]],noun=seg==="house"?"house":"unit",unit=seg==="unit";
- const tabs=[["overview","Overview"],["trends","Trends"],["sales","Sales"],["buyrent","Buy or rent"]];
+ if(dtab==="buyrent")dtab="overview";const tabs=[["overview","Overview"],["trends","Trends"],["sales","Sales"]];   // "Buy or rent" tab hidden until reworked (code kept below)
  let body="";
  if(dtab==="overview"){const pk=r[C.from_peak],pm=r[C.peak_months_ago];
   const pkTxt=pk==null?"":pk>-0.005?"Prices are at their 3-year high.":`Prices are ${pct(-pk,1)} below the 12-month median peak of ${money(r[C.med_now]/(1+pk))}, reached about ${pm>=12?Math.round(pm/12*2)/2+" years":pm+" months"} ago.`;
@@ -1557,7 +1583,7 @@ function detail(){const el=document.getElementById("detail");
   <div class="stat"><div class="v">${m?pct(m.yield,1):"–"}</div><div class="l">Rental yield</div></div>
   <div class="stat"><div class="v">${r[C.n_now]}</div><div class="l">Sales, 12 months</div></div></div>
   ${af}
-  ${rangeStrip("Sale prices, last 12 months",[r[C.pmin],r[C.p10],r[C.p25],r[C.med_now],r[C.p75],r[C.p90],r[C.pmax]],money,"#1C2B3A",maxP&&maxP.price?maxP.price:null,"your budget")}
+  ${rangeStrip("Sale prices, last 12 months",[r[C.pmin],r[C.p10],r[C.p25],r[C.med_now],r[C.p75],r[C.p90],r[C.pmax]],money,"#0E1A16",maxP&&maxP.price?maxP.price:null,"your budget")}
   ${r[C.rent_pw]!=null?rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}`,[r[C.rmin],r[C.r10],r[C.r25],r[C.rent_pw],r[C.r75],r[C.r90],r[C.rmax]],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent"):""}
   <p class="note" style="margin-top:12px">${pkTxt} ${signed(r[C.growth_6m])} over the last 6 months.</p>`;}
  else if(dtab==="buyrent"){
@@ -1576,12 +1602,12 @@ function detail(){const el=document.getElementById("detail");
  else if(dtab==="trends"){const L=k[0].match(/[A-Z]/)?k[0]:"_",DT=window.DET&&window.DET[L];if(!DT)detLoad(L);
  const zc=RNG&&zoomP,cr=pts=>{if(!zc||!pts)return pts;const a=qOf(RNG.a),b=qOf(RNG.b);return pts.filter(p=>p[0]>=a&&p[0]<=b);},mk=zc?null:tmark();
  const rsC=cr(rs);
- body=!DT?`<p class="note">Loading charts…</p>`:`${RNG?`<p class="note" style="margin:0 0 6px">${zc?`Charts show ${mlabel(RNG.a)} to ${mlabel(RNG.b)}. <a href="#" data-zoomp>Show all years</a>`:`The shaded band is the chosen period. <a href="#" data-zoomp>Zoom to it</a>`}</p>`:""}<p class="note" style="margin:0 0 6px">Click a chart to show that quarter on the map.</p><div class="chart"><h3>Sale prices by quarter: median, middle half of sales shaded</h3>${chart(cr((DT[k]||[]).map(x=>[x[0],x[1],x[3],x[4],x[2]])),money,"#1C2B3A","rgba(28,43,58,.11)",mk)}
+ body=!DT?`<p class="note">Loading charts…</p>`:`${RNG?`<p class="note" style="margin:0 0 6px">${zc?`Charts show ${mlabel(RNG.a)} to ${mlabel(RNG.b)}. <a href="#" data-zoomp>Show all years</a>`:`The shaded band is the chosen period. <a href="#" data-zoomp>Zoom to it</a>`}</p>`:""}<p class="note" style="margin:0 0 6px">Click a chart to show that quarter on the map.</p><div class="chart"><h3>Sale prices by quarter: median, middle half of sales shaded</h3>${chart(cr((DT[k]||[]).map(x=>[x[0],x[1],x[3],x[4],x[2]])),money,"#0E1A16","rgba(28,43,58,.11)",mk)}
   <h3>Weekly rent on new leases, postcode ${r[C.postcode]}: median, middle half shaded</h3>${rsC&&rsC.length>=3?chart(rsC,v=>"$"+Math.round(v),"#1F6E68","rgba(31,110,104,.14)",mk):`<p class="note">${zc?"Rent records start in 2021, so there are none for most of this period.":"Not enough rent data for a chart."}</p>`}</div>`;}
  const hist=MS&&!isLatest();
  if(dtab==="sales")body='<div id="salesList"><p class="note">Loading sales…</p></div>';
  if(hist&&dtab==="overview")body=histOverview(k,r)+'<div id="ovStrip"><p class="note">Loading sales…</p></div>';
- else if(hist&&dtab!=="sales"&&!(dtab==="trends"&&RNG))body=`<p class="note" style="background:#EEF2F6;border-radius:6px;padding:8px 12px">Showing ${whenTxt()}.${dtab==="buyrent"?" This comparison always uses today's prices and rents.":""}</p>`+body;
+ else if(hist&&dtab!=="sales"&&!(dtab==="trends"&&RNG))body=`<p class="note" style="background:var(--wash);border-radius:6px;padding:8px 12px">Showing ${whenTxt()}.${dtab==="buyrent"?" This comparison always uses today's prices and rents.":""}</p>`+body;
  el.innerHTML=dHead(title(r[C.locality]),`${r[C.postcode]} · ${seg==="house"?"Houses":"Units"}${r[C.cagr_10y]==null?' <span class="tag">new</span>':""}`)+`
  <div class="dtabs" role="tablist">${tabs.map(([k2,l])=>`<button role="tab" data-dt="${k2}" aria-selected="${dtab===k2}">${l}</button>`).join("")}</div>${body}`;
  el.querySelectorAll("[data-dt]").forEach(b=>b.addEventListener("click",()=>{dtab=b.dataset.dt;detail();el.scrollTop=0;}));
@@ -1614,11 +1640,12 @@ function viewNames(){const area=new Set(D.rows.filter(inArea).map(r=>r[C.localit
  let inA=0;for(const n of area)if(s.has(n))inA++;const named=[...s].filter(n=>rowFor(n)||D.rows.some(r=>r[C.locality]===n)).length;
  return{names:[...s],name:area.size&&inA/area.size>=.8&&named<=area.size*1.3?areaDef()[1]:"Suburbs in view"};}
 function areaSummary(){const noun=seg==="house"?"house":"unit",{names,name}=viewNames();
- const MN=15,val=n=>{const k=n+"|"+seg;if(!MS||isLatest()){const r=rowFor(n);return r&&r[C.n_now]>=MN?r[C.growth_1y]:null;}
-  if(RNG){if((sv(k,4,RNG.b)||0)<MN||(sv(k,4,RNG.a)||0)<MN)return null;const v=pg(k);return v==null?null:pgTotal(v);}return(sv(k,4)||0)>=MN&&(sv(k,4,ti-12)||0)>=MN?tg(k,12):null;};
+ const six=metric==="g6",yrs=metric==="g5"?5:metric==="g10"?10:0,L=!MS||isLatest(),span=RNG?"across the period":yrs&&L?`a year, over ${yrs} years`:six?"over 6 months":"over 12 months";
+ const MN=15,val=n=>{const k=n+"|"+seg;if(L){const r=rowFor(n);return r&&r[C.n_now]>=MN?r[yrs===5?C.cagr_5y:yrs===10?C.cagr_10y:six?C.growth_6m:C.growth_1y]:null;}
+  if(RNG){if((sv(k,4,RNG.b)||0)<MN||(sv(k,4,RNG.a)||0)<MN)return null;const v=pg(k);return v==null?null:pgTotal(v);}return(sv(k,4)||0)>=MN&&(sv(k,4,ti-12)||0)>=MN?tg(k,six?6:12):null;};
  const vs=names.map(n=>[n,val(n)]).filter(x=>x[1]!=null&&isFinite(x[1])).sort((a,b)=>b[1]-a[1]),rows=names;
  const when=!MS||isLatest()?`Sales ${MS?mshift(TL,-12)+" to "+mlabel(TL):"in the last 12 months"}`:RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`Sales ${mshift(ti,-12)} to ${mlabel()}`;
- let h=`<h2>${esc(name)}</h2><p class="sub">${noun==="house"?"Houses":"Units"} · ${when}</p>`;
+ let h=`<h2>${esc(name)}</h2><p class="sub">${noun==="house"?"Houses":"Units"} · ${when} · price change ${span}</p>`;
  if(!vs.length)h+=`<p class="empty">${rows.length?"Too few sales in view at this date to compare suburbs.":"Zoom or pan the map to a populated area."}</p>`;
  else{const up=vs.filter(x=>x[1]>0).length,mid=vs[Math.floor(vs.length/2)][1],fall=vs.filter(x=>x[1]<0).slice(-5).reverse();
   const li=x=>`<button data-n="${esc(x[0])}"><span>${esc(title(x[0]))}</span><b class="num ${x[1]<0?"neg":"pos"}">${signed(x[1],1)}</b></button>`;
@@ -1626,12 +1653,12 @@ function areaSummary(){const noun=seg==="house"?"house":"unit",{names,name}=view
    <div class="stat"><div class="v ${mid<0?"neg":"pos"}">${signed(mid,1)}</div><div class="l">The typical suburb</div></div></div>
    <div class="movers"><div><h3>Biggest rises</h3>${vs.slice(0,5).filter(x=>x[1]>0).map(li).join("")||'<p class="note">None</p>'}</div>
    <div><h3>Biggest falls</h3>${fall.map(li).join("")||'<p class="note">No suburb fell</p>'}</div></div>
-   <p class="note">Change in each suburb's median ${noun} price ${RNG?"across the period":"over 12 months"}. <b>${vs.length} of the ${names.length} suburbs in view</b> are compared: the rest had fewer than 15 ${noun} sales ${RNG?"at the start or end of the period":"in this 12 months or the one before"}, and with so few sales one unusual home can swing the median. Pan or zoom the map to summarise another area, or click a suburb.</p>`;}
+   <p class="note">${yrs&&L?"Average yearly growth":"Change"} in each suburb's median ${noun} price ${span}. This follows the map's "Colour by" setting. <b>${vs.length} of the ${names.length} suburbs in view</b> are compared: the rest had fewer than 15 ${noun} sales ${RNG?"at the start or end of the period":"in this 12 months or the one before"}, and with so few sales one unusual home can swing the median. Pan or zoom the map to summarise another area, or click a suburb.</p>`;}
  return h+`<details style="margin-top:14px"><summary style="cursor:pointer;font:500 13px var(--sans)">Ways to use this</summary><ul class="tips"><li><b>Press play</b> above the map to watch prices move since 1991. <b>Hover</b> the chart to read any month.</li><li><b>Press and hold</b> on that chart, then drag, to pick a period and see growth across it.</li><li><b>Search a street address</b> to see every recorded sale of that home and a rough value today.</li><li>Open <b>Layers</b> and turn on <b>Individual sales</b> to see every sale as a dot.</li><li>Enter your numbers on the <b>Budget</b> tab and the map can show what's within reach.</li></ul></details>`;}
 // suburbs with too few recent sales for a summary: show the sales themselves, and the long-run chart if there is one
 async function thinPanel(el,n){const noun=seg==="house"?"house":"unit",k=n+"|"+seg;
  el.innerHTML=dHead(title(n),seg==="house"?"Houses":"Units")+`<p class="note" style="margin-top:12px">Too few ${noun} sales here in the last 12 months for a reliable median. The recorded sales are below.</p><div id="thin"><p class="note">Loading sales…</p></div><div id="thinChart"></div>`;bindPanel(el);
- const L=n[0].match(/[A-Z]/)?n[0]:"_",DT=window.DET&&window.DET[L];if(!DT)detLoad(L);else if(DT[k]&&DT[k].length>=3)$("thinChart").innerHTML=`<div class="chart"><h3>Sale prices by quarter</h3>${chart(DT[k].map(x=>[x[0],x[1],x[3],x[4],x[2]]),money,"#1C2B3A","rgba(28,43,58,.11)",tmark())}</div>`;
+ const L=n[0].match(/[A-Z]/)?n[0]:"_",DT=window.DET&&window.DET[L];if(!DT)detLoad(L);else if(DT[k]&&DT[k].length>=3)$("thinChart").innerHTML=`<div class="chart"><h3>Sale prices by quarter</h3>${chart(DT[k].map(x=>[x[0],x[1],x[3],x[4],x[2]]),money,"#0E1A16","rgba(28,43,58,.11)",tmark())}</div>`;
  try{if(!(window.PR&&window.PR[n]))await loadJS(`../data/props/${pslug(n)}.js`);}catch(e){$("thin").innerHTML='<p class="note">No sales file for this suburb.</p>';return;}
  if(sel!==n||!$("thin"))return;const R=window.PR[n],u=seg==="unit"?1:0,list=[];
  for(const p of R.p)if(p[5]===u)for(const x of p[7])list.push([x,p]);list.sort((a,b)=>b[0][0]-a[0][0]);
@@ -1643,15 +1670,15 @@ async function thinPanel(el,n){const noun=seg==="house"?"house":"unit",k=n+"|"+s
 function multiLine(qs,series,fmt,{bars=false,h=190,mark=null,tfmt=null}={}){const w=440,L0=50,R=12,T=10,B_=22,n=qs.length;if(n<3)return'<p class="note">Not enough data.</p>';
  const vals=series.flatMap(s=>s.v.filter(x=>x!=null));let lo=bars?0:Math.min(...vals)*.92,hi=Math.max(...vals)*1.05;
  const X=i=>L0+(bars?(i+.5)*(w-L0-R)/n:i*(w-L0-R)/(n-1)),Y=v=>T+(h-T-B_)*(1-(v-lo)/(hi-lo));let g="";
- for(let j=0;j<=3;j++){const v=lo+(hi-lo)*j/3;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#ECEBE5"/><text x="${L0-7}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
+ for(let j=0;j<=3;j++){const v=lo+(hi-lo)*j/3;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#E6EAE2"/><text x="${L0-7}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
  const step=Math.ceil(n/4/6)*4;qs.forEach((q,i)=>{if(q.endsWith("Q1")&&(i%step<4))g+=`<text x="${X(i)}" y="${h-5}" text-anchor="middle">${q.slice(0,4)}</text>`;});
  if(bars){const bw=(w-L0-R)/n/series.length*.8;series.forEach((s,k)=>s.v.forEach((v,i)=>{if(v!=null)g+=`<rect x="${X(i)-bw*series.length/2+k*bw}" y="${Y(v)}" width="${bw}" height="${Y(0)-Y(v)}" fill="${s.c}"/>`;}));}
  else series.forEach(s=>{let d="",pen=false;s.v.forEach((v,i)=>{if(v==null){pen=false;return;}d+=(pen?"L":"M")+X(i).toFixed(1)+","+Y(v).toFixed(1);pen=true;});g+=`<path d="${d}" fill="none" stroke="${s.c}" stroke-width="2"/>`;});
  if(mark&&typeof mark==="object"){const ia=qs.findIndex(q=>q>=mark.a);let ib=qs.findIndex(q=>q>mark.b);ib=ib<0?n-1:ib-1;
-  if(ia>=0&&ib>=ia)g=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(47,92,138,.12)"/>`+g;mark=null;}
+  if(ia>=0&&ib>=ia)g=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(210,255,58,.3)"/>`+g;mark=null;}
  const mi=mark?qs.indexOf(mark):-1;
- if(mi>=0){g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#2F5C8A" stroke-width="1.5" stroke-dasharray="3 3"/>`;
-  if(!bars)series.forEach(s=>{if(s.v[mi]!=null)g+=`<circle cx="${X(mi)}" cy="${Y(s.v[mi])}" r="3.5" fill="#2F5C8A" stroke="#fff" stroke-width="1.5"/>`;});}
+ if(mi>=0){g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#0E1A16" stroke-width="1.2" stroke-dasharray="3 3"/>`;
+  if(!bars)series.forEach(s=>{if(s.v[mi]!=null)g+=`<circle cx="${X(mi)}" cy="${Y(s.v[mi])}" r="4.5" fill="#D2FF3A" stroke="#0E1A16" stroke-width="1.5"/>`;});}
  const hov={vw:w,t:T,b:h-B_,bars,xs:qs.map((q,i)=>+X(i).toFixed(1)),lab:qs.map(qlab),rows:qs.map((q,i)=>series.filter(s=>s.v[i]!=null).map(s=>[s.c,+Y(s.v[i]).toFixed(1),`${s.name?s.name+": ":""}${(tfmt||fmt)(s.v[i])}`]))};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}</svg>`;}
 const qlab=q=>{const m=String(q).match(/^(\d{4})Q([1-4])$/);return m?["Jan–Mar","Apr–Jun","Jul–Sep","Oct–Dec"][+m[2]-1]+" "+m[1]:q;};
@@ -1669,9 +1696,10 @@ function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=
  document.getElementById("mlede").textContent=`Across ${mregName()}, the median house sold for ${money(mh.median)} over the last 12 months, ${signed(mh.growth_1y)} on the year before, and the median unit for ${money(mu.median)}, ${signed(mu.growth_1y)}.`;
  document.getElementById("mstats").innerHTML=[["Median house",money(mh.median)],["Houses, 12 months",signed(mh.growth_1y)],["Houses, avg yearly growth, 10 yrs",pct(mh.cagr_10y)],["Median unit",money(mu.median)],["Units, 12 months",signed(mu.growth_1y)],["Units, avg yearly growth, 10 yrs",pct(mu.cagr_10y)]]
   .map(([l,v])=>`<div><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
- document.getElementById("mc1").innerHTML=multiLine(qs,[{v:at(h,"price"),c:"#1C2B3A",name:"Houses"},{v:u02(at(u,"price")),c:"#8A97A3",name:"Units"}],money,{mark:tmark()});
- document.getElementById("mc2").innerHTML=multiLine(qs,[{v:at(h,"n"),c:"#1C2B3A",name:"Houses"},{v:u02(at(u,"n")),c:"#8A97A3",name:"Units"}],v=>v>=2000?(v/1000).toFixed(v>=1e4?0:1)+"k":Math.round(v),{bars:true,mark:tmark(),tfmt:v=>Math.round(v).toLocaleString("en-AU")+" sales"});
- mClick("mc1",qs);mClick("mc2",qs);mClick("mc3",rq);
+ document.getElementById("mc1").innerHTML=multiLine(qs,[{v:at(h,"price"),c:"#0E1A16",name:"Houses"},{v:u02(at(u,"price")),c:"#8FA39A",name:"Units"}],money,{mark:tmark()});
+ const q2=qs.filter(q=>q>="2002"),at2=(s_,k)=>at(s_,k).slice(qs.length-q2.length);
+ document.getElementById("mc2").innerHTML=multiLine(q2,[{v:at2(h,"n"),c:"#0E1A16",name:"Houses"},{v:at2(u,"n"),c:"#8FA39A",name:"Units"}],v=>v>=2000?(v/1000).toFixed(v>=1e4?0:1)+"k":Math.round(v),{bars:true,mark:tmark(),tfmt:v=>Math.round(v).toLocaleString("en-AU")+" sales"});
+ mClick("mc1",qs);mClick("mc2",qs.filter(q=>q>="2002"));mClick("mc3",rq);
  document.getElementById("mc3").innerHTML=multiLine(rq,[{v:rq.map(q=>(h.rent||{})[q]??null),c:"#1F6E68",name:"Houses"},{v:rq.map(q=>(u.rent||{})[q]??null),c:"#86B3A9",name:"Units"}],v=>"$"+Math.round(v),{mark:tmark()});}
 
 /* ---------- headline: which way is the market going? ----------
@@ -1692,7 +1720,7 @@ function mRead(g1,g6){const d=(v,t)=>v>t?1:v<-t?-1:0,a=d(g1,MK.flat12),b=d(g6,MK
   "-1,0":["Down on the year, <mark>steadying lately</mark>","Falling over the year but flat over the last six months suggests the fall has paused."],
   "-1,-1":sp<0?["Falling, and <mark>faster lately</mark>","The last six months fell faster than the year as a whole: momentum is still downward."]:sp>0?["Still falling, <mark>more slowly</mark>","The last six months fell at a slower pace than the year: the fall is easing."]:["Falling <mark>steadily</mark>","The last six months fell at about the year's pace."]};
  return T[a+","+b];}
-function ghHist(r6,r12,g6m){const el=$("ghFig"),W=Math.max(300,Math.round(el.clientWidth||600)),H=W<480?150:178,L=4,R=4,T=26,Bm=22,lo=-20,hi=20,bw=2,nb=(hi-lo)/bw;
+function ghHist(r6,r12,g6m){const el=$("ghFig"),W=Math.max(300,Math.round(el.clientWidth||600)),H=W<480?170:230,L=4,R=4,T=26,Bm=22,lo=-20,hi=20,bw=2,nb=(hi-lo)/bw;
  const bin=vs=>{const c=new Array(nb).fill(0);for(const v of vs){const g=Math.max(lo,Math.min(hi-.001,v*100));c[Math.floor((g-lo)/bw)]++;}return c;},c6=bin(r6),c12=bin(r12);
  const mx=Math.max(1,...c6,...c12),X=v=>L+(v-lo)/(hi-lo)*(W-L-R),Y=n=>H-Bm-n/mx*(H-T-Bm),dn=r6.filter(v=>v<0).length,up=r6.filter(v=>v>0).length;let g="";
  c6.forEach((n,i)=>{if(!n)return;const v=lo+i*bw,x=X(v)+1,w=Math.max(1,X(v+bw)-X(v)-2);
@@ -1712,23 +1740,22 @@ function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].re
  const g1=mid(r12.map(r=>r[C.growth_1y])),g6=mid(r6.map(r=>r[C.growth_6m])),pk=mid(rp.map(r=>r[C.from_peak]));
  const up12=r12.filter(r=>r[C.growth_1y]>0).length,dn6=r6.filter(r=>r[C.growth_6m]<0).length,near=rp.filter(r=>r[C.from_peak]>-MK.near).length;
  const ok=r12.length>=10&&r6.length>=10,mt=m&&m.median?`The median ${noun} in ${mregName()} sold for <b>${money(m.median)}</b> in the 12 months to ${asof}, ${signed(m.growth_1y)} on the year before.`:"";
- $("ghEv").hidden=!ok;
- if(!ok){$("ghH1").innerHTML=`Too few ${noun} sales here <mark>to call it</mark>`;$("headline").innerHTML=`Fewer than 10 suburbs in ${esc(area)} had ${MK.min} or more ${noun} sales in the last year. ${mt}`;$("ghTiles").innerHTML="";$("ghCap").textContent="";return;}
+ $("ghEv").hidden=!ok;{const f=$("ghFresh");f.hidden=!(MS&&MS.ad);f.innerHTML=`<i></i>Sales settled to ${asof} <u>See the past week on the map →</u>`;}
+ if(!ok){$("ghH1").innerHTML=`Too few ${noun} sales here <mark>to call it</mark>`;$("headline").innerHTML=`Fewer than 10 suburbs in ${esc(area)} had ${MK.min} or more ${noun} sales in the last year. ${mt}`;$("ghTiles").innerHTML="";$("ghTier").innerHTML="";$("ghCap").textContent="";return;}
  const [h,why]=mRead(g1,g6),ud=(v,a,b)=>`<b>${v>=0?a:b} ${pct(Math.abs(v))}</b>`;
  $("ghH1").innerHTML=h;
- $("headline").innerHTML=`In the typical ${esc(area)} suburb, the median ${noun} price is ${ud(g1,"up","down")} on the year before and ${ud(g6,"up","down")} over the last six months against the six before. ${why}${pk!=null?` ${pk>-.0005?"It is at its peak of the last three years.":`It sits <b>${pct(-pk)} below</b> its peak of the last three years.`}`:""}`;
+ $("headline").innerHTML=why;
  const cl=v=>v>.0005?"up":v<-.0005?"dn":"";
- $("ghTiles").innerHTML=`<div><small>12 months</small><b class="${cl(g1)}">${signed(g1)}</b><span>Rose in ${up12} of ${r12.length}</span></div><div><small>6 months</small><b class="${cl(g6)}">${signed(g6)}</b><span>Fell in ${dn6} of ${r6.length}</span></div><div><small>Below peak</small><b>${pk==null?"–":pk>-.0005?"At peak":pct(-pk)}</b><span>${near} of ${rp.length} at or within ${MK.near*100}%</span></div>`;
+ $("ghTiles").innerHTML=`<div><small>Last 12 months</small><b class="${cl(g1)}">${signed(g1)}</b><span>Rose in ${up12} of ${r12.length} suburbs</span></div><div><small>Last 6 months</small><b class="${cl(g6)}">${signed(g6)}</b><span>Fell in ${dn6} of ${r6.length} suburbs</span></div><div><small>Below 3-year peak</small><b>${pk==null?"–":pk>-.0005?"At peak":pct(-pk)}</b><span>${near} of ${rp.length} within ${MK.near*100}%</span></div>`;
  ghHist(r6.map(r=>r[C.growth_6m]),r12.map(r=>r[C.growth_1y]),g6);
  // where is the momentum: suburbs split into thirds by median price
  const both=rs.filter(r=>r[C.growth_6m]!=null&&r[C.growth_1y]!=null&&r[C.med_now]!=null).sort((a,b)=>a[C.med_now]-b[C.med_now]),k=Math.floor(both.length/3);
  if(k>=10){const ts=[both.slice(0,k),both.slice(k,2*k),both.slice(2*k)].map((t,i)=>({n:["Cheaper third","Middle third","Dearer third"][i],lim:i===0?`under ${money(both[k][C.med_now])}`:i===2?`over ${money(both[2*k][C.med_now])}`:`${money(t[0][C.med_now])}–${money(t[t.length-1][C.med_now])}`,g1:mid(t.map(r=>r[C.growth_1y])),g6:mid(t.map(r=>r[C.growth_6m]))}));
   const best=ts.reduce((a,b)=>b.g6>a.g6?b:a),worst=ts.reduce((a,b)=>b.g6<a.g6?b:a),S=Math.max(.04,...ts.map(t=>Math.abs(t.g6))),lc=s=>s.toLowerCase();
   const lead=best===worst?"":best.g6>MK.flat6?`Momentum is strongest in the <b>${lc(best.n)}</b> of suburbs (${signed(best.g6)}) and weakest in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`:`Prices are holding up best in the <b>${lc(best.n)}</b> of suburbs (${signed(best.g6)}) and softest in the <b>${lc(worst.n)}</b> (${signed(worst.g6)}).`;
-  $("ghTier").innerHTML=`<p>${lead}</p><div class="tier h"><span>By price</span><span class="y">12 mo</span><span>6 months</span></div>`+ts.map(t=>{const w=Math.abs(t.g6)/S*46,n=t.g6<0;
-   return`<div class="tier"><span>${t.n}<small>${t.lim}</small></span><span class="y">${signed(t.g1)}</span><span class="t"><i style="${n?"right":"left"}:50%;width:${w.toFixed(1)}%;background:${n?"#E5484D":"#9DB0A6"}"></i><em style="${n?"left":"right"}:calc(50% + 5px);color:${n?"#FF8A7A":"#EAF0EA"}">${signed(t.g6)}</em></span></div>`;}).join("");}
+  $("ghTier").innerHTML=`<p>${lead}</p><div class="tiers num">`+ts.map(t=>`<div><small>${t.n}</small><em>Suburbs ${t.lim}</em><b class="${cl(t.g6)}">${signed(t.g6)}</b><span>6 months · ${signed(t.g1)} over 12</span></div>`).join("")+"</div>";}
  else $("ghTier").innerHTML="";
- $("ghCap").innerHTML=`${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. ${mt} Source: NSW Valuer General.`;}
+ $("ghCap").innerHTML=`All figures are for the typical suburb. ${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. ${mt} Source: NSW Valuer General.`;}
 
 /* ---------- table ---------- */
 const COLS=[["Suburb",r=>title(r[C.locality])],["Median price",r=>r[C.med_now],money],["Sales, 12 mths",r=>r[C.n_now]],
@@ -1753,7 +1780,7 @@ const mser=()=>((MS.mkt[mreg()]||MS.mkt.all||{})[seg])||[];
 function drawSpark(){if(!MS)return;const v=mser(),ok=v.filter(x=>x!=null);if(!ok.length)return;
  const lo=Math.min(...ok)*.97,hi=Math.max(...ok)*1.02,X=i=>i/TL*1000,Y=x=>44-(x-lo)/(hi-lo)*44;
  let d="",pen=false;v.forEach((x,i)=>{if(x==null){pen=false;return;}d+=(pen?"L":"M")+X(i).toFixed(1)+","+Y(x).toFixed(1);pen=true;});
- document.getElementById("tspark").innerHTML=`<path d="${d}L1000,44L0,44Z" fill="rgba(28,43,58,.07)"/><path d="${d}" fill="none" stroke="#1C2B3A" stroke-width="1.6" vector-effect="non-scaling-stroke"/>`;
+ document.getElementById("tspark").innerHTML=`<path d="${d}L1000,44L0,44Z" fill="rgba(28,43,58,.07)"/><path d="${d}" fill="none" stroke="#0E1A16" stroke-width="1.6" vector-effect="non-scaling-stroke"/>`;
  const yrStep=TL>200?5:1;document.getElementById("tyears").innerHTML=MS.m.map((m,i)=>m.endsWith("-01")&&(+m.slice(0,4))%yrStep===0?`<span style="left:${i/TL*100}%">${m.slice(0,4)}</span>`:"").join("");}
 function timeUI(){if(!MS)return;const f=ti/TL,v=mser()[ti];
  TB.cur.style.left=`calc(8px + (100% - 16px) * ${f})`;TB.cur.classList.toggle("flip",f>.8);
@@ -1768,8 +1795,8 @@ function timeUI(){if(!MS)return;const f=ti/TL,v=mser()[ti];
  const pb=document.getElementById("tperiod");pb.setAttribute("aria-pressed",!!RNG);pb.textContent=RNG?"Clear period":"Pick a period";
  TB.sl.value=ti;TB.sl.setAttribute("aria-valuetext",RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`12 months to ${mlabel()}`);TB.latest.disabled=isLatest();}
 let pgFrom=null;
-function spButtons(){const m=document.querySelector('#spsw button[data-sp=month]'),y=document.querySelector('#spsw button[data-sp=year]');if(!m||!y)return;
- m.hidden=!!RNG;y.textContent=RNG?"Whole period":"12 months";if(RNG&&spMode==="month")setSp("year");}
+function spButtons(){const o=k=>document.querySelector(`#spsw option[value=${k}]`),m=o("month"),w=o("week"),y=o("year");if(!m||!y)return;
+ m.hidden=m.disabled=w.hidden=w.disabled=!!RNG;const L=isLatest();w.textContent=L?"Past week":"That week";m.textContent=L?"Past month":"That month";y.textContent=RNG?"Whole period":L?"Past year":"12 months to then";if(RNG&&(spMode==="month"||spMode==="week"))setSp("year");}
 function metricAvail(){const s=document.getElementById("metric");
  for(const o of s.options){const M=METRICS[o.value];o.disabled=M.period?!RNG:!isLatest()&&!M.time;}
  if(RNG&&metric!=="gp"&&pgFrom==null){pgFrom=metric;metric="gp";s.value=metric;}
@@ -1823,10 +1850,10 @@ if(MS){TB.sl.max=TL;TB.sl.value=TL;drawSpark();timeUI();
   timer=setInterval(()=>{if(ti>=TL){stopPlay();return;}const c=Math.floor((ti+1)/HCH);if(window.HIST&&!window.HIST[c]){histLoad(c);return;}if(RNG)setRange(RNG.a+1,RNG.b+1);else setTime(ti+1);},TL>200?80:160);});}
 else TB.bar.hidden=true;
 
-if(SPM&&MS&&MS.ad&&window.maplibregl){document.querySelectorAll("#spsw button").forEach(b=>b.addEventListener("click",()=>setSp(b.dataset.sp)));
+if(SPM&&MS&&MS.ad&&window.maplibregl){$("spsw").addEventListener("change",e=>setSp(e.target.value));setSp("week",true);
  $("spfilt").addEventListener("change",e=>{spFilt=e.target.value;const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);$("spopt").hidden=spMode==="off"||spFilt!=="all";spApply();legend();});
  document.getElementById("spcol").addEventListener("change",()=>{const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);legend();});}
-else document.getElementById("spsw").hidden=true;
+else document.querySelector(".spbar").hidden=true;
 
 /* ---------- tabs ---------- */
 function showTab(t){if(typeof tourS!=="undefined"&&tourS)tourEnd();setTimeout(()=>{if(t==="budget"&&SIM&&!store.get("hs_tour_budget")&&!tourS)tourStart("budget");},700);document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
@@ -1849,7 +1876,7 @@ function chartHover(e){const svg=e.target.closest&&e.target.closest("svg[data-ho
  const H=svg.__h||(svg.__h=JSON.parse(svg.dataset.hov)),r=svg.getBoundingClientRect(),k=H.vw/r.width,vx=(e.clientX-r.left)*k;
  let i=0,bd=1e9;H.xs.forEach((x,j)=>{const dd=Math.abs(x-vx);if(dd<bd){bd=dd;i=j;}});
  let g=svg.querySelector("g.hovg");if(!g){g=document.createElementNS("http://www.w3.org/2000/svg","g");g.setAttribute("class","hovg");g.setAttribute("pointer-events","none");svg.appendChild(g);}
- const x=H.xs[i];g.innerHTML=`<line x1="${x}" x2="${x}" y1="${H.t}" y2="${H.b}" stroke="#1C2B3A" stroke-opacity=".35"/>`+(H.bars?"":H.rows[i].map(([c,y])=>`<circle cx="${x}" cy="${y}" r="4" fill="${c}" stroke="#fff" stroke-width="1.5"/>`).join(""));
+ const x=H.xs[i];g.innerHTML=`<line x1="${x}" x2="${x}" y1="${H.t}" y2="${H.b}" stroke="#0E1A16" stroke-opacity=".35"/>`+(H.bars?"":H.rows[i].map(([c,y])=>`<circle cx="${x}" cy="${y}" r="4" fill="${c}" stroke="#fff" stroke-width="1.5"/>`).join(""));
  svg.classList.add("hovon");const box=svg.parentElement;let tip=box.querySelector(":scope > .ctip");if(!tip){tip=document.createElement("div");tip.className="ctip";box.appendChild(tip);}
  tip.innerHTML=`<b>${H.lab[i]}</b>`+(H.rows[i].length?H.rows[i].map(([c,,t])=>`<div><i style="background:${c}"></i>${t}</div>`).join(""):`<div style="color:var(--slate)">No data</div>`);
  const br=box.getBoundingClientRect(),px=r.left-br.left+x/k,top=r.top-br.top+4;tip.style.top=top+"px";
@@ -1919,7 +1946,7 @@ document.querySelectorAll(".seg button[data-base]").forEach(b=>b.addEventListene
 document.getElementById("opac").addEventListener("input",e=>setOpacity(+e.target.value/100));
 function palUI(){$("pals").innerHTML=Object.entries(PALS).map(([k,s])=>`<button data-pal="${k}" aria-pressed="${k===pal}" title="${k}" style="background:linear-gradient(90deg,${s.join(",")})"></button>`).join("");}
 palUI();$("pals").addEventListener("click",e=>{const b=e.target.closest("[data-pal]");if(!b)return;pal=b.dataset.pal;try{localStorage.setItem("hs_pal",pal);}catch(x){}palUI();paintMap();});
-document.getElementById("metric").addEventListener("change",e=>{metric=e.target.value;autoFrom=null;paintMap();planChip();if(METRICS[metric].needs&&!(METRICS[metric].rent?rb:maxP)){showTab("budget");document.querySelector("[data-b=cash]").focus();}});
+document.getElementById("metric").addEventListener("change",e=>{metric=e.target.value;autoFrom=null;paintMap();planChip();detail();if(METRICS[metric].needs&&!(METRICS[metric].rent?rb:maxP)){showTab("budget");document.querySelector("[data-b=cash]").focus();}});
 ["minn","fAfford"].forEach(id=>document.getElementById(id).addEventListener("input",()=>table()));
 searchWire();
 planWire();
@@ -1958,5 +1985,7 @@ market();all();
  $("legend").addEventListener("click",e=>{if(e.target.closest(".lg-x,.lg-open")){lgMin=!lgMin;store.set("hs_lg",lgMin);legend();}});
  $("detail").addEventListener("click",e=>{const svg=e.target.closest&&e.target.closest(".chart svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov);if(!hov.q)return;
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
+ document.querySelectorAll(".gh-ask button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll(".gh-ask button").forEach(x=>x.classList.toggle("pri",x===b))));
+ $("ghFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});});
  $("askFind").addEventListener("click",()=>{showTab("map");const f=$("find");f.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>f.focus({preventScroll:true}),350);});}
 </script></body></html>
