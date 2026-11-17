@@ -453,7 +453,7 @@ header.gh h1 mark{background:var(--hi);color:var(--night);padding:0 .1em;-webkit
 .gh-stats div b{display:block;font:700 28px/1 var(--serif);font-stretch:85%;color:#fff;letter-spacing:-.01em}
 .gh-stats div span{font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
 /* market read (hero) */
-.gh-hero{display:block;padding:72px 0 64px}
+.gh-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px 64px;align-items:end;padding:72px 0 64px}
 header.gh .gh-hero h1{margin:0 0 26px;max-width:17ch}
 .gh-sub{font:400 21px/1.4 var(--sans);color:#C9D4CD;margin:0 0 22px}.gh-sub b{color:#fff;font-weight:600}
 .gh-fresh{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;color:#EAF0EA;font:500 14.5px var(--sans);cursor:pointer;transition:border-color .15s,background .15s}
@@ -626,13 +626,24 @@ details.how.lic{margin-top:0;border-top:0}
  body{background:#fff}
  .bx-step{break-inside:avoid}
 }
+
+/* hero stats: a quiet column beside the headline */
+.gh-hero .gh-stats{display:grid;grid-template-columns:repeat(2,auto);gap:20px 36px;align-items:start;padding:4px 0 6px 30px;border-top:0;border-left:1px solid rgba(255,255,255,.13)}
+.gh-hero .gh-stats div b{font-size:24px}
+.gh-hero .gh-stats div span{font-size:11px}
+.gh-hero .gh-stats .prov{grid-column:1/-1;margin:0;max-width:30ch;text-align:left;font:400 11.5px/1.45 var(--sans);color:var(--mist)}
+@media(max-width:1000px){.gh-hero .gh-stats{grid-template-columns:repeat(4,auto);justify-content:start;border-left:0;border-top:1px solid rgba(255,255,255,.13);padding:16px 0 0}.gh-hero .gh-stats .prov{max-width:70ch}}
+@media(max-width:720px){.gh-hero .gh-stats{display:none}}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
 <div class="gh-hero">
+<div class="gh-hl">
 <h1>See <mark>straight through</mark> the property market</h1>
 <p class="gh-sub">Every NSW home sale since 1990, on the record. <b>Updated weekly.</b></p>
 <button class="gh-fresh" id="ghFresh" hidden></button>
+</div>
+<div class="gh-stats num" id="ghStats"></div>
 </div>
 <section class="gh-mkt" aria-label="Which way is the market going?">
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
@@ -645,7 +656,6 @@ details.how.lic{margin-top:0;border-top:0}
 <button id="askFind"><span class="n">02</span><span><b>Sales in the last week</b><span class="s">Every home that settled in the past seven days, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button data-goto="budget"><span class="n">03</span><span><b>What can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div>
-<div class="gh-stats num" id="ghStats"></div>
 <p class="prov" id="prov" hidden></p>
 <nav class="tabs" role="tablist"><button role="tab" data-tab="map" aria-selected="true">Map and suburbs</button><button role="tab" data-tab="budget" aria-selected="false">Budget: buy or rent</button></nav>
 </div></header>
@@ -2017,5 +2027,5 @@ $("bxPrint").addEventListener("click",()=>window.print());
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
  document.querySelectorAll(".gh-ask button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll(".gh-ask button").forEach(x=>x.classList.toggle("pri",x===b))));
  $("ghFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});});
- $("askFind").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});if(map)map.flyTo({center:[151.225,-33.852],zoom:12.3,duration:900});});}
+ $("askFind").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});if(map)map.flyTo({center:[151.225,-33.858],zoom:11.7,duration:900});});}
 </script></body></html>
