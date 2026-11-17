@@ -502,7 +502,10 @@ header.gh .gh-ask{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 30px}
  header.gh .gh-ask{display:flex;margin-bottom:16px}}
 /* map top row, sale popup, range strips */
 .hoverbar{top:10px;left:50px;width:min(250px,calc(100% - 60px))}
+@media(max-width:1180px){.hoverbar{top:54px}}
+.spbar .lf{display:inline!important}.spbar select{max-width:128px}
 .spbar select{padding:5px 6px}
+.maplibregl-popup{z-index:7}
 .maplibregl-popup.sale .maplibregl-popup-content{padding:16px 18px 14px;min-width:270px;border-radius:12px}
 .sale>b,.sale .maplibregl-popup-content>b{font:700 16.5px/1.25 var(--serif);padding-right:18px}
 .sale .pr{font:700 28px/1.1 var(--serif);font-stretch:85%;margin:10px 0 0}
@@ -661,7 +664,7 @@ details.assume,details.how{border-top-color:var(--ink)}
 <div class="main">
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
   <div class="maptools">
-   <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><span class="ls">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select></div>
+   <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select></div>
    <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>Layers</button></div>
    <div class="spnote" id="spnote" hidden></div>
    <div class="lpanel" id="lpanel" hidden>
@@ -1104,10 +1107,11 @@ function spKeys(){if(!SPM||!MS||!MS.ad||!ready||map.getZoom()<SP_MINZ)return[];c
  return out;}
 function spLoad(key){if(spLoaded[key]||spLoading[key])return;spLoading[key]=1;spStatus();const el=document.createElement("script");el.src=`../data/points/${key}.js`;
  el.onload=()=>{spLoading[key]=0;spAdd(key);};el.onerror=()=>{spLoading[key]=0;spErr=true;spStatus();};document.head.appendChild(el);}
+const spRad=()=>spMode==="week"?["interpolate",["linear"],["zoom"],9,3.5,12,5.5,15,8,17,10]:["interpolate",["linear"],["zoom"],9,1.6,12,3,15,6,17,9];
 function spPaint(){const mode=document.getElementById("spcol").value,rk=mode==="size"?"ra":"r";return{"circle-color":spFilt==="loss"?"#B23A48":spFilt==="odd"?"#5E4B8B":mode==="abs"
   ?["interpolate",["linear"],["ln",["get","p"]],Math.log(6e5),HEX[0],Math.log(1.1e6),HEX[1],Math.log(1.8e6),HEX[2],Math.log(3e6),HEX[3],Math.log(5.5e6),HEX[4]]
   :["interpolate",["linear"],["get",rk],.7,HREL[0],.87,HREL[1],1,"#D8D2C2",1.18,HREL[3],1.45,HREL[4]],
- "circle-radius":["interpolate",["linear"],["zoom"],9,1.6,12,3,15,6,17,9],"circle-opacity":.92,
+ "circle-radius":spRad(),"circle-opacity":.92,
  "circle-stroke-color":"#fff","circle-stroke-width":["interpolate",["linear"],["zoom"],11,0,13,.8]};}
 function spAdd(y){const P=window.SP&&window.SP[y];if(!P||!ready||spLoaded[y])return;const id="sp_"+y.replace(/[^0-9a-z]/gi,"_");LID[id]=y;const n=P.p.length,f=new Array(n);
  for(let i=0;i<n;i++)f[i]={type:"Feature",properties:{i,d:P.d[i],u:P.u[i],pp:(P.pp&&P.pp[i])||0,m:(P.m&&P.m[i])||1,r:P.r[i]??1,ra:(P.ra&&P.ra[i])??P.r[i]??1,p:P.p[i]},geometry:{type:"Point",coordinates:[150+P.x[i]/1e5,-34+P.y[i]/1e5]}};
@@ -1161,7 +1165,7 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  spPop.setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
  const lk=spPop.getElement().querySelector("[data-sub]");lk&&lk.addEventListener("click",ev=>{ev.preventDefault();select(lk.dataset.sub,false);});
  const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});return true;}
-function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(quiet){spApply();legend();return;}
+function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(ready)for(const y in spLoaded)try{map.setPaintProperty(spId(y),"circle-radius",spRad());}catch(e){}if(quiet){spApply();legend();return;}
  if(m==="off"&&spPop)spPop.remove();{const o=document.getElementById("opac");if(m!=="off"&&+o.value>40){o.value=30;setOpacity(.3);}else if(m==="off"&&+o.value<=30){o.value=72;setOpacity(.72);}}if(m!=="off"&&ready&&map.getZoom()<11)map.easeTo({zoom:11,duration:600});spApply();legend();}
 let sumT=0;if(window.maplibregl)setTimeout(()=>map&&map.on("moveend",()=>{if(spMode!=="off")spApply();if(!sel&&!P_SEL){clearTimeout(sumT);sumT=setTimeout(detail,150);}}),0);
 
@@ -1498,7 +1502,7 @@ function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band||`<path d="${d}L${X(pts.length-1)},${h-B_}L${L0},${h-B_}Z" fill="${fill}"/>`}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/>
  <circle cx="${X(pts.length-1)}" cy="${Y(last[1])}" r="3.5" fill="${stroke}"/><text x="${X(pts.length-1)+7}" y="${Y(last[1])+4}" style="fill:${stroke};font-weight:600">${fmt(last[1])}</text>${mdot}</svg>`;}
 function rangeStrip(label,v,fmt,col,mark,markLbl,note){let[mn,p10,p25,md,p75,p90,mx]=v;if(md==null||p25==null)return"";const half=p10==null;if(half){p10=p25-(p75-p25)*.6;p90=p75+(p75-p25)*.6;}
- const w=520,h=64,L0=56,R=56,lo=p10-(p90-p10)*.08,hi=p90+(p90-p10)*.08,X=x=>L0+(w-L0-R)*(Math.max(lo,Math.min(hi,x))-lo)/(hi-lo),y=30;
+ const w=400,h=72,L0=48,R=48,lo=p10-(p90-p10)*.08,hi=p90+(p90-p10)*.08,X=x=>L0+(w-L0-R)*(Math.max(lo,Math.min(hi,x))-lo)/(hi-lo),y=30;
  let g=`<line x1="${X(p10)}" x2="${X(p90)}" y1="${y}" y2="${y}" stroke="#C9D0C7" stroke-width="4" stroke-linecap="round"/>
  <rect x="${X(p25)}" y="${y-7}" width="${Math.max(2,X(p75)-X(p25))}" height="14" rx="7" fill="${col}"/>
  <circle cx="${X(md)}" cy="${y}" r="6.5" fill="#D2FF3A" stroke="${col}" stroke-width="2"/>
@@ -1577,7 +1581,7 @@ function detail(){const el=document.getElementById("detail");
   if(rb&&r[C.rent_pw]!=null){const f=rfit(r);af+=`<p class="afford">The median rent here is $${Math.round(r[C.rent_pw])} a week, <b>${f<=1?pct(1-f,0)+" under":pct(f-1,0)+" over"}</b> your rent of $${Math.round(rb.pw)}.</p>`;}
   body=`<div class="stats num">
   <div class="stat"><div class="v">${money(r[C.med_now])}</div><div class="l">Median price</div></div>
-  <div class="stat"><div class="v">${signed(r[C.growth_1y])}</div><div class="l">Change, 12 months</div></div>
+  <div class="stat"><div class="v ${cls(metric==="g6"?r[C.growth_6m]:r[C.growth_1y])}">${signed(metric==="g6"?r[C.growth_6m]:r[C.growth_1y])}</div><div class="l">Change, ${metric==="g6"?"6":"12"} months</div></div>
   <div class="stat"><div class="v">${pct(r[C.cagr_10y])}</div><div class="l">Average yearly growth, last 10 years</div></div>
   <div class="stat"><div class="v">${r[C.rent_pw]==null?"–":"$"+Math.round(r[C.rent_pw])}</div><div class="l">Median rent a week</div></div>
   <div class="stat"><div class="v">${m?pct(m.yield,1):"–"}</div><div class="l">Rental yield</div></div>
