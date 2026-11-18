@@ -652,12 +652,15 @@ details.how.lic{margin-top:0;border-top:0}
 .thov{height:36px}
 .tbtns{align-items:center}.tbtns .seg{margin-right:6px}
 
-/* full-width map: the suburb panel slides over the right edge */
+/* full-width map (default on wide screens): the side panel slides over the right edge */
 .lbtn span{margin-left:2px}
-.main.full{grid-template-columns:1fr;position:relative;overflow:hidden}
-.main.full aside#detail{position:absolute;top:12px;right:12px;width:min(440px,calc(100% - 24px));height:calc(var(--maph) - 24px);z-index:25;transform:translateX(calc(100% + 32px));opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s}
-.main.full.open aside#detail{transform:none;opacity:1;pointer-events:auto;box-shadow:0 24px 48px -20px rgba(14,26,22,.45)}
-@media(max-width:1000px){#fullBtn{display:none}}
+.lbtn[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+@media(min-width:1001px){
+ .main.full{grid-template-columns:1fr;position:relative;overflow:hidden}
+ .main.full aside#detail{position:absolute;top:12px;right:12px;width:min(440px,calc(100% - 24px));height:calc(var(--maph) - 24px);z-index:25;transform:translateX(calc(100% + 32px));opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s}
+ .main.full.open aside#detail{transform:none;opacity:1;pointer-events:auto;box-shadow:0 24px 48px -20px rgba(14,26,22,.45)}
+ }
+@media(max-width:1000px){#fullBtn,#panelBtn{display:none}}
 @media(prefers-reduced-motion:reduce){.main.full aside#detail{transition:none}}
 
 /* all suburbs: folded away until asked for */
@@ -723,6 +726,7 @@ details.how.lic{margin-top:0;border-top:0}
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
   <div class="maptools">
    <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select></div>
+   <button class="lbtn" id="panelBtn" aria-pressed="false" title="Show the side panel: suburbs in view, or the suburb you picked"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12M2 8h12M2 13h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Suburbs in view</span></button>
    <button class="lbtn" id="fullBtn" aria-pressed="false" title="Make the map full width"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Full width</span></button>
    <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>Layers</button></div>
    <div class="spnote" id="spnote" hidden></div>
@@ -2105,13 +2109,22 @@ market();all();
 
 
 $("bxPrint").addEventListener("click",()=>window.print());
-// Full-width map: the suburb panel slides over the map's right edge when a suburb is chosen, and away on Esc or a click off it.
-{const MN=document.querySelector(".main"),fb=$("fullBtn"),_sel=select,_close=closeSel;
- const setFull=on=>{MN.classList.toggle("full",on);MN.classList.toggle("open",on&&!!sel);fb.setAttribute("aria-pressed",on);fb.querySelector("span").textContent=on?"Exit full width":"Full width";fb.title=on?"Back to the map and panel side by side":"Make the map full width";setTimeout(()=>map&&map.resize(),320);};
- fb.addEventListener("click",()=>setFull(!MN.classList.contains("full")));
- select=function(...a){_sel(...a);if(MN.classList.contains("full"))MN.classList.add("open");};
- closeSel=function(...a){_close(...a);MN.classList.remove("open");};
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open"))MN.classList.remove("open");});}
+// Full-width map (the default on wide screens): the side panel slides over the map's right edge, when a suburb is
+// chosen or from the "Suburbs in view" button, and away on Esc or a click off a suburb. "Side by side" restores the old layout.
+{const MN=document.querySelector(".main"),fb=$("fullBtn"),pb=$("panelBtn"),_sel=select,_close=closeSel,wide=matchMedia("(min-width:1001px)");
+ const isFull=()=>MN.classList.contains("full");
+ const sync=()=>{const f=isFull(),o=MN.classList.contains("open");fb.setAttribute("aria-pressed",f);fb.querySelector("span").textContent=f?"Side by side":"Full width";
+  fb.title=f?"Map and panel side by side":"Make the map full width";pb.hidden=!f;pb.setAttribute("aria-pressed",o);pb.querySelector("span").textContent=o?"Hide panel":sel?"Show "+title(sel):"Suburbs in view";};
+ const setOpen=on=>{MN.classList.toggle("open",on&&isFull());sync();};
+ const setFull=(on,keep)=>{MN.classList.toggle("full",on&&wide.matches);MN.classList.remove("open");if(!keep)store.set("hs_full",on?1:0);sync();setTimeout(()=>map&&map.resize(),320);};
+ fb.addEventListener("click",()=>setFull(!isFull()));
+ pb.addEventListener("click",()=>setOpen(!MN.classList.contains("open")));
+ select=function(...a){_sel(...a);if(isFull())MN.classList.add("open");sync();};
+ closeSel=function(...a){_close(...a);MN.classList.remove("open");sync();};
+ new MutationObserver(sync).observe(MN,{attributes:true,attributeFilter:["class"]});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open"))setOpen(false);});
+ wide.addEventListener("change",()=>setFull(store.get("hs_full")!==0,true));
+ setFull(store.get("hs_full")!==0,true);}
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;
