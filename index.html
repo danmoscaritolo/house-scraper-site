@@ -453,7 +453,7 @@ header.gh h1 mark{background:var(--hi);color:var(--night);padding:0 .1em;-webkit
 .gh-stats div b{display:block;font:700 28px/1 var(--serif);font-stretch:85%;color:#fff;letter-spacing:-.01em}
 .gh-stats div span{font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
 /* market read (hero) */
-.gh-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px 64px;align-items:end;padding:72px 0 64px}
+.gh-hero{display:block;padding:72px 0 64px}
 header.gh .gh-hero h1{margin:0 0 26px;max-width:17ch}
 .gh-sub{font:400 21px/1.4 var(--sans);color:#C9D4CD;margin:0 0 22px}.gh-sub b{color:#fff;font-weight:600}
 .gh-fresh{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;color:#EAF0EA;font:500 14.5px var(--sans);cursor:pointer;transition:border-color .15s,background .15s}
@@ -673,16 +673,66 @@ details.how.lic{margin-top:0;border-top:0}
 .bx-rentin>span:first-child{margin-right:-5px}
 .main.full .maptools{transition:right .32s cubic-bezier(.2,.7,.2,1)}.main.full.open .maptools{right:min(470px,calc(100% - 24px))}
 @media(max-width:720px){.timebar .tbtns{grid-column:1/-1;order:8;flex-wrap:wrap}}
+
+/* ---- 19 Nov: stats in the top bar ---- */
+.gh-bar .gh-stats{display:flex;align-items:baseline;gap:20px;margin:0 18px 0 auto;padding:0;border:0}
+.gh-bar .gh-stats div{display:flex;align-items:baseline;gap:6px}
+.gh-bar .gh-stats div b{font:700 15px/1 var(--serif);font-stretch:85%;color:#fff}
+.gh-bar .gh-stats div span{font:500 10.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--mist)}
+.gh-bar .gh-stats .prov{display:none}
+@media(max-width:1100px){.gh-bar .gh-stats{display:none}}
+
+/* ---- dropdowns: one look across the site ---- */
+select:not([multiple]){-webkit-appearance:none;appearance:none;cursor:pointer;font-weight:500;border-radius:10px;padding-right:32px!important;
+ background:var(--sheet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230E1A16' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center/10px 6px;
+ transition:border-color .15s,box-shadow .15s}
+select:not([multiple]):hover{border-color:var(--ink)}
+select:not([multiple]):focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(210,255,58,.6)}
+header.gh select:not([multiple]){background-color:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.22);
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23D2FF3A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+header.gh select:not([multiple]):hover{border-color:var(--hi)}
+header.gh select option{color:var(--ink);background:#fff}
+.bar select:not([multiple]){padding-top:9px;padding-bottom:9px;font-size:14.5px}
+
+/* ---- sliders in the budget tab: lime thumb, ink track ---- */
+.bx-range,.lrow input[type=range]{-webkit-appearance:none;appearance:none;height:22px;background:transparent}
+.bx-range::-webkit-slider-runnable-track,.lrow input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--ink)}
+.bx-range::-webkit-slider-thumb,.lrow input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;box-sizing:border-box;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:var(--hi);border:2px solid var(--ink);cursor:grab}
+.bx-range::-moz-range-track,.lrow input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--ink)}
+.bx-range::-moz-range-thumb,.lrow input[type=range]::-moz-range-thumb{box-sizing:border-box;width:20px;height:20px;border-radius:50%;background:var(--hi);border:2px solid var(--ink);cursor:grab}
+.bx-range:disabled::-webkit-slider-runnable-track{background:var(--hair)}.bx-range:disabled::-webkit-slider-thumb{background:var(--wash);border-color:var(--hair)}
+
+/* ---- map controls: one header that stays at the top as you scroll ---- */
+.mapctl{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--hair);margin-bottom:12px;padding-top:4px}
+.mapctl .bar{padding-bottom:4px}
+.mapctl .timebar{position:static;border-bottom:0;margin-bottom:0;grid-template-columns:auto auto 170px minmax(0,1fr) auto}
+@media(max-width:720px){.mapctl{position:static}.mapctl .timebar{grid-template-columns:auto auto 1fr}}
+.tcur i{box-sizing:border-box;width:16px;height:16px;left:-8px}
+.tcur[hidden]{display:none}
+.trng{background:rgba(210,255,58,.45);border-radius:4px}
+.trng .g{background:var(--ink)}
+.tmode button[aria-pressed=true]{background:var(--ink);color:#fff}
+
+/* ---- price or rent limit above the map ---- */
+.mbud{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:6px 8px 6px 14px;border:1px solid var(--ink);border-radius:12px;background:var(--sheet);box-shadow:0 0 0 3px rgba(210,255,58,.45)}
+.mbud[hidden]{display:none}
+.mbud label{display:flex;align-items:center;gap:10px;font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--slate)}
+.mbud-in{display:flex;align-items:baseline;gap:4px;font:700 19px/1 var(--serif);font-stretch:85%;color:var(--ink);text-transform:none;letter-spacing:0}
+.mbud-in input{width:7ch;font:inherit;font-stretch:inherit;border:0;border-bottom:2px solid var(--ink);border-radius:0;background:transparent;padding:0 2px}
+.mbud-in input:focus-visible{box-shadow:none;background:rgba(210,255,58,.25)}
+.mbud-in em{font:400 13px var(--sans);font-style:normal;color:var(--slate)}
+.mbud-h{font:400 13px var(--sans);color:var(--slate)}
+.mbud button{border:0;background:var(--wash);border-radius:999px;padding:7px 12px;font:500 13px var(--sans);color:var(--ink);cursor:pointer}
+.mbud button:hover{background:var(--hi)}
 </style></head><body>
 <header class="gh"><div class="wrap">
-<div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
+<div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><div class="gh-stats num" id="ghStats"></div><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
 <div class="gh-hero">
 <div class="gh-hl">
 <h1>See <mark>straight through</mark> the property market</h1>
 <p class="gh-sub">Every NSW home sale since 1990, on the record. <b>Updated weekly.</b></p>
 <button class="gh-fresh" id="ghFresh" hidden></button>
 </div>
-<div class="gh-stats num" id="ghStats"></div>
 </div>
 <section class="gh-mkt" aria-label="Which way is the market going?">
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
@@ -696,11 +746,12 @@ details.how.lic{margin-top:0;border-top:0}
 <button data-goto="budget"><span class="n">03</span><span><b>Where can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div>
 <p class="prov" id="prov" hidden></p>
-<nav class="tabs" role="tablist"><button role="tab" data-tab="map" aria-selected="true">Map and suburbs</button><button role="tab" data-tab="budget" aria-selected="false">Budget: buy or rent</button></nav>
+<nav class="tabs" role="tablist"><button role="tab" data-tab="map" aria-selected="true">Map and suburbs</button><button role="tab" data-tab="budget" aria-selected="false">Your budget</button></nav>
 </div></header>
 
 <div class="wrap">
 <div id="tabMap" role="tabpanel">
+<div class="mapctl" id="mapctl">
 <div class="bar">
  <label class="field">Area <select id="area"></select></label>
  <label class="field">Colour suburbs by <select id="metric">
@@ -708,11 +759,12 @@ details.how.lic{margin-top:0;border-top:0}
   <optgroup label="Price changes"><option value="gp" disabled>Growth over the chosen period</option><option value="g1" selected>Price change, last 12 months</option><option value="g6">Price change, last 6 months</option><option value="g5">Average yearly price growth, last 5 years</option><option value="g10">Average yearly price growth, last 10 years</option><option value="peak">Below recent peak</option></optgroup>
   <optgroup label="Rental return"><option value="yield">Rental yield (yearly rent as % of price)</option></optgroup>
   <optgroup label="My budget"><option value="afford">Where I can afford to buy</option><option value="rent">Where I can afford to rent</option></optgroup></select></label>
- <div class="chip" id="budChip" hidden></div>
+ <div class="mbud" id="mbud" hidden></div>
  <div class="field srch"><input id="find" placeholder="Search a suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div>
 </div>
 
 <div class="timebar" id="timebar">
+ <div class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></div>
  <button id="play" aria-pressed="false" aria-label="Play through every month"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path id="playico" d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg></button>
  <div><div class="tdate num" id="tdate"></div><div class="tsub" id="tsub"></div></div>
  <div class="ttrack"><svg id="tspark" viewBox="0 0 1000 44" preserveAspectRatio="none" aria-hidden="true"></svg><div class="tyears" id="tyears"></div>
@@ -720,7 +772,8 @@ details.how.lic{margin-top:0;border-top:0}
   <div class="thov" id="thov"><b class="num"></b></div>
   <div class="tcur" id="tcur"><i></i><b class="num"></b></div>
   <input type="range" id="tslider" min="0" max="0" step="1" aria-label="Month shown on the map and charts"></div>
- <div class="tbtns"><div class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></div><button id="tperiod" aria-pressed="false" title="Or press and hold on the chart, then drag">Pick a period</button><button id="tlatest" disabled>Latest</button></div>
+ <div class="tbtns"><div class="seg tmode" role="group" aria-label="Which months"><button id="tlatest" aria-pressed="true">Latest</button><button id="tperiod" aria-pressed="false" title="Compare two dates. Or press and hold on the line, then drag">Period</button></div></div>
+</div>
 </div>
 <div class="main">
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
@@ -791,7 +844,6 @@ details.how.lic{margin-top:0;border-top:0}
     <h4 class="bx-sh">Rent</h4>
     <div class="bin">
      <label><span>Rent you pay now, a week <span class="i" tabindex="0" data-tip="What you pay today. If you buy an investment, you keep renting where you live, so it counts as a cost. Leave blank or $0 if you don't rent.">i</span></span><input type="text" inputmode="numeric" id="ownRent" placeholder="$0 if none"></label>
-     <label><span>Most you'd pay in rent, a week <span class="i" tabindex="0" data-tip="Your rent budget. It sets &quot;Where I can afford to rent&quot; on the map. Leave blank to use 30% of your income before tax.">i</span></span><input type="text" inputmode="numeric" id="rentMax" placeholder="30% of income"></label>
     </div>
    </div>
    <div class="bx-panel" id="bxCap" aria-live="polite"></div>
@@ -1070,13 +1122,17 @@ function model(r){const p=r[C.med_now],rw=r[C.rent_pw],unit=r[C.segment]==="unit
  const g=growth(r);if(g==null)return null;const H=Math.max(1,Math.min(30,Math.round(A.hold_years))),b=buyRent(p,rw,unit,g);
  const be=b.diff.findIndex((v,i)=>i>0&&v>=0);
  return{...b,g,H,diffH:b.diff[H],edge:b.diff[H]/p,be:be>0?be:null,yield:rw*52/p,rent:rw*52};}
-const fit=r=>maxP&&maxP.price>0?r[C.med_now]/maxP.price:null;  // <=1 affordable
+// The map's price limit: the one typed on the map, else the most the budget tab says you can pay.
+const buyLim=()=>B.map_price>0?B.map_price:maxP&&maxP.max&&maxP.max.price>0?maxP.max.price:null;
+const fit=r=>buyLim()?r[C.med_now]/buyLim():null;  // <=1 affordable
 const rfit=r=>rb&&r[C.rent_pw]!=null?r[C.rent_pw]/rb.pw:null;  // <=1 rent affordable
 const dip=r=>r[C.from_peak]!=null&&r[C.from_peak]<=-0.03;
 function recompute(){METRICS.edge.label=`Buying vs renting after ${Math.round(A.hold_years)} years, share of price`;ML=maxLoan();rb=rentBudget();
  // The price you chose stays put when other numbers change; it only moves down if your limit falls below it.
  if(ML){const mx=plan(ML.L);if(B.price!=null&&B.price>=mx.price){B.price=Math.floor(mx.price/5000)*5000||null;B.dep=null;}
-  if(B.price!=null){const dr=depRange(B.price);if(B.dep!=null&&B.dep>=dr.max)B.dep=null;if(B.dep!=null&&B.dep<dr.min)B.dep=dr.min;maxP=planAt(B.price,B.dep);maxP.dr=dr;}else maxP=mx;maxP.max=mx;}else maxP=null;
+  // No price picked yet: a price limit typed on the map becomes the default, if the budget can reach it.
+  const want=B.price!=null?B.price:B.map_price>0&&B.map_price<mx.price?Math.floor(B.map_price/5000)*5000:null;
+  if(want!=null){const dr=depRange(want);if(B.dep!=null&&B.dep>=dr.max)B.dep=null;if(B.dep!=null&&B.dep<dr.min)B.dep=dr.min;maxP=planAt(want,B.dep);maxP.dr=dr;}else maxP=mx;maxP.max=mx;}else maxP=null;
  for(const r of D.rows)r._m=model(r);}
 const byKey={};for(const r of D.rows)byKey[r[C.locality]+"|"+r[C.segment]]=r;
 /* ---------- areas ---------- */
@@ -1104,7 +1160,7 @@ const stopsOf=M=>M.stops==="PRICE"?PALS[pal]:M.stops;
 // median to upper quarter = within budget; above the upper quarter = comfortably within. Same for rents.
 const BL=["Out of budget","A stretch","Within budget","Comfortably within budget"];
 const band4=(v,lo,mid,hi)=>v==null||mid==null?null:v<(lo??mid*.85)?0:v<mid?1:v<(hi??mid*1.2)?2:3;
-const bBand=r=>maxP&&maxP.price>0?band4(maxP.price,r[C.p25],r[C.med_now],r[C.p75]):null;
+const bBand=r=>buyLim()?band4(buyLim(),r[C.p25],r[C.med_now],r[C.p75]):null;
 const rBand=r=>rb&&r[C.rent_pw]!=null?band4(rb.pw,r[C.r25],r[C.rent_pw],r[C.r75]):null;
 const CAT={rent:[["Comfortably within: above most rents","#1F6E68",r=>rBand(r)===3],["Within budget: at or above the median rent","#86B3A9",r=>rBand(r)===2],["A stretch: below the median, above the cheapest quarter","#E2D3B5",r=>rBand(r)===1],["Out of budget: below the cheapest quarter of rents","#C9AEB1",r=>rBand(r)===0]],
  afford:[["Comfortably within: above most sale prices","#1F6E68",r=>bBand(r)===3],["Within budget: at or above the median price","#86B3A9",r=>bBand(r)===2],["A stretch: below the median, above the cheapest quarter","#E2D3B5",r=>bBand(r)===1],["Out of budget: below the cheapest quarter of sales","#C9AEB1",r=>bBand(r)===0]],
@@ -1128,13 +1184,13 @@ const METRICS={
 function colour(r,k){const M=METRICS[metric];
  if(M.time&&MS){let v=M.tget(k,r);if(v==null||!isFinite(v))return null;if(M.tf)v=M.tf(v);return ramp(stopsOf(M),(v-M.dom[0])/(M.dom[1]-M.dom[0]));}
  if(!r)return null;
- if(M.cat){if(M.rent?(!rb||r[C.rent_pw]==null):(!maxP||!maxP.price))return null;for(const[,c,t]of CAT[metric])if(t(r))return c;return null;}
+ if(M.cat){if(M.rent?(!rb||r[C.rent_pw]==null):!buyLim())return null;for(const[,c,t]of CAT[metric])if(t(r))return c;return null;}
  let v=M.get(r);if(v==null||!isFinite(v))return null;if(M.tf)v=M.tf(v);return ramp(stopsOf(M),(v-M.dom[0])/(M.dom[1]-M.dom[0]));}
 function valueText(r,k){const M=METRICS[metric];
  if(M.time&&MS){const v=M.tget(k,r);return v==null||!isFinite(v)?"–":M.fmt(v);}
- if(M.rent){if(!rb)return"Enter your income or a rent budget";const b=rBand(r);if(b==null)return"No rent data";return`${BL[b]}: your $${Math.round(rb.pw)} against a median of $${Math.round(r[C.rent_pw])} a week`;}
- if(M.cat){if(!maxP||!maxP.price)return"Enter your budget to see";const b=bBand(r);
-  return b==null?"–":`${BL[b]}: your ${money(maxP.price)} against a median of ${money(r[C.med_now])}`;}
+ if(M.rent){if(!rb)return"Enter a rent limit above the map";const b=rBand(r);if(b==null)return"No rent data";return`${BL[b]}: your $${Math.round(rb.pw)} against a median of $${Math.round(r[C.rent_pw])} a week`;}
+ if(M.cat){if(!buyLim())return"Enter a price limit above the map";const b=bBand(r);
+  return b==null?"–":`${BL[b]}: your ${money(buyLim())} against a median of ${money(r[C.med_now])}`;}
  const v=M.get(r);return v==null?"–":M.fmt(v);}
 let lgMin=(()=>{const v=store.get("hs_lg");return v==null?innerWidth<=720:!!v;})();
 function legend(){const el=document.getElementById("legend");legend0();el.classList.toggle("min",lgMin);
@@ -1142,7 +1198,7 @@ function legend(){const el=document.getElementById("legend");legend0();el.classL
  if(spMode!=="off")el.insertAdjacentHTML("beforeend",spLegend());el.insertAdjacentHTML("beforeend",'<button class="lg-x" aria-label="Hide the colour key" title="Hide">×</button>');}
 function legend0(){const M=METRICS[metric],el=document.getElementById("legend");{const pr=$("palrow");if(pr)pr.hidden=M.stops!=="PRICE";}
  const na=`<div class="na"><i class="hatch"></i>${M.cat?"No sales, or budget not entered":metric==="g5"&&ti<60?"Needs 5 years of history before this date":metric==="yield"&&!isLatest()?"Not enough sales or rent data (rents start 2021)":"Not enough sales or rent data"}</div>`;
- if(M.cat){const has=M.rent?!!rb:!!(maxP&&maxP.price);el.innerHTML=`<div class="t">${M.label}${M.rent&&rb?`: $${Math.round(rb.pw)} a week`:""}</div>`+(has?`<div class="cats">${CAT[metric].map(([l,c])=>`<div><i style="background:${c}"></i>${l}</div>`).join("")}</div>`:`<div>${M.rent?"Enter your income or a rent budget above.":"Enter your cash and income above."}</div>`)+na;return;}
+ if(M.cat){const has=M.rent?!!rb:!!buyLim();el.innerHTML=`<div class="t">${M.label}${M.rent&&rb?`: $${Math.round(rb.pw)} a week`:""}</div>`+(has?`<div class="cats">${CAT[metric].map(([l,c])=>`<div><i style="background:${c}"></i>${l}</div>`).join("")}</div>`:`<div>${M.rent?"Enter your income or a rent budget above.":"Enter your cash and income above."}</div>`)+na;return;}
  const ticks=M.ticks||(M.tickv?M.tickv.map(money):[M.fmt(M.dom[0]),M.fmt((M.dom[0]+M.dom[1])/2),M.fmt(M.dom[1])]);
  el.innerHTML=`<div class="t">${M.label}${MS&&!isLatest()?`<br><span style="color:var(--focus);font-weight:400">${RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`Sales ${mshift(ti,-12)} to ${mlabel()}`}</span>`:""}</div><div class="ramp" style="background:linear-gradient(90deg,${stopsOf(M).join(",")})"></div><div class="ticks">${ticks.map(t=>`<span>${t}</span>`).join("")}</div>${na}`;}
 
@@ -1177,7 +1233,8 @@ if(window.maplibregl){
    map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["case",["boolean",["feature-state","has"],false],0,.45]}},firstSym);}
   map.addLayer({id:"edge",type:"line",source:"sub",paint:{"line-color":["case",["boolean",["feature-state","hover"],false],"#0E1A16","#FFFFFF"],
    "line-width":["interpolate",["linear"],["zoom"],9,["case",["boolean",["feature-state","hover"],false],1.8,.3],13,["case",["boolean",["feature-state","hover"],false],2.2,1]],"line-opacity":.9}},firstSym);
-  map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#0E1A16","line-width":3}},firstSym);
+  map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#D2FF3A","line-width":6}},firstSym);
+  map.addLayer({id:"sel2",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#0E1A16","line-width":1.6}},firstSym);   // the chosen suburb: lime with a dark core
   ready=true;paintMap();});
  map.on("mousemove","fill",e=>{if(spHover(e))return;const f=e.features[0];if(!f)return;map.getCanvas().style.cursor="pointer";
   if(hoverId!==f.id){if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=f.id;map.setFeatureState({source:"sub",id:hoverId},{hover:true});}
@@ -1296,7 +1353,7 @@ async function openAddress(loc,st,num,unit,exact){try{if(!(window.PR&&window.PR[
  let c=onSt.filter(p=>!num||p[1].toUpperCase()===String(num).toUpperCase());if(unit||exact)c=c.filter(p=>uNorm(p[2])===uNorm(unit));
  P_SEL={loc,st,num,unit,R,street:onSt,list:c.length===1?null:(c.length?c:onSt),p:c.length===1?c[0]:null,miss:!c.length};
  const pr=P_SEL.p||P_SEL.list.find(p=>p[3]!=null);
- if(pr&&pr[3]!=null&&map){const ll=[150+pr[3]/1e5,-34+pr[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#2F5C8A"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:P_SEL.p?16:15,duration:800});}
+ if(pr&&pr[3]!=null&&map){const ll=[150+pr[3]/1e5,-34+pr[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#C6F23A"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:P_SEL.p?16:15,duration:800});}
  sel=loc;paintMap();detail();if(window.innerWidth<1000)$("detail").scrollIntoView({behavior:"smooth"});}
 function propEstimate(loc,unit,price,day){const rg=((byKey[loc+"|house"]||byKey[loc+"|unit"])||[])[C.region]||"all";if(!MS||!MS.ad)return null;const k=loc+"|"+(unit?"unit":"house");let i=MS.ad.findIndex(a=>a>=day);
  const early=i<0?false:i===0&&day<MS.ad[0]-200;if(i<0)i=TL;let a=sv(k,1,i),b=sv(k,1,TL),src="suburb";
@@ -1326,13 +1383,18 @@ function propHtml(){const S=P_SEL,loc=S.loc;const stBack=S.p&&S.street&&S.street
 const HEX=["#F3EEDF","#E8C98F","#D08A4E","#A04A3E","#5B2435"],HREL=["#C2372B","#E3A199","#EFEBE0","#8CC5A3","#167A49"];
 function paintMap(){legend();spApply();if(!ready)return;
  for(const f of GEO.features){const n=f.properties.n,c=colour(rowFor(n),n+"|"+seg);map.setFeatureState({source:"sub",id:f.id},{c:c||"#D9D7CF",has:!!c});}
- map.setFilter("sel",["==",["get","n"],sel||""]);}
+ map.setFilter("sel",["==",["get","n"],sel||""]);if(map.getLayer("sel2"))map.setFilter("sel2",["==",["get","n"],sel||""]);}
 function setOpacity(v){opac=v;if(ready){map.setPaintProperty("fill","fill-opacity",["case",["boolean",["feature-state","has"],false],opac,0]);}}
 
 /* ---------- budget planner ---------- */
 const $=id=>document.getElementById(id);
-function planChip(){const c=$("budChip"),has=!!(ML&&maxP&&maxP.price);c.hidden=!has;if(!has)return;
- c.innerHTML=`Your budget <b class="num">up to ${money(maxP.price)}</b><button data-a="map" class="${metric==="afford"?"on":""}">${metric==="afford"?"Showing on map":"Show on map"}</button><button data-a="edit">Edit</button>`;}
+// Price or rent limit above the map, shown only with "Where I can afford to buy / rent". Type a figure here,
+// or leave it blank to use the Your budget tab.
+function planChip(){const c=$("mbud"),M=METRICS[metric]||{},on=metric==="afford"||metric==="rent";c.hidden=!on;if(!on)return;
+ const rent=metric==="rent",v=rent?B.rent_max:B.map_price,auto=rent?(grossPA()?Math.round(grossPA()*.3/52/10)*10:null):(maxP&&maxP.max?maxP.max.price:null);
+ const hint=rent?(auto?`Blank uses 30% of your income: $${auto} a week`:"Or set your income in Your budget"):(auto?`Blank uses Your budget: up to ${money(auto)}`:"Or work it out in Your budget");
+ if(c.dataset.k!==metric){c.dataset.k=metric;c.innerHTML=`<label><span>${rent?"Rent limit":"Price limit"}</span><span class="mbud-in">$<input id="mbudIn" type="text" inputmode="numeric" autocomplete="off" aria-label="${rent?"Most you'd pay in rent, a week":"Most you'd pay for a home"}">${rent?"<em>a week</em>":""}</span></label><span class="mbud-h" id="mbudH"></span><button type="button" data-a="edit">Your budget →</button>`;}
+ const inp=$("mbudIn");if(document.activeElement!==inp)inp.value=v?Math.round(v).toLocaleString("en-AU"):"";inp.placeholder=auto?Math.round(auto).toLocaleString("en-AU"):(rent?"e.g. 700":"e.g. 1.2m");$("mbudH").textContent=hint;}
 function planUI(){planChip();bxUI();}
 A.rent_growth=A.rent_growth??.035;A.cost_growth=A.cost_growth??.03;A.let_pct=A.let_pct??.10;A.land_house=A.land_house??.65;A.land_unit=A.land_unit??.25;let gSrc="auto",gCust=.04;
 function growthChoice(){const unit=seg==="unit",syd=Math.min(mkt(mreg(),seg).cagr_10y||.04,A.growth_cap),r=sel?rowFor(sel):null,sg=r?growth(r):null;
@@ -1453,7 +1515,6 @@ function bxUI(){const cap=$("bxCap"),has=!!(ML&&maxP&&maxP.price>0);
  $("rentDesc").textContent=inv?"What a tenant would pay you each week. It's income in step 4.":"What you'd pay each week to rent a home like this instead of buying it. It's the rent on the Renting side of step 4.";
  if(document.activeElement!==$("rentIn"))$("rentIn").value=Math.round(cr.pw).toLocaleString("en-AU");$("rentReset").hidden=!cr.own;
  $("rentNote").textContent=cr.own?"Your figure.":cr.y?`Typical for a ${money(ch.price)} ${noun}${cr.sub?` in ${title(sel)}`:""}: a ${pct(cr.y,1)} yield. Type your own to change it.`:"";
- if(document.activeElement!==$("rentMax"))$("rentMax").value=B.rent_max==null?"":Math.round(B.rent_max).toLocaleString("en-AU");
  if(document.activeElement!==$("ownRent"))$("ownRent").value=B.own_rent==null?"":Math.round(B.own_rent).toLocaleString("en-AU");
  $("gSrc").innerHTML=gc.opts.map(o=>`<option value="${o[0]}">${esc(o[1])}</option>`).join("");$("gSrc").value=gc.pick;$("gCustL").hidden=gc.pick!=="custom";
  for(const[id,k]of[["rentG","rent_growth"],["costG","cost_growth"],["invR","opportunity_rate"]])if(document.activeElement!==$(id))$(id).value=+(A[k]*100).toFixed(2);
@@ -1555,7 +1616,6 @@ function planWire(){$("plTerm").innerHTML=[10,15,20,25,30].map(y=>`<option value
  $("rentIn").addEventListener("input",e=>{liveFmt(e.target);const n=parseNum(e.target.value.trim());B[isInv()?"inv_rent":"rent_pw"]=n>0&&isFinite(n)?n:null;save();soon();});
  $("rentReset").addEventListener("click",()=>{B[isInv()?"inv_rent":"rent_pw"]=null;save();all();});
  $("ownRent").addEventListener("input",e=>{liveFmt(e.target);const v=e.target.value.trim(),n=parseNum(v);B.own_rent=v===""||n==null||!isFinite(n)?null:n;save();soon();});
- $("rentMax").addEventListener("input",e=>{liveFmt(e.target);const v=e.target.value.trim(),n=parseNum(v);B.rent_max=v===""||n==null||!isFinite(n)||n<=0?null:n;save();soon();});
  $("plRate").addEventListener("input",e=>{const v=+e.target.value;if(!isFinite(v)||v<=0)return;A.mortgage_rate=v/100;const a=document.querySelector("[data-a=mortgage_rate]");if(a)a.value=v;soon();});
  $("plTerm").addEventListener("change",e=>{BB.term_years=+e.target.value;const a=document.querySelector("[data-bb=term_years]");if(a)a.value=BB.term_years;soon();});
  document.querySelectorAll("[data-use]").forEach(b=>b.addEventListener("click",()=>{B.use=b.dataset.use;toMedian();save();all();}));
@@ -1628,7 +1688,7 @@ async function detailAsync(r){const tok=++detTok,loc=r[C.locality],u=seg==="unit
  let R;try{R=await propsOf(loc);}catch(e){if(strip)strip.innerHTML="";if(list)list.innerHTML='<p class="note">No sales file for this suburb.</p>';return;}
  if(tok!==detTok)return;let ws=winSales(R,u);const when=RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`${mshift(ti,-12)} to ${mlabel()}`;
  if(strip){const ps=ws.filter(([x])=>!x[3]).map(([x])=>x[2]).sort((a,b)=>a-b);
-  let h=ps.length>=5?rangeStrip(`Sale prices, ${when} (${ps.length} sales)`,[ps[0],qtl(ps,.1),qtl(ps,.25),qtl(ps,.5),qtl(ps,.75),qtl(ps,.9),ps[ps.length-1]],money,"#0E1A16",maxP&&maxP.price?maxP.price:null,"your budget"):`<p class="note">Fewer than 5 ${noun} sales in this window, too few to show a spread.</p>`;
+  let h=ps.length>=5?rangeStrip(`Sale prices, ${when} (${ps.length} sales)`,[ps[0],qtl(ps,.1),qtl(ps,.25),qtl(ps,.5),qtl(ps,.75),qtl(ps,.9),ps[ps.length-1]],money,"#0E1A16",buyLim(),"your limit"):`<p class="note">Fewer than 5 ${noun} sales in this window, too few to show a spread.</p>`;
   const rs=D.rent_series[r[C.postcode]+"|"+seg]||[],[lo,hi]=winDays(),qa=dq(lo+1),qb=dq(hi),rq=rs.filter(x=>x[0]>=qa&&x[0]<=qb);
   if(rq.length){const md=rq.map(x=>x[1]).sort((a,b)=>a-b),av=i=>rq.reduce((s,x)=>s+x[i],0)/rq.length;
    h+=rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}, ${qlab(rq[0][0])} to ${qlab(rq[rq.length-1][0])}`,[null,null,av(2),qtl(md,.5),av(3),null,null],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent",`The dot is the median. Half of new leases were between about <b>$${Math.round(av(2))}</b> and <b>$${Math.round(av(3))}</b> a week.${rb?` Dashed line: your rent $${Math.round(rb.pw)}.`:""}`);}
@@ -1669,7 +1729,7 @@ function detail(){const el=document.getElementById("detail");
    const st=(P_SEL.R.st.find(x=>x.toUpperCase()===st0.toUpperCase()))||st0;openAddress(P_SEL.loc,st,n,u||"",true);}));
   const sb=$("propStreet");sb&&sb.addEventListener("click",()=>{P_SEL.p=null;P_SEL.list=P_SEL.street;P_SEL.num=null;P_SEL.unit=null;P_SEL.miss=false;detail();});
   el.querySelectorAll(".plist button").forEach(x=>x.addEventListener("click",()=>{const p=P_SEL.R.p[+x.dataset.k];P_SEL.p=p;P_SEL.list=null;
-   if(p[3]!=null&&map){const ll=[150+p[3]/1e5,-34+p[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#2F5C8A"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:16,duration:600});}detail();}));return;}
+   if(p[3]!=null&&map){const ll=[150+p[3]/1e5,-34+p[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#C6F23A"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:16,duration:600});}detail();}));return;}
  if(!sel){el.innerHTML=areaSummary();el.querySelectorAll("[data-n]").forEach(x=>x.addEventListener("click",()=>select(x.dataset.n)));return;}
  const r=rowFor(sel);if(!r){thinPanel(el,sel);return;}
  const m=r._m,k=r[C.locality]+"|"+r[C.segment],rs=D.rent_series[r[C.postcode]+"|"+r[C.segment]],noun=seg==="house"?"house":"unit",unit=seg==="unit";
@@ -1677,8 +1737,8 @@ function detail(){const el=document.getElementById("detail");
  let body="";
  if(dtab==="overview"){const pk=r[C.from_peak],pm=r[C.peak_months_ago];
   const pkTxt=pk==null?"":pk>-0.005?"Prices are at their 3-year high.":`Prices are ${pct(-pk,1)} below the 12-month median peak of ${money(r[C.med_now]/(1+pk))}, reached about ${pm>=12?Math.round(pm/12*2)/2+" years":pm+" months"} ago.`;
-  let af="";if(maxP&&maxP.price){const f=fit(r);af+=`<p class="afford">The median ${noun} here is <b>${f<=1?pct(1-f,0)+" under":pct(f-1,0)+" over"}</b> your budget of ${money(maxP.price)}.</p>`;}
-  if(rb&&r[C.rent_pw]!=null){const f=rfit(r);af+=`<p class="afford">The median rent here is $${Math.round(r[C.rent_pw])} a week, <b>${f<=1?pct(1-f,0)+" under":pct(f-1,0)+" over"}</b> your rent budget of $${Math.round(rb.pw)}.</p>`;}
+  let af="";if(buyLim()){const f=fit(r);af+=`<p class="afford">The median ${noun} here is <b>${f<=1?pct(1-f,0)+" under":pct(f-1,0)+" over"}</b> your limit of ${money(buyLim())}.</p>`;}
+  if(rb&&r[C.rent_pw]!=null){const f=rfit(r);af+=`<p class="afford">The median rent here is $${Math.round(r[C.rent_pw])} a week, <b>${f<=1?pct(1-f,0)+" under":pct(f-1,0)+" over"}</b> your rent limit of $${Math.round(rb.pw)}.</p>`;}
   body=`<div class="stats num">
   <div class="stat"><div class="v">${money(r[C.med_now])}</div><div class="l">Median price</div></div>
   <div class="stat"><div class="v ${cls(metric==="g6"?r[C.growth_6m]:r[C.growth_1y])}">${signed(metric==="g6"?r[C.growth_6m]:r[C.growth_1y])}</div><div class="l">Change, ${metric==="g6"?"6":"12"} months</div></div>
@@ -1687,7 +1747,7 @@ function detail(){const el=document.getElementById("detail");
   <div class="stat"><div class="v">${m?pct(m.yield,1):"–"}</div><div class="l">Rental yield</div></div>
   <div class="stat"><div class="v">${r[C.n_now]}</div><div class="l">Sales, 12 months</div></div></div>
   ${af}
-  ${rangeStrip("Sale prices, last 12 months",[r[C.pmin],r[C.p10],r[C.p25],r[C.med_now],r[C.p75],r[C.p90],r[C.pmax]],money,"#0E1A16",maxP&&maxP.price?maxP.price:null,"your budget")}
+  ${rangeStrip("Sale prices, last 12 months",[r[C.pmin],r[C.p10],r[C.p25],r[C.med_now],r[C.p75],r[C.p90],r[C.pmax]],money,"#0E1A16",buyLim(),"your limit")}
   ${r[C.rent_pw]!=null?rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}`,[r[C.rmin],r[C.r10],r[C.r25],r[C.rent_pw],r[C.r75],r[C.r90],r[C.rmax]],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent"):""}
   <p class="note" style="margin-top:12px">${pkTxt} ${signed(r[C.growth_6m])} over the last 6 months.</p>`;}
  else if(dtab==="buyrent"){
@@ -1904,7 +1964,7 @@ function table(scroll){const minn=+document.getElementById("minn").value||0,fa=d
  document.querySelector(".t thead").innerHTML="<tr>"+COLS.map((c,i)=>`<th data-i="${i}" ${i===sortI?`aria-sort="${dir>0?"ascending":"descending"}"`:""}>${c[0]}${i===sortI?(dir>0?" ↑":" ↓"):""}</th>`).join("")+"</tr>";
  document.querySelector(".t tbody").innerHTML=v.map(r=>{const n=r[C.locality];return`<tr tabindex="0" data-n="${esc(n)}" class="${n===sel?"sel":""}">`+
   COLS.map((c,i)=>{const x=c[1](r);const s=i===0?esc(x)+(r[C.cagr_10y]==null?'<span class="tag">new</span>':""):(c[2]?c[2](x,r):x??"–");
-   const k=i===BUDCOL?(x==null?"":x<=1?"pos":"neg"):c[3]?cls(x):"";return`<td class="${i?"num ":""}${k}">${s}</td>`}).join("")+"</tr>"}).join("");
+   const k=i===BUDCOL?(x==null?"":x>=2?"pos":x===0?"neg":""):c[3]?cls(x):"";return`<td class="${i?"num ":""}${k}">${s}</td>`}).join("")+"</tr>"}).join("");
  document.getElementById("count").textContent=`${v.length} suburbs · buying ahead after ${Math.round(A.hold_years)} years in ${v.filter(r=>r._m&&r._m.edge>0).length}`;
  if(scroll){const tr=document.querySelector(".t tr.sel");tr&&tr.scrollIntoView({block:"nearest"});}}
 
@@ -1917,14 +1977,14 @@ function drawSpark(){if(!MS)return;const v=mser(),ok=v.filter(x=>x!=null);if(!ok
  const yrStep=TL>200?5:1;document.getElementById("tyears").innerHTML=MS.m.map((m,i)=>m.endsWith("-01")&&(+m.slice(0,4))%yrStep===0?`<span style="left:${i/TL*100}%">${m.slice(0,4)}</span>`:"").join("");}
 function timeUI(){if(!MS)return;const f=ti/TL,v=mser()[ti];
  TB.cur.style.left=`calc(8px + (100% - 16px) * ${f})`;TB.cur.classList.toggle("flip",f>.8);
- TB.cur.querySelector("i").style.top="15px";TB.cur.querySelector("b").textContent="";
+ TB.cur.querySelector("i").style.top="14px";TB.cur.querySelector("b").textContent="";
  const td=document.getElementById("tdate"),loading=Object.values(hLoading).some(Boolean);td.classList.toggle("rng",!!RNG);
  td.textContent=RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:mlabel();
  document.getElementById("tsub").textContent=loading?"Loading history…":RNG?`${spanText(RNG.b-RNG.a)} · drag the band to move it`:`Sales ${mshift(ti,-12)} to ${mlabel()}${isLatest()?", the latest":""}`;
  const R=document.getElementById("trng");R.classList.toggle("on",!!RNG);
  if(RNG){R.style.left=`calc(8px + (100% - 16px) * ${RNG.a/TL})`;R.style.width=`calc((100% - 16px) * ${(RNG.b-RNG.a)/TL})`;}
- const pb=document.getElementById("tperiod");pb.setAttribute("aria-pressed",!!RNG);pb.textContent=RNG?"Clear period":"Pick a period";
- TB.sl.value=ti;TB.sl.setAttribute("aria-valuetext",RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`12 months to ${mlabel()}`);TB.latest.disabled=isLatest();}
+ const pb=document.getElementById("tperiod");pb.setAttribute("aria-pressed",!!RNG);TB.latest.setAttribute("aria-pressed",!RNG&&isLatest());TB.cur.hidden=!!RNG;
+ TB.sl.value=ti;TB.sl.setAttribute("aria-valuetext",RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`12 months to ${mlabel()}`);}
 let pgFrom=null;
 function spButtons(){const o=k=>document.querySelector(`#spsw option[value=${k}]`),m=o("month"),w=o("week"),y=o("year");if(!m||!y)return;
  m.hidden=m.disabled=w.hidden=w.disabled=!!RNG;const L=isLatest();w.textContent=L?"Past week":"That week";m.textContent=L?"Past month":"That month";y.textContent=RNG?"Whole period":L?"Past year":"12 months to then";if(RNG&&(spMode==="month"||spMode==="week"))setSp("year");}
@@ -1973,7 +2033,7 @@ function trackInput(){const tr=document.querySelector(".ttrack"),R=document.getE
 function stopPlay(){if(timer){clearInterval(timer);timer=null;}TB.play.setAttribute("aria-pressed","false");TB.play.setAttribute("aria-label","Play through every month");document.getElementById("playico").setAttribute("d","M3 1.5v11l9-5.5z");}
 if(MS){TB.sl.max=TL;TB.sl.value=TL;drawSpark();timeUI();
  TB.sl.addEventListener("input",()=>{stopPlay();const v=+TB.sl.value;if(RNG){const L=RNG.b-RNG.a;setRange(Math.max(0,v-L),Math.max(L,v));}else setTime(v);});
- TB.latest.addEventListener("click",()=>{stopPlay();setTime(TL);});
+ TB.latest.addEventListener("click",()=>{stopPlay();if(RNG)clearRange();setTime(TL);});
  $("tperiod").addEventListener("click",()=>{stopPlay();if(RNG)clearRange();else{const b=ti,a=Math.max(0,b-60);setRange(a,Math.max(b,a+MINR));}});
  trackInput();
  TB.play.addEventListener("click",()=>{if(timer){stopPlay();return;}if(ti>=TL){if(RNG)setRange(0,RNG.b-RNG.a);else setTime(0);}
@@ -1997,8 +2057,9 @@ $("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&m
 if(location.hash==="#budget")setTimeout(()=>showTab("budget"),0);  // deferred: showTab reads tour state declared further down
 
 $("layersBtn").addEventListener("click",()=>{const o=$("lpanel").hidden;$("lpanel").hidden=!o;$("layersBtn").setAttribute("aria-expanded",o);});
-$("budChip").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a==="edit"){showTab("budget");$("tabBudget").scrollIntoView({behavior:"smooth"});}
- else{metric=metric==="afford"?"price":"afford";$("metric").value=metric;autoFrom=null;paintMap();planChip();}});
+$("mbud").addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.a==="edit"){showTab("budget");$("tabBudget").scrollIntoView({behavior:"smooth"});}});
+$("mbud").addEventListener("input",e=>{if(e.target.id!=="mbudIn")return;liveFmt(e.target);const t=e.target.value.trim(),n=parseNum(t),v=t===""||n==null||!isFinite(n)||n<=0?null:n;
+ if(metric==="rent")B.rent_max=v;else B.map_price=v;save();soon();});
 
 /* ---------- chart hover ---------- */
 // Every chart carries its points in data-hov; one handler draws a guide line, dots and a value box.
@@ -2077,7 +2138,7 @@ document.querySelectorAll(".seg button[data-base]").forEach(b=>b.addEventListene
 document.getElementById("opac").addEventListener("input",e=>setOpacity(+e.target.value/100));
 function palUI(){$("pals").innerHTML=Object.entries(PALS).map(([k,s])=>`<button data-pal="${k}" aria-pressed="${k===pal}" title="${k}" style="background:linear-gradient(90deg,${s.join(",")})"></button>`).join("");}
 palUI();$("pals").addEventListener("click",e=>{const b=e.target.closest("[data-pal]");if(!b)return;pal=b.dataset.pal;try{localStorage.setItem("hs_pal",pal);}catch(x){}palUI();paintMap();});
-document.getElementById("metric").addEventListener("change",e=>{metric=e.target.value;autoFrom=null;paintMap();planChip();detail();if(METRICS[metric].needs&&!(METRICS[metric].rent?rb:maxP)){showTab("budget");document.querySelector("[data-b=cash]").focus();}});
+document.getElementById("metric").addEventListener("change",e=>{metric=e.target.value;autoFrom=null;paintMap();planChip();detail();if(METRICS[metric].needs&&!(METRICS[metric].rent?rb:buyLim())){const i=$("mbudIn");i&&i.focus();}});
 ["minn","fAfford"].forEach(id=>document.getElementById(id).addEventListener("input",()=>table()));
 searchWire();
 planWire();
@@ -2127,7 +2188,7 @@ $("bxPrint").addEventListener("click",()=>window.print());
  setFull(store.get("hs_full")!==0,true);}
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
- $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;
+ $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;$("ghStats").title=$("prov").textContent;
  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){const els=[...$("ghStats").querySelectorAll("b")],t0=performance.now();els.forEach(e=>{const m=e.textContent.match(/^([\d.,]+)(.*)$/);e._v=m?parseFloat(m[1].replace(/,/g,"")):null;e._s=m?m[2]:"";e._d=m&&m[1].includes(".")?1:0;e._c=m&&m[1].includes(",");e._t=e.textContent;});
   const step=t=>{const k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);els.forEach(e=>{if(e._v==null)return;const v=e._v*q;e.textContent=k===1?e._t:(e._c?Math.round(v).toLocaleString("en-AU"):v.toFixed(e._d))+e._s;});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
  let rzT,rzW=innerWidth;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(SIM&&!$("tabBudget").hidden)bxChart();if(innerWidth!==rzW){rzW=innerWidth;headline();}},200);});
