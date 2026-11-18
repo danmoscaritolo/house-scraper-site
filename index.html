@@ -654,7 +654,7 @@ details.how.lic{margin-top:0;border-top:0}
 
 /* full-width map (default on wide screens): the side panel slides over the right edge */
 .lbtn span{margin-left:2px}
-.lbtn[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+#panelBtn[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 @media(min-width:1001px){
  .main.full{grid-template-columns:1fr;position:relative;overflow:hidden}
  .main.full aside#detail{position:absolute;top:12px;right:12px;width:min(440px,calc(100% - 24px));height:calc(var(--maph) - 24px);z-index:25;transform:translateX(calc(100% + 32px));opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s}
