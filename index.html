@@ -762,6 +762,46 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 #mtab button[aria-pressed=true]{background:var(--ink);color:#fff}
 /* sales bar: colouring sits with the other sales controls */
 .spbar #spopt select{max-width:190px}
+
+/* map / panel controls (19 Nov e): the panel button is a pull tab on the map's right edge */
+@media(min-width:1001px){
+ .main.full #panelBtn{position:absolute;right:0;top:calc(var(--maph) / 2);transform:translateY(-50%);z-index:26;flex-direction:column;gap:8px;padding:14px 7px;border-radius:10px 0 0 10px;border-right:0;writing-mode:vertical-rl;box-shadow:-4px 4px 14px -6px rgba(14,26,22,.35);transition:right .32s cubic-bezier(.2,.7,.2,1),background .15s}
+ .main.full #panelBtn span{margin:0;letter-spacing:.02em}
+ .main.full #panelBtn svg{transition:transform .32s}
+ .main.full.open #panelBtn{right:min(452px,calc(100% - 12px))}
+ .main.full.open #panelBtn svg{transform:rotate(180deg)}
+ .main.full #panelBtn:hover{background:var(--hi);color:var(--ink);border-color:var(--ink)}
+}
+
+/* sales lists: show, sort and filters */
+.sfc{margin:8px 0 4px;padding:10px 12px;background:var(--wash);border-radius:10px}
+.sfr{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:0 0 6px}
+.sfr label{display:flex;flex-direction:column;gap:3px;font:500 11.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.sfr select,.sfr input{font:14.5px var(--sans);color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:7px;padding:6px 8px;width:100%;min-width:0}
+.sfd>summary{cursor:pointer;font:500 13px var(--sans);color:var(--ink);padding:4px 0}.sfd>summary b{color:var(--gain);font-weight:600}
+.sfd[open]>summary{margin-bottom:6px}
+.rsales td small{display:block;color:var(--slate);font-size:11.5px}
+
+/* address sale history: timeline */
+.tl-t{font:500 11.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--slate);margin:18px 0 10px}
+.tl{list-style:none;margin:0 0 10px;padding:0}
+.tl-i{display:grid;grid-template-columns:58px 1fr;gap:14px;position:relative;padding-bottom:16px}
+.tl-i::before{content:"";position:absolute;left:28px;top:58px;bottom:0;width:2px;background:#C4CBC2}
+.tl-i:last-child::before{display:none}
+.tl-n{width:58px;height:58px;border-radius:50%;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 5px var(--wash);line-height:1.05}
+.tl-n b{font:500 11.5px var(--mono);letter-spacing:.08em}
+.tl-n span{font:700 16.5px var(--serif)}
+.tl-i.now .tl-n{background:var(--hi);color:var(--ink)}
+.tl-c{position:relative;border:1px solid var(--hair);border-radius:12px;padding:11px 14px 10px;background:var(--sheet);min-width:0}
+.tl-c::before{content:"";position:absolute;left:-7px;top:22px;width:12px;height:12px;background:var(--sheet);border-left:1px solid var(--hair);border-bottom:1px solid var(--hair);transform:rotate(45deg)}
+.tl-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding-bottom:9px;margin-bottom:8px;border-bottom:1px solid var(--wash)}
+.tl-b{background:var(--ink);color:#fff;font:600 13px var(--sans);padding:3px 10px;border-radius:7px}
+.tl-b.odd{background:var(--slate)}
+.tl-p{font:600 23px/1 var(--sans);letter-spacing:-.01em}
+.tl-ch{font:600 13px var(--sans);padding:3px 9px;border-radius:999px}
+.tl-ch.pos{background:#E2F1E8;color:var(--gain)}.tl-ch.neg{background:#FBE7E4;color:var(--loss)}
+.tl-m{font:13px/1.45 var(--sans);color:var(--slate);margin:2px 0}
+.tl-m b.pos{color:var(--gain)}.tl-m b.neg{color:var(--loss)}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><div class="gh-stats num" id="ghStats"></div><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
@@ -1276,14 +1316,14 @@ if(window.maplibregl){
   if(hoverId!==f.id){if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=f.id;map.setFeatureState({source:"sub",id:hoverId},{hover:true});}
   hoverBar.setLngLat(e.lngLat).setHTML(tipHtml(f.properties.n)).addTo(map);});
  map.on("mouseleave","fill",()=>{map.getCanvas().style.cursor="";if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=null;hoverBar.remove();});
- map.on("click",e=>{const M=document.querySelector(".main.full.open");if(M&&!map.queryRenderedFeatures(e.point,{layers:["fill"]}).length)M.classList.remove("open");});   // full width: clicking off a suburb slides the panel away
+ map.on("click",e=>{if(spPop&&spPop.isOpen()&&!spAt(e))spPop.remove();const M=document.querySelector(".main.full.open");if(M&&!map.queryRenderedFeatures(e.point,{layers:["fill"]}).length)M.classList.remove("open");});   // full width: clicking off a suburb slides the panel away
  map.on("click","fill",e=>{if(spClick(e))return;const f=e.features[0];if(!f)return;if(f.properties.n===sel&&!P_SEL)closeSel();else select(f.properties.n,false);});
 }else{document.getElementById("map").innerHTML='<p class="note" style="padding:20px">The map needs an internet connection to load.</p>';}
 /* ---------- individual sales ---------- */
 // data/points/sales_YYYY.js (tools/build_points.py) each add window.SP[YYYY]; loaded only when needed.
 const SPM=D.points&&D.points.years?D.points:null,SP_EP=Date.parse((SPM&&SPM.epoch||"2000-01-01")+"T00:00:00Z");
 let spMode="off",spErr=false;const spLoaded={},spLoading={};
-const spPop=window.maplibregl?new maplibregl.Popup({closeButton:true,closeOnClick:true,className:"tip sale",offset:8,maxWidth:"320px"}):null;
+const spPop=window.maplibregl?new maplibregl.Popup({closeButton:true,closeOnClick:false,className:"tip sale",offset:8,maxWidth:"320px"}):null;
 const dday=n=>new Date(SP_EP+n*864e5).toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
 const yOf=n=>new Date(SP_EP+n*864e5).getUTCFullYear();
 function spWindow(){const ad=MS.ad;if(RNG)return[RNG.a>0?ad[RNG.a-1]:ad[0]-31,ad[RNG.b]];const hi=ad[ti];return[spMode==="year"?hi-365:spMode==="week"?hi-7:(ti>0?ad[ti-1]:hi-31),hi];}
@@ -1305,10 +1345,10 @@ const SEEN=(()=>{try{return JSON.parse(localStorage.getItem("hs_seen")||"{}")}ca
 const spRing=y=>{const v=SEEN[y];return v&&v.length?["case",["in",["get","i"],["literal",v]],"#FFFFFF","#0E1A16"]:"#0E1A16";};
 function spSeen(y,i){const v=SEEN[y]||(SEEN[y]=[]);if(!v.includes(i)){v.push(i);try{localStorage.setItem("hs_seen",JSON.stringify(SEEN));}catch(e){}}try{map.setPaintProperty(spId(y),"circle-stroke-color",spRing(y));}catch(e){}}
 function spAdd(y){const P=window.SP&&window.SP[y];if(!P||!ready||spLoaded[y])return;const id="sp_"+y.replace(/[^0-9a-z]/gi,"_");LID[id]=y;const n=P.p.length,f=new Array(n);
- for(let i=0;i<n;i++)f[i]={type:"Feature",properties:{i,d:P.d[i],u:P.u[i],pp:(P.pp&&P.pp[i])||0,m:(P.m&&P.m[i])||1,r:P.r[i]??1,ra:(P.ra&&P.ra[i])??P.r[i]??1,p:P.p[i]},geometry:{type:"Point",coordinates:[150+P.x[i]/1e5,-34+P.y[i]/1e5]}};
+ for(let i=0;i<n;i++)f[i]={type:"Feature",properties:{i,d:P.d[i],u:P.u[i],pp:(P.pp&&P.pp[i])||0,m:(P.m&&P.m[i])||1,r:P.r[i]??1,ra:(P.ra&&P.ra[i])??P.r[i]??1,p:P.p[i],a:(P.a&&P.a[i])||0},geometry:{type:"Point",coordinates:[150+P.x[i]/1e5,-34+P.y[i]/1e5]}};
  map.addSource(id,{type:"geojson",data:{type:"FeatureCollection",features:f}});
  map.addLayer({id,type:"circle",source:id,layout:{visibility:"none"},paint:spPaint()});map.setPaintProperty(id,"circle-stroke-color",spRing(y));
- spLoaded[y]=1;spApply();}
+ spLoaded[y]=1;spApply();sivSoon();}
 const spId=k=>"sp_"+k.replace(/[^0-9a-z]/gi,"_");
 function spLayers(){if(spMode==="off")return[];const ks=spKeys();return ks.filter(k=>spLoaded[k]).map(spId);}
 // which sales the dots show: all, those that sold for less than the home's previous sale, or the unusual ones
@@ -1318,7 +1358,7 @@ const spFiltExpr=()=>spFilt==="loss"?[[">",["get","pp"],0],["<",["get","p"],["ge
 const spFiltFn=()=>spFilt==="loss"?(P,i)=>P.pp&&P.pp[i]>0&&P.p[i]<P.pp[i]:spFilt==="odd"?(P,i)=>P.m&&P.m[i]!=null&&P.m[i]!==1:()=>true;
 function spApply(){if(!SPM||!MS||!MS.ad)return;const on=spMode!=="off",ys=on?spKeys():[];if(on&&ready)ys.forEach(spLoad);
  if(ready){const w=on?spWindow():null;for(const y in spLoaded){const id=spId(y),vis=on&&ys.includes(y);map.setLayoutProperty(id,"visibility",vis?"visible":"none");
-  if(vis)map.setFilter(id,["all",[">",["get","d"],w[0]],["<=",["get","d"],w[1]],["==",["get","u"],seg==="unit"?1:0],...spFiltExpr()]);}}
+  if(vis)map.setFilter(id,["all",[">",["get","d"],w[0]],["<=",["get","d"],w[1]],["==",["get","u"],seg==="unit"?1:0],...spFiltExpr(),...sfExpr()]);}}
  spStatus();}
 function spStatus(){spStatus0();const n=$("spnote"),s=$("spinfo");if(n&&s){n.hidden=spMode==="off"||!s.textContent;n.textContent=s.textContent.replace(/^ · /,"");}}
 function spStatus0(){const el=document.getElementById("spinfo");if(!el)return;if(spMode==="off"){el.textContent="";return;}
@@ -1327,8 +1367,8 @@ function spStatus0(){const el=document.getElementById("spinfo");if(!el)return;if
  if(Object.values(spLoading).some(Boolean)){el.textContent=" · loading…";return;}
  // count only dots inside the visible map (tiles are bigger than the view); coordinates are stored as 1e-5° offsets
  const[lo,hi]=spWindow(),u=seg==="unit"?1:0,ok=spFiltFn(),bd=map.getBounds(),x0=(bd.getWest()-150)*1e5,x1=(bd.getEast()-150)*1e5,y0=(bd.getSouth()+34)*1e5,y1=(bd.getNorth()+34)*1e5;let n=0;
- for(const y of spKeys()){const P=window.SP&&window.SP[y];if(!P)continue;for(let i=0;i<P.d.length;i++){const X=P.x[i],Y=P.y[i];if(X>=x0&&X<=x1&&Y>=y0&&Y<=y1&&P.d[i]>lo&&P.d[i]<=hi&&P.u[i]===u&&ok(P,i))n++;}}
- el.textContent=` · ${n.toLocaleString("en-AU")} ${spFilt==="loss"?"sold at a loss":spFilt==="odd"?"unusual sales":seg==="unit"?"units":"houses"} in view`;}
+ for(const y of spKeys()){const P=window.SP&&window.SP[y];if(!P)continue;for(let i=0;i<P.d.length;i++){const X=P.x[i],Y=P.y[i];if(X>=x0&&X<=x1&&Y>=y0&&Y<=y1&&P.d[i]>lo&&P.d[i]<=hi&&P.u[i]===u&&ok(P,i)&&sfOk(P.p[i],P.a[i]||0))n++;}}
+ el.textContent=` · ${n.toLocaleString("en-AU")} ${spFilt==="loss"?"sold at a loss":spFilt==="odd"?"unusual sales":seg==="unit"?"units":"houses"} in view${sfOn()?" (filtered)":""}`;}
 function spLegend(){const abs=document.getElementById("spcol").value==="abs",st=abs?HEX:[HREL[0],HREL[1],"#D8D2C2",HREL[3],HREL[4]];
  if(spFilt!=="all")return`<div class="t" style="margin-top:10px"><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${spFilt==="loss"?"#B23A48":"#5E4B8B"};margin-right:6px"></i>Each dot is ${spFilt==="loss"?"a sale for less than the home last sold for":"an unusual sale (several homes at one price, or far from the suburb's typical price), left out of medians"}, settled ${RNG?`from ${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="year"?`from ${mshift(ti,-12)} to ${mlabel()}`:spMode==="week"?`in the week to ${dday(MS.ad[ti])}`:`in the month to ${mlabel()}`}. Click one for details.</div>`;
  return`<div class="t" style="margin-top:10px">Each dot is ${spFilt==="loss"?"a sale for less than the home last sold for":spFilt==="odd"?"an unusual sale (several homes at one price, or far from the suburb's typical price), left out of medians":"a sale"}, settled ${RNG?`from ${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="year"?`from ${mshift(ti,-12)} to ${mlabel()}`:spMode==="week"?`in the week to ${dday(MS.ad[ti])}`:`in the month to ${mlabel()}`}</div><div class="ramp" style="background:linear-gradient(90deg,${st.join(",")})"></div>
@@ -1413,14 +1453,21 @@ function propHtml(){const S=P_SEL,loc=S.loc;const stBack=S.p&&S.street&&S.street
   return back+`<h2>${esc(S.st)}</h2><p class="sub">${esc(title(loc))}</p><p class="note">${S.miss&&S.num?`No recorded sale at ${esc((S.unit?S.unit+"/":"")+S.num)} ${esc(S.st)} since 1990. `:""}${L.length} ${L.length===1?"property has":"properties have"} sold on this street${S.num&&!S.miss?" at that number":""}. Pick one:</p>
   <div class="plist">${L.slice(0,300).map(p=>{const last=p[7][p[7].length-1];return`<button data-k="${R.p.indexOf(p)}">${esc(addr(p))}<span>${money(last[2])}${last[3]>1?` (${last[3]}-property sale)`:""}${p[8]&&p[8][0]==="p"?" (subdivided)":""} · ${dday(last[0]).replace(/^\d+ /,"")}</span></button>`;}).join("")}</div>`;}
  const p=S.p,unit=p[5]===1,sales=p[7],single=sales.filter(x=>!x[3]),latest=sales[sales.length-1],sub=p[8]||null,last=single.length?single[single.length-1]:latest,est=!(latest[3]>1)&&single.length&&!(sub&&sub[0]==="p")?propEstimate(loc,unit,last[2],last[0]):null;
- let rows="";sales.forEach((x,j)=>{const pv=sales[j-1],ok=pv&&!x[3]&&!pv[3],yrs=pv?(x[0]-pv[0])/365.25:0,ch=ok?x[2]/pv[2]-1:null,pa=ok&&yrs>=1?Math.pow(x[2]/pv[2],1/yrs)-1:null;
-  rows+=`<tr><td>${dday(x[0])}</td><td>${dollars(x[2])}${x[3]>1?`<br><span class="note" style="font-size:11.5px">total for ${x[3]} properties</span>`:x[3]<0?`<br><span class="note" style="font-size:11.5px">unusual for the suburb, not in medians</span>`:""}</td><td class="${ch==null?"":ch<0?"neg":"pos"}">${ch==null?"–":signed(ch,0)}</td><td>${pa==null?"–":signed(pa,1)}</td></tr>`;});
+ // Sale history as a timeline, newest first: a dated node per sale and a card with the price, change on the sale before, and dates.
+ const MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"],L=sales.length;
+ let rows="";sales.slice().reverse().forEach((x,k)=>{const j=L-1-k,pv=sales[j-1],ok=pv&&!x[3]&&!pv[3],yrs=pv?(x[0]-pv[0])/365.25:0,ch=ok?x[2]/pv[2]-1:null,pa=ok&&yrs>=1?Math.pow(x[2]/pv[2],1/yrs)-1:null;
+  const dt=new Date(SP_EP+x[0]*864e5),held=pv?(yrs>=1?`${yrs.toFixed(1)} years`:`${Math.max(1,Math.round(yrs*12))} months`):"";
+  rows+=`<li class="tl-i${k===0?" now":""}"><div class="tl-n"><b>${MON[dt.getUTCMonth()]}</b><span>${dt.getUTCFullYear()}</span></div><div class="tl-c">
+   <div class="tl-h"><span class="tl-b${x[3]?" odd":""}">${x[3]>1?`Sold · ${x[3]} homes`:"Sold"}</span><span class="tl-p num">${dollars(x[2])}</span>${ch!=null?`<span class="tl-ch num ${ch<0?"neg":"pos"}">${signed(ch,0)}</span>`:""}</div>
+   <div class="tl-m">Settled ${dday(x[0])}${x[1]&&x[1]!==x[0]?` · contract ${dday(x[1])}`:""}</div>
+   ${pv?`<div class="tl-m">${ok?`${ch<0?"Down":"Up"} ${dollars(Math.abs(x[2]-pv[2]))} on ${dollars(pv[2])}, held ${held}${pa!=null?` · <b class="${pa<0?"neg":"pos"}">${signed(pa,1)} a year</b>`:""}`:`Held ${held} since the sale before`}</div>`:`<div class="tl-m">First sale on record</div>`}
+   ${x[3]>1?`<div class="tl-m">Total for ${x[3]} properties sold together, not this home alone.</div>`:x[3]<0?`<div class="tl-m">Unusual for the suburb that year, not in medians.</div>`:""}</div></li>`;});
  let h=back+`<div class="prop"><h2>${esc(addr(p))}</h2><p class="sub">${esc(title(loc))} · ${unit?"Unit (strata)":"House"}${p[6]?` · ${unit?"lot":"land"} ${p[6].toLocaleString("en-AU")} m²`:""}</p>`;
  if(sub&&sub[0]==="p")h+=`<div class="est"><div class="l" style="font-size:12.5px;color:var(--slate)">This lot was subdivided</div><p style="margin:4px 0 0">Around ${sub[1]} it was redeveloped as ${esc(sub[3])}: ${sub[4].map(a=>`<a href="#" data-sub="${esc(JSON.stringify(a))}">${esc(sAddr(a))}</a>`).join(", ")}${sub[2]>sub[4].length?` and ${sub[2]-sub[4].length} more`:""}. The home that sold here no longer exists, so there's no value estimate.</p><p class="note" style="margin:4px 0 0">Worked out from the sales records: the old property stopped selling and new ones appeared at the same number. The type of home is a best guess from titles and lot sizes.</p></div>`;
  else if(sub&&sub[0]==="c")h+=`<p class="note" style="margin:0 0 10px">Built after the original lot, ${esc(sAddr(sub[2]))}, was subdivided around ${sub[1]}. <a href="#" data-sub="${esc(JSON.stringify(sub[2]))}">See its earlier sales</a>.</p>`;
  if(est)h+=`<div class="est"><div class="l" style="font-size:12.5px;color:var(--slate)">Rough value today</div><div class="v num">${money(est.v)}</div><p class="note" style="margin:4px 0 0">The last sale of ${dollars(last[2])} moved with the ${est.src==="suburb"?esc(title(loc))+" median "+(unit?"unit":"house"):"regional median"} price since then (${signed(est.ch,0)}). Renovations, condition and the particular home can move it a long way either side.</p></div>`;
  if(est&&maxP&&maxP.price){const pl=planAt(est.v),mm=monthly(pl,0,unit);h+=`<p class="afford">Buying at about ${money(est.v)}: a ${money(pl.L)} loan, ${dollars(pl.repay)} a month, leaving ${dollars(mm.buyLeft+mm.rent)} a month after costs on your budget.${pl.ok?"":` <span class="warn">Your cash doesn't cover the minimum deposit at this price.</span>`}</p>`;}
- h+=`<h3 style="font:500 13px var(--sans);color:var(--slate);margin:16px 0 0">Recorded sales since 1990 (settlement date)</h3><table class="num"><tr><th>Settled</th><th>Price</th><th>Change</th><th>A year</th></tr>${rows}</table>
+ h+=`<h3 class="tl-t">Sale history</h3><ol class="tl">${rows}</ol>
   <p class="note">${latest[3]>1?`Last sold ${dday(latest[0]).replace(/^\d+ /,"")} as one of ${latest[3]} properties in a single sale (often a developer buying a site), so there's no estimate: the home may since have been redeveloped. `:`Contract signed ${dday(latest[1])} for the latest sale. `} NSW Valuer General records from 1990. Sales before 2001 have estimated settlement dates (contract + 6 weeks).</p></div>`;
  return h;}
 
@@ -1764,16 +1811,15 @@ async function detailAsync(r){const tok=++detTok,loc=r[C.locality],u=seg==="unit
   else h+=`<p class="note">No rent records for this window: they start in 2021.</p>`;
   strip.innerHTML=h;}
  if(list){const chg=([x,p])=>{const j=p[7].indexOf(x),pv=j>0?p[7][j-1]:null;return pv&&!x[3]&&!pv[3]&&x[0]-pv[0]>=60?x[2]/pv[2]-1:null;};
-  const losses=ws.filter(w=>{const c=chg(w);return c!=null&&c<0;}),only=list.dataset.loss==="1",ws0=ws;
-  if(only)ws=losses;
-  const N=list.dataset.all?ws.length:Math.min(ws.length,150),norm=ws0.filter(([x])=>!x[3]).map(([x])=>x[2]).sort((a,b)=>a-b);
-  list.innerHTML=!ws0.length?`<p class="note">No ${noun} sales recorded here from ${when}.</p>`:`<p class="note" style="margin:0 0 6px"><b>${ws0.length} ${noun} sale${ws0.length>1?"s":""}</b> settled ${when}${norm.length?`, median ${money(qtl(norm,.5))}`:""}. <b class="${losses.length?"neg":""}">${losses.length}</b> sold for less than the home's previous sale. Click one for its full history.</p>
-   <p style="margin:0 0 6px"><label style="font:13px var(--sans);cursor:pointer"><input type="checkbox" id="lossOnly" ${only?"checked":""}> Show only sales at a loss</label></p>
-   <table class="rsales num">${ws.slice(0,N).map(([x,p],i)=>{const c=chg([x,p]);return`<tr><td><a href="#" data-i="${i}">${esc(pAddr(R,p))}</a></td><td>${dday(x[0])}</td><td class="${c==null?"":c<0?"neg":"pos"}" style="text-align:right">${c==null?"":signed(c,0)}</td><td>${dollars(x[2])}${x[3]>1?` <span class="note">(${x[3]} homes)</span>`:x[3]<0?` <span class="note">(unusual)</span>`:""}</td></tr>`;}).join("")}</table>
-   ${N<ws.length?`<p><button class="linkbtn" id="salesAll">Show all ${ws.length}</button></p>`:""}<p class="note">The % column is the change on that home's previous sale. "(N homes)": one price for several properties sold together. "(unusual)": far from anything else sold here that year. Neither counts towards medians.</p>`;
-  list.querySelectorAll("[data-i]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const p=ws[+a.dataset.i][1];openAddress(loc,R.st[p[0]],p[1],p[2]);}));
-  const sa=$("salesAll");sa&&sa.addEventListener("click",()=>{list.dataset.all=1;detailAsync(r);});
-  const lo_=$("lossOnly");lo_&&lo_.addEventListener("change",()=>{list.dataset.loss=lo_.checked?"1":"";detailAsync(r);});}}
+  const items=ws.map(w=>({x:w[0],p:w[0][2],pr:w[1],d:w[0][0],a:w[1][6]||0,m:w[0][3]?w[0][3]:1,c:chg(w)}));
+  const losses=items.filter(it=>it.c!=null&&it.c<0).length,norm=items.filter(it=>it.m===1).map(it=>it.p).sort((a,b)=>a-b);
+  const L=sfSort(items.filter(it=>sfShow(it)&&sfOk(it.p,it.a))),N=list.dataset.all?L.length:Math.min(L.length,150);
+  list.innerHTML=!items.length?`<p class="note">No ${noun} sales recorded here from ${when}.</p>`:`<p class="note" style="margin:0 0 6px"><b>${items.length} ${noun} sale${items.length>1?"s":""}</b> settled ${when}${norm.length?`, median ${money(qtl(norm,.5))}`:""}. <b class="${losses?"neg":""}">${losses}</b> sold for less than the home's previous sale.</p>
+   ${sfControls(u===1)}<p class="note" style="margin:10px 0 4px">${L.length===items.length?"":`<b>${L.length} ${noun2()}</b> match. `}Click one for its full history.</p>
+   ${sfRows(L,N,it=>pAddr(R,it.pr))}${N<L.length?`<p><button class="linkbtn" id="salesAll">Show all ${L.length}</button></p>`:""}${SF_NOTE}`;
+  list.querySelectorAll("[data-i]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const p=L[+a.dataset.i].pr;openAddress(loc,R.st[p[0]],p[1],p[2]);}));
+  sfWire(list,()=>{delete list.dataset.all;detailAsync(r);});
+  const sa=$("salesAll");sa&&sa.addEventListener("click",()=>{list.dataset.all=1;detailAsync(r);});}}
 function periodBox(k){const{a,b}=RNG,va=sv(k,1,a),vb=sv(k,1,b),lbl=`${mlabel(a)} to ${mlabel(b)}`;
  if(va==null||vb==null)return`<div class="then"><div class="l0">${lbl}</div><p class="note" style="margin:0">Too few sales at one end of the period to compare.</p></div>`;
  let n=0;for(let i=b;i>a;i-=12){const c=sv(k,4,i)||0;n+=i-12>=a?c:c*(i-a)/12;}
@@ -1799,7 +1845,7 @@ function detail(){const el=document.getElementById("detail");
   const sb=$("propStreet");sb&&sb.addEventListener("click",()=>{P_SEL.p=null;P_SEL.list=P_SEL.street;P_SEL.num=null;P_SEL.unit=null;P_SEL.miss=false;detail();});
   el.querySelectorAll(".plist button").forEach(x=>x.addEventListener("click",()=>{const p=P_SEL.R.p[+x.dataset.k];P_SEL.p=p;P_SEL.list=null;
    if(p[3]!=null&&map){const ll=[150+p[3]/1e5,-34+p[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#C6F23A"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:16,duration:600});}detail();}));return;}
- if(!sel){el.innerHTML=areaSummary();el.querySelectorAll("[data-n]").forEach(x=>x.addEventListener("click",()=>select(x.dataset.n)));return;}
+ if(!sel){inViewPanel(el);return;}
  const r=rowFor(sel);if(!r){thinPanel(el,sel);return;}
  const m=r._m,k=r[C.locality]+"|"+r[C.segment],rs=D.rent_series[r[C.postcode]+"|"+r[C.segment]],noun=seg==="house"?"house":"unit",unit=seg==="unit";
  if(dtab==="buyrent")dtab="overview";const tabs=[["overview","Overview"],["trends","Trends"],["sales","Sales"]];   // "Buy or rent" tab hidden until reworked (code kept below)
@@ -1899,6 +1945,57 @@ async function thinPanel(el,n){const noun=seg==="house"?"house":"unit",k=n+"|"+s
  $("thin").innerHTML=list.length?`<table class="rsales num">${list.slice(0,12).map(([x,p],i)=>`<tr><td><a href="#" data-i="${i}">${esc(addr(p))}</a></td><td>${dday(x[0])}</td><td>${dollars(x[2])}${x[3]>1?" *":""}</td></tr>`).join("")}</table>${list.some(([x])=>x[3]>1)?'<p class="note">* total for several properties sold together</p>':""}`:`<p class="note">No ${noun} sales recorded here since 1990.</p>`;
  $("thin").querySelectorAll("[data-i]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const p=list[+a.dataset.i][1];openAddress(n,R.st[p[0]],p[1],p[2]);}));}
 
+/* ---------- sales lists: one set of filters for the map dots and the panel lists ---------- */
+// Show (all / at a loss / unusual) is the map's own selector (spFilt). Price in dollars, land in m² (strata lot for units).
+const SF={sort:"new",pmin:null,pmax:null,amin:null,amax:null};
+let pview="sub";   // panel with no suburb chosen: "sub" = suburbs in view, "sales" = sales in view
+const sfOn=()=>SF.pmin!=null||SF.pmax!=null||SF.amin!=null||SF.amax!=null;
+const sfOk=(p,a)=>(SF.pmin==null||p>=SF.pmin)&&(SF.pmax==null||p<=SF.pmax)&&(SF.amin==null||(a>0&&a>=SF.amin))&&(SF.amax==null||(a>0&&a<=SF.amax));
+function sfExpr(){const e=[];if(SF.pmin!=null)e.push([">=",["get","p"],SF.pmin]);if(SF.pmax!=null)e.push(["<=",["get","p"],SF.pmax]);
+ if(SF.amin!=null)e.push([">=",["get","a"],SF.amin]);if(SF.amax!=null)e.push([">",["get","a"],0],["<=",["get","a"],SF.amax]);return e;}
+const SORTS=[["new","Newest first"],["old","Oldest first"],["phi","Price, high to low"],["plo","Price, low to high"],["gain","Biggest gain on last sale"],["loss","Biggest loss on last sale"],["ahi","Land, largest first"]];
+// items: {d: settle day, p: price, a: area, c: change on the previous sale or null}
+function sfSort(L){const k=SF.sort,nz=(v,s)=>v==null?Infinity:s*v;const f={new:(a,b)=>b.d-a.d,old:(a,b)=>a.d-b.d,phi:(a,b)=>b.p-a.p,plo:(a,b)=>a.p-b.p,
+ gain:(a,b)=>nz(a.c,-1)-nz(b.c,-1),loss:(a,b)=>nz(a.c,1)-nz(b.c,1),ahi:(a,b)=>(b.a||0)-(a.a||0)}[k]||((a,b)=>b.d-a.d);return L.sort(f);}
+function sfShow(it){return spFilt==="loss"?it.c!=null&&it.c<0:spFilt==="odd"?!!it.m&&it.m!==1:true;}
+function sfControls(unit){const v=x=>x==null?"":Number(x).toLocaleString("en-AU"),o=(k,l,cur)=>`<option value="${k}"${k===cur?" selected":""}>${l}</option>`;
+ return`<div class="sfc"><div class="sfr"><label><span>Show</span><select data-sf="show">${o("all","All sales",spFilt)}${o("loss","Sold at a loss",spFilt)}${o("odd","Unusual prices",spFilt)}</select></label>
+  <label><span>Sort</span><select data-sf="sort">${SORTS.map(([k,l])=>o(k,l,SF.sort)).join("")}</select></label></div>
+  <details class="sfd"${sfOn()?" open":""}><summary>Filter by price and ${unit?"lot size":"land size"}${sfOn()?" <b>· on</b>":""}</summary>
+  <div class="sfr"><label><span>Price from</span><input data-sf="pmin" inputmode="numeric" placeholder="Any" value="${v(SF.pmin)}"></label><label><span>to</span><input data-sf="pmax" inputmode="numeric" placeholder="Any" value="${v(SF.pmax)}"></label></div>
+  <div class="sfr"><label><span>${unit?"Lot":"Land"} from (m²)</span><input data-sf="amin" inputmode="numeric" placeholder="Any" value="${v(SF.amin)}"></label><label><span>to (m²)</span><input data-sf="amax" inputmode="numeric" placeholder="Any" value="${v(SF.amax)}"></label></div>
+  <p class="note" style="margin:6px 0 0">These also filter the dots on the map. ${sfOn()?'<button class="linkbtn" data-sf="clear">Clear filters</button>':""}</p></details></div>`;}
+function sfWire(root,redraw){root.querySelectorAll("[data-sf]").forEach(el=>{const k=el.dataset.sf;
+ if(k==="clear")return el.addEventListener("click",()=>{SF.pmin=SF.pmax=SF.amin=SF.amax=null;spApply();redraw();});
+ if(k==="show")return el.addEventListener("change",()=>{const f=$("spfilt");f.value=el.value;f.dispatchEvent(new Event("change"));redraw();});
+ if(k==="sort")return el.addEventListener("change",()=>{SF.sort=el.value;redraw();});
+ el.addEventListener("change",()=>{const x=parseNum(el.value);SF[k]=x&&x>0?x:null;spApply();redraw();});
+ el.addEventListener("keydown",e=>{if(e.key==="Enter")el.blur();});});}
+function sfRows(L,N,addr,sub){return`<table class="rsales num">${L.slice(0,N).map((it,i)=>`<tr><td><a href="#" data-i="${i}">${esc(addr(it))}</a>${sub?`<small>${esc(sub(it))}</small>`:""}</td><td>${dday(it.d)}</td><td class="${it.c==null?"":it.c<0?"neg":"pos"}" style="text-align:right">${it.c==null?"":signed(it.c,0)}</td><td>${dollars(it.p)}${it.m>1?` <span class="note">(${it.m} homes)</span>`:it.m<0?` <span class="note">(unusual)</span>`:""}</td></tr>`).join("")}</table>`;}
+const SF_NOTE=`<p class="note">The % column is the change on that home's previous sale. "(N homes)": one price for several properties sold together. "(unusual)": far from anything else sold there that year. Neither counts towards medians.</p>`;
+const noun2=()=>spFilt==="loss"?"sales at a loss":spFilt==="odd"?"unusual sales":seg==="unit"?"unit sales":"house sales";
+// Sales in view: every dot inside the visible map, from the loaded point tiles.
+let sivAll=false;
+function salesInView(){if(!ready||map.getZoom()<SP_MINZ)return`<p class="empty">Zoom in to list the sales on the map.</p>`;
+ const[lo,hi]=spWindow(),u=seg==="unit"?1:0,ok=spFiltFn(),bd=map.getBounds(),x0=(bd.getWest()-150)*1e5,x1=(bd.getEast()-150)*1e5,y0=(bd.getSouth()+34)*1e5,y1=(bd.getNorth()+34)*1e5,L=[];
+ for(const y of spKeys()){const P=window.SP&&window.SP[y];if(!P)continue;for(let i=0;i<P.d.length;i++){const X=P.x[i],Y=P.y[i];
+  if(X>=x0&&X<=x1&&Y>=y0&&Y<=y1&&P.d[i]>lo&&P.d[i]<=hi&&P.u[i]===u&&ok(P,i)&&sfOk(P.p[i],P.a[i]||0)){const pp=P.pp&&P.pp[i];
+   const m=(P.m&&P.m[i])||1;L.push({P,i,d:P.d[i],p:P.p[i],a:P.a[i]||0,m,c:pp>0&&m===1?P.p[i]/pp-1:null});}}}
+ sfSort(L);sivL=L;const N=sivAll?L.length:Math.min(L.length,150),when=RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="week"?`in the week to ${dday(MS.ad[ti])}`:spMode==="year"?`${mshift(ti,-12)} to ${mlabel()}`:`in the month to ${mlabel()}`;
+ const loading=Object.values(spLoading).some(Boolean);
+ return`<h2>Sales in view</h2><p class="sub">${seg==="unit"?"Units":"Houses"} · settled ${when}</p>${sfControls(u===1)}
+  <p class="note" style="margin:10px 0 4px"><b>${L.length.toLocaleString("en-AU")} ${noun2()}</b> on the map${loading?" (still loading)":""}. Click one for its full history.</p>
+  ${L.length?sfRows(L,N,it=>spAddr(it.P,it.i),it=>title(it.P.loc[it.P.l[it.i]])):""}${N<L.length?`<p><button class="linkbtn" id="sivAll">Show all ${L.length.toLocaleString("en-AU")}</button></p>`:""}${L.length?SF_NOTE:""}`;}
+let sivL=[];
+function inViewPanel(el){const on=spMode!=="off";if(!on)pview="sub";
+ const tabs=on?`<div class="dtabs" role="tablist" style="margin-top:0"><button role="tab" data-pv="sub" aria-selected="${pview==="sub"}">Suburbs in view</button><button role="tab" data-pv="sales" aria-selected="${pview==="sales"}">Sales in view</button></div>`:"";
+ el.innerHTML=tabs+(pview==="sales"?salesInView():areaSummary());
+ el.querySelectorAll("[data-pv]").forEach(b=>b.addEventListener("click",()=>{pview=b.dataset.pv;sivAll=false;detail();}));
+ if(pview!=="sales"){el.querySelectorAll("[data-n]").forEach(x=>x.addEventListener("click",()=>select(x.dataset.n)));return;}
+ sfWire(el,()=>{sivAll=false;detail();});const sa=$("sivAll");sa&&sa.addEventListener("click",()=>{sivAll=true;detail();});
+ el.querySelectorAll("[data-i]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const it=sivL[+a.dataset.i],P=it.P,i=it.i;openAddress(P.loc[P.l[i]],P.st[P.s[i]],P.n[i],P.un[i]);}));}
+// Refresh the sales list when point tiles finish loading.
+let sivT=0;function sivSoon(){if(pview!=="sales"||sel||P_SEL)return;clearTimeout(sivT);sivT=setTimeout(detail,200);}
 /* ---------- market section ---------- */
 function multiLine(qs,series,fmt,{bars=false,h=190,mark=null,tfmt=null,w=440}={}){L0=50,R=12,T=10,B_=22,n=qs.length;if(n<3)return'<p class="note">Not enough data.</p>';
  const vals=series.flatMap(s=>s.v.filter(x=>x!=null));let lo=bars?0:Math.min(...vals)*.92,hi=Math.max(...vals)*1.05;
@@ -2139,7 +2236,7 @@ if(MS){TB.sl.max=TL;TB.sl.value=TL;drawSpark();timeUI();
 else TB.bar.hidden=true;
 
 if(SPM&&MS&&MS.ad&&window.maplibregl){$("spsw").addEventListener("change",e=>setSp(e.target.value));setSp("week",true);
- $("spfilt").addEventListener("change",e=>{spFilt=e.target.value;const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);$("spopt").hidden=spMode==="off"||spFilt!=="all";spApply();legend();});
+ $("spfilt").addEventListener("change",e=>{spFilt=e.target.value;const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);$("spopt").hidden=spMode==="off"||spFilt!=="all";spApply();legend();detail();});
  document.getElementById("spcol").addEventListener("change",()=>{const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);legend();});}
 else document.querySelector(".spbar").hidden=true;
 
@@ -2269,16 +2366,21 @@ market();all();
 $("bxPrint").addEventListener("click",()=>window.print());
 // Full-width map (the default on wide screens): the side panel slides over the map's right edge, when a suburb is
 // chosen or from the "Suburbs in view" button, and away on Esc or a click off a suburb. "Side by side" restores the old layout.
-{const MN=document.querySelector(".main"),fb=$("fullBtn"),pb=$("panelBtn"),_sel=select,_close=closeSel,wide=matchMedia("(min-width:1001px)");
+// The panel button is a pull tab on the map's right edge, riding on the panel's edge when it is open.
+const IC_FULL='<path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+ IC_SIDE='<rect x="1.3" y="2.3" width="13.4" height="11.4" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 2.5v11" stroke="currentColor" stroke-width="1.6"/>';
+{const MN=document.querySelector(".main"),fb=$("fullBtn"),pb=$("panelBtn"),_sel=select,_close=closeSel,_open=openAddress,wide=matchMedia("(min-width:1001px)");
+ MN.appendChild(pb);pb.querySelector("svg").innerHTML='<path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';
  const isFull=()=>MN.classList.contains("full");
- const sync=()=>{const f=isFull(),o=MN.classList.contains("open");fb.setAttribute("aria-pressed",f);fb.querySelector("span").textContent=f?"Side by side":"Full width";
-  fb.title=f?"Map and panel side by side":"Make the map full width";pb.hidden=!f;pb.setAttribute("aria-pressed",o);pb.querySelector("span").textContent=o?"Hide panel":sel?"Show "+title(sel):"Suburbs in view";};
+ const sync=()=>{const f=isFull(),o=MN.classList.contains("open");fb.setAttribute("aria-pressed",f);fb.querySelector("span").textContent=f?"Side by side":"Full width";fb.querySelector("svg").innerHTML=f?IC_SIDE:IC_FULL;
+  fb.title=f?"Map and panel side by side":"Make the map full width";pb.hidden=!f;pb.setAttribute("aria-pressed",o);pb.querySelector("span").textContent=o?"Hide":P_SEL?"Show address":sel?"Show "+title(sel):"Suburbs in view";pb.title=o?"Hide the side panel":"Show the side panel";};
  const setOpen=on=>{MN.classList.toggle("open",on&&isFull());sync();};
  const setFull=(on,keep)=>{MN.classList.toggle("full",on&&wide.matches);MN.classList.remove("open");if(!keep)store.set("hs_full",on?1:0);sync();setTimeout(()=>map&&map.resize(),320);};
  fb.addEventListener("click",()=>setFull(!isFull()));
  pb.addEventListener("click",()=>setOpen(!MN.classList.contains("open")));
  select=function(...a){_sel(...a);if(isFull())MN.classList.add("open");sync();};
  closeSel=function(...a){_close(...a);MN.classList.remove("open");sync();};
+ openAddress=async function(...a){await _open(...a);if(isFull())MN.classList.add("open");sync();};
  new MutationObserver(sync).observe(MN,{attributes:true,attributeFilter:["class"]});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open"))setOpen(false);});
  wide.addEventListener("change",()=>setFull(store.get("hs_full")!==0,true));
