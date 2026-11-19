@@ -481,7 +481,11 @@ header.gh h2#ghH1 mark{background:none;color:var(--hi);padding:0}
 #ghFig svg{display:block;width:100%;height:auto;overflow:visible}
 #ghFig text{font:500 11.5px var(--mono);fill:var(--mist)}
 #ghFig text.v{font:600 14.5px var(--sans);fill:#C9D4CD}#ghFig text.v.now{fill:#fff}
-.gh-cap{margin:26px 0 0;font:400 13px/1.55 var(--sans);color:var(--mist)}.gh-cap summary{cursor:pointer;display:inline-block;color:#C9D4CD}.gh-cap p{margin:8px 0 0;max-width:100ch}
+.gh-cap{margin:26px 0 0;font:400 13px/1.55 var(--sans);color:var(--mist)}.gh-cap summary{cursor:pointer;display:inline-block;color:#C9D4CD}
+.gh-cap dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px 26px;margin:14px 0 0;max-width:1100px}
+.gh-cap dl>div{border-top:1px solid rgba(157,176,166,.3);padding-top:9px}
+.gh-cap dt{font:500 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--hi);margin:0 0 4px}
+.gh-cap dd{margin:0;color:#C9D4CD;font-size:13px;line-height:1.5}
 header.gh .gh-ask{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 30px}
 @media(max-width:1000px){header.gh .gh-ask{grid-template-columns:1fr}.gh-mgrid{grid-template-columns:1fr}}
 @media(max-width:720px){.gh-hero{padding:34px 0 34px}header.gh .gh-hero h1{font-size:46px;margin-bottom:16px}.gh-sub{font-size:16.5px;margin-bottom:16px}.gh-fresh{font-size:13px;padding:9px 14px;border-radius:14px;flex-wrap:wrap;text-align:left;gap:4px 10px}
@@ -657,7 +661,7 @@ details.how.lic{margin-top:0;border-top:0}
 #panelBtn[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 @media(min-width:1001px){
  .main.full{grid-template-columns:1fr;position:relative;overflow:hidden}
- .main.full aside#detail{position:absolute;top:12px;right:12px;width:min(440px,calc(100% - 24px));height:calc(var(--maph) - 24px);z-index:25;transform:translateX(calc(100% + 32px));opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s}
+ .main.full aside#detail{position:absolute;top:12px;right:12px;width:min(var(--pw,440px),calc(100% - 24px));height:calc(var(--maph) - 24px);z-index:25;transform:translateX(calc(100% + 32px));opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s}
  .main.full.open aside#detail{transform:none;opacity:1;pointer-events:auto;box-shadow:0 24px 48px -20px rgba(14,26,22,.45)}
  }
 @media(max-width:1000px){#fullBtn,#panelBtn{display:none}}
@@ -671,7 +675,7 @@ details.how.lic{margin-top:0;border-top:0}
 .list-d>summary h2{margin:0;font:700 28px/1.1 var(--serif)}
 .list-d>summary span{font:400 13px var(--sans);color:var(--slate)}
 .bx-rentin>span:first-child{margin-right:-5px}
-.main.full .maptools{transition:right .32s cubic-bezier(.2,.7,.2,1)}.main.full.open .maptools{right:min(470px,calc(100% - 24px))}
+.main.full .maptools{transition:right .32s cubic-bezier(.2,.7,.2,1)}.main.full.open .maptools[data-a$=r]{right:min(calc(var(--pw,440px) + 30px),calc(100% - 24px))}
 @media(max-width:720px){.timebar .tbtns{grid-column:1/-1;order:8;flex-wrap:wrap}}
 
 /* ---- 19 Nov: stats in the top bar ---- */
@@ -768,7 +772,7 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
  .main.full #panelBtn{position:absolute;right:0;top:calc(var(--maph) / 2);transform:translateY(-50%);z-index:26;flex-direction:column;gap:8px;padding:14px 7px;border-radius:10px 0 0 10px;border-right:0;writing-mode:vertical-rl;box-shadow:-4px 4px 14px -6px rgba(14,26,22,.35);transition:right .32s cubic-bezier(.2,.7,.2,1),background .15s}
  .main.full #panelBtn span{margin:0;letter-spacing:.02em}
  .main.full #panelBtn svg{transition:transform .32s}
- .main.full.open #panelBtn{right:min(452px,calc(100% - 12px))}
+ .main.full.open #panelBtn{right:min(calc(var(--pw,440px) + 12px),calc(100% - 12px))}
  .main.full.open #panelBtn svg{transform:rotate(180deg)}
  .main.full #panelBtn:hover{background:var(--hi);color:var(--ink);border-color:var(--ink)}
 }
@@ -802,6 +806,48 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 .tl-ch.pos{background:#E2F1E8;color:var(--gain)}.tl-ch.neg{background:#FBE7E4;color:var(--loss)}
 .tl-m{font:13px/1.45 var(--sans);color:var(--slate);margin:2px 0}
 .tl-m b.pos{color:var(--gain)}.tl-m b.neg{color:var(--loss)}
+
+/* filled range tracks: ink up to the thumb, grey after (--f set by rFill) */
+.bx-range::-webkit-slider-runnable-track,.lrow input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--ink) var(--f,50%),#D5DAD2 var(--f,50%))}
+.bx-range::-moz-range-track,.lrow input[type=range]::-moz-range-track{background:linear-gradient(90deg,var(--ink) var(--f,50%),#D5DAD2 var(--f,50%))}
+.bx-range::-webkit-slider-runnable-track{height:6px;border-radius:3px}.bx-range::-webkit-slider-thumb{margin-top:-7px}
+.bx-range::-moz-range-track{height:6px;border-radius:3px}
+.bx-range:disabled::-webkit-slider-runnable-track{background:var(--hair)}
+
+/* map boxes sit at anchors (18a-layout.js); wide screens only */
+@media(min-width:1001px){
+ .mapbox>[data-a]{top:auto;right:auto;bottom:auto;left:auto}
+ .mapbox>[data-a=tl]{top:12px;left:52px}
+ .mapbox>[data-a=tc]{top:12px;left:50%;transform:translateX(-50%)}
+ .mapbox>[data-a=tr]{top:12px;right:12px}
+ .mapbox>[data-a=bl]{bottom:28px;left:12px}
+ .mapbox>[data-a=bc]{bottom:28px;left:50%;transform:translateX(-50%)}
+ .mapbox>[data-a=br]{bottom:30px;right:12px}
+ .main.full.open .mapbox>[data-a$=r]{right:min(calc(var(--pw,440px) + 30px),calc(100% - 24px))}
+ .main.full.open .mapbox>[data-a$=c]{left:calc((100% - min(var(--pw,440px) + 24px,100%)) / 2)}
+ .mapbox>[data-a$=r],.mapbox>[data-a$=c]{transition:right .32s cubic-bezier(.2,.7,.2,1),left .32s cubic-bezier(.2,.7,.2,1)}
+ .maptools[data-a$=l]{align-items:flex-start}
+ .maptools[data-a^=b]{flex-direction:column-reverse}
+ .legend[style*="--w"],.hoverbar[style*="--w"]{width:var(--w);min-width:0;max-width:calc(100% - 24px)}
+ .hoverbar[data-a=tr],.hoverbar[data-a=tc]{top:12px}
+}
+@media(min-width:1001px) and (max-width:1180px){.hoverbar[data-a=tl]{top:54px}}
+@media(max-width:1000px){#arrRow{display:none}}
+
+/* arrange mode */
+.mapbox.arrange>[data-mv]{outline:2px dashed var(--ink);outline-offset:3px;cursor:grab;pointer-events:auto!important;z-index:30}
+.mapbox.arrange>[data-mv]::before{content:attr(data-mv);position:absolute;top:-22px;left:0;font:500 11.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;background:var(--ink);color:#fff;padding:2px 7px;border-radius:5px}
+.mapbox.arrange>[data-mv]::after{content:"";position:absolute;inset:0;z-index:40}
+.mapbox.dragging>[data-mv]{transition:none!important;cursor:grabbing}
+.mv-rs{position:absolute;right:-9px;bottom:-9px;width:16px;height:16px;border-radius:4px;background:var(--hi);border:2px solid var(--ink);cursor:ew-resize;z-index:41}
+[data-a$=r]>.mv-rs{right:auto;left:-9px}
+.mv-dot{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid var(--ink);background:#fff;opacity:.55;z-index:29;pointer-events:none}
+.mv-dot.on{background:var(--hi);opacity:1;transform:scale(1.4)}
+.mv-bar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);user-select:none;z-index:45;display:flex;align-items:center;gap:14px;background:var(--night);color:#fff;padding:10px 14px;border-radius:12px;font:13px var(--sans);box-shadow:0 14px 30px -12px rgba(0,0,0,.5);max-width:min(620px,calc(100% - 40px))}
+.mv-bar .linkbtn{color:var(--hi)}.mv-bar .lbtn{background:var(--hi);color:var(--ink);border-color:var(--hi)}
+.mv-pw{position:absolute;top:12px;right:calc(min(var(--pw,440px),100% - 24px) + 6px);height:calc(var(--maph) - 24px);width:14px;z-index:46;cursor:ew-resize;display:flex;align-items:center;justify-content:center}
+.mv-pw::before{content:"";width:6px;height:64px;border-radius:3px;background:var(--hi);border:2px solid var(--ink)}
+.main.full.open .mv-bar{left:calc((100% - min(var(--pw,440px) + 24px,100%)) / 2)}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><div class="gh-stats num" id="ghStats"></div><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
@@ -816,7 +862,7 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
 <div class="gh-mgrid"><div class="gh-ans"><h2 id="ghH1"></h2><p id="headline"></p><div class="gh-tiles num" id="ghTiles"></div></div>
 <div class="gh-ev" id="ghEv"><div class="gh-labrow"><p class="gh-lab" id="ghLab"></p><span class="seg gh-yrs" role="group" aria-label="Years shown"><button data-ghy="1" aria-pressed="true">1 yr</button><button data-ghy="3" aria-pressed="false">3 yrs</button></span></div><p class="gh-now" id="ghNow"></p><div id="ghFig"></div></div></div>
-<details class="gh-cap"><summary>How this is worked out</summary><p id="ghCap"></p></details>
+<details class="gh-cap"><summary>How this is worked out</summary><div id="ghCap"></div></details>
 </section>
 <div class="gh-ask">
 <button class="pri" id="ctaPlay"><span class="n">01</span><span><b>Where are prices moving?</b><span class="s">Watch the last 12 months play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
@@ -855,7 +901,7 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 </div>
 <div class="main">
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
-  <div class="maptools">
+  <div class="maptools" data-a="tr">
    <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select><span id="spopt" hidden><select id="spcol" aria-label="Colour individual sales by" title="Colour individual sales by"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></span><b id="spinfo" hidden></b></div>
    <button class="lbtn" id="panelBtn" aria-pressed="false" title="Show the side panel: suburbs in view, or the suburb you picked"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12M2 8h12M2 13h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Suburbs in view</span></button>
    <button class="lbtn" id="fullBtn" aria-pressed="false" title="Make the map full width"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Full width</span></button>
@@ -865,10 +911,11 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
     <div class="lrow" id="palrow"><span>Price colours</span><div class="pals" id="pals" role="group" aria-label="Colours for price maps"></div></div>
     <div class="lrow"><span>Base map</span><div class="seg" role="group" aria-label="Base map"><button data-base="map" aria-pressed="true">Map</button><button data-base="sat" aria-pressed="false">Satellite</button></div></div>
     <div class="lrow"><span>Suburb shading</span><input id="opac" type="range" min="0" max="100" value="72" aria-label="Suburb shading opacity"></div>
+    <div class="lrow" id="arrRow"><span>Layout</span><button class="lbtn" id="arrBtn" type="button">Arrange the map</button></div>
    </div>
   </div>
-  <div class="hoverbar" id="hoverbar" hidden></div>
-  <div class="legend" id="legend"></div></div>
+  <div class="hoverbar" id="hoverbar" data-a="tl" hidden></div>
+  <div class="legend" id="legend" data-a="bl"></div></div>
  <aside id="detail" aria-live="polite"></aside>
 </div>
 
@@ -1316,7 +1363,7 @@ if(window.maplibregl){
   if(hoverId!==f.id){if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=f.id;map.setFeatureState({source:"sub",id:hoverId},{hover:true});}
   hoverBar.setLngLat(e.lngLat).setHTML(tipHtml(f.properties.n)).addTo(map);});
  map.on("mouseleave","fill",()=>{map.getCanvas().style.cursor="";if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=null;hoverBar.remove();});
- map.on("click",e=>{if(spPop&&spPop.isOpen()&&!spAt(e))spPop.remove();const M=document.querySelector(".main.full.open");if(M&&!map.queryRenderedFeatures(e.point,{layers:["fill"]}).length)M.classList.remove("open");});   // full width: clicking off a suburb slides the panel away
+ map.on("click",e=>{if(spPop&&spPop.isOpen()&&!spAt(e))spPop.remove();const M=document.querySelector(".main.full.open:not(.pin)");if(M&&!map.queryRenderedFeatures(e.point,{layers:["fill"]}).length)M.classList.remove("open");});   // full width: clicking off a suburb slides the panel away
  map.on("click","fill",e=>{if(spClick(e))return;const f=e.features[0];if(!f)return;if(f.properties.n===sel&&!P_SEL)closeSel();else select(f.properties.n,false);});
 }else{document.getElementById("map").innerHTML='<p class="note" style="padding:20px">The map needs an internet connection to load.</p>';}
 /* ---------- individual sales ---------- */
@@ -2102,7 +2149,14 @@ function headline3(M,noun,asof,an){const fp=M.fromPeak,yy=M.yoy,cl=v=>v==null?""
   `<div><small>On a year ago</small><b class="${cl(yy)}">${yy==null?"–":signed(yy)}</b><span>Against a year earlier</span></div>`+
   `<div><small>Last 3 months</small><b class="${cl(M.prev)}">${M.prev==null?"–":signed(M.prev)}</b><span>Against the 3 months before</span></div>`;
  ghLine3(M,noun,an);
- $("ghCap").innerHTML=`Every figure here compares 3-month medians of all ${noun} sales in ${an}: the middle price of the sales that settled in each three months. Three months is long enough to steady the figure and short enough to turn within about a month of the market; a 12-month median runs six or seven months late. <b>From the peak</b> compares the latest three months with the highest three months in the last three years. <b>On a year ago</b> compares the same three months a year apart, so the season is the same. <b>Last 3 months</b> compares with the three months before and moves with the season, so read it as a direction. Suburb colours on the map use 12 months of sales, because most suburbs have too few sales for three. Medians also move with the mix of homes sold. Source: NSW Valuer General.`;}
+ {const it=(k,v)=>`<div><dt>${k}</dt><dd>${v}</dd></div>`;$("ghCap").innerHTML=`<dl>`+
+  it("The figure",`The 3-month median: the middle price of all ${noun} sales in ${an} that settled in each three months.`)+
+  it("Why 3 months","Steady enough to trust, and it turns within about a month of the market. A 12-month median runs 6 to 7 months late.")+
+  it("From the peak","The latest 3 months against the highest 3 months in the last 3 years.")+
+  it("On a year ago","The same 3 months a year apart, so the season matches.")+
+  it("Last 3 months","Against the 3 months before. It moves with the season, so read it as a direction.")+
+  it("On the map","Suburb colours use 12 months of sales: most suburbs have too few for 3.")+
+  it("Keep in mind","Medians move with the mix of homes sold. Source: NSW Valuer General.")+`</dl>`;}}
 // Small line: the 3-month median at each month, 1 or 3 years back. Hover a point for its value; no labels sit on the line.
 function ghLine3(M,noun,an){const el=$("ghFig"),i0=Math.max(0,M.n-12*ghYrs),idx=[];for(let i=i0;i<=M.n;i++)if(M.a[i]!=null)idx.push(i);
  document.querySelectorAll("[data-ghy]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.ghy===ghYrs));
@@ -2124,7 +2178,7 @@ function ghLine3(M,noun,an){const el=$("ghFig"),i0=Math.max(0,M.n-12*ghYrs),idx=
   const opts=[y-13,y+22].filter(ty=>ty-12>2&&ty<H-Bm+16).map(ty=>({ty,s:clear(ty)-(hit(ty)?1e6:0)+(c.k===pk&&ty<y?25:0)})).sort((a,b)=>b.s-a.s);
   const ty=(opts[0]||{ty:y-13}).ty;
   box.push([x0,ty-12,x0+tw,ty+3]);g+=`<text class="call" x="${(an==="start"?x-4:an==="end"?x+4:x).toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${an}">${txt}</text>`;});
- const hov={vw:W,t:T,b:H-Bm,q:idx.map(i=>MS.m[i]),xs:v.map((_,k)=>+X(k).toFixed(1)),lab:idx.map(i=>"3 months to "+m3lab(i)),rows:v.map((x,k)=>[["#D2FF3A",+Y(x).toFixed(1),`Median ${money(x)}${k===pk?" · the peak":""}`]])};
+ const hov={vw:W,t:T,b:H-Bm,q:idx.map(i=>MS.m[i]),xs:v.map((_,k)=>+X(k).toFixed(1)),lab:idx.map(i=>m3lab(i)),rows:v.map((x,k)=>[["#D2FF3A",+Y(x).toFixed(1),money(x)]])};
  $("ghLab").textContent=`Median ${noun} price, ${an}`;
  $("ghNow").textContent="";
  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" data-hov="${esc(JSON.stringify(hov))}" aria-label="Median price by month: ${v.map((x,k)=>sl(idx[k])+" "+money(x)).join(", ")}">${g}</svg>`;}
@@ -2364,32 +2418,99 @@ market();all();
 
 
 $("bxPrint").addEventListener("click",()=>window.print());
-// Full-width map (the default on wide screens): the side panel slides over the map's right edge, when a suburb is
-// chosen or from the "Suburbs in view" button, and away on Esc or a click off a suburb. "Side by side" restores the old layout.
-// The panel button is a pull tab on the map's right edge, riding on the panel's edge when it is open.
+// Wide screens: the map is always full width and the side panel slides over its right edge, when a suburb is chosen
+// or from the pull tab, and away on Esc or a click off a suburb. "Side by side" pins the panel open until unpinned.
 const IC_FULL='<path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="1.6"/>',
  IC_SIDE='<rect x="1.3" y="2.3" width="13.4" height="11.4" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 2.5v11" stroke="currentColor" stroke-width="1.6"/>';
 {const MN=document.querySelector(".main"),fb=$("fullBtn"),pb=$("panelBtn"),_sel=select,_close=closeSel,_open=openAddress,wide=matchMedia("(min-width:1001px)");
  MN.appendChild(pb);pb.querySelector("svg").innerHTML='<path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';
- const isFull=()=>MN.classList.contains("full");
- const sync=()=>{const f=isFull(),o=MN.classList.contains("open");fb.setAttribute("aria-pressed",f);fb.querySelector("span").textContent=f?"Side by side":"Full width";fb.querySelector("svg").innerHTML=f?IC_SIDE:IC_FULL;
-  fb.title=f?"Map and panel side by side":"Make the map full width";pb.hidden=!f;pb.setAttribute("aria-pressed",o);pb.querySelector("span").textContent=o?"Hide":P_SEL?"Show address":sel?"Show "+title(sel):"Suburbs in view";pb.title=o?"Hide the side panel":"Show the side panel";};
- const setOpen=on=>{MN.classList.toggle("open",on&&isFull());sync();};
- const setFull=(on,keep)=>{MN.classList.toggle("full",on&&wide.matches);MN.classList.remove("open");if(!keep)store.set("hs_full",on?1:0);sync();setTimeout(()=>map&&map.resize(),320);};
- fb.addEventListener("click",()=>setFull(!isFull()));
+ const isFull=()=>MN.classList.contains("full"),pinned=()=>MN.classList.contains("pin");
+ const sync=()=>{const p=pinned(),o=MN.classList.contains("open");fb.setAttribute("aria-pressed",p);fb.querySelector("span").textContent=p?"Full width":"Side by side";fb.querySelector("svg").innerHTML=p?IC_FULL:IC_SIDE;
+  fb.title=p?"Let the panel slide away again":"Keep the side panel open beside the map";pb.hidden=!isFull();pb.setAttribute("aria-pressed",o);
+  pb.querySelector("span").textContent=o?"Hide":P_SEL?"Show address":sel?"Show "+title(sel):"Suburbs in view";pb.title=o?"Hide the side panel":"Show the side panel";};
+ const setPin=on=>{MN.classList.toggle("pin",on);if(on&&isFull())MN.classList.add("open");store.set("hs_pin",on?1:0);sync();};
+ const setOpen=on=>{if(!on&&pinned())MN.classList.remove("pin"),store.set("hs_pin",0);MN.classList.toggle("open",on&&isFull());sync();};
+ const setFull=on=>{MN.classList.toggle("full",on);if(!on)MN.classList.remove("open");else if(pinned())MN.classList.add("open");sync();setTimeout(()=>map&&map.resize(),320);};
+ fb.addEventListener("click",()=>setPin(!pinned()));
  pb.addEventListener("click",()=>setOpen(!MN.classList.contains("open")));
  select=function(...a){_sel(...a);if(isFull())MN.classList.add("open");sync();};
- closeSel=function(...a){_close(...a);MN.classList.remove("open");sync();};
+ closeSel=function(...a){_close(...a);if(!pinned())MN.classList.remove("open");sync();};
  openAddress=async function(...a){await _open(...a);if(isFull())MN.classList.add("open");sync();};
  new MutationObserver(sync).observe(MN,{attributes:true,attributeFilter:["class"]});
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open"))setOpen(false);});
- wide.addEventListener("change",()=>setFull(store.get("hs_full")!==0,true));
- setFull(store.get("hs_full")!==0,true);}
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open")&&!pinned())setOpen(false);});
+ wide.addEventListener("change",()=>setFull(wide.matches));
+ if(store.get("hs_pin")===1)MN.classList.add("pin");setFull(wide.matches);}
 document.querySelectorAll("[data-ghy]").forEach(b=>b.addEventListener("click",()=>{ghYrs=+b.dataset.ghy;headline();}));
 // The map fills the screen under the control header (which stays at the top as you scroll).
 {const ctl=$("mapctl"),fit=()=>{document.documentElement.style.setProperty("--ctlh",ctl.offsetHeight+"px");if(map)map.resize();};
  new ResizeObserver(fit).observe(ctl);addEventListener("resize",fit);fit();}
 document.querySelectorAll("#mtab [data-mt]").forEach(b=>b.addEventListener("click",()=>{mtab=b.dataset.mt;market();}));
+/* ---------- arrange the map: move and resize the boxes on it, snapping to set places (wide screens) ---------- */
+// Each box sits at one of a few anchors (top or bottom; left, centre or right) and can be widened within limits.
+// The side panel's width can be changed too. Saved in this browser (hs_layout). Phones keep the fixed layout.
+const MV={tools:{sel:".maptools",at:["tl","tr","bl","br"],def:"tr",name:"Map controls"},
+ legend:{sel:"#legend",at:["tl","tc","tr","bl","bc","br"],def:"bl",w:[220,420],name:"Key"},
+ hover:{sel:"#hoverbar",at:["tl","tc","tr","bl","bc","br"],def:"tl",w:[220,400],name:"Hover card"}};
+const PW=[360,640],W_STEP=20,PW_STEP=40;
+let LAY=store.get("hs_layout")||{},arrOn=false;
+const mvEl=k=>document.querySelector(MV[k].sel),mbox=()=>document.querySelector(".mapbox");
+function layApply(){for(const k in MV){const m=MV[k],el=mvEl(k),s=LAY[k]||{};if(!el)continue;el.dataset.a=m.at.includes(s.a)?s.a:m.def;
+  if(m.w&&s.w)el.style.setProperty("--w",s.w+"px");else el.style.removeProperty("--w");}
+ const MN=document.querySelector(".main");if(LAY.pw)MN.style.setProperty("--pw",LAY.pw+"px");else MN.style.removeProperty("--pw");}
+function laySave(){store.set("hs_layout",LAY);layApply();}
+// anchor points in map-box pixels; the right edge moves in when the side panel is open over the map
+function anchorXY(a){const mb=mbox(),w=mb.clientWidth,h=mb.clientHeight,MN=document.querySelector(".main"),
+ pw=MN.classList.contains("full")&&MN.classList.contains("open")?Math.min(LAY.pw||440,w-24)+24:0,R=w-pw;
+ return[a[1]==="l"?0:a[1]==="c"?R/2:R,a[0]==="t"?0:h];}
+function nearest(k,x,y){let best=null,bd=1e18;for(const a of MV[k].at){const[ax,ay]=anchorXY(a),d=(ax-x)**2+(ay-y)**2;if(d<bd){bd=d;best=a;}}return best;}
+function place(k,a){const old=(LAY[k]&&LAY[k].a)||MV[k].def;if(a===old)return;
+ for(const k2 in MV){if(k2===k)continue;const a2=(LAY[k2]&&LAY[k2].a)||MV[k2].def;if(a2!==a)continue;   // swap with whatever was there
+  const used=new Set(Object.keys(MV).filter(x=>x!==k2&&x!==k).map(x=>(LAY[x]&&LAY[x].a)||MV[x].def));used.add(a);
+  LAY[k2]={...(LAY[k2]||{}),a:MV[k2].at.includes(old)?old:MV[k2].at.find(z=>!used.has(z))};}
+ LAY[k]={...(LAY[k]||{}),a};}
+function arrange(on){arrOn=on;const mb=mbox(),MN=document.querySelector(".main");mb.classList.toggle("arrange",on);
+ mb.querySelectorAll(".mv-rs,.mv-bar,.mv-dot").forEach(x=>x.remove());MN.querySelectorAll(".mv-pw").forEach(x=>x.remove());
+ for(const k in MV){const el=mvEl(k);if(el)on?el.setAttribute("data-mv",k):el.removeAttribute("data-mv");}
+ if(!on){hoverBar.remove();return;}
+ $("lpanel").hidden=true;$("layersBtn").setAttribute("aria-expanded",false);
+ const hb=$("hoverbar");hb.innerHTML=`<b>Hover card</b><span>Shows the suburb or sale under your pointer.</span>`;hb.hidden=false;
+ for(const k in MV)if(MV[k].w){const h=document.createElement("span");h.className="mv-rs";h.title="Drag to resize";mvEl(k).appendChild(h);}
+ for(const a of ["tl","tc","tr","bl","bc","br"]){const d=document.createElement("i");d.className="mv-dot";d.dataset.at=a;mb.appendChild(d);}
+ const bar=document.createElement("div");bar.className="mv-bar";bar.innerHTML=`<span>Drag a box to move it; it snaps into place. Drag a lime corner to resize${MN.classList.contains("full")?", or the panel's edge to widen it":""}.</span><button class="linkbtn" data-mvr>Reset</button><button class="lbtn" data-mvd>Done</button>`;mb.appendChild(bar);
+ bar.querySelector("[data-mvr]").addEventListener("click",()=>{LAY={};laySave();arrange(true);});
+ bar.querySelector("[data-mvd]").addEventListener("click",()=>arrange(false));
+ if(MN.classList.contains("full")){MN.classList.add("open");const p=document.createElement("div");p.className="mv-pw";p.title="Drag to change the panel's width";MN.appendChild(p);}
+ dots();}
+function dots(){const mb=mbox();mb.querySelectorAll(".mv-dot").forEach(d=>{const[x,y]=anchorXY(d.dataset.at);d.style.left=Math.max(8,Math.min(mb.clientWidth-8,x))+"px";d.style.top=Math.max(8,Math.min(mb.clientHeight-8,y))+"px";});}
+{const mb=mbox(),MN=document.querySelector(".main");let drag=null;
+ const down=e=>{if(!arrOn)return;const pwH=e.target.closest(".mv-pw");
+  if(pwH){drag={kind:"pw",x:e.clientX,w:Math.min(LAY.pw||440,mb.clientWidth-24)};}
+  else{const el=e.target.closest("[data-mv]");if(!el)return;const k=el.dataset.mv,rs=e.target.closest(".mv-rs");
+   drag=rs?{kind:"w",k,el,x:e.clientX,w:el.getBoundingClientRect().width,dir:el.dataset.a[1]==="r"?-1:el.dataset.a[1]==="c"?2:1}:{kind:"mv",k,el,x:e.clientX,y:e.clientY};}
+  e.preventDefault();e.stopPropagation();(e.target.setPointerCapture&&e.target.setPointerCapture(e.pointerId));mb.classList.add("dragging");};
+ const move=e=>{if(!drag)return;const dx=e.clientX-drag.x;
+  if(drag.kind==="mv"){drag.el.style.translate=`${dx}px ${e.clientY-drag.y}px`;const r=drag.el.getBoundingClientRect(),b=mb.getBoundingClientRect(),a=nearest(drag.k,r.left+r.width/2-b.left,r.top+r.height/2-b.top);
+   mb.querySelectorAll(".mv-dot").forEach(d=>d.classList.toggle("on",d.dataset.at===a));}
+  else if(drag.kind==="w"){const[lo,hi]=MV[drag.k].w,w=Math.max(lo,Math.min(hi,Math.round((drag.w+dx*drag.dir)/W_STEP)*W_STEP));drag.el.style.setProperty("--w",w+"px");drag.nw=w;}
+  else{const w=Math.max(PW[0],Math.min(PW[1],mb.clientWidth-240,Math.round((drag.w-dx)/PW_STEP)*PW_STEP));MN.style.setProperty("--pw",w+"px");drag.nw=w;}};
+ const up=()=>{if(!drag)return;mb.classList.remove("dragging");mb.querySelectorAll(".mv-dot").forEach(d=>d.classList.remove("on"));
+  if(drag.kind==="mv"){const r=drag.el.getBoundingClientRect(),b=mb.getBoundingClientRect();place(drag.k,nearest(drag.k,r.left+r.width/2-b.left,r.top+r.height/2-b.top));drag.el.style.translate="";}
+  else if(drag.kind==="w"&&drag.nw)LAY[drag.k]={...(LAY[drag.k]||{}),w:drag.nw};
+  else if(drag.kind==="pw"&&drag.nw){LAY.pw=drag.nw;setTimeout(()=>map&&map.resize(),50);}
+  drag=null;laySave();dots();};
+ MN.addEventListener("pointerdown",down,true);addEventListener("pointermove",move);addEventListener("pointerup",up);
+ // in arrange mode, clicks inside the boxes don't reach their controls
+ mb.addEventListener("click",e=>{if(arrOn&&e.target.closest("[data-mv]")){e.preventDefault();e.stopPropagation();}},true);
+ document.addEventListener("keydown",e=>{if(arrOn&&e.key==="Escape")arrange(false);});
+ addEventListener("resize",()=>arrOn&&dots());
+ $("arrBtn").addEventListener("click",()=>arrange(true));
+ layApply();}
+// Range sliders show their value as a filled track: ink up to the thumb, grey after it.
+function rFill(el){const lo=+el.min||0,hi=+el.max||100,f=hi>lo?((+el.value-lo)/(hi-lo))*100:0;el.style.setProperty("--f",Math.max(0,Math.min(100,f))+"%");}
+function rFillAll(){document.querySelectorAll(".bx-range,#opac").forEach(rFill);}
+document.addEventListener("input",e=>{if(e.target.matches&&e.target.matches(".bx-range,#opac"))rFill(e.target);});
+{const _pu=planUI;planUI=function(...a){const r=_pu(...a);rFillAll();return r;};}
+rFillAll();
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;$("ghStats").title=$("prov").textContent;
