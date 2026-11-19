@@ -1358,7 +1358,7 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  spPop.setOffset({"bottom":[0,-44],"top":[0,8],"left":[16,-22],"right":[-16,-22],"bottom-left":[10,-40],"bottom-right":[-10,-40],"top-left":[10,6],"top-right":[-10,6]}).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
  requestAnimationFrame(()=>{const pe=spPop.getElement(),mr=map.getContainer().getBoundingClientRect();if(!pe)return;const pr=pe.getBoundingClientRect(),pad=12;let dx=0,dy=0;
   if(pr.top<mr.top+pad)dy=pr.top-mr.top-pad;else if(pr.bottom>mr.bottom-pad)dy=pr.bottom-mr.bottom+pad;
-  if(pr.left<mr.left+pad)dx=pr.left-mr.left-pad;else if(pr.right>mr.right-pad)dx=pr.right-mr.right+pad;if(dx||dy)map.panBy([dx,dy],{duration:300});});
+  if(pr.left<mr.left+pad)dx=pr.left-mr.left-pad;else if(pr.right>mr.right-pad)dx=pr.right-mr.right+pad;const pp=map.project(f.geometry.coordinates);if(pp.y<52)dy=Math.min(dy,pp.y-52);if(dx||dy)map.panBy([dx,dy],{duration:300});});
  const lk=spPop.getElement().querySelector("[data-sub]");lk&&lk.addEventListener("click",ev=>{ev.preventDefault();select(lk.dataset.sub,false);});
  const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});return true;}
 function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(ready)for(const y in spLoaded)try{map.setPaintProperty(spId(y),"circle-radius",spRad());}catch(e){}if(quiet){spApply();legend();return;}
@@ -1433,6 +1433,8 @@ function setOpacity(v){opac=v;if(ready){map.setPaintProperty("fill","fill-opacit
 
 /* ---------- budget planner ---------- */
 const $=id=>document.getElementById(id);
+// Scroll so the map sits just below the sticky control header (scrollIntoView misbehaves once the header is stuck).
+function toMap(){const m=document.querySelector(".main"),c=$("mapctl");if(!m||!c)return;scrollTo({top:m.getBoundingClientRect().top+scrollY-c.offsetHeight-12,behavior:"smooth"});}
 // Price or rent limit above the map, shown only with "Where I can afford to buy / rent". Type a figure here,
 // or leave it blank to use the Your budget tab.
 const mbudW=i=>{i.style.width=Math.max(7,(i.value||i.placeholder||"").length+1)+"ch";};   // grow with the figure so nothing is cut off
@@ -1919,7 +1921,7 @@ function qMonth(q){const m=String(q).match(/^(\d{4})Q([1-4])$/);if(!m||!MS)retur
 function mClick(id,labels){const el=$(id);el.dataset.q=JSON.stringify(labels);if(el.dataset.bound)return;el.dataset.bound=1;
  el.addEventListener("click",e=>{const svg=el.querySelector("svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov),r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;
   let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(JSON.parse(el.dataset.q)[k]);if(i==null)return;
-  stopPlay();setTime(i);$("timebar").scrollIntoView({behavior:"smooth",block:"start"});});}
+  stopPlay();setTime(i);toMap();});}
 // The market section: a card per home type (houses together, units together), then one big chart you can switch
 // between prices, sales and rents. Area figures follow the 3-month rule.
 let mtab="price";
@@ -2148,7 +2150,7 @@ function showTab(t){if(typeof tourS!=="undefined"&&tourS)tourEnd();setTimeout(()
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
 document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.goto);$("tabBudget").scrollIntoView({behavior:"smooth"});}));
 $("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&metric!=="g1"){metric="price";$("metric").value="price";}
- $("timebar").scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>{stopPlay();setTime(Math.max(0,TL-12));TB.play.click();},500);});
+ toMap();setTimeout(()=>{stopPlay();setTime(Math.max(0,TL-12));TB.play.click();},500);});
 if(location.hash==="#budget")setTimeout(()=>showTab("budget"),0);  // deferred: showTab reads tour state declared further down
 
 $("layersBtn").addEventListener("click",()=>{const o=$("lpanel").hidden;$("lpanel").hidden=!o;$("layersBtn").setAttribute("aria-expanded",o);});
@@ -2256,7 +2258,7 @@ document.querySelectorAll("[data-c]").forEach(el=>{const k=el.dataset.c;el.value
 document.querySelectorAll("[data-a],[data-bb]").forEach(el=>{const O=el.dataset.a?A:BB,k=el.dataset.a||el.dataset.bb,p="pct"in el.dataset;if(el.type==="checkbox")el.checked=!!O[k];else el.value=O[k]==null?"":p?+(O[k]*100).toFixed(3):O[k];
  el.addEventListener("input",()=>{if(k==="inv_tax"&&el.value===""){A.inv_tax=null;soon();return;}const x=el.type==="checkbox"?el.checked:el.tagName==="SELECT"?el.value:(+el.value)/(p?100:1);if(el.tagName!=="SELECT"&&el.type!=="checkbox"&&!isFinite(x))return;O[k]=x;soon();});});
 document.querySelector(".t thead").addEventListener("click",e=>{const th=e.target.closest("th");if(!th)return;const i=+th.dataset.i;dir=i===sortI?-dir:(i===0||i===BUDCOL?1:-1);sortI=i;table();});
-const pick=e=>{const tr=e.target.closest("tr[data-n]");if(tr){select(tr.dataset.n);document.querySelector(".main").scrollIntoView({behavior:"smooth",block:"start"});}};
+const pick=e=>{const tr=e.target.closest("tr[data-n]");if(tr){select(tr.dataset.n);toMap();}};
 document.querySelector(".t tbody").addEventListener("click",pick);
 document.querySelector(".t tbody").addEventListener("keydown",e=>{if(e.key==="Enter")pick(e);});
 const dt=s=>new Date(s).toLocaleDateString("en-AU",{day:"numeric",month:"long",year:"numeric"});
@@ -2296,6 +2298,6 @@ document.querySelectorAll("#mtab [data-mt]").forEach(b=>b.addEventListener("clic
  $("detail").addEventListener("click",e=>{const svg=e.target.closest&&e.target.closest(".chart svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov);if(!hov.q)return;
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
  document.querySelectorAll(".gh-ask button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll(".gh-ask button").forEach(x=>x.classList.toggle("pri",x===b))));
- $("ghFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});});
- $("askFind").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");$("map").scrollIntoView({behavior:"smooth",block:"center"});if(map)map.flyTo({center:[151.225,-33.858],zoom:11.7,duration:900});});}
+ $("ghFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");toMap();});
+ $("askFind").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");toMap();if(map)map.flyTo({center:[151.225,-33.858],zoom:11.7,duration:900});});}
 </script></body></html>
