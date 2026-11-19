@@ -745,6 +745,23 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 #ghFig{position:relative}#ghFig .hovg line{stroke:#fff;stroke-opacity:.45}
 #detail .chart{position:relative}
 .ovyrs button,.gh-yrs button{white-space:nowrap}
+#ghFig text.call{font:600 12.5px var(--sans);fill:#fff;paint-order:stroke;stroke:#0B1411;stroke-width:5px;stroke-linejoin:round}
+.gh-now:empty{display:none}
+/* market section: a card per home type, one big switchable chart */
+.mcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:10px 0 18px}
+@media(max-width:720px){.mcards{grid-template-columns:1fr}}
+.mcard{background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:16px 18px}
+.mcard h3{margin:0;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.mcard-v{font:700 34px/1.1 var(--serif);font-stretch:85%;margin:6px 0 0}.mcard>p{margin:0 0 10px;font-size:13px;color:var(--slate)}
+.mcard dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin:0}
+.mcard dl div{border-top:1px solid var(--hair);padding-top:6px}.mcard dt{font-size:13px;color:var(--slate)}.mcard dd{margin:0;font:600 16.5px var(--sans)}
+.mbig{background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:16px 18px 12px;position:relative}
+.mbig-h{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;margin-bottom:8px}.mbig-h h3{margin:0;font:600 16.5px var(--sans)}
+.mbig-h .k{display:flex;gap:14px;font-size:13px;color:var(--slate);margin-left:auto}.mbig-h .k i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+#mcBig svg{display:block;width:100%;height:auto}#mcBig svg text{font-size:13px}
+#mtab button[aria-pressed=true]{background:var(--ink);color:#fff}
+/* sales bar: colouring sits with the other sales controls */
+.spbar #spopt select{max-width:190px}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><div class="gh-stats num" id="ghStats"></div><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
@@ -799,13 +816,12 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 <div class="main">
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
   <div class="maptools">
-   <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select></div>
+   <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select><span id="spopt" hidden><select id="spcol" aria-label="Colour individual sales by" title="Colour individual sales by"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></span><b id="spinfo" hidden></b></div>
    <button class="lbtn" id="panelBtn" aria-pressed="false" title="Show the side panel: suburbs in view, or the suburb you picked"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12M2 8h12M2 13h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Suburbs in view</span></button>
    <button class="lbtn" id="fullBtn" aria-pressed="false" title="Make the map full width"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Full width</span></button>
    <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>Layers</button></div>
    <div class="spnote" id="spnote" hidden></div>
    <div class="lpanel" id="lpanel" hidden>
-    <div class="lrow" id="spopt" hidden><span>Colour individual sales by <b id="spinfo" class="num" style="font-weight:400"></b></span><select id="spcol"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></div>
     <div class="lrow" id="palrow"><span>Price colours</span><div class="pals" id="pals" role="group" aria-label="Colours for price maps"></div></div>
     <div class="lrow"><span>Base map</span><div class="seg" role="group" aria-label="Base map"><button data-base="map" aria-pressed="true">Map</button><button data-base="sat" aria-pressed="false">Satellite</button></div></div>
     <div class="lrow"><span>Suburb shading</span><input id="opac" type="range" min="0" max="100" value="72" aria-label="Suburb shading opacity"></div>
@@ -819,12 +835,11 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 <section class="market" aria-label="Market">
  <h2 class="sec" id="mtitle">The market</h2>
  <p class="lede" id="mlede"></p>
- <div class="mstats num" id="mstats"></div>
- <p class="note" style="margin:0 0 8px">Click any chart to show that date on the map. Unit figures start in 2002: records before then don't reliably say whether a home is a unit.</p>
- <div class="mcharts">
-  <div class="card"><h3>Median sale price</h3><div class="k"><span><i style="background:#0E1A16"></i>Houses</span><span><i style="background:#8FA39A"></i>Units</span></div><div id="mc1"></div></div>
-  <div class="card"><h3>Sales each quarter, since 2002</h3><div class="k"><span><i style="background:#0E1A16"></i>Houses</span><span><i style="background:#8FA39A"></i>Units</span></div><div id="mc2"></div></div>
-  <div class="card"><h3>Median weekly rent, new leases</h3><div class="k"><span><i style="background:#1F6E68"></i>Houses</span><span><i style="background:#86B3A9"></i>Units</span></div><div id="mc3"></div></div>
+ <div class="mcards" id="mcards"></div>
+ <div class="mbig card">
+  <div class="mbig-h"><span class="seg" id="mtab" role="group" aria-label="Chart"><button data-mt="price" aria-pressed="true">Prices</button><button data-mt="sales" aria-pressed="false">Sales</button><button data-mt="rent" aria-pressed="false">Rents</button></span><h3 id="mbigT"></h3><div class="k" id="mbigK"></div></div>
+  <div id="mcBig"></div>
+  <p class="note" id="mbigN" style="margin:6px 0 0"></p>
  </div>
 </section>
 
@@ -1170,7 +1185,7 @@ const rowFor=n=>byKey[n+"|"+seg];
 /* ---------- colour ---------- */
 const lerp=(a,b,t)=>a.map((x,i)=>Math.round(x+(b[i]-x)*t)),hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 function ramp(stops,t){t=Math.max(0,Math.min(1,t));const n=stops.length-1,i=Math.min(n-1,Math.floor(t*n));const c=lerp(hex(stops[i]),hex(stops[i+1]),t*n-i);return`rgb(${c})`;}
-const DIV=["#A8201A","#E8866A","#F5F2E6","#62BC97","#0A6048"],SEQ=["#F3F1E2","#B4DDC2","#5DB590","#168060","#07402F"],INK=["#EDE8DA","#B9C0C3","#7D8B98","#44576A","#0E1A16"];
+const DIV=["#D11F2E","#F2766B","#F4F3EC","#3CCB85","#0B9150"],SEQ=["#F3F1E2","#B4DDC2","#5DB590","#168060","#07402F"],INK=["#EDE8DA","#B9C0C3","#7D8B98","#44576A","#0E1A16"];
 const DIP=["#A8201A","#E8866A","#F5F2E6"];
 // colour schemes for the price maps (cheap to dear); growth keeps red and green so they never look alike
 const PALS={warm:["#F6F0DF","#EAC88C","#D9874E","#A8483F","#5B2435"],blue:["#EEF2F5","#B7CCDD","#6F9CC0","#33658F","#14324F"],
@@ -1180,11 +1195,11 @@ const stopsOf=M=>M.stops==="PRICE"?PALS[pal]:M.stops;
 // Budget bands from the spread of prices: below the cheapest quarter = out of budget; up to the median = a stretch;
 // median to upper quarter = within budget; above the upper quarter = comfortably within. Same for rents.
 const BL=["Out of budget","A stretch","Within budget","Comfortably within budget"];
-const band4=(v,lo,mid,hi)=>v==null||mid==null?null:v<(lo??mid*.85)?0:v<mid?1:v<(hi??mid*1.2)?2:3;
-const bBand=r=>buyLim()?band4(buyLim(),r[C.p25],r[C.med_now],r[C.p75]):null;
-const rBand=r=>rb&&r[C.rent_pw]!=null?band4(rb.pw,r[C.r25],r[C.rent_pw],r[C.r75]):null;
-const CAT={rent:[["Comfortably within: above most rents","#1F6E68",r=>rBand(r)===3],["Within budget: at or above the median rent","#86B3A9",r=>rBand(r)===2],["A stretch: below the median, above the cheapest quarter","#E2D3B5",r=>rBand(r)===1],["Out of budget: below the cheapest quarter of rents","#C9AEB1",r=>rBand(r)===0]],
- afford:[["Comfortably within: above most sale prices","#1F6E68",r=>bBand(r)===3],["Within budget: at or above the median price","#86B3A9",r=>bBand(r)===2],["A stretch: below the median, above the cheapest quarter","#E2D3B5",r=>bBand(r)===1],["Out of budget: below the cheapest quarter of sales","#C9AEB1",r=>bBand(r)===0]],
+const band4=(v,lo,q1,mid)=>v==null||mid==null?null:v>=mid?3:v>=(q1??mid*.85)?2:v>=(lo??(q1??mid*.85)*.85)?1:0;   // lo = cheapest tenth, q1 = cheapest quarter
+const bBand=r=>buyLim()?band4(buyLim(),r[C.p10],r[C.p25],r[C.med_now]):null;
+const rBand=r=>rb&&r[C.rent_pw]!=null?band4(rb.pw,r[C.r10],r[C.r25],r[C.rent_pw]):null;
+const CAT={rent:[["Comfortably within budget: at or above the median rent","#0B9150",r=>rBand(r)===3],["Within budget: below the median, above the cheapest quarter","#7FDCA4",r=>rBand(r)===2],["A stretch: only the cheapest quarter of rents","#F5B94C",r=>rBand(r)===1],["Out of budget: below almost every rent","#E5484D",r=>rBand(r)===0]],
+ afford:[["Comfortably within budget: at or above the median price","#0B9150",r=>bBand(r)===3],["Within budget: below the median, above the cheapest quarter","#7FDCA4",r=>bBand(r)===2],["A stretch: only the cheapest quarter of sales","#F5B94C",r=>bBand(r)===1],["Out of budget: below almost every sale","#E5484D",r=>bBand(r)===0]],
  shortlist:[["Affordable, below peak, beats Sydney's 10-year growth","#1F6E68",r=>fit(r)<=1&&dip(r)&&r[C.cagr_10y]!=null&&r[C.cagr_10y]>=(mkt(rowReg(r),seg).cagr_10y||0)],
   ["Affordable and below peak","#86B3A9",r=>fit(r)<=1&&dip(r)],["Affordable, not below peak","#E2DDD0",r=>fit(r)<=1],["Out of budget","#D8D3CC",()=>true]]};
 const METRICS={
@@ -1284,11 +1299,15 @@ function spPaint(){const mode=document.getElementById("spcol").value,rk=mode==="
   ?["interpolate",["linear"],["ln",["get","p"]],Math.log(6e5),HEX[0],Math.log(1.1e6),HEX[1],Math.log(1.8e6),HEX[2],Math.log(3e6),HEX[3],Math.log(5.5e6),HEX[4]]
   :["interpolate",["linear"],["get",rk],.7,HREL[0],.87,HREL[1],1,"#D8D2C2",1.18,HREL[3],1.45,HREL[4]],
  "circle-radius":spRad(),"circle-opacity":.92,
- "circle-stroke-color":"#fff","circle-stroke-width":["interpolate",["linear"],["zoom"],11,0,13,.8]};}
+ "circle-stroke-color":"#C6F23A","circle-stroke-width":["interpolate",["linear"],["zoom"],10,.5,13,1.6,16,2.2]};}
+// Like a listings map: every sale has a lime ring until you open it, then the ring turns white. Remembered in this browser.
+const SEEN=(()=>{try{return JSON.parse(localStorage.getItem("hs_seen")||"{}")}catch(e){return{}}})();
+const spRing=y=>{const v=SEEN[y];return v&&v.length?["case",["in",["get","i"],["literal",v]],"#FFFFFF","#C6F23A"]:"#C6F23A";};
+function spSeen(y,i){const v=SEEN[y]||(SEEN[y]=[]);if(!v.includes(i)){v.push(i);try{localStorage.setItem("hs_seen",JSON.stringify(SEEN));}catch(e){}}try{map.setPaintProperty(spId(y),"circle-stroke-color",spRing(y));}catch(e){}}
 function spAdd(y){const P=window.SP&&window.SP[y];if(!P||!ready||spLoaded[y])return;const id="sp_"+y.replace(/[^0-9a-z]/gi,"_");LID[id]=y;const n=P.p.length,f=new Array(n);
  for(let i=0;i<n;i++)f[i]={type:"Feature",properties:{i,d:P.d[i],u:P.u[i],pp:(P.pp&&P.pp[i])||0,m:(P.m&&P.m[i])||1,r:P.r[i]??1,ra:(P.ra&&P.ra[i])??P.r[i]??1,p:P.p[i]},geometry:{type:"Point",coordinates:[150+P.x[i]/1e5,-34+P.y[i]/1e5]}};
  map.addSource(id,{type:"geojson",data:{type:"FeatureCollection",features:f}});
- map.addLayer({id,type:"circle",source:id,layout:{visibility:"none"},paint:spPaint()});
+ map.addLayer({id,type:"circle",source:id,layout:{visibility:"none"},paint:spPaint()});map.setPaintProperty(id,"circle-stroke-color",spRing(y));
  spLoaded[y]=1;spApply();}
 const spId=k=>"sp_"+k.replace(/[^0-9a-z]/gi,"_");
 function spLayers(){if(spMode==="off")return[];const ks=spKeys();return ks.filter(k=>spLoaded[k]).map(spId);}
@@ -1334,8 +1353,12 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  if(ml>1)h+=`<div class="ln warn">Part of one sale of <b>${ml} properties</b> for ${dollars(P.p[i])} in total (about ${dollars(P.p[i]/ml)} each). Left out of medians and growth.</div>`;
  else if(ml<0)h+=`<div class="ln warn">Far from anything else sold in ${esc(title(loc))} that year: often a development site, a big holding or a family transfer. Left out of medians and growth.</div>`;
  h+=`<div class="ft"><a href="#" data-prop="1">Full history of this address</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;
- if(!pMarker)pMarker=new maplibregl.Marker({color:"#C6F23A"});pMarker.setLngLat(f.geometry.coordinates).addTo(map);   // same lime pin as a searched address
- spPop.setOffset([0,-40]).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
+ if(!pMarker)pMarker=new maplibregl.Marker({color:"#C6F23A"});pMarker.setLngLat(f.geometry.coordinates).addTo(map);spSeen(y,i);   // same lime pin as a searched address
+ // The card sits beside the pin, never on it, and the map moves so the card is fully in view.
+ spPop.setOffset({"bottom":[0,-44],"top":[0,8],"left":[16,-22],"right":[-16,-22],"bottom-left":[10,-40],"bottom-right":[-10,-40],"top-left":[10,6],"top-right":[-10,6]}).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
+ requestAnimationFrame(()=>{const pe=spPop.getElement(),mr=map.getContainer().getBoundingClientRect();if(!pe)return;const pr=pe.getBoundingClientRect(),pad=12;let dx=0,dy=0;
+  if(pr.top<mr.top+pad)dy=pr.top-mr.top-pad;else if(pr.bottom>mr.bottom-pad)dy=pr.bottom-mr.bottom+pad;
+  if(pr.left<mr.left+pad)dx=pr.left-mr.left-pad;else if(pr.right>mr.right-pad)dx=pr.right-mr.right+pad;if(dx||dy)map.panBy([dx,dy],{duration:300});});
  const lk=spPop.getElement().querySelector("[data-sub]");lk&&lk.addEventListener("click",ev=>{ev.preventDefault();select(lk.dataset.sub,false);});
  const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});return true;}
 function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(ready)for(const y in spLoaded)try{map.setPaintProperty(spId(y),"circle-radius",spRad());}catch(e){}if(quiet){spApply();legend();return;}
@@ -1402,7 +1425,7 @@ function propHtml(){const S=P_SEL,loc=S.loc;const stBack=S.p&&S.street&&S.street
  return h;}
 
 /* ---------- sales colours ---------- */
-const HEX=["#F3EEDF","#E8C98F","#D08A4E","#A04A3E","#5B2435"],HREL=["#C2372B","#E3A199","#EFEBE0","#8CC5A3","#167A49"];
+const HEX=["#F3EEDF","#E8C98F","#D08A4E","#A04A3E","#5B2435"],HREL=["#D11F2E","#F2766B","#F1EEE6","#3CCB85","#0B9150"];
 function paintMap(){legend();spApply();if(!ready)return;
  for(const f of GEO.features){const n=f.properties.n,c=colour(rowFor(n),n+"|"+seg);map.setFeatureState({source:"sub",id:f.id},{c:c||"#D9D7CF",has:!!c});}
  map.setFilter("sel",["==",["get","n"],sel||""]);if(map.getLayer("sel2"))map.setFilter("sel2",["==",["get","n"],sel||""]);}
@@ -1815,7 +1838,7 @@ function detail(){const el=document.getElementById("detail");
  if(dtab==="sales")body='<div id="salesList"><p class="note">Loading sales…</p></div>';
  if(hist&&dtab==="overview")body=histOverview(k,r)+'<div id="ovStrip"><p class="note">Loading sales…</p></div>';
  else if(hist&&dtab!=="sales"&&!(dtab==="trends"&&RNG))body=`<p class="note" style="background:var(--wash);border-radius:6px;padding:8px 12px">Showing ${whenTxt()}.${dtab==="buyrent"?" This comparison always uses today's prices and rents.":""}</p>`+body;
- el.innerHTML=dHead(title(r[C.locality]),`${r[C.postcode]} · ${seg==="house"?"Houses":"Units"}${r[C.cagr_10y]==null?' <span class="tag">new</span>':""}`)+`
+ el.innerHTML=dHead(title(r[C.locality]),`${r[C.postcode]} · ${seg==="house"?"Houses":"Units"}${r[C.cagr_10y]==null?' <span class="tag" title="Fewer than 10 years of sales here, usually a newly built area, so its growth comes from its region">new</span>':""}`)+`
  <div class="dtabs" role="tablist">${tabs.map(([k2,l])=>`<button role="tab" data-dt="${k2}" aria-selected="${dtab===k2}">${l}</button>`).join("")}</div>${body}`;
  el.querySelectorAll("[data-dt]").forEach(b=>b.addEventListener("click",()=>{dtab=b.dataset.dt;detail();el.scrollTop=0;}));
  el.querySelectorAll("[data-ovy]").forEach(b=>b.addEventListener("click",()=>{ovYrs=+b.dataset.ovy;detail();}));
@@ -1875,7 +1898,7 @@ async function thinPanel(el,n){const noun=seg==="house"?"house":"unit",k=n+"|"+s
  $("thin").querySelectorAll("[data-i]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const p=list[+a.dataset.i][1];openAddress(n,R.st[p[0]],p[1],p[2]);}));}
 
 /* ---------- market section ---------- */
-function multiLine(qs,series,fmt,{bars=false,h=190,mark=null,tfmt=null}={}){const w=440,L0=50,R=12,T=10,B_=22,n=qs.length;if(n<3)return'<p class="note">Not enough data.</p>';
+function multiLine(qs,series,fmt,{bars=false,h=190,mark=null,tfmt=null,w=440}={}){L0=50,R=12,T=10,B_=22,n=qs.length;if(n<3)return'<p class="note">Not enough data.</p>';
  const vals=series.flatMap(s=>s.v.filter(x=>x!=null));let lo=bars?0:Math.min(...vals)*.92,hi=Math.max(...vals)*1.05;
  const X=i=>L0+(bars?(i+.5)*(w-L0-R)/n:i*(w-L0-R)/(n-1)),Y=v=>T+(h-T-B_)*(1-(v-lo)/(hi-lo));let g="";
  for(let j=0;j<=3;j++){const v=lo+(hi-lo)*j/3;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#E6EAE2"/><text x="${L0-7}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`;}
@@ -1897,20 +1920,31 @@ function mClick(id,labels){const el=$(id);el.dataset.q=JSON.stringify(labels);if
  el.addEventListener("click",e=>{const svg=el.querySelector("svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov),r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;
   let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(JSON.parse(el.dataset.q)[k]);if(i==null)return;
   stopPlay();setTime(i);$("timebar").scrollIntoView({behavior:"smooth",block:"start"});});}
+// The market section: a card per home type (houses together, units together), then one big chart you can switch
+// between prices, sales and rents. Area figures follow the 3-month rule.
+let mtab="price";
 function market(){const R=mreg(),S=(D.market_series||{})[R]||{},h=S.house||{},u=S.unit||{},mh=mkt(R,"house"),mu=mkt(R,"unit");
- document.getElementById("mtitle").textContent=`The ${mregName()} market`;
+ $("mtitle").textContent=`The ${mregName()} market`;
  const qs=[...new Set([...(h.q||[]),...(u.q||[])])].sort(),at=(s,k)=>qs.map(q=>{const i=(s.q||[]).indexOf(q);return i<0?null:s[k][i];});
- const rq=[...new Set([...Object.keys(h.rent||{}),...Object.keys(u.rent||{})])].sort(),u02=a=>a.map((v,i)=>qs[i]<"2002"?null:v);
- {const H3=m3(R,"house"),U3=m3(R,"unit"),f=(M,n)=>M?`the median ${n} sold for ${money(M.now)} in the last three months, ${M.fromPeak>-.0005?"at its peak":pct(-M.fromPeak)+" below its peak"}${M.yoy==null?"":` and ${pct(Math.abs(M.yoy))} ${M.yoy>=0?"up":"down"} on a year ago`}`:"";
- document.getElementById("mlede").textContent=H3?`Across ${mregName()}, ${f(H3,"house")}${U3?`; ${f(U3,"unit")}`:""}.`:`Across ${mregName()}, the median house sold for ${money(mh.median)} over the last 12 months, ${signed(mh.growth_1y)} on the year before, and the median unit for ${money(mu.median)}, ${signed(mu.growth_1y)}.`;
- const tile=(M,n)=>M?[[`Median ${n}, 3 months`,money(M.now)],[`${n[0].toUpperCase()+n.slice(1)}s from the peak`,M.fromPeak>-.0005?"At peak":signed(M.fromPeak)],[`${n[0].toUpperCase()+n.slice(1)}s on a year ago`,M.yoy==null?"–":signed(M.yoy)]]:[];
- const tl=H3?[...tile(H3,"house"),...tile(U3,"unit")]:[["Median house",money(mh.median)],["Houses, 12 months",signed(mh.growth_1y)],["Houses, avg yearly growth, 10 yrs",pct(mh.cagr_10y)],["Median unit",money(mu.median)],["Units, 12 months",signed(mu.growth_1y)],["Units, avg yearly growth, 10 yrs",pct(mu.cagr_10y)]];
- document.getElementById("mstats").innerHTML=tl.map(([l,v])=>`<div><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");}
- document.getElementById("mc1").innerHTML=multiLine(qs,[{v:at(h,"price"),c:"#0E1A16",name:"Houses"},{v:u02(at(u,"price")),c:"#8FA39A",name:"Units"}],money,{mark:tmark()});
- const q2=qs.filter(q=>q>="2002"),at2=(s_,k)=>at(s_,k).slice(qs.length-q2.length);
- document.getElementById("mc2").innerHTML=multiLine(q2,[{v:at2(h,"n"),c:"#0E1A16",name:"Houses"},{v:at2(u,"n"),c:"#8FA39A",name:"Units"}],v=>v>=2000?(v/1000).toFixed(v>=1e4?0:1)+"k":Math.round(v),{bars:true,mark:tmark(),tfmt:v=>Math.round(v).toLocaleString("en-AU")+" sales"});
- mClick("mc1",qs);mClick("mc2",qs.filter(q=>q>="2002"));mClick("mc3",rq);
- document.getElementById("mc3").innerHTML=multiLine(rq,[{v:rq.map(q=>(h.rent||{})[q]??null),c:"#1F6E68",name:"Houses"},{v:rq.map(q=>(u.rent||{})[q]??null),c:"#86B3A9",name:"Units"}],v=>"$"+Math.round(v),{mark:tmark()});}
+ const rq=[...new Set([...Object.keys(h.rent||{}),...Object.keys(u.rent||{})])].sort(),u02=a=>a.map((v,i)=>qs[i]<"2002"?null:v),lastRent=s=>{const ks=Object.keys(s.rent||{}).sort();return ks.length?s.rent[ks[ks.length-1]]:null;};
+ const H3=m3(R,"house"),U3=m3(R,"unit"),cl=v=>v==null?"":v>.0005?"pos":v<-.0005?"neg":"";
+ const card=(nm,M,mm,S_)=>{const row=(l,v,c="")=>`<div><dt>${l}</dt><dd class="${c}">${v}</dd></div>`;
+  return`<div class="mcard"><h3>${nm}</h3><div class="mcard-v num">${M?money(M.now):money(mm.median)}</div><p>median price${M?"":", last 12 months"}</p><dl class="num">`+
+  (M?row("From the peak",M.fromPeak>-.0005?"At peak":signed(M.fromPeak),cl(M.fromPeak))+row("On a year ago",M.yoy==null?"–":signed(M.yoy),cl(M.yoy)):row("On a year ago",signed(mm.growth_1y),cl(mm.growth_1y)))+
+  row("Avg yearly growth, 10 yrs",pct(mm.cagr_10y))+row("Median rent, new leases",lastRent(S_)!=null?`$${Math.round(lastRent(S_))} a week`:"–")+`</dl></div>`;};
+ $("mcards").innerHTML=card("Houses",H3,mh,h)+card("Units",U3,mu,u);
+ $("mlede").textContent=H3?`Across ${mregName()}, the median house is ${money(H3.now)}${H3.fromPeak>-.0005?", at its peak":`, ${pct(-H3.fromPeak)} below its peak`}${U3?`, and the median unit ${money(U3.now)}${U3.fromPeak>-.0005?", at its peak":`, ${pct(-U3.fromPeak)} below its peak`}`:""}.`:`Across ${mregName()}, the median house sold for ${money(mh.median)} over the last 12 months and the median unit for ${money(mu.median)}.`;
+ document.querySelectorAll("#mtab [data-mt]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mt===mtab));
+ const key=(a,b)=>`<span><i style="background:${a}"></i>Houses</span><span><i style="background:${b}"></i>Units</span>`,W=1100,HH=320;
+ if(mtab==="price"){$("mbigT").textContent="Median sale price each quarter";$("mbigK").innerHTML=key("#0E1A16","#8FA39A");
+  $("mcBig").innerHTML=multiLine(qs,[{v:at(h,"price"),c:"#0E1A16",name:"Houses"},{v:u02(at(u,"price")),c:"#8FA39A",name:"Units"}],money,{mark:tmark(),w:W,h:HH});mClick("mcBig",qs);
+  $("mbigN").textContent="Each point is the median of the sales in that quarter (three months), the same rule as the headline. Unit figures start in 2002: earlier records don't reliably say whether a home is a unit. Click the chart to show that date on the map.";}
+ else if(mtab==="sales"){const q2=qs.filter(q=>q>="2002"),at2=(s_,k)=>at(s_,k).slice(qs.length-q2.length);$("mbigT").textContent="Number of sales each quarter, since 2002";$("mbigK").innerHTML=key("#0E1A16","#8FA39A");
+  $("mcBig").innerHTML=multiLine(q2,[{v:at2(h,"n"),c:"#0E1A16",name:"Houses"},{v:at2(u,"n"),c:"#8FA39A",name:"Units"}],v=>v>=2000?(v/1000).toFixed(v>=1e4?0:1)+"k":Math.round(v),{bars:true,mark:tmark(),tfmt:v=>Math.round(v).toLocaleString("en-AU")+" sales",w:W,h:HH});mClick("mcBig",q2);
+  $("mbigN").textContent="The latest quarter fills in over the following weeks as sales are recorded. Click the chart to show that date on the map.";}
+ else{$("mbigT").textContent="Median weekly rent on new leases, each quarter";$("mbigK").innerHTML=key("#1F6E68","#86B3A9");
+  $("mcBig").innerHTML=multiLine(rq,[{v:rq.map(q=>(h.rent||{})[q]??null),c:"#1F6E68",name:"Houses"},{v:rq.map(q=>(u.rent||{})[q]??null),c:"#86B3A9",name:"Units"}],v=>"$"+Math.round(v),{mark:tmark(),w:W,h:HH});mClick("mcBig",rq);
+  $("mbigN").textContent="From rental bond lodgements, which start in 2021. Townhouses are grouped with houses. Click the chart to show that date on the map.";}}
 
 /* ---------- headline: which way is the market going? ----------
    Same suburbs as the side panel: this segment, 15+ sales in the year, in the chosen area.
@@ -1959,8 +1993,8 @@ const m3lab=i=>{const[y,m]=MS.m[i].split("-");return MON[+m-1]+" "+y;};
 let ghYrs=1;
 function headline3(M,noun,asof,an){const fp=M.fromPeak,yy=M.yoy,cl=v=>v==null?"":v>.0005?"up":v<-.0005?"dn":"";
  const mk=(t,c)=>c?`<mark class="${c}">${t}</mark>`:t;
- const pk=fp>-M3_NEAR?mk("at their peak","up"):mk(`down ${Math.round(-fp*100)}% from the peak`,"dn");
- const ya=yy==null?"":Math.abs(yy)<M3_FLAT?"flat on a year ago":mk(`${yy>0?"up":"down"} ${Math.round(Math.abs(yy)*100)}% on a year ago`,yy>0?"up":"dn");
+ const pk=fp>-M3_NEAR?mk("at their peak","up"):`${mk(`down ${Math.round(-fp*100)}%`,"dn")} from the peak`;
+ const ya=yy==null?"":Math.abs(yy)<M3_FLAT?"flat on a year ago":`${mk(`${yy>0?"up":"down"} ${Math.round(Math.abs(yy)*100)}%`,yy>0?"up":"dn")} on a year ago`;
  $("ghH1").innerHTML=`Prices ${pk}${ya?", "+ya:""}`;
  $("headline").innerHTML=`The median ${noun} in ${an} is <b>${money(M.now)}</b>. `+
   (fp>-M3_NEAR?`That's at or near its highest in three years`:`That's ${pct(-fp)} below its peak of ${money(M.peak)} in ${m3lab(M.peakAt)}`)+
@@ -1974,16 +2008,26 @@ function headline3(M,noun,asof,an){const fp=M.fromPeak,yy=M.yoy,cl=v=>v==null?""
 function ghLine3(M,noun,an){const el=$("ghFig"),i0=Math.max(0,M.n-12*ghYrs),idx=[];for(let i=i0;i<=M.n;i++)if(M.a[i]!=null)idx.push(i);
  document.querySelectorAll("[data-ghy]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.ghy===ghYrs));
  if(idx.length<2){el.innerHTML="";return;}const v=idx.map(i=>M.a[i]*1000);
- const W=Math.max(280,Math.round(el.clientWidth||480)),H=160,L=10,R=10,T=14,Bm=24,lo=Math.min(...v),hi=Math.max(...v),pad=Math.max((hi-lo)*.15,hi*.01);
+ const W=Math.max(280,Math.round(el.clientWidth||480)),H=190,L=10,R=10,T=34,Bm=40,lo=Math.min(...v),hi=Math.max(...v),pad=Math.max((hi-lo)*.15,hi*.01);
  const X=k=>L+k/(v.length-1)*(W-L-R),Y=x=>T+(1-(x-(lo-pad))/((hi+pad)-(lo-pad)))*(H-T-Bm),sl=i=>{const[y,m]=MS.m[i].split("-");return MON[+m-1].slice(0,3)+" "+y.slice(2);};
  const pk=v.indexOf(Math.max(...v)),st=ghYrs>1?6:3;let d="",g=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="rgba(255,255,255,.18)"/>`;
  v.forEach((x,k)=>{d+=(k?"L":"M")+X(k).toFixed(1)+","+Y(x).toFixed(1);});
  g+=`<path d="${d}" fill="none" stroke="#EAF0EA" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
- v.forEach((x,k)=>{const last=k===v.length-1;if(last||k===pk||ghYrs===1)g+=`<circle cx="${X(k).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:k===pk?4:2.2}" fill="${last?"#D2FF3A":k===pk?"none":"#EAF0EA"}" ${k===pk&&!last?'stroke="#EAF0EA" stroke-width="1.5"':""}/>`;
+ v.forEach((x,k)=>{const last=k===v.length-1;if(last||k===pk||k===idx.indexOf(M.n-12)||ghYrs===1)g+=`<circle cx="${X(k).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:k===pk?4:2.2}" fill="${last?"#D2FF3A":k===pk?"none":"#EAF0EA"}" ${k===pk&&!last?'stroke="#EAF0EA" stroke-width="1.5"':""}/>`;
   if((v.length-1-k)%st===0)g+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="${k===0?"start":last?"end":"middle"}">${sl(idx[k])}</text>`;});
+ // Call out now, the peak and a year ago (the three figures in the summary), placed so they never sit on the line.
+ const ya=idx.indexOf(M.n-12),last=v.length-1,cs=[];const add=(k,t)=>{if(k<0)return;const c=cs.find(c=>c.k===k);if(c)c.t.push(t);else cs.push({k,t:[t]});};
+ add(last,"Now");add(pk,"Peak");add(ya,"A year ago");
+ const box=[];cs.sort((a,b)=>a.k-b.k).forEach(c=>{const x=X(c.k),y=Y(v[c.k]),txt=`${c.t.join(" · ")} ${money(v[c.k])}`,tw=txt.length*6.4+6,an=x<W*.18?"start":x>W*.82?"end":"middle",x0=an==="start"?x-4:an==="end"?x-tw+4:x-tw/2;
+  // try above and below; keep the side with the most room between the text and the line, inside the chart, not on another label
+  const clear=ty=>{let m=1e9;v.forEach((o,q)=>{const xq=X(q);if(xq>=x0-6&&xq<=x0+tw+6)m=Math.min(m,Math.abs(Y(o)-(ty-4)));});return m;};
+  const hit=ty=>box.some(b=>x0<b[2]&&x0+tw>b[0]&&ty-12<b[3]&&ty+3>b[1]);
+  const opts=[y-13,y+22].filter(ty=>ty-12>2&&ty<H-Bm+16).map(ty=>({ty,s:clear(ty)-(hit(ty)?1e6:0)+(c.k===pk&&ty<y?25:0)})).sort((a,b)=>b.s-a.s);
+  const ty=(opts[0]||{ty:y-13}).ty;
+  box.push([x0,ty-12,x0+tw,ty+3]);g+=`<text class="call" x="${(an==="start"?x-4:an==="end"?x+4:x).toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${an}">${txt}</text>`;});
  const hov={vw:W,t:T,b:H-Bm,q:idx.map(i=>MS.m[i]),xs:v.map((_,k)=>+X(k).toFixed(1)),lab:idx.map(i=>"3 months to "+m3lab(i)),rows:v.map((x,k)=>[["#D2FF3A",+Y(x).toFixed(1),`Median ${money(x)}${k===pk?" · the peak":""}`]])};
  $("ghLab").textContent=`Median ${noun} price, ${an}`;
- $("ghNow").innerHTML=`Now <b>${money(v[v.length-1])}</b>${pk!==v.length-1?` · Peak <b>${money(v[pk])}</b>, ${m3lab(idx[pk])}`:" · the peak of this period"}`;
+ $("ghNow").textContent="";
  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" data-hov="${esc(JSON.stringify(hov))}" aria-label="Median price by month: ${v.map((x,k)=>sl(idx[k])+" "+money(x)).join(", ")}">${g}</svg>`;}
 function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].replace(/ \(.*\)$/,""),m=mkt(mreg(),seg),asof=dt(D.asof);
  document.querySelectorAll(".gh-ctl [data-seg]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.seg===seg));
@@ -2014,7 +2058,7 @@ function table(scroll){const minn=+document.getElementById("minn").value||0,fa=d
  v.sort((a,b)=>{const x=f(a),y=f(b);if(x==null)return 1;if(y==null)return-1;return(x>y?1:x<y?-1:0)*dir;});
  document.querySelector(".t thead").innerHTML="<tr>"+COLS.map((c,i)=>`<th data-i="${i}" ${i===sortI?`aria-sort="${dir>0?"ascending":"descending"}"`:""}>${c[0]}${i===sortI?(dir>0?" ↑":" ↓"):""}</th>`).join("")+"</tr>";
  document.querySelector(".t tbody").innerHTML=v.map(r=>{const n=r[C.locality];return`<tr tabindex="0" data-n="${esc(n)}" class="${n===sel?"sel":""}">`+
-  COLS.map((c,i)=>{const x=c[1](r);const s=i===0?esc(x)+(r[C.cagr_10y]==null?'<span class="tag">new</span>':""):(c[2]?c[2](x,r):x??"–");
+  COLS.map((c,i)=>{const x=c[1](r);const s=i===0?esc(x)+(r[C.cagr_10y]==null?'<span class="tag" title="Fewer than 10 years of sales here, usually a newly built area, so its growth comes from its region">new</span>':""):(c[2]?c[2](x,r):x??"–");
    const k=i===BUDCOL?(x==null?"":x>=2?"pos":x===0?"neg":""):c[3]?cls(x):"";return`<td class="${i?"num ":""}${k}">${s}</td>`}).join("")+"</tr>"}).join("");
  document.getElementById("count").textContent=`${v.length} suburbs · buying ahead after ${Math.round(A.hold_years)} years in ${v.filter(r=>r._m&&r._m.edge>0).length}`;
  if(scroll){const tr=document.querySelector(".t tr.sel");tr&&tr.scrollIntoView({block:"nearest"});}}
@@ -2241,6 +2285,7 @@ document.querySelectorAll("[data-ghy]").forEach(b=>b.addEventListener("click",()
 // The map fills the screen under the control header (which stays at the top as you scroll).
 {const ctl=$("mapctl"),fit=()=>{document.documentElement.style.setProperty("--ctlh",ctl.offsetHeight+"px");if(map)map.resize();};
  new ResizeObserver(fit).observe(ctl);addEventListener("resize",fit);fit();}
+document.querySelectorAll("#mtab [data-mt]").forEach(b=>b.addEventListener("click",()=>{mtab=b.dataset.mt;market();}));
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;$("ghStats").title=$("prov").textContent;
