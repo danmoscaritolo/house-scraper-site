@@ -1675,7 +1675,7 @@ function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="
  pts.forEach((p,i)=>{if(p[0].endsWith("Q1")&&yrs.indexOf(p[0].slice(0,4))%step===0)g+=`<text x="${X(i)}" y="${h-5}" text-anchor="middle">${p[0].slice(0,4)}</text>`;});
  const d=pts.map((p,i)=>(i?"L":"M")+X(i).toFixed(1)+","+Y(p[1]).toFixed(1)).join(""),last=pts[pts.length-1];
  let band="";const seg_=[];let cur=[];pts.forEach((p,i)=>{if(p[2]!=null&&p[3]!=null)cur.push([i,p[2],p[3]]);else{if(cur.length>1)seg_.push(cur);cur=[];}});if(cur.length>1)seg_.push(cur);
- if(shade)for(const sg of seg_)band+=`<path d="${sg.map(([i,,h_],j)=>(j?"L":"M")+X(i).toFixed(1)+","+Y(h_).toFixed(1)).join("")}${sg.slice().reverse().map(([i,l_])=>"L"+X(i).toFixed(1)+","+Y(l_).toFixed(1)).join("")}Z" fill="${fill}"/>`;
+ for(const sg of seg_)band+=`<path d="${sg.map(([i,,h_],j)=>(j?"L":"M")+X(i).toFixed(1)+","+Y(h_).toFixed(1)).join("")}${sg.slice().reverse().map(([i,l_])=>"L"+X(i).toFixed(1)+","+Y(l_).toFixed(1)).join("")}Z" fill="${fill}"/>`;
  if(mark&&typeof mark==="object"){const ia=pts.findIndex(p=>p[0]>=mark.a);let ib=pts.findIndex(p=>p[0]>mark.b);ib=ib<0?pts.length-1:ib-1;
   if(ia>=0&&ib>=ia)g+=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(210,255,58,.3)"/>`;mark=null;}
  const mi=mark?pts.findIndex(p=>p[0]===mark):-1;
