@@ -724,6 +724,27 @@ header.gh select option{color:var(--ink);background:#fff}
 .mbud-h{font:400 13px var(--sans);color:var(--slate)}
 .mbud button{border:0;background:var(--wash);border-radius:999px;padding:7px 12px;font:500 13px var(--sans);color:var(--ink);cursor:pointer}
 .mbud button:hover{background:var(--hi)}
+
+/* ---- 19 Nov b ---- */
+/* headline highlighter: red for a fall, green for a rise or the peak; flat stays plain */
+header.gh h2#ghH1 mark.dn{background:#E5484D;color:#fff;padding:0 .12em}
+header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
+.gh-labrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 6px}.gh-labrow .gh-lab{margin:0}
+.gh-yrs button{padding:5px 10px;font-size:12.5px}
+.gh-now{margin:0 0 6px;font:400 13px var(--sans);color:var(--mist)}.gh-now b{color:#fff;font-weight:600}
+#ghFig svg{cursor:crosshair}
+/* suburb panel */
+#detail .chd{display:flex;justify-content:space-between;align-items:center;gap:10px}#detail .chd h3{margin:0}
+.ovyrs button{padding:4px 9px;font-size:12px}
+#detail h3.dsub{font:600 14.5px var(--sans);margin:22px 0 4px}
+/* time line: dot and period band centred on the line (line sits 22px down the track) */
+.trng{top:12px;height:20px;border-left-color:var(--ink);border-right-color:var(--ink)}
+.trng .g{top:-1px;height:22px;width:6px}
+/* the map fills the screen under the sticky controls */
+@media(min-width:1001px){.main{--maph:max(420px,calc(100vh - var(--ctlh,150px) - 20px))}}
+#ghFig{position:relative}#ghFig .hovg line{stroke:#fff;stroke-opacity:.45}
+#detail .chart{position:relative}
+.ovyrs button,.gh-yrs button{white-space:nowrap}
 </style></head><body>
 <header class="gh"><div class="wrap">
 <div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">Every sale on the record. No agents.</span><div class="gh-stats num" id="ghStats"></div><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
@@ -737,7 +758,7 @@ header.gh select option{color:var(--ink);background:#fff}
 <section class="gh-mkt" aria-label="Which way is the market going?">
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
 <div class="gh-mgrid"><div class="gh-ans"><h2 id="ghH1"></h2><p id="headline"></p><div class="gh-tiles num" id="ghTiles"></div></div>
-<div class="gh-ev" id="ghEv"><p class="gh-lab" id="ghLab"></p><div id="ghFig"></div></div></div>
+<div class="gh-ev" id="ghEv"><div class="gh-labrow"><p class="gh-lab" id="ghLab"></p><span class="seg gh-yrs" role="group" aria-label="Years shown"><button data-ghy="1" aria-pressed="true">1 yr</button><button data-ghy="3" aria-pressed="false">3 yrs</button></span></div><p class="gh-now" id="ghNow"></p><div id="ghFig"></div></div></div>
 <details class="gh-cap"><summary>How this is worked out</summary><p id="ghCap"></p></details>
 </section>
 <div class="gh-ask">
@@ -1313,7 +1334,8 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  if(ml>1)h+=`<div class="ln warn">Part of one sale of <b>${ml} properties</b> for ${dollars(P.p[i])} in total (about ${dollars(P.p[i]/ml)} each). Left out of medians and growth.</div>`;
  else if(ml<0)h+=`<div class="ln warn">Far from anything else sold in ${esc(title(loc))} that year: often a development site, a big holding or a family transfer. Left out of medians and growth.</div>`;
  h+=`<div class="ft"><a href="#" data-prop="1">Full history of this address</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;
- spPop.setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
+ if(!pMarker)pMarker=new maplibregl.Marker({color:"#C6F23A"});pMarker.setLngLat(f.geometry.coordinates).addTo(map);   // same lime pin as a searched address
+ spPop.setOffset([0,-40]).setLngLat(f.geometry.coordinates).setHTML(h).addTo(map);
  const lk=spPop.getElement().querySelector("[data-sub]");lk&&lk.addEventListener("click",ev=>{ev.preventDefault();select(lk.dataset.sub,false);});
  const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});return true;}
 function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(ready)for(const y in spLoaded)try{map.setPaintProperty(spId(y),"circle-radius",spRad());}catch(e){}if(quiet){spApply();legend();return;}
@@ -1390,11 +1412,12 @@ function setOpacity(v){opac=v;if(ready){map.setPaintProperty("fill","fill-opacit
 const $=id=>document.getElementById(id);
 // Price or rent limit above the map, shown only with "Where I can afford to buy / rent". Type a figure here,
 // or leave it blank to use the Your budget tab.
+const mbudW=i=>{i.style.width=Math.max(7,(i.value||i.placeholder||"").length+1)+"ch";};   // grow with the figure so nothing is cut off
 function planChip(){const c=$("mbud"),M=METRICS[metric]||{},on=metric==="afford"||metric==="rent";c.hidden=!on;if(!on)return;
  const rent=metric==="rent",v=rent?B.rent_max:B.map_price,auto=rent?(grossPA()?Math.round(grossPA()*.3/52/10)*10:null):(maxP&&maxP.max?maxP.max.price:null);
  const hint=rent?(auto?`Blank uses 30% of your income: $${auto} a week`:"Or set your income in Your budget"):(auto?`Blank uses Your budget: up to ${money(auto)}`:"Or work it out in Your budget");
  if(c.dataset.k!==metric){c.dataset.k=metric;c.innerHTML=`<label><span>${rent?"Rent limit":"Price limit"}</span><span class="mbud-in">$<input id="mbudIn" type="text" inputmode="numeric" autocomplete="off" aria-label="${rent?"Most you'd pay in rent, a week":"Most you'd pay for a home"}">${rent?"<em>a week</em>":""}</span></label><span class="mbud-h" id="mbudH"></span><button type="button" data-a="edit">Your budget →</button>`;}
- const inp=$("mbudIn");if(document.activeElement!==inp)inp.value=v?Math.round(v).toLocaleString("en-AU"):"";inp.placeholder=auto?Math.round(auto).toLocaleString("en-AU"):(rent?"e.g. 700":"e.g. 1.2m");$("mbudH").textContent=hint;}
+ const inp=$("mbudIn");if(document.activeElement!==inp)inp.value=v?Math.round(v).toLocaleString("en-AU"):"";mbudW(inp);inp.placeholder=auto?Math.round(auto).toLocaleString("en-AU"):(rent?"e.g. 700":"e.g. 1.2m");$("mbudH").textContent=hint;}
 function planUI(){planChip();bxUI();}
 A.rent_growth=A.rent_growth??.035;A.cost_growth=A.cost_growth??.03;A.let_pct=A.let_pct??.10;A.land_house=A.land_house??.65;A.land_unit=A.land_unit??.25;let gSrc="auto",gCust=.04;
 function growthChoice(){const unit=seg==="unit",syd=Math.min(mkt(mreg(),seg).cagr_10y||.04,A.growth_cap),r=sel?rowFor(sel):null,sg=r?growth(r):null;
@@ -1652,7 +1675,7 @@ function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="
  pts.forEach((p,i)=>{if(p[0].endsWith("Q1")&&yrs.indexOf(p[0].slice(0,4))%step===0)g+=`<text x="${X(i)}" y="${h-5}" text-anchor="middle">${p[0].slice(0,4)}</text>`;});
  const d=pts.map((p,i)=>(i?"L":"M")+X(i).toFixed(1)+","+Y(p[1]).toFixed(1)).join(""),last=pts[pts.length-1];
  let band="";const seg_=[];let cur=[];pts.forEach((p,i)=>{if(p[2]!=null&&p[3]!=null)cur.push([i,p[2],p[3]]);else{if(cur.length>1)seg_.push(cur);cur=[];}});if(cur.length>1)seg_.push(cur);
- for(const sg of seg_)band+=`<path d="${sg.map(([i,,h_],j)=>(j?"L":"M")+X(i).toFixed(1)+","+Y(h_).toFixed(1)).join("")}${sg.slice().reverse().map(([i,l_])=>"L"+X(i).toFixed(1)+","+Y(l_).toFixed(1)).join("")}Z" fill="${fill}"/>`;
+ if(shade)for(const sg of seg_)band+=`<path d="${sg.map(([i,,h_],j)=>(j?"L":"M")+X(i).toFixed(1)+","+Y(h_).toFixed(1)).join("")}${sg.slice().reverse().map(([i,l_])=>"L"+X(i).toFixed(1)+","+Y(l_).toFixed(1)).join("")}Z" fill="${fill}"/>`;
  if(mark&&typeof mark==="object"){const ia=pts.findIndex(p=>p[0]>=mark.a);let ib=pts.findIndex(p=>p[0]>mark.b);ib=ib<0?pts.length-1:ib-1;
   if(ia>=0&&ib>=ia)g+=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(210,255,58,.3)"/>`;mark=null;}
  const mi=mark?pts.findIndex(p=>p[0]===mark):-1;
@@ -1661,6 +1684,27 @@ function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="
  const hov={vw:w,t:T,b:h-B_,q:pts.map(p=>p[0]),xs:pts.map((p,i)=>+X(i).toFixed(1)),lab:pts.map(p=>qlab(p[0])),rows:pts.map(p=>p[1]==null?[]:[[stroke,+Y(p[1]).toFixed(1),`Median ${fmt(p[1])}`+(p[2]!=null&&p[3]!=null?`<br><span style="color:var(--slate)">Middle half ${fmt(p[2])}–${fmt(p[3])}</span>`:"")+(p[4]?`<br><span style="color:var(--slate)">${p[4]} sales</span>`:"")]])};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band||`<path d="${d}L${X(pts.length-1)},${h-B_}L${L0},${h-B_}Z" fill="${fill}"/>`}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/>
  <circle cx="${X(pts.length-1)}" cy="${Y(last[1])}" r="3.5" fill="${stroke}"/><text x="${X(pts.length-1)+7}" y="${Y(last[1])+4}" style="fill:${stroke};font-weight:600">${fmt(last[1])}</text>${mdot}</svg>`;}
+// A 12-month median at each month (price or rent), middle half shaded where known. Its last point is the figure the
+// panel shows, so the chart and the number always agree. Hover for values.
+let ovYrs=5;
+function mline(ix,v,lo,hi,fmt,stroke,fill,shade){if(v.filter(x=>x!=null).length<3)return'<p class="note">Not enough sales for a chart.</p>';
+ const w=520,h=170,L0=54,R=14,T=12,B_=22,ys=(shade?[...v,...lo,...hi]:v).filter(x=>x!=null),mn=Math.min(...ys)*.97,mx=Math.max(...ys)*1.03;
+ const X=j=>L0+j*(w-L0-R)/(v.length-1),Y=x=>T+(h-T-B_)*(1-(x-mn)/(mx-mn));let g="";
+ for(let k=0;k<=2;k++){const y=mn+(mx-mn)*k/2;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(y).toFixed(1)}" y2="${Y(y).toFixed(1)}" stroke="#E6EAE2"/><text x="${L0-8}" y="${(Y(y)+3.5).toFixed(1)}" text-anchor="end">${fmt(y)}</text>`;}
+ const jan=ix.map((i,j)=>MS.m[i].endsWith("-01")?j:-1).filter(j=>j>=0),st=Math.ceil(jan.length/6);
+ jan.forEach((j,n)=>{if(n%st===0)g+=`<text x="${X(j).toFixed(1)}" y="${h-5}" text-anchor="middle">${MS.m[ix[j]].slice(0,4)}</text>`;});
+ let band="",seg_=[],cur=[];ix.forEach((_,j)=>{if(lo[j]!=null&&hi[j]!=null)cur.push(j);else{if(cur.length>1)seg_.push(cur);cur=[];}});if(cur.length>1)seg_.push(cur);
+ if(shade)for(const sg of seg_)band+=`<path d="${sg.map((j,n)=>(n?"L":"M")+X(j).toFixed(1)+","+Y(hi[j]).toFixed(1)).join("")}${sg.slice().reverse().map(j=>"L"+X(j).toFixed(1)+","+Y(lo[j]).toFixed(1)).join("")}Z" fill="${fill}"/>`;
+ let d="",pen=false;v.forEach((x,j)=>{if(x==null){pen=false;return;}d+=(pen?"L":"M")+X(j).toFixed(1)+","+Y(x).toFixed(1);pen=true;});
+ const lj=v.length-1-[...v].reverse().findIndex(x=>x!=null);
+ const hov={vw:w,t:T,b:h-B_,q:ix.map(i=>MS.m[i]),xs:ix.map((_,j)=>+X(j).toFixed(1)),lab:ix.map(i=>"12 months to "+mlabel(i)),
+  rows:v.map((x,j)=>x==null?[]:[[stroke,+Y(x).toFixed(1),`Median ${fmt(x)}`+(lo[j]!=null&&hi[j]!=null?`<br><span style="color:var(--slate)">Middle half ${fmt(lo[j])}–${fmt(hi[j])}</span>`:"")]])};
+ return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/><circle cx="${X(lj).toFixed(1)}" cy="${Y(v[lj]).toFixed(1)}" r="4" fill="#D2FF3A" stroke="${stroke}" stroke-width="1.5"/></svg>`;}
+function ovCharts(r){const k=r[C.locality]+"|"+r[C.segment],rk=r[C.postcode]+"|"+r[C.segment],e=ti,n=ovYrs*12,ix=[];for(let i=Math.max(0,e-n);i<=e;i++)ix.push(i);
+ const pv=ix.map(i=>sv(k,1,i)),pl=ix.map(i=>sv(k,2,i)),ph=ix.map(i=>sv(k,3,i)),rvv=ix.map(i=>rv(rk,i)),nul=ix.map(()=>null);
+ const yb=`<span class="seg ovyrs" role="group" aria-label="Years shown">${[5,10].map(y=>`<button data-ovy="${y}" aria-pressed="${ovYrs===y}">${y} yrs</button>`).join("")}</span>`;
+ return`<div class="chart"><div class="chd"><h3>Median price, 12 months to each month</h3>${yb}</div>${mline(ix,pv,pl,ph,money,"#0E1A16","rgba(14,26,22,.08)",false)}</div>
+ <div class="chart"><h3>Median weekly rent on new leases, postcode ${r[C.postcode]}</h3>${rvv.some(x=>x!=null)?mline(ix,rvv,nul,nul,v=>"$"+Math.round(v),"#1F6E68","none"):`<p class="note">No rent data for this postcode.</p>`}</div>`;}
 function rangeStrip(label,v,fmt,col,mark,markLbl,note){let[mn,p10,p25,md,p75,p90,mx]=v;if(md==null||p25==null)return"";const half=p10==null;if(half){p10=p25-(p75-p25)*.6;p90=p75+(p75-p25)*.6;}
  const w=400,h=72,L0=48,R=48,lo=p10-(p90-p10)*.08,hi=p90+(p90-p10)*.08,X=x=>L0+(w-L0-R)*(Math.max(lo,Math.min(hi,x))-lo)/(hi-lo),y=30;
  let g=`<line x1="${X(p10)}" x2="${X(p90)}" y1="${y}" y2="${y}" stroke="#C9D0C7" stroke-width="4" stroke-linecap="round"/>
@@ -1747,8 +1791,7 @@ function detail(){const el=document.getElementById("detail");
   <div class="stat"><div class="v">${m?pct(m.yield,1):"–"}</div><div class="l">Rental yield</div></div>
   <div class="stat"><div class="v">${r[C.n_now]}</div><div class="l">Sales, 12 months</div></div></div>
   ${af}
-  ${rangeStrip("Sale prices, last 12 months",[r[C.pmin],r[C.p10],r[C.p25],r[C.med_now],r[C.p75],r[C.p90],r[C.pmax]],money,"#0E1A16",buyLim(),"your limit")}
-  ${r[C.rent_pw]!=null?rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}`,[r[C.rmin],r[C.r10],r[C.r25],r[C.rent_pw],r[C.r75],r[C.r90],r[C.rmax]],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent"):""}
+  ${ovCharts(r)}
   <p class="note" style="margin-top:12px">${pkTxt} ${signed(r[C.growth_6m])} over the last 6 months.</p>`;}
  else if(dtab==="buyrent"){
   if(!m)body=odd(r)?`<p class="verdict">Sales here are mostly land lots or acreage rather than homes like the ones being rented, so a buy-or-rent comparison wouldn't mean much.</p>`:`<p class="verdict">No rent data for this postcode yet, so no buy-or-rent comparison.</p>`;
@@ -1766,8 +1809,8 @@ function detail(){const el=document.getElementById("detail");
  else if(dtab==="trends"){const L=k[0].match(/[A-Z]/)?k[0]:"_",DT=window.DET&&window.DET[L];if(!DT)detLoad(L);
  const zc=RNG&&zoomP,cr=pts=>{if(!zc||!pts)return pts;const a=qOf(RNG.a),b=qOf(RNG.b);return pts.filter(p=>p[0]>=a&&p[0]<=b);},mk=zc?null:tmark();
  const rsC=cr(rs);
- body=!DT?`<p class="note">Loading charts…</p>`:`${RNG?`<p class="note" style="margin:0 0 6px">${zc?`Charts show ${mlabel(RNG.a)} to ${mlabel(RNG.b)}. <a href="#" data-zoomp>Show all years</a>`:`The shaded band is the chosen period. <a href="#" data-zoomp>Zoom to it</a>`}</p>`:""}<p class="note" style="margin:0 0 6px">Click a chart to show that quarter on the map.</p><div class="chart"><h3>Sale prices by quarter: median, middle half of sales shaded</h3>${chart(cr((DT[k]||[]).map(x=>[x[0],x[1],x[3],x[4],x[2]])),money,"#0E1A16","rgba(28,43,58,.11)",mk)}
-  <h3>Weekly rent on new leases, postcode ${r[C.postcode]}: median, middle half shaded</h3>${rsC&&rsC.length>=3?chart(rsC,v=>"$"+Math.round(v),"#1F6E68","rgba(31,110,104,.14)",mk):`<p class="note">${zc?"Rent records start in 2021, so there are none for most of this period.":"Not enough rent data for a chart."}</p>`}</div>`;}
+ body=`${rangeStrip("Sale prices, last 12 months",[r[C.pmin],r[C.p10],r[C.p25],r[C.med_now],r[C.p75],r[C.p90],r[C.pmax]],money,"#0E1A16",buyLim(),"your limit")}${r[C.rent_pw]!=null?rangeStrip(`Weekly rents on new leases, postcode ${r[C.postcode]}`,[r[C.rmin],r[C.r10],r[C.r25],r[C.rent_pw],r[C.r75],r[C.r90],r[C.rmax]],v=>"$"+Math.round(v),"#1F6E68",rb?rb.pw:null,"your rent"):""}<h3 class="dsub">Every quarter since 1990</h3><p class="note" style="margin:0 0 6px">Each point is one quarter's own median, so it swings more than the 12-month figure on Overview, and a quarter appears once it has ended.</p>`+(!DT?`<p class="note">Loading charts…</p>`:`${RNG?`<p class="note" style="margin:0 0 6px">${zc?`Charts show ${mlabel(RNG.a)} to ${mlabel(RNG.b)}. <a href="#" data-zoomp>Show all years</a>`:`The shaded band is the chosen period. <a href="#" data-zoomp>Zoom to it</a>`}</p>`:""}<p class="note" style="margin:0 0 6px">Click a chart to show that quarter on the map.</p><div class="chart"><h3>Sale prices by quarter: median, middle half of sales shaded</h3>${chart(cr((DT[k]||[]).map(x=>[x[0],x[1],x[3],x[4],x[2]])),money,"#0E1A16","rgba(28,43,58,.11)",mk)}
+  <h3>Weekly rent on new leases, postcode ${r[C.postcode]}: median, middle half shaded</h3>${rsC&&rsC.length>=3?chart(rsC,v=>"$"+Math.round(v),"#1F6E68","rgba(31,110,104,.14)",mk):`<p class="note">${zc?"Rent records start in 2021, so there are none for most of this period.":"Not enough rent data for a chart."}</p>`}</div>`);}
  const hist=MS&&!isLatest();
  if(dtab==="sales")body='<div id="salesList"><p class="note">Loading sales…</p></div>';
  if(hist&&dtab==="overview")body=histOverview(k,r)+'<div id="ovStrip"><p class="note">Loading sales…</p></div>';
@@ -1775,6 +1818,7 @@ function detail(){const el=document.getElementById("detail");
  el.innerHTML=dHead(title(r[C.locality]),`${r[C.postcode]} · ${seg==="house"?"Houses":"Units"}${r[C.cagr_10y]==null?' <span class="tag">new</span>':""}`)+`
  <div class="dtabs" role="tablist">${tabs.map(([k2,l])=>`<button role="tab" data-dt="${k2}" aria-selected="${dtab===k2}">${l}</button>`).join("")}</div>${body}`;
  el.querySelectorAll("[data-dt]").forEach(b=>b.addEventListener("click",()=>{dtab=b.dataset.dt;detail();el.scrollTop=0;}));
+ el.querySelectorAll("[data-ovy]").forEach(b=>b.addEventListener("click",()=>{ovYrs=+b.dataset.ovy;detail();}));
  bindPanel(el);if(MS&&MS.ad)detailAsync(r);}
 const whenTxt=()=>RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`sales ${mshift(ti,-12)} to ${mlabel()}`;
 const dHead=(name,sub)=>`<div class="dhead"><div><h2>${esc(name)}</h2><p class="sub" style="margin-bottom:0">${sub}</p></div><button class="dclose" id="dClose" aria-label="Close this suburb">×</button></div>`;
@@ -1910,30 +1954,37 @@ function m3(rg,sg){const a=MS&&MS.mkt3&&(MS.mkt3[rg]||{})[sg];if(!a)return null;
  const ago=a[n-12],prev=a[n-3];
  return{a,n,now:now*1000,yoy:ago?now/ago-1:null,prev:prev?now/prev-1:null,peak:pk*1000,peakAt:pi,fromPeak:now/pk-1};}
 const m3lab=i=>{const[y,m]=MS.m[i].split("-");return MON[+m-1]+" "+y;};
+// Colour rule for every price change in the headline: a fall is red, a rise (or being at the peak) is green, and
+// anything within 2% is "flat" and left plain. The tiles use the same red and green.
+let ghYrs=1;
 function headline3(M,noun,asof,an){const fp=M.fromPeak,yy=M.yoy,cl=v=>v==null?"":v>.0005?"up":v<-.0005?"dn":"";
- const yph=yy==null?"":Math.abs(yy)<M3_FLAT?"flat":`${yy>0?"up":"down"} ${Math.round(Math.abs(yy)*100)}%`;
- $("ghH1").innerHTML=fp>-M3_NEAR?`Prices at their peak${yph?`, <mark>${yph} on a year ago</mark>`:""}`:`Prices down ${Math.round(-fp*100)}% from the peak${yph?`, <mark>${yph} on a year ago</mark>`:""}`;
- $("headline").innerHTML=`The median ${noun} in ${an} sold for <b>${money(M.now)}</b> in the three months to ${asof}. `+
-  (fp>-M3_NEAR?`That's at or near the highest three months of the last three years`:`That's ${pct(-fp)} below the peak, the three months to ${m3lab(M.peakAt)} (${money(M.peak)})`)+
-  (yy==null?".":`, and ${Math.abs(yy)<.0005?"level with":yy>0?pct(yy)+" above":pct(-yy)+" below"} the same three months a year earlier.`);
- $("ghTiles").innerHTML=`<div><small>From the peak</small><b class="${fp<-.0005?"dn":""}">${fp>-.0005?"At peak":signed(fp)}</b><span>Peak: 3 months to ${m3lab(M.peakAt)}</span></div>`+
-  `<div><small>On a year ago</small><b class="${cl(yy)}">${yy==null?"–":signed(yy)}</b><span>Same 3 months, a year earlier</span></div>`+
+ const mk=(t,c)=>c?`<mark class="${c}">${t}</mark>`:t;
+ const pk=fp>-M3_NEAR?mk("at their peak","up"):mk(`down ${Math.round(-fp*100)}% from the peak`,"dn");
+ const ya=yy==null?"":Math.abs(yy)<M3_FLAT?"flat on a year ago":mk(`${yy>0?"up":"down"} ${Math.round(Math.abs(yy)*100)}% on a year ago`,yy>0?"up":"dn");
+ $("ghH1").innerHTML=`Prices ${pk}${ya?", "+ya:""}`;
+ $("headline").innerHTML=`The median ${noun} in ${an} is <b>${money(M.now)}</b>. `+
+  (fp>-M3_NEAR?`That's at or near its highest in three years`:`That's ${pct(-fp)} below its peak of ${money(M.peak)} in ${m3lab(M.peakAt)}`)+
+  (yy==null?".":`, and ${Math.abs(yy)<.0005?"level with":yy>0?pct(yy)+" above":pct(-yy)+" below"} a year ago.`);
+ $("ghTiles").innerHTML=`<div><small>From the peak</small><b class="${fp<-.0005?"dn":""}">${fp>-.0005?"At peak":signed(fp)}</b><span>Peak: ${m3lab(M.peakAt)}</span></div>`+
+  `<div><small>On a year ago</small><b class="${cl(yy)}">${yy==null?"–":signed(yy)}</b><span>Against a year earlier</span></div>`+
   `<div><small>Last 3 months</small><b class="${cl(M.prev)}">${M.prev==null?"–":signed(M.prev)}</b><span>Against the 3 months before</span></div>`;
  ghLine3(M,noun,an);
  $("ghCap").innerHTML=`Every figure here compares 3-month medians of all ${noun} sales in ${an}: the middle price of the sales that settled in each three months. Three months is long enough to steady the figure and short enough to turn within about a month of the market; a 12-month median runs six or seven months late. <b>From the peak</b> compares the latest three months with the highest three months in the last three years. <b>On a year ago</b> compares the same three months a year apart, so the season is the same. <b>Last 3 months</b> compares with the three months before and moves with the season, so read it as a direction. Suburb colours on the map use 12 months of sales, because most suburbs have too few sales for three. Medians also move with the mix of homes sold. Source: NSW Valuer General.`;}
-// Small line: the 3-month median at each month over the last year.
-function ghLine3(M,noun,an){const el=$("ghFig"),i0=Math.max(0,M.n-12),idx=[];for(let i=i0;i<=M.n;i++)if(M.a[i]!=null)idx.push(i);
+// Small line: the 3-month median at each month, 1 or 3 years back. Hover a point for its value; no labels sit on the line.
+function ghLine3(M,noun,an){const el=$("ghFig"),i0=Math.max(0,M.n-12*ghYrs),idx=[];for(let i=i0;i<=M.n;i++)if(M.a[i]!=null)idx.push(i);
+ document.querySelectorAll("[data-ghy]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.ghy===ghYrs));
  if(idx.length<2){el.innerHTML="";return;}const v=idx.map(i=>M.a[i]*1000);
- const W=Math.max(280,Math.round(el.clientWidth||480)),H=150,L=8,R=8,T=26,Bm=24,lo=Math.min(...v),hi=Math.max(...v),pad=Math.max((hi-lo)*.25,hi*.01);
+ const W=Math.max(280,Math.round(el.clientWidth||480)),H=160,L=10,R=10,T=14,Bm=24,lo=Math.min(...v),hi=Math.max(...v),pad=Math.max((hi-lo)*.15,hi*.01);
  const X=k=>L+k/(v.length-1)*(W-L-R),Y=x=>T+(1-(x-(lo-pad))/((hi+pad)-(lo-pad)))*(H-T-Bm),sl=i=>{const[y,m]=MS.m[i].split("-");return MON[+m-1].slice(0,3)+" "+y.slice(2);};
- const pk=v.indexOf(Math.max(...v));let d="",g=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="rgba(255,255,255,.18)"/>`;
+ const pk=v.indexOf(Math.max(...v)),st=ghYrs>1?6:3;let d="",g=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="rgba(255,255,255,.18)"/>`;
  v.forEach((x,k)=>{d+=(k?"L":"M")+X(k).toFixed(1)+","+Y(x).toFixed(1);});
  g+=`<path d="${d}" fill="none" stroke="#EAF0EA" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
- v.forEach((x,k)=>{const last=k===v.length-1,lab=k===0||last||k===pk;g+=`<circle cx="${X(k).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:lab?3.5:2}" fill="${last?"#D2FF3A":"#EAF0EA"}"><title>3 months to ${m3lab(idx[k])}: ${money(x)}</title></circle>`;
-  if(k%3===0||last)g+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="${k===0?"start":last?"end":"middle"}">${sl(idx[k])}</text>`;
-  if(lab&&!(k===pk&&(k===0||last)&&false))g+=`<text class="v${last?" now":""}" x="${X(k).toFixed(1)}" y="${(Y(x)-11).toFixed(1)}" text-anchor="${k===0?"start":last?"end":"middle"}">${k===pk&&!last&&k!==0?"Peak ":""}${money(x)}</text>`;});
- $("ghLab").textContent=`Median ${noun} price, ${an}, 3 months to each month`;
- el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="3-month median price by month: ${v.map((x,k)=>sl(idx[k])+" "+money(x)).join(", ")}">${g}</svg>`;}
+ v.forEach((x,k)=>{const last=k===v.length-1;if(last||k===pk||ghYrs===1)g+=`<circle cx="${X(k).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:k===pk?4:2.2}" fill="${last?"#D2FF3A":k===pk?"none":"#EAF0EA"}" ${k===pk&&!last?'stroke="#EAF0EA" stroke-width="1.5"':""}/>`;
+  if((v.length-1-k)%st===0)g+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="${k===0?"start":last?"end":"middle"}">${sl(idx[k])}</text>`;});
+ const hov={vw:W,t:T,b:H-Bm,q:idx.map(i=>MS.m[i]),xs:v.map((_,k)=>+X(k).toFixed(1)),lab:idx.map(i=>"3 months to "+m3lab(i)),rows:v.map((x,k)=>[["#D2FF3A",+Y(x).toFixed(1),`Median ${money(x)}${k===pk?" · the peak":""}`]])};
+ $("ghLab").textContent=`Median ${noun} price, ${an}`;
+ $("ghNow").innerHTML=`Now <b>${money(v[v.length-1])}</b>${pk!==v.length-1?` · Peak <b>${money(v[pk])}</b>, ${m3lab(idx[pk])}`:" · the peak of this period"}`;
+ el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" data-hov="${esc(JSON.stringify(hov))}" aria-label="Median price by month: ${v.map((x,k)=>sl(idx[k])+" "+money(x)).join(", ")}">${g}</svg>`;}
 function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].replace(/ \(.*\)$/,""),m=mkt(mreg(),seg),asof=dt(D.asof);
  document.querySelectorAll(".gh-ctl [data-seg]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.seg===seg));
  const ga=$("ghArea");if(!ga.options.length){ga.innerHTML=$("area").innerHTML;ga.hidden=D.areas.length<2;ga.addEventListener("change",()=>{const a=$("area");a.value=ga.value;a.dispatchEvent(new Event("change"));});}ga.value=AREA;
@@ -1973,7 +2024,7 @@ const TB={bar:document.getElementById("timebar"),sl:document.getElementById("tsl
 let autoFrom=null,timer=null,raf=0;
 const mser=()=>((MS.mkt[mreg()]||MS.mkt.all||{})[seg])||[];
 function drawSpark(){if(!MS)return;const v=mser(),ok=v.filter(x=>x!=null);if(!ok.length)return;
- document.getElementById("tspark").innerHTML=`<line x1="0" x2="1000" y1="12" y2="12" stroke="#0E1A16" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>`;
+ document.getElementById("tspark").innerHTML=`<line x1="0" x2="1000" y1="22" y2="22" stroke="#0E1A16" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>`;
  const yrStep=TL>200?5:1;document.getElementById("tyears").innerHTML=MS.m.map((m,i)=>m.endsWith("-01")&&(+m.slice(0,4))%yrStep===0?`<span style="left:${i/TL*100}%">${m.slice(0,4)}</span>`:"").join("");}
 function timeUI(){if(!MS)return;const f=ti/TL,v=mser()[ti];
  TB.cur.style.left=`calc(8px + (100% - 16px) * ${f})`;TB.cur.classList.toggle("flip",f>.8);
@@ -2058,7 +2109,7 @@ if(location.hash==="#budget")setTimeout(()=>showTab("budget"),0);  // deferred: 
 
 $("layersBtn").addEventListener("click",()=>{const o=$("lpanel").hidden;$("lpanel").hidden=!o;$("layersBtn").setAttribute("aria-expanded",o);});
 $("mbud").addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.a==="edit"){showTab("budget");$("tabBudget").scrollIntoView({behavior:"smooth"});}});
-$("mbud").addEventListener("input",e=>{if(e.target.id!=="mbudIn")return;liveFmt(e.target);const t=e.target.value.trim(),n=parseNum(t),v=t===""||n==null||!isFinite(n)||n<=0?null:n;
+$("mbud").addEventListener("input",e=>{if(e.target.id!=="mbudIn")return;liveFmt(e.target);mbudW(e.target);const t=e.target.value.trim(),n=parseNum(t),v=t===""||n==null||!isFinite(n)||n<=0?null:n;
  if(metric==="rent")B.rent_max=v;else B.map_price=v;save();soon();});
 
 /* ---------- chart hover ---------- */
@@ -2186,6 +2237,10 @@ $("bxPrint").addEventListener("click",()=>window.print());
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open"))setOpen(false);});
  wide.addEventListener("change",()=>setFull(store.get("hs_full")!==0,true));
  setFull(store.get("hs_full")!==0,true);}
+document.querySelectorAll("[data-ghy]").forEach(b=>b.addEventListener("click",()=>{ghYrs=+b.dataset.ghy;headline();}));
+// The map fills the screen under the control header (which stays at the top as you scroll).
+{const ctl=$("mapctl"),fit=()=>{document.documentElement.style.setProperty("--ctlh",ctl.offsetHeight+"px");if(map)map.resize();};
+ new ResizeObserver(fit).observe(ctl);addEventListener("resize",fit);fit();}
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
  $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;$("ghStats").title=$("prov").textContent;
