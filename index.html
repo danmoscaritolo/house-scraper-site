@@ -1170,6 +1170,9 @@ body[data-view=analysis] footer{padding-top:24px}
 [data-theme=dark] select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23E4EBE6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 .tv select:not([multiple]){border-radius:6px;padding-right:26px!important;background-color:transparent;background-position:right 9px center}
 [data-theme=dark] .tv select{border-color:transparent}
+
+.tv-auto{height:28px;padding:0 10px;margin-right:6px;border:1px solid var(--hair);border-radius:6px;background:transparent;cursor:pointer;font:600 12.5px var(--mono);color:var(--slate);flex:none}
+.tv-auto:hover{color:var(--ink);border-color:var(--ink)}.tv-auto[aria-pressed=true]{background:var(--hi);border-color:var(--hi);color:#0E1A16}
 </style></head><body>
 <header class="top"><div class="top-in">
 <button type="button" class="gh-logo top-logo" data-tab="market" aria-label="Glasshouse, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</button>
@@ -1325,13 +1328,13 @@ body[data-view=analysis] footer{padding-top:24px}
   <span class="tv-rng" id="tvRng" role="group" aria-label="Years shown"><button data-r="1">1Y</button><button data-r="3">3Y</button><button data-r="5">5Y</button><button data-r="10">10Y</button><button data-r="20">20Y</button><button data-r="0">All</button></span>
   <button class="tv-b" id="tvGo" type="button" title="Go to a period"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12v10H3zM3 8h12M6.5 3v3M11.5 3v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l">Period</span></button>
   <span class="tv-gap"></span>
-  <span class="tv-asof" id="tvAsof"></span>
+  <span class="tv-asof" id="tvAsof"></span><button class="tv-auto" id="tvAuto" type="button" title="Auto fit: both scales fit the data in view. Turns off when you drag the chart or a scale; click (or double-click the chart) to fit again">auto</button>
   <span class="tv-rng" id="tvScale" role="group" aria-label="Scale"><button data-sc="abs" title="Dollars on an even scale">$</button><button data-sc="pct" title="Change since the left edge">%</button><button data-sc="log" title="Log scale: equal steps are equal percentage moves">log</button><button data-sc="idx" title="Every line starts at 100 at the left edge">100</button></span>
  </div>
  <div class="tv-pop" id="tvPop" hidden></div>
  <div class="tv-modal" id="tvModal" hidden><div class="tv-dlg" role="dialog" aria-modal="true" aria-labelledby="tvDlgT"></div></div>
 </section>
-<div class="wrap"><details class="tv-how"><summary>How these figures are worked out</summary><p>Suburb prices are 12-month medians (each point covers the year to that month); areas use 3-month medians. Suburb rents are by postcode. Area sales are counted by quarter. Sale-by-sale charts use contract dates; the price and land filters apply to them (land to houses only), and sales over four times or under a quarter of their suburb&rsquo;s typical price that year are left out (development sites, part shares). Candles take each month&rsquo;s first, highest, lowest and last sale: these are different homes, so a candle shows spread and timing, not one price moving.</p><p>Drag to move through time, scroll to zoom, drag the price scale to stretch it and the date scale to zoom, double-click the chart for everything and a scale to reset it. Click a drawing to select it, drag its handles to change it, Delete to remove it. Start typing anywhere on the chart to change the main series.</p></details></div>
+<div class="wrap"><details class="tv-how"><summary>How these figures are worked out</summary><p>Suburb prices are 12-month medians (each point covers the year to that month); areas use 3-month medians. Suburb rents are by postcode. Area sales are counted by quarter. Sale-by-sale charts use contract dates; the price and land filters apply to them (land to houses only), and sales over four times or under a quarter of their suburb&rsquo;s typical price that year are left out (development sites, part shares). Candles take each month&rsquo;s first, highest, lowest and last sale: these are different homes, so a candle shows spread and timing, not one price moving.</p><p>Drag to move through time, scroll to zoom, drag the price scale to stretch it and the date scale to zoom, double-click the chart (or press auto, bottom right) to fit the data again, and double-click a scale to reset just that one. Click a drawing to select it, drag its handles to change it, Delete to remove it. Start typing anywhere on the chart to change the main series.</p></details></div>
 </div>
 <div id="tabSuburbs" role="tabpanel" hidden>
 <div id="subMkt">
@@ -2793,7 +2796,15 @@ const anDark=()=>document.documentElement.dataset.theme==="dark";
 const anC=c=>c==="#0E1A16"&&anDark()?"#E4EBE6":c;
 const anOn=c=>{const h=anC(c).slice(1),n=parseInt(h,16),l=(.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))/255;return l>.6?"#0E1A16":"#FFFFFF";};
 const anLast=()=>anRp.on&&anRp.i!=null?anRp.i:TL;
-function anRange(){if(!MS)return{a:0,b:0};if(!anV){const n=AN.r?AN.r*12:TL+1,b=anLast();anV={a:Math.max(0,b-n),b:Math.max(b,6)};}return anV;}
+// months that have data, across every visible series on every chart: the auto fit starts where the data starts
+function anExt(){let a=Infinity,b=-Infinity;for(const c of AN.ch.slice(0,Math.max(1,anE.length)))for(const s of c.s){if(!s.on)continue;
+  if(AN_MET[s.m].sl){const S=anSales(s);if(S.n){a=Math.min(a,Math.floor(S.i[0]));b=Math.max(b,Math.ceil(S.i[S.n-1]));}continue;}
+  for(let i=0;i<=TL;i++)if(anVal(s,i)!=null){a=Math.min(a,i);break;}for(let i=TL;i>=0;i--)if(anVal(s,i)!=null){b=Math.max(b,i);break;}}
+ return isFinite(a)?{a,b}:null;}
+// the view: the chosen years back from the latest month, but never before the first month with data (unless you've moved it yourself)
+function anRange(){if(!MS)return{a:0,b:0};if(!anV){const n=AN.r?AN.r*12:TL+1,b=anLast(),e=anExt();let a=Math.max(0,b-n,e?Math.min(e.a,b-6):0);anV={a,b:Math.max(b,a+6)};}return anV;}
+const anAuto=()=>!(anV&&anV.z)&&AN.ch.slice(0,Math.max(1,anE.length)).every(c=>!Object.keys(c.ys||{}).length);
+function anFit(){AN.ch.forEach(c=>{c.ys={};});anV=null;anSave();anDraw();}
 function anSetR(r){AN.r=r;anV=null;anSave();anDraw();}
 const anUnit=(s,sc)=>{const u=AN_MET[s.m].u;return(sc==="idx"||sc==="pct")&&(u==="$"||u==="r"||u==="n")&&s.m!=="band"&&!AN_MET[s.m].sl?"i":u;};
 const anMx=v=>"$"+(v>=1e6?+(v/1e6).toFixed(v>=1e7?1:2)+"m":Math.round(v/1e3)+"k");
@@ -2825,7 +2836,7 @@ function anDots(E,W,H,dots){let cv=E.cv;if(!dots.length){if(cv)cv.hidden=true;re
  for(const d of dots){const n=d.j1-d.j0,r=n>20000?1:n>4000?1.3:2;x.save();x.beginPath();x.rect(0,d.y0,E.P0W,d.h);x.clip();x.fillStyle=d.c;x.globalAlpha=n>20000?.25:n>3000?.4:.65;
   for(let j=d.j0;j<d.j1;j++){const px=d.X(d.S.i[j]),py=d.Y(d.S.p[j]);x.fillRect(px-r,py-r,r*2,r*2);}x.restore();}}
 let anRAF=0,anSideT=0;const anDrawSoon=()=>{if(!anRAF)anRAF=requestAnimationFrame(()=>{anRAF=0;anDraw();});};
-function anDraw(){if(!$("tvGridEl")||!MS||$("tabAnalysis").hidden)return;if(!anE.length||anE.length!==(AN_LAYN[AN.lay]||1))anBuild();
+function anDraw(){if(!$("tvGridEl")||!MS||$("tabAnalysis").hidden)return;if(anV&&!anV.z&&!anRp.on)anV=null;if(!anE.length||anE.length!==(AN_LAYN[AN.lay]||1))anBuild();
  anE.forEach((E,ci)=>{E.cell.classList.toggle("act",ci===AN.act&&anE.length>1);try{anChart(ci);}catch(e){console.error(e);}});anTop();anRpBar();clearTimeout(anSideT);anSideT=setTimeout(anSide,120);}
 function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cell.clientWidth),H=Math.max(220,E.cell.clientHeight),V=anRange(),span=V.b-V.a||1,lastI=anLast();
  const a=Math.max(0,Math.floor(V.a)-1),b=Math.min(lastI,Math.ceil(V.b)+1),sc=ch.sc||"abs",L=0,R=W<480?62:76,T=0,XA=26,SEP=7,notes=[];
@@ -2894,7 +2905,7 @@ function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cel
   panes.push({u,y0,h,Y,inv,ds,lg,mn,mx});yC+=h+SEP;});
  const yb=yC-SEP;g+=`<line class="hr" x1="0" x2="${W}" y1="${yb}" y2="${yb}"/>`;
  for(let k=0;k<panes.length-1;k++){const sy=panes[k].y0+panes[k].h+SEP/2;g+=`<line class="hr" x1="0" x2="${W}" y1="${sy}" y2="${sy}" data-sep="${k}"/>`;}
- for(const t of xt)g+=`<text x="${X(t[0]).toFixed(1)}" y="${yb+17}" text-anchor="middle"${t[2]?' style="font-weight:600"':""}>${t[1]}</text>`;
+ for(const t of xt)if(X(t[0])>18&&X(t[0])<W-R-14)g+=`<text x="${X(t[0]).toFixed(1)}" y="${yb+17}" text-anchor="middle"${t[2]?' style="font-weight:600"':""}>${t[1]}</text>`;
  if(anRp.on&&anRp.i!=null)g+=`<line x1="${X(anRp.i+.5).toFixed(1)}" x2="${X(anRp.i+.5).toFixed(1)}" y1="0" y2="${yb}" stroke="#2F6FB0" stroke-width="1.5"/>`;
  E.P0W=W-L-R;anDots(E,W,H,dots);svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width",W);svg.setAttribute("height",H);svg.innerHTML=g+`<g class="tv-dr"></g><g class="tv-x"></g>`;
  E.P={X,ix:x=>V.a+(x-L)/(W-L-R)*span,panes,L,R,W,H,T,yb,V,a,b,data,all,span,boxPer,candPer,sc,SEP};
@@ -2965,6 +2976,7 @@ function anTop(){const c=CH(),m=anMain(c);$("tvSymN").textContent=m?anName(m):"P
  document.querySelectorAll("#tvTools [data-flag]").forEach(x=>x.setAttribute("aria-pressed",!!AN[x.dataset.flag]));
  document.querySelectorAll("#tvRail [data-side]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.side===AN.side));
  $("tvSide").hidden=!AN.side;$("tv").classList.toggle("drawing",anTool!=="pan");
+ $("tvAuto").setAttribute("aria-pressed",anAuto());
  $("tvAsof").textContent=anRp.on&&anRp.i!=null?`Replay at ${mlabel(anRp.i)}`:`Sales to ${mlabel(TL)}`;}
 
 /* ---- side panels: watchlist + series in view, data window, object tree ---- */
@@ -3166,7 +3178,7 @@ function anNoteAt(ci,i,v,u,px,py){const E=anE[ci];const f=document.createElement
  grid.addEventListener("pointerleave",()=>{if(!drag&&!anTmp){anHov=null;anCrossAll();grid.style.cursor="";}});
  grid.addEventListener("wheel",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;e.preventDefault();const V=anRange(),k=Math.exp(e.deltaY*.0015),i=Math.max(V.a,Math.min(V.b,q.i));anV=clampV(i-(i-V.a)*k,i+(V.b-i)*k);anDrawSoon();},{passive:false});
  grid.addEventListener("dblclick",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;const z=zone(q),ch=AN.ch[q.ci];
-  if(z.z==="yax"){delete ch.ys[q.pn.u];anSave();anDraw();}else if(z.z==="sep"){ch.ph={};anSave();anDraw();}else if(z.z==="xax"||(z.z==="plot"&&anTool==="pan"&&!e.target.closest("[data-dr]"))){ch.ys={};anSetR(AN.r||0);if(z.z==="plot")anSetR(0);}});
+  if(z.z==="yax"){delete ch.ys[q.pn.u];anSave();anDraw();}else if(z.z==="sep"){ch.ph={};anSave();anDraw();}else if(z.z==="xax"||(z.z==="plot"&&anTool==="pan"&&!e.target.closest("[data-dr]")))anFit();});
  // legend buttons
  grid.addEventListener("click",e=>{const b=e.target.closest("[data-la]");if(!b)return;const row=b.closest(".tv-lr"),ci=row?+row.dataset.ci:AN.act,c=AN.ch[ci];
   if(b.dataset.la==="find"){anSearch("main");return;}if(!row)return;
@@ -3203,6 +3215,7 @@ $("tvFull").addEventListener("click",()=>{const s=$("tv");try{document.fullscree
 document.addEventListener("fullscreenchange",()=>setTimeout(anDraw,80));
 $("tvRng").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(b){if(anRp.on)anRpOff();anSetR(+b.dataset.r);}});
 $("tvGo").addEventListener("click",e=>anGoMenu(e.currentTarget));
+$("tvAuto").addEventListener("click",anFit);
 $("tvScale").addEventListener("click",e=>{const b=e.target.closest("[data-sc]");if(!b)return;const c=CH();anDo(()=>{c.sc=b.dataset.sc;c.ys={};});});
 $("tvTools").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.tool){anTool=anTool===b.dataset.tool&&b.dataset.tool!=="pan"?"pan":b.dataset.tool;anTmp=null;anTop();}
