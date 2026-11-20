@@ -1072,7 +1072,7 @@ body[data-view=market] footer{padding-top:0}
 .tv-cell.act{box-shadow:inset 0 0 0 1.5px var(--hi)}
 .tv-grid.grab .tv-cell{cursor:grabbing}
 .tv.drawing .tv-cell{cursor:crosshair}
-.tv-cell svg.tv-svg{position:absolute;inset:0;display:block;width:100%;height:100%}
+.tv-cell svg.tv-svg,.tv-cv{position:absolute;inset:0;display:block;width:100%;height:100%}.tv-cv{pointer-events:none}.tv-cv[hidden]{display:none}
 .tv-svg .adr{cursor:pointer}.tv-svg .hit{pointer-events:stroke}.tv-svg [data-hd]{cursor:move}
 .tv-leg{position:absolute;inset:0 76px 26px 0;pointer-events:none}
 .tv-lp{position:absolute;left:10px;display:flex;flex-direction:column;gap:1px;text-shadow:0 0 3px var(--sheet),0 0 3px var(--sheet)}
@@ -2721,27 +2721,39 @@ const anQ=(()=>{const o={};if(!MS)return o;const ix={};MS.m.forEach((m,i)=>{ix[m
 
 /* ---- individual sales, from the suburb property files ---- */
 const anQt=(a,q)=>{if(!a.length)return null;const x=(a.length-1)*q,lo=Math.floor(x),hi=Math.ceil(x);return a[lo]+(a[hi]-a[lo])*(x-lo);};
-const anPR={};let anSC={};
+const anPR={},anSS={};let anSC={};
+const anLb=(A,n,x)=>{let lo=0,hi=n;while(lo<hi){const m=(lo+hi)>>1;A[m]<x?lo=m+1:hi=m;}return lo;};   // first index with A[j] >= x
 function anSubsOf(s){if(s.k==="s")return[s.id];const a=D.areas.find(x=>x[0]===s.id);if(!a)return[];const[c,,,rng]=a;
  return[...new Set(D.rows.filter(r=>{const pc=r[C.postcode];return c==="all"||(c==="syd"?inSyd(pc):c==="reg"?!inSyd(pc):(rng||[]).some(([lo,hi])=>pc>=lo&&pc<=hi));}).map(r=>r[C.locality]))];}
-function anProps(loc){if(window.PR&&window.PR[loc])return window.PR[loc];if(!anPR[loc]){anPR[loc]="l";loadJS(`data/props/${pslug(loc)}.js`).then(()=>{anPR[loc]="ok";anSC={};clearTimeout(anProps.t);anProps.t=setTimeout(anDraw,80);}).catch(()=>{anPR[loc]="err";});}return null;}
-// every sale of the series that passes the filters: {i (month, with day), p, a (land m2)}; st says what's missing
-function anSales(s){const F=AN.f||{},key=s.k+s.id+s.seg+JSON.stringify(F);if(anSC[key])return anSC[key];const subs=anSubsOf(s);
- if(subs.length>AN_MAXSUB)return{st:`${subs.length} suburbs is too many for sale by sale: pick a smaller area or a suburb`,v:[]};
- const out=[];let wait=0;for(const loc of subs){const P=anProps(loc);if(!P){if(anPR[loc]!=="err")wait++;continue;}
-  for(const row of P.p){if(!!row[5]!==(s.seg==="unit"))continue;const land=row[6];if(s.seg==="house"&&(F.lmin||F.lmax)){if(!land||(F.lmin&&land<F.lmin)||(F.lmax&&land>F.lmax))continue;}
-   for(const t of row[7]){if(t[3]&&t[3]>1)continue;const p=t[2];if(!p||(F.pmin&&p<F.pmin)||(F.pmax&&p>F.pmax))continue;const i=anMi(t[1]??t[0]);if(i<0)continue;out.push({i,p,a:land||null,loc});}}}
- // leave out sales far from their suburb's typical price that year (development sites, part shares, family transfers)
- {const byY=new Map();for(const x of out){const k=x.loc+Math.floor(x.i/12);let e=byY.get(k);if(!e){e=[];byY.set(k,e);}e.push(x.p);}
-  const md=new Map();for(const[k,a]of byY){a.sort((u,v)=>u-v);md.set(k,anQt(a,.5));}
-  for(let j=out.length-1;j>=0;j--){const x=out[j],m=md.get(x.loc+Math.floor(x.i/12));if(m&&(x.p>m*4||x.p<m/4))out.splice(j,1);}}
- out.sort((a,b)=>a.i-b.i);const r={v:out,st:wait?`loading ${wait} suburb${wait>1?"s":""}…`:""};if(!wait)anSC[key]=r;return r;}
+// files arrive one by one: redraw at most every 300 ms while they load, not once per file
+function anProps(loc){if(window.PR&&window.PR[loc])return window.PR[loc];if(!anPR[loc]){anPR[loc]="l";loadJS(`data/props/${pslug(loc)}.js`).then(()=>{anPR[loc]="ok";if(!anProps.t)anProps.t=setTimeout(()=>{anProps.t=0;anDraw();},300);}).catch(()=>{anPR[loc]="err";});}return null;}
+// one suburb's sales for houses or units, worked out once: typed arrays sorted by month (with the day as a fraction), price, land.
+// Sales over four times or under a quarter of the suburb's median that year are left out (development sites, part shares, family transfers).
+function anSub(loc,seg){const k=loc+"|"+seg;if(anSS[k])return anSS[k];const P=anProps(loc);if(!P)return null;const I=[],Pp=[],A=[],dm=new Date(0);
+ for(const row of P.p){if(!!row[5]!==(seg==="unit"))continue;const land=row[6]||0;for(const t of row[7]){if(t[3]&&t[3]>1)continue;const p=t[2];if(!p)continue;
+  dm.setTime(SP_EP+(t[1]??t[0])*864e5);const i=dm.getUTCFullYear()*12+dm.getUTCMonth()-anM0+(dm.getUTCDate()-1)/31;if(i<0)continue;I.push(i);Pp.push(p);A.push(land);}}
+ const byY=new Map();for(let j=0;j<I.length;j++){const y=Math.floor(I[j]/12);let e=byY.get(y);if(!e)byY.set(y,e=[]);e.push(Pp[j]);}const md=new Map();for(const[y,a]of byY){a.sort((u,v)=>u-v);md.set(y,anQt(a,.5));}
+ const ord=[];for(let j=0;j<I.length;j++){const m=md.get(Math.floor(I[j]/12));if(!(m&&(Pp[j]>m*4||Pp[j]<m/4)))ord.push(j);}ord.sort((x,y)=>I[x]-I[y]);
+ return anSS[k]={i:Float32Array.from(ord,j=>I[j]),p:Float64Array.from(ord,j=>Pp[j]),a:Float32Array.from(ord,j=>A[j])};}
+// every sale of the series that passes the filters, merged across its suburbs: {i, p, n}. Re-merged only when another suburb has arrived.
+function anSales(s){const F=AN.f||{},key=s.k+s.id+s.seg+JSON.stringify(F),c=anSC[key];if(c&&c.done)return c;const subs=anSubsOf(s);
+ if(subs.length>AN_MAXSUB)return{st:`${subs.length} suburbs is too many for sale by sale: pick a smaller area or a suburb`,i:new Float32Array(0),p:new Float64Array(0),n:0,done:1};
+ let wait=0;const parts=[];for(const loc of subs){const r=anSub(loc,s.seg);if(r)parts.push(r);else if(anPR[loc]!=="err")wait++;}
+ if(c&&c.parts===parts.length)return c;
+ let n=0;for(const r of parts)n+=r.i.length;const fi=new Float32Array(n),fp=new Float64Array(n),lf=s.seg==="house"&&(F.lmin||F.lmax);let m=0;
+ for(const r of parts)for(let j=0;j<r.i.length;j++){const p=r.p[j];if((F.pmin&&p<F.pmin)||(F.pmax&&p>F.pmax))continue;if(lf){const ar=r.a[j];if(!ar||(F.lmin&&ar<F.lmin)||(F.lmax&&ar>F.lmax))continue;}fi[m]=r.i[j];fp[m]=p;m++;}
+ let I=fi.subarray(0,m),Pp=fp.subarray(0,m);
+ if(parts.length>1){const o=new Uint32Array(m);for(let j=0;j<m;j++)o[j]=j;o.sort((x,y)=>I[x]-I[y]);const I2=new Float32Array(m),P2=new Float64Array(m);for(let j=0;j<m;j++){I2[j]=I[o[j]];P2[j]=Pp[o[j]];}I=I2;Pp=P2;}
+ return anSC[key]={i:I,p:Pp,n:m,parts:parts.length,done:!wait,st:wait?`loading ${wait} suburb${wait>1?"s":""}…`:""};}
 // sales in replay stop at the replay month
-const anSalesV=s=>{const S=anSales(s);if(!anRp.on||anRp.i==null)return S;return{...S,v:S.v.filter(x=>x.i<anRp.i+1)};};
-function anGroups(v,per,a,b){const g=new Map();for(const x of v){if(x.i<a-per||x.i>b+per)continue;const k=Math.floor(Math.floor(x.i)/per);let e=g.get(k);if(!e){e=[];g.set(k,e);}e.push(x);}return g;}
+const anSalesV=s=>{const S=anSales(s);if(!anRp.on||anRp.i==null)return S;return{...S,n:anLb(S.i,S.n,anRp.i+1)};};
+// prices of sales from month a up to (not including) b, sorted
+const anPs=(S,a,b)=>{const j0=anLb(S.i,S.n,a),j1=anLb(S.i,S.n,b);return Array.from(S.p.subarray(j0,j1)).sort((x,y)=>x-y);};
+// prices grouped by period (months per group), in time order, for the groups in view
+function anGroups(S,per,a,b){const g=new Map(),j1=anLb(S.i,S.n,b+per);for(let j=anLb(S.i,S.n,a-per);j<j1;j++){const k=Math.floor(Math.floor(S.i[j])/per);let e=g.get(k);if(!e)g.set(k,e=[]);e.push(S.p[j]);}return g;}
 // value of series s at month i (null if none); band returns [low, high]; sale-level measures give that month's median sale
 function anVal(s,i){const m=s.m;if(i<0||i>TL)return null;
- if(AN_MET[m].sl){const S=anSales(s).v;let lo=0,hi=S.length;while(lo<hi){const md=(lo+hi)>>1;S[md].i<i?lo=md+1:hi=md;}const ps=[];for(let j=lo;j<S.length&&S[j].i<i+1;j++)ps.push(S[j].p);if(ps.length<3)return null;ps.sort((x,y)=>x-y);return anQt(ps,.5);}
+ if(AN_MET[m].sl){const ps=anPs(anSales(s),i,i+1);return ps.length<3?null:anQt(ps,.5);}
  if(s.k==="a"){const p=j=>{const a=MS.mkt3&&(MS.mkt3[s.id]||{})[s.seg];return a&&a[j]!=null?a[j]*1000:null;},r=()=>{const a=MS.rmkt3&&(MS.rmkt3[s.id]||{})[s.seg];return a&&a[i]!=null?a[i]:null;};
   if(m==="price"||m==="band")return p(i);if(m==="rent")return r();if(m==="sales"){const a=anQ[s.id+"|"+s.seg];return a?a[i]:null;}
   if(m==="yield"){const a=p(i),b=r();return a&&b?b*52/a:null;}if(m==="yoy"){if(i<12)return null;const a=p(i),pa=p(i-12);return a&&pa?a/pa-1:null;}return null;}
@@ -2807,8 +2819,14 @@ function anBuild(){const n=AN_LAYN[AN.lay]||1;while(AN.ch.length<n){const src=CH
  const g=$("tvGridEl");g.dataset.lay=AN.lay;g.innerHTML=Array.from({length:n},(_,i)=>`<div class="tv-cell" data-ci="${i}"><svg class="tv-svg" role="img" aria-label="Chart ${i+1}"></svg><div class="tv-leg"></div><div class="tv-st" hidden></div></div>`).join("");
  anE=[...g.children].map(cell=>({cell,svg:cell.querySelector("svg"),leg:cell.querySelector(".tv-leg"),st:cell.querySelector(".tv-st"),P:null}));}
 // one pass: every chart, then the bars and panels around them
+// dots on a canvas under the SVG: thousands of squares draw in a few milliseconds, where SVG paths take hundreds
+function anDots(E,W,H,dots){let cv=E.cv;if(!dots.length){if(cv)cv.hidden=true;return;}if(!cv||!cv.isConnected){cv=E.cv=document.createElement("canvas");cv.className="tv-cv";E.cell.insertBefore(cv,E.svg);}cv.hidden=false;
+ const k=Math.min(2,devicePixelRatio||1);if(cv.width!==Math.round(W*k)||cv.height!==Math.round(H*k)){cv.width=Math.round(W*k);cv.height=Math.round(H*k);}const x=cv.getContext("2d");x.setTransform(k,0,0,k,0,0);x.clearRect(0,0,W,H);
+ for(const d of dots){const n=d.j1-d.j0,r=n>20000?1:n>4000?1.3:2;x.save();x.beginPath();x.rect(0,d.y0,E.P0W,d.h);x.clip();x.fillStyle=d.c;x.globalAlpha=n>20000?.25:n>3000?.4:.65;
+  for(let j=d.j0;j<d.j1;j++){const px=d.X(d.S.i[j]),py=d.Y(d.S.p[j]);x.fillRect(px-r,py-r,r*2,r*2);}x.restore();}}
+let anRAF=0,anSideT=0;const anDrawSoon=()=>{if(!anRAF)anRAF=requestAnimationFrame(()=>{anRAF=0;anDraw();});};
 function anDraw(){if(!$("tvGridEl")||!MS||$("tabAnalysis").hidden)return;if(!anE.length||anE.length!==(AN_LAYN[AN.lay]||1))anBuild();
- anE.forEach((E,ci)=>{E.cell.classList.toggle("act",ci===AN.act&&anE.length>1);try{anChart(ci);}catch(e){console.error(e);}});anTop();anSide();anRpBar();}
+ anE.forEach((E,ci)=>{E.cell.classList.toggle("act",ci===AN.act&&anE.length>1);try{anChart(ci);}catch(e){console.error(e);}});anTop();anRpBar();clearTimeout(anSideT);anSideT=setTimeout(anSide,120);}
 function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cell.clientWidth),H=Math.max(220,E.cell.clientHeight),V=anRange(),span=V.b-V.a||1,lastI=anLast();
  const a=Math.max(0,Math.floor(V.a)-1),b=Math.min(lastI,Math.ceil(V.b)+1),sc=ch.sc||"abs",L=0,R=W<480?62:76,T=0,XA=26,SEP=7,notes=[];
  const data=ch.s.filter(s=>s.on).map(s=>{const sl=AN_MET[s.m].sl,u=anUnit(s,sc);let v=[],raw=[],S=null;
@@ -2823,12 +2841,12 @@ function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cel
   if(ch.st.cg){const v=[];for(let i=a;i<=b;i++){const x=full[i],y=full[i-60];v.push(x&&y&&i>=60?Math.pow(x/y,1/5)-1:null);}xs.push({s:{...main.s,m:"_cg",c:main.s.c},v,u:"cg",study:"cg"});}}
  const all=data.concat(xs),order=sc==="idx"||sc==="pct"?["i","$","r","n","%","dd","cg"]:["$","i","r","n","%","dd","cg"],units=order.filter(u=>all.some(d=>d.u===u));if(!units.length)units.push("$");
  const avail=H-T-XA-(units.length-1)*SEP,w=units.map((u,j)=>ch.ph[u]||(j?1.1:3)),ws=w.reduce((x,y)=>x+y,0);
- const X=i=>L+(i-V.a)/span*(W-L-R),boxPer=span>180?12:3,candPer=span>72?3:1;let g=`<rect class="bg" x="0" y="0" width="${W}" height="${H}"/>`,yC=T;const panes=[];
+ const dots=[],X=i=>L+(i-V.a)/span*(W-L-R),boxPer=span>180?12:3,candPer=span>72?3:1;let g="",yC=T;const panes=[];
  // years (or quarters, zoomed in) down every pane
  const pxm=(W-L-R)/span,stY=[1,2,5,10].find(k=>k*12*pxm>=64)||10,mq=pxm*3>=46,xt=[];
  for(let i=Math.ceil(V.a);i<=Math.floor(V.b)&&i<=TL;i++){const[yr,mo]=MS.m[i].split("-");if(mo==="01"&&+yr%stY===0)xt.push([i,yr,1]);else if(mq&&(mo==="04"||mo==="07"||mo==="10"))xt.push([i,MON[+mo-1],0]);}
  units.forEach((u,pi)=>{const y0=yC,h=Math.max(40,avail*w[pi]/ws),ds=all.filter(d=>d.u===u),vals=[];
-  for(const d of ds){if(d.S){const ps=d.S.v.filter(x=>x.i>=V.a&&x.i<=V.b+1).map(x=>x.p).sort((x,y)=>x-y);if(ps.length)vals.push(anQt(ps,.03),anQt(ps,.97));continue;}
+  for(const d of ds){if(d.S){const S=d.S,j0=anLb(S.i,S.n,V.a),j1=anLb(S.i,S.n,V.b+1),st=Math.max(1,Math.floor((j1-j0)/5000)),ps=[];for(let j=j0;j<j1;j+=st)ps.push(S.p[j]);ps.sort((x,y)=>x-y);if(ps.length)vals.push(anQt(ps,.03),anQt(ps,.97));continue;}
    d.v.forEach((x,j)=>{const i=a+j;if(i<V.a-1||i>V.b+1||x==null)return;(Array.isArray(x)?x:[x]).forEach(q=>vals.push(q));});
    if(d.s.sty==="col"&&!d.S)vals.push(0);}
   let mn=Math.min(...vals),mx=Math.max(...vals);if(!isFinite(mn)){mn=0;mx=1;}
@@ -2843,14 +2861,12 @@ function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cel
   g+=`<clipPath id="tvC${ci}_${pi}"><rect x="${L}" y="${y0}" width="${W-L-R}" height="${h}"/></clipPath><g clip-path="url(#tvC${ci}_${pi})">`;
   const nBox=ds.filter(d=>d.s.m==="box"||d.s.m==="candle").length;let kBox=0;const tags=[];
   for(const d of ds){const c=anC(d.s.c),m=d.s.m,sty=d.s.sty||"line";
-   if(m==="dots"){const inV=d.S.v.filter(x=>x.i>=V.a-1&&x.i<=V.b+1),step=Math.max(1,Math.ceil(inV.length/14000)),r=inV.length>4000?1.6:2.4;let dd="";
-    for(let j=0;j<inV.length;j+=step){const x=inV[j];dd+=`M${X(x.i).toFixed(1)},${Y(x.p).toFixed(1)}h0`;}g+=`<path d="${dd}" stroke="${c}" stroke-opacity="${inV.length>3000?.35:.6}" stroke-width="${r*2}" stroke-linecap="round" fill="none"/>`;
-    if(step>1)notes.push(`${anName(d.s)}: showing 1 in ${step} of ${inV.length.toLocaleString("en-AU")} sales`);continue;}
-   if(m==="box"||m==="candle"){const per=m==="box"?boxPer:candPer,G=anGroups(d.S.v,per,V.a,V.b),pw=(W-L-R)/span*per,bw=Math.max(2,Math.min(40,pw*.7/nBox)),off=(kBox-(nBox-1)/2)*bw;kBox++;
+   if(m==="dots"){dots.push({S:d.S,c,X,Y,y0,h,j0:anLb(d.S.i,d.S.n,V.a-1),j1:anLb(d.S.i,d.S.n,V.b+1)});continue;}
+   if(m==="box"||m==="candle"){const per=m==="box"?boxPer:candPer,G=anGroups(d.S,per,V.a,V.b),pw=(W-L-R)/span*per,bw=Math.max(2,Math.min(40,pw*.7/nBox)),off=(kBox-(nBox-1)/2)*bw;kBox++;
     for(const[k,arr]of G){const xm=X(k*per+per/2)+off;
-     if(m==="box"){if(arr.length<5)continue;const ps=arr.map(x=>x.p).sort((x,y)=>x-y),q=[.1,.25,.5,.75,.9].map(t=>anQt(ps,t));
+     if(m==="box"){if(arr.length<5)continue;const ps=arr.slice().sort((x,y)=>x-y),q=[.1,.25,.5,.75,.9].map(t=>anQt(ps,t));
       g+=`<line x1="${xm.toFixed(1)}" x2="${xm.toFixed(1)}" y1="${Y(q[4]).toFixed(1)}" y2="${Y(q[0]).toFixed(1)}" stroke="${c}"/><rect x="${(xm-bw/2+.5).toFixed(1)}" y="${Y(q[3]).toFixed(1)}" width="${Math.max(1,bw-1).toFixed(1)}" height="${Math.max(1,Y(q[1])-Y(q[3])).toFixed(1)}" fill="${c}" fill-opacity=".22" stroke="${c}"/><line x1="${(xm-bw/2+.5).toFixed(1)}" x2="${(xm+bw/2-.5).toFixed(1)}" y1="${Y(q[2]).toFixed(1)}" y2="${Y(q[2]).toFixed(1)}" stroke="${c}" stroke-width="2.2"/>`;}
-     else{if(arr.length<2)continue;const o=arr[0].p,cl=arr[arr.length-1].p,hi=Math.max(...arr.map(x=>x.p)),lo=Math.min(...arr.map(x=>x.p)),k2=cl>=o?"gain":"loss";
+     else{if(arr.length<2)continue;const o=arr[0],cl=arr[arr.length-1];let hi=-Infinity,lo=Infinity;for(const x of arr){if(x>hi)hi=x;if(x<lo)lo=x;}const k2=cl>=o?"gain":"loss";
       g+=`<line class="${k2}" x1="${xm.toFixed(1)}" x2="${xm.toFixed(1)}" y1="${Y(hi).toFixed(1)}" y2="${Y(lo).toFixed(1)}"/><rect class="${k2}f" x="${(xm-bw/2+.5).toFixed(1)}" y="${Y(Math.max(o,cl)).toFixed(1)}" width="${Math.max(1,bw-1).toFixed(1)}" height="${Math.max(1,Math.abs(Y(o)-Y(cl))).toFixed(1)}"/>`;}}
     continue;}
    if(m==="band"){let up="",dn=[];d.v.forEach((x,j)=>{if(!x)return;const i=a+j;up+=(up?"L":"M")+X(i).toFixed(1)+","+Y(x[1]).toFixed(1);dn.push("L"+X(i).toFixed(1)+","+Y(x[0]).toFixed(1));});
@@ -2880,7 +2896,7 @@ function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cel
  for(let k=0;k<panes.length-1;k++){const sy=panes[k].y0+panes[k].h+SEP/2;g+=`<line class="hr" x1="0" x2="${W}" y1="${sy}" y2="${sy}" data-sep="${k}"/>`;}
  for(const t of xt)g+=`<text x="${X(t[0]).toFixed(1)}" y="${yb+17}" text-anchor="middle"${t[2]?' style="font-weight:600"':""}>${t[1]}</text>`;
  if(anRp.on&&anRp.i!=null)g+=`<line x1="${X(anRp.i+.5).toFixed(1)}" x2="${X(anRp.i+.5).toFixed(1)}" y1="0" y2="${yb}" stroke="#2F6FB0" stroke-width="1.5"/>`;
- svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width",W);svg.setAttribute("height",H);svg.innerHTML=g+`<g class="tv-dr"></g><g class="tv-x"></g>`;
+ E.P0W=W-L-R;anDots(E,W,H,dots);svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width",W);svg.setAttribute("height",H);svg.innerHTML=g+`<g class="tv-dr"></g><g class="tv-x"></g>`;
  E.P={X,ix:x=>V.a+(x-L)/(W-L-R)*span,panes,L,R,W,H,T,yb,V,a,b,data,all,span,boxPer,candPer,sc,SEP};
  E.st.textContent=notes.join(" · ");E.st.hidden=!notes.length;anDrawings(ci);anCross(ci);}
 
@@ -2920,8 +2936,8 @@ function anLegend(ci){const E=anE[ci],P=E&&E.P,ch=AN.ch[ci];if(!P)return;const h
  let h="";P.panes.forEach((pn,pi)=>{let rows=pi?`<div class="tv-pl">${AN_PANE[pn.u]}${pn.u==="i"?(P.sc==="idx"?" · 100 at the left edge":" · % since the left edge"):""}</div>`:"";
   for(const d of pn.ds){const si=ch.s.indexOf(d.s),m=d.s.m,c=anC(d.s.c);let val="",chg="";
    if(d.study){const k=i??Math.min(P.b,Math.floor(P.V.b)),v=d.v[k-P.a];val=v==null?"–":pct(v,1);rows+=`<div class="tv-lr st" data-ci="${ci}" data-study="${d.study}"><i style="background:${d.study==="dd"?"var(--loss)":c}"></i><b>${AN_STUDY[d.study].t}</b><span class="tv-lm">${esc(anName(d.s))}</span><span class="tv-lv">${val}</span><span class="tv-lb">${btn("sx","Remove this study",X_)}</span></div>`;continue;}
-   if(d.S){const inV=d.S.v.filter(z=>z.i<=P.V.b+1),k=i??(inV.length?Math.min(TL,Math.floor(inV[inV.length-1].i)):Math.min(TL,Math.floor(P.V.b))),per=m==="box"?P.boxPer:m==="candle"?P.candPer:1,kk=Math.floor(k/per),arr=d.S.v.filter(z=>Math.floor(Math.floor(z.i)/per)===kk),ps=arr.map(z=>z.p).sort((u,v)=>u-v),lab=per===12?MS.m[k].slice(0,4):per===3?qOf(k):mlabel(k);
-    val=!arr.length?`no sales in ${lab}`:m==="candle"?`${lab} · first ${money(arr[0].p)} · high ${money(ps[ps.length-1])} · low ${money(ps[0])} · last ${money(arr[arr.length-1].p)}`:m==="box"?`${lab} · median ${money(anQt(ps,.5))} · middle half ${money(anQt(ps,.25))} to ${money(anQt(ps,.75))}`:`${lab} · median ${money(anQt(ps,.5))}`;
+   if(d.S){const S=d.S,jv=anLb(S.i,S.n,P.V.b+1),k=i??(jv?Math.min(TL,Math.floor(S.i[jv-1])):Math.min(TL,Math.floor(P.V.b))),per=m==="box"?P.boxPer:m==="candle"?P.candPer:1,kk=Math.floor(k/per),ga=anLb(S.i,S.n,kk*per),gb=anLb(S.i,S.n,(kk+1)*per),arr=Array.from(S.p.subarray(ga,gb)),ps=arr.slice().sort((u,v)=>u-v),lab=per===12?MS.m[k].slice(0,4):per===3?qOf(k):mlabel(k);
+    val=!arr.length?`no sales in ${lab}`:m==="candle"?`${lab} · first ${money(arr[0])} · high ${money(ps[ps.length-1])} · low ${money(ps[0])} · last ${money(arr[arr.length-1])}`:m==="box"?`${lab} · median ${money(anQt(ps,.5))} · middle half ${money(anQt(ps,.25))} to ${money(anQt(ps,.75))}`:`${lab} · median ${money(anQt(ps,.5))}`;
     chg=arr.length?`<span class="tv-lc">${arr.length} sale${arr.length>1?"s":""}</span>`:"";}
    else{const k=i??(()=>{for(let j=Math.min(P.b,Math.floor(P.V.b));j>=P.a;j--)if(d.v[j-P.a]!=null)return j;return Math.floor(P.V.b);})();let v=d.v[k-P.a];if(v==null&&d.sparse)for(let q=1;q<=3&&v==null;q++)v=d.v[k-P.a-q];
     val=Array.isArray(v)?anFmt("$",v[0])+" to "+anFmt("$",v[1]):anFmt(pn.u,v,P.sc);
@@ -3079,6 +3095,7 @@ async function anPicture(){const css=getComputedStyle(document.documentElement),
  cv.width=g.width*k;cv.height=(g.height+FT)*k;const x=cv.getContext("2d");x.scale(k,k);x.fillStyle=v("--sheet");x.fillRect(0,0,g.width,g.height+FT);const style=anCss(v);
  for(const E of anE){const r=E.cell.getBoundingClientRect(),cl=E.svg.cloneNode(true);cl.setAttribute("xmlns","http://www.w3.org/2000/svg");cl.querySelector(".tv-x").innerHTML="";cl.insertAdjacentHTML("afterbegin",`<style>${style.replace(/var\(--(\w+)\)/g,(m,n)=>v("--"+n))}</style>`);
   const src=new XMLSerializer().serializeToString(cl).replace(/var\(--(\w+)\)/g,(m,n)=>v("--"+n)),img=new Image();await new Promise(res=>{img.onload=res;img.onerror=res;img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(src);});
+  if(E.cv&&!E.cv.hidden)x.drawImage(E.cv,r.left-g.left,r.top-g.top,r.width,r.height);
   x.drawImage(img,r.left-g.left,r.top-g.top,r.width,r.height);
   E.leg.querySelectorAll(".tv-lr").forEach(row=>{const rr=row.getBoundingClientRect(),dot=row.querySelector("i");let tx=rr.left-g.left,ty=rr.top-g.top+rr.height/2+4;
    if(dot){x.fillStyle=getComputedStyle(dot).backgroundColor;x.beginPath();x.arc(tx+5,ty-4,4,0,7);x.fill();}tx+=16;
@@ -3129,9 +3146,9 @@ function anNoteAt(ci,i,v,u,px,py){const E=anE[ci];const f=document.createElement
   if(anTmp){if(!q||q.ci!==anTmp.ci)return;const pn=anTmp.pn;if(anTool==="zoom"){anTmp.i2=q.i;const P=q.P;anE[q.ci].svg.querySelector(".tv-dr").innerHTML=`<rect x="${Math.min(anTmp.zx,q.x)}" y="0" width="${Math.abs(q.x-anTmp.zx)}" height="${P.yb}" class="hl" fill-opacity=".25"/>`;return;}
    const p=snap({...q,y:Math.max(pn.y0,Math.min(pn.y0+pn.h,q.y))},pn);anTmp.i2=p.i;anTmp.v2=p.v;anDrawings(q.ci);return;}
   if(drag){const P=drag.q0.P,ch=AN.ch[drag.q0.ci],dx=e.clientX-(drag.cx??(drag.cx=e.clientX)),dy=e.clientY-(drag.cy??(drag.cy=e.clientY)),r=drag.q0.E.svg.getBoundingClientRect(),kx=P.W/r.width;
-   if(drag.m==="pan"){const d=dx*kx/(P.W-P.L-P.R)*(drag.v.b-drag.v.a);anV=clampV(drag.v.a-d,drag.v.b-d);if(drag.ys&&drag.pn){const pn=drag.pn,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),s=(f(drag.ys[1])-f(drag.ys[0]))/pn.h*dy*kx;ch.ys[pn.u]=[fi(f(drag.ys[0])+s),fi(f(drag.ys[1])+s),drag.ys[2]];}anHov=null;anDraw();return;}
-   if(drag.m==="xax"){const k=Math.exp(-dx*kx*.006),w=(drag.v.b-drag.v.a)*k;anV=clampV(drag.v.b-w,drag.v.b);anDraw();return;}
-   if(drag.m==="yax"){const pn=drag.pn,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),k=Math.exp(dy*kx*.006),c=(f(drag.mn)+f(drag.mx))/2,hw=(f(drag.mx)-f(drag.mn))/2*k;ch.ys[drag.u]=[fi(c-hw),fi(c+hw),P.sc];anDraw();return;}
+   if(drag.m==="pan"){const d=dx*kx/(P.W-P.L-P.R)*(drag.v.b-drag.v.a);anV=clampV(drag.v.a-d,drag.v.b-d);if(drag.ys&&drag.pn){const pn=drag.pn,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),s=(f(drag.ys[1])-f(drag.ys[0]))/pn.h*dy*kx;ch.ys[pn.u]=[fi(f(drag.ys[0])+s),fi(f(drag.ys[1])+s),drag.ys[2]];}anHov=null;anDrawSoon();return;}
+   if(drag.m==="xax"){const k=Math.exp(-dx*kx*.006),w=(drag.v.b-drag.v.a)*k;anV=clampV(drag.v.b-w,drag.v.b);anDrawSoon();return;}
+   if(drag.m==="yax"){const pn=drag.pn,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),k=Math.exp(dy*kx*.006),c=(f(drag.mn)+f(drag.mx))/2,hw=(f(drag.mx)-f(drag.mn))/2*k;ch.ys[drag.u]=[fi(c-hw),fi(c+hw),P.sc];anDrawSoon();return;}
    if(drag.m==="sep"){const ps=P.panes,a=ps[drag.k],b=ps[drag.k+1],tot=a.h+b.h,ha=Math.max(40,Math.min(tot-40,a.h+dy*kx)),wa=ch.ph[a.u]||(drag.k?1.1:3),wb=ch.ph[b.u]||1.1,sw=wa+wb;
     ch.ph[a.u]=sw*ha/tot;ch.ph[b.u]=sw*(tot-ha)/tot;drag.cy=e.clientY;drag.q0={...drag.q0,P:anE[drag.q0.ci].P};anChart(drag.q0.ci);drag.q0.P=anE[drag.q0.ci].P;return;}
    if(drag.m==="hd"||drag.m==="mv"){if(!q||q.ci!==drag.q0.ci)return;const d=drag.d,pn=P.panes.find(p=>p.u===d.u)||q.pn;if(!pn)return;
@@ -3140,14 +3157,14 @@ function anNoteAt(ci,i,v,u,px,py){const E=anE[ci];const f=document.createElement
     anDrawings(drag.q0.ci);return;}
    return;}
   if(!q||e.target.closest(".tv-lr,.tv-empty"))return;const z=zone(q);grid.style.cursor=anRp.pick?"pointer":z.z==="sep"?"row-resize":z.z==="yax"?"ns-resize":z.z==="xax"?"ew-resize":e.target.closest("[data-hd]")?"move":e.target.closest("[data-dr]")&&anTool==="pan"?"pointer":"";
-  anHov=z.z==="plot"||z.z==="yax"?{ci:q.ci,i:q.i,y:z.z==="plot"?q.y:null}:null;anCrossAll();});
+  anHov=z.z==="plot"||z.z==="yax"?{ci:q.ci,i:q.i,y:z.z==="plot"?q.y:null}:null;if(!anCrossAll.r)anCrossAll.r=requestAnimationFrame(()=>{anCrossAll.r=0;anCrossAll();});});
  const end=e=>{grid.classList.remove("grab");
   if(anTmp){const{pn,ci,zx,...d}=anTmp;anTmp=null;if(d.t==="zoom"){if(Math.abs(d.i2-d.i1)>=2){anV=clampV(Math.min(d.i1,d.i2),Math.max(d.i1,d.i2));}if(!AN.keep)anTool="pan";anDraw();return;}
    if(Math.abs(d.i2-d.i1)>.3||Math.abs(pn.Y(d.v2)-pn.Y(d.v1))>4){anDo(()=>{AN.ch[ci].dr.push(d);});anSel={ci,k:AN.ch[ci].dr.length-1};}if(!AN.keep)anTool="pan";anDraw();return;}
   if(drag){const m=drag.m;if(m==="hd"||m==="mv"){if(m==="mv"&&!drag.moved)anHist.pop();anSave();anDraw();}else if(m==="sep"||m==="yax"||m==="pan"&&drag.ys)anSave();drag=null;}};
  grid.addEventListener("pointerup",end);grid.addEventListener("pointercancel",end);
  grid.addEventListener("pointerleave",()=>{if(!drag&&!anTmp){anHov=null;anCrossAll();grid.style.cursor="";}});
- grid.addEventListener("wheel",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;e.preventDefault();const V=anRange(),k=Math.exp(e.deltaY*.0015),i=Math.max(V.a,Math.min(V.b,q.i));anV=clampV(i-(i-V.a)*k,i+(V.b-i)*k);anDraw();},{passive:false});
+ grid.addEventListener("wheel",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;e.preventDefault();const V=anRange(),k=Math.exp(e.deltaY*.0015),i=Math.max(V.a,Math.min(V.b,q.i));anV=clampV(i-(i-V.a)*k,i+(V.b-i)*k);anDrawSoon();},{passive:false});
  grid.addEventListener("dblclick",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;const z=zone(q),ch=AN.ch[q.ci];
   if(z.z==="yax"){delete ch.ys[q.pn.u];anSave();anDraw();}else if(z.z==="sep"){ch.ph={};anSave();anDraw();}else if(z.z==="xax"||(z.z==="plot"&&anTool==="pan"&&!e.target.closest("[data-dr]"))){ch.ys={};anSetR(AN.r||0);if(z.z==="plot")anSetR(0);}});
  // legend buttons
