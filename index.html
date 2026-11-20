@@ -622,7 +622,7 @@ details.assume,details.how{border-top-color:var(--ink)}
 .bx-fine{margin:10px 0 0;font-size:11.5px;color:var(--slate)}
 details.how.lic{margin-top:0;border-top:0}
 @media print{
- header.gh,nav.tabs,#tabMap,footer,.tourBtn,#bxPlay,.bx-legal-a{display:none!important}
+ header.gh,header.top,nav.tabs,#tabMap,#tabMarket,#tabSuburbs,footer,.tourBtn,#bxPlay,.bx-legal-a{display:none!important}
  #tabBudget{display:block!important}
  body{background:#fff}
  .bx-step{break-inside:avoid}
@@ -871,33 +871,177 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 .qn-d{font:400 13px var(--sans);color:var(--slate)}
 .qnow p{margin:6px 0 0;font:400 14.5px/1.45 var(--sans);color:var(--ink)}
 .mbig-h #myrs button{padding:3px 10px;font-size:13px}
+
+/* ================= Layout v2 (prototype): top bar, four views, more room ================= */
+:root{--toph:60px}
+header.top{padding:0;position:sticky;top:0;z-index:60;background:var(--night);border-bottom:1px solid rgba(255,255,255,.1)}
+.top-in{display:flex;align-items:center;gap:28px;height:var(--toph);padding:0 32px;max-width:1440px;margin:0 auto}
+.top-logo{background:none;border:0;padding:0;cursor:pointer;font-size:21px}
+header.top .tabs{display:flex;gap:4px;margin:0;align-self:stretch}
+header.top .tabs button{color:var(--mist);font:500 15px var(--sans);padding:0 16px;border:0;border-bottom:3px solid transparent;margin:0;background:none;cursor:pointer}
+header.top .tabs button:hover{color:#fff}
+header.top .tabs button[aria-selected=true]{color:#fff;border-bottom-color:var(--hi)}
+header.top .tabs .t-s{display:none}
+.top-srch{margin-left:auto}
+.top-srch #find{width:300px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#fff;padding:9px 16px;font:400 14.5px var(--sans)}
+.top-srch #find::placeholder{color:var(--mist)}
+.top-srch #find:focus{outline:2px solid var(--hi);outline-offset:1px;background:rgba(255,255,255,.1)}
+.top-srch #sugg{right:0;left:auto}
+header.top .tourBtn{float:none;margin:0;background:transparent;color:#EAF0EA;border-color:rgba(255,255,255,.28)}
+header.top .tourBtn:hover{border-color:var(--hi);color:var(--hi)}
+
+/* Market view: the hero, then the detail with room around it */
+.gh-bar{padding-top:28px}
+.gh-hero{padding:80px 0 72px}
+.gh-mkt{padding:64px 0 56px}
+.gh-ask{padding:8px 0 72px}
+/* Overview hero: two slides, the introduction and "which way is the market going?" */
+.gh-slides{position:relative;overflow:hidden;transition:height .45s cubic-bezier(.2,.7,.2,1)}
+.gh-track{display:flex;align-items:flex-start;width:200%;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.gh-slides[data-s="1"] .gh-track{transform:translateX(-50%)}
+.gh-slide{width:50%;flex:none;box-sizing:border-box}
+.gh-slides .gh-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:40px 64px;align-items:end;padding:72px 0 56px}
+.gh-slides header.gh h1,header.gh .gh-slides h1{font-size:clamp(40px,5.4vw,78px)}
+.gh-slides .gh-mkt{border-top:0;padding:56px 0 40px;position:relative}
+@media(prefers-reduced-motion:reduce){.gh-track,.gh-slides{transition:none}}
+.gh-slides .gh-hero .gh-stats{display:flex;flex-wrap:wrap;border:0;padding:0;margin:36px 0 28px;gap:12px 48px}
+.gh-next{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;text-align:left;background:var(--hi);color:var(--night);border:0;border-radius:16px;padding:22px 24px;cursor:pointer;transition:transform .2s,background .2s}
+.gh-next:hover{background:#E0FF6B;transform:translateY(-2px)}
+.gh-next .k{grid-column:1/-1;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#33420F}
+.gh-next b{font:800 25px/1.05 var(--serif);font-stretch:80%;text-transform:uppercase;letter-spacing:-.01em}
+.gh-next .s{grid-column:1;font:400 14.5px/1.4 var(--sans);color:#33420F}
+.gh-next .go{grid-column:2;grid-row:2/4;align-self:center;font:500 28px/1 var(--sans)}
+.gh-back{position:absolute;top:50px;left:0;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:transparent;color:#EAF0EA;font:500 18px/1 var(--sans);cursor:pointer}
+.gh-back:hover{border-color:var(--hi);color:var(--hi)}
+.gh-slides .gh-mkt .gh-kick{padding-left:52px}
+.gh-dots{display:flex;gap:8px;justify-content:center;padding:4px 0 32px}
+.gh-dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:rgba(255,255,255,.28);cursor:pointer;transition:width .3s,background .3s}
+.gh-dots button[aria-pressed=true]{width:26px;background:var(--hi)}
+.gh-ask{padding:8px 0 64px}
+/* tab icons */
+header.top .tabs button{display:inline-flex;align-items:center;gap:8px}
+header.top .tabs .ti{width:17px;height:17px;flex:none;opacity:.85}
+header.top .tabs button[aria-selected=true] .ti{color:var(--hi);opacity:1}
+/* Suburbs view: the area summary, then the table */
+#subMkt section.market{margin:0;padding:56px 0 40px;border-top:0}
+#subMkt .sec{font-size:34px;margin:0 0 12px}
+#subMkt .lede{font-size:16.5px;max-width:62ch;margin:0 0 32px}
+#subMkt .mcards{gap:24px;margin:0 0 28px}
+#subMkt .mcards>*{padding:24px 26px}
+#subMkt .mbig{padding:24px 26px 18px}
+#tabSuburbs section.list{padding-top:40px!important}
+/* budget bars */
+svg.bars text{font:500 11.5px var(--mono);fill:var(--slate)}
+#bxChart svg.bars,#poBal svg.bars{cursor:pointer;display:block;width:100%;height:auto}
+#bxCK .cap i{border-radius:2px}
+/* Map view: the map fills the screen under the top bar and controls */
+body[data-view=map] footer{display:none}
+#tabMap .mapctl{top:var(--toph);margin:0 -32px 16px;padding:10px 32px 6px}
+@media(min-width:1001px){#tabMap .main{--maph:max(420px,calc(100vh - var(--toph) - var(--ctlh,150px) - 32px))}}
+#tabMap .bar{gap:16px 24px}
+.lrow-sp .spbar{box-shadow:none;border:0;padding:0;background:none;flex-wrap:wrap}
+
+/* Suburbs and budget views: a heading with room, then the content */
+#tabSuburbs section.list{margin:0;padding:56px 0 96px}
+.v-head{margin:0 0 32px}
+.v-head .sec{font-size:34px;margin:0 0 10px}
+.v-head .lede{font-size:16.5px;max-width:62ch;margin:0}
+#tabBudget .bx{padding:56px 0 64px}
+#tabBudget .bx-top{margin-bottom:36px}
+#tabBudget .bx-top .sec{font-size:34px}
+#tabBudget .bx-step{padding:36px 40px;margin:0 0 28px}
+footer{padding-top:48px}
+
+@media(max-width:1000px){.top-srch #find{width:220px}}
+@media(max-width:860px){
+ .top-in{gap:12px;padding:0 16px;flex-wrap:wrap;height:auto;padding-top:10px}
+ :root{--toph:104px}
+ .top-logo{font-size:19px}
+ .top-srch{margin-left:auto;flex:1;min-width:0}.top-srch #find{width:100%}
+ header.top .tourBtn{display:none}
+ header.top .tabs{order:3;width:100%;justify-content:space-between;align-self:auto;height:44px}
+ header.top .tabs button{flex:1;padding:0 4px;font-size:14px;justify-content:center}
+ header.top .tabs .t-l{display:none}header.top .tabs .t-s{display:inline}
+ #tabMap .mapctl{margin:0 -16px 12px;padding:8px 16px 4px}
+ .gh-hero{padding:48px 0 40px}.gh-mkt{padding:40px 0}.gh-ask{padding-bottom:48px}
+ .gh-slides .gh-hero{grid-template-columns:1fr;padding:44px 0 36px;gap:28px}.gh-slides .gh-mkt{padding:36px 0 28px}.gh-back{top:30px}.gh-next b{font-size:21px}
+ #subMkt section.market{padding:36px 0 24px}
+ header.top .tabs .ti{display:none}
+ #tabBudget .bx-step{padding:22px 16px}
+}
+@media(max-width:720px){.gh-slides .gh-hero .gh-stats{display:flex;gap:10px 28px;margin:24px 0 20px}.gh-slides .gh-stats div b{font-size:22px}}
+
+/* ================= Analysis view ================= */
+.an{padding:32px 0 72px}
+.an-bar{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;margin:0 0 12px}
+.an-add,.an-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#anFind{width:340px;max-width:calc(100vw - 32px);font:400 15px var(--sans);padding:10px 14px;border:1px solid #C4CBC2;border-radius:10px;background:var(--sheet)}
+#anFind:focus{outline:2px solid var(--ink);outline-offset:1px}
+#anSugg{position:absolute;top:100%;left:0;min-width:100%;z-index:40;background:var(--sheet);border:1px solid var(--hair);border-radius:8px;margin:4px 0 0;padding:4px 0;list-style:none;box-shadow:0 8px 24px rgba(14,26,22,.14)}
+#anSugg li{padding:8px 12px;cursor:pointer;font-size:14.5px}#anSugg li[aria-selected=true],#anSugg li:hover{background:var(--wash)}#anSugg li span{color:var(--slate);font-size:12px;margin-left:8px;font-family:var(--mono);text-transform:uppercase}
+#anMet{font:500 14px var(--sans);padding:9px 10px;border:1px solid #C4CBC2;border-radius:10px;background:var(--sheet)}
+.an .seg button{padding:7px 12px;font-size:13.5px}
+.an-presets{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 16px;font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--slate)}
+.an-presets button{font:500 13px var(--sans);text-transform:none;letter-spacing:0;color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:99px;padding:5px 12px;cursor:pointer}
+.an-presets button:hover{border-color:var(--ink)}
+.an-chart{background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:10px 4px 4px 4px;cursor:crosshair;touch-action:pan-y;user-select:none;overflow:hidden;box-shadow:0 14px 34px -26px rgba(14,26,22,.4)}
+.an-chart.drag{cursor:grabbing}
+#anSvg{display:block;width:100%;height:auto}
+#anSvg text{font:500 11.5px var(--mono);fill:var(--slate)}
+#anSvg text.ap{font:600 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;fill:var(--ink)}
+#anSvg text.av{font:500 12.5px var(--sans);fill:var(--ink)}
+#anSvg text.al,#anSvg text.axh{fill:#fff;font-weight:600}
+.an-hint{font-size:13px;color:var(--slate);margin:10px 0 28px}
+.an-tbl td small{display:block;color:var(--slate);font-size:11.5px;font-weight:400}
+.an-tbl td.muted{color:var(--slate)}
+.an-tbl .pos{color:var(--gain)}.an-tbl .neg{color:var(--loss)}
+.an-sw{width:16px;height:16px;border-radius:4px;border:2px solid var(--c);background:var(--c);cursor:pointer;padding:0}
+.an-sw[aria-pressed=false]{background:transparent}
+.an-x{border:0;background:none;font-size:18px;color:var(--slate);cursor:pointer}.an-x:hover{color:var(--loss)}
+.sub-area{padding:40px 0 0}.sub-area select{font:500 14.5px var(--sans);padding:8px 10px;border-radius:10px;margin-left:8px}
+#subMkt section.market{padding-top:24px}
+@media(max-width:860px){header.top .tabs button{font-size:12.5px}.an{padding-top:20px}#anFind{width:100%}.an-add .srch{flex:1 1 100%}}
+.an-tbl td:nth-child(2),.an-tbl th:nth-child(2){text-align:left}
 </style></head><body>
+<header class="top"><div class="top-in">
+<button type="button" class="gh-logo top-logo" data-tab="market" aria-label="Glasshouse, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</button>
+<nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="true"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h5v5H2zM9 2h5v3H9zM9 7h5v7H9zM2 9h5v5H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Overview</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
+<div class="top-srch"><div class="field srch"><input id="find" placeholder="Search a suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div></div>
+<button type="button" class="tourBtn" id="tourBtn">Tour</button>
+</div></header>
+
+<div id="tabMarket" role="tabpanel">
 <header class="gh"><div class="wrap">
-<div class="gh-bar"><span class="gh-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</span><span class="gh-tag">What homes really sold for.</span><div class="gh-stats num" id="ghStats"></div><button type="button" class="tourBtn" id="tourBtn">Take the tour</button></div>
-<div class="gh-hero">
+<div class="gh-slides" id="ghSlides" data-s="0"><div class="gh-track">
+<section class="gh-slide gh-hero" aria-label="Glasshouse">
 <div class="gh-hl">
 <h1>See <mark>straight through</mark> the property market</h1>
 <p class="gh-sub">Every NSW home sale since 1990, on the record. <b>Updated weekly.</b></p>
+<div class="gh-stats num" id="ghStats"></div>
 <button class="gh-fresh" id="ghFresh" hidden></button>
 </div>
-</div>
-<section class="gh-mkt" aria-label="Which way is the market going?">
+<button type="button" class="gh-next" data-slide="1"><span class="k">Next</span><b>Which way is the market going?</b><span class="s">The headline, the trend and the last three months.</span><span class="go" aria-hidden="true">→</span></button>
+</section>
+<section class="gh-slide gh-mkt" aria-label="Which way is the market going?">
+<button type="button" class="gh-back" data-slide="0" aria-label="Back to the introduction">←</button>
 <div class="gh-kick"><span>Which way is the market going?</span><span class="gh-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ghArea" aria-label="Area"></select></span></div>
 <div class="gh-mgrid"><div class="gh-ans"><h2 id="ghH1"></h2><p id="headline"></p><div class="gh-tiles num" id="ghTiles"></div></div>
 <div class="gh-ev" id="ghEv"><div class="gh-labrow"><p class="gh-lab" id="ghLab"></p><span class="seg gh-yrs" role="group" aria-label="Years shown"><button data-ghy="1" aria-pressed="true">1 yr</button><button data-ghy="3" aria-pressed="false">3 yrs</button></span></div><p class="gh-now" id="ghNow"></p><div id="ghFig"></div></div></div>
 <details class="gh-cap"><summary>How this is worked out</summary><div id="ghCap"></div></details>
 </section>
+</div></div><div class="gh-dots" role="group" aria-label="Slides"><button data-slide="0" aria-label="Introduction" aria-pressed="true"></button><button data-slide="1" aria-label="Which way is the market going?" aria-pressed="false"></button></div>
 <div class="gh-ask">
-<button class="pri" id="ctaPlay"><span class="n">01</span><span><b>Where are prices moving?</b><span class="s">Watch the last 12 months play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="ctaPlay"><span class="n">01</span><span><b>Where are prices moving?</b><span class="s">Watch the last 12 months play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askFind"><span class="n">02</span><span><b>Sales in the last week</b><span class="s">Every home that settled in the past seven days, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button data-goto="budget"><span class="n">03</span><span><b>Where can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div>
 <p class="prov" id="prov" hidden></p>
-<nav class="tabs" role="tablist"><button role="tab" data-tab="map" aria-selected="true">Map and suburbs</button><button role="tab" data-tab="budget" aria-selected="false">Your budget</button></nav>
 </div></header>
 
+</div>
+
 <div class="wrap">
-<div id="tabMap" role="tabpanel">
+<div id="tabMap" role="tabpanel" hidden>
 <div class="mapctl" id="mapctl">
 <div class="bar">
  <label class="field">Area <select id="area"></select></label>
@@ -907,7 +1051,6 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
   <optgroup label="Rental return"><option value="yield">Rental yield (yearly rent as % of price)</option></optgroup>
   <optgroup label="My budget"><option value="afford">Where I can afford to buy</option><option value="rent">Where I can afford to rent</option></optgroup></select></label>
  <div class="mbud" id="mbud" hidden></div>
- <div class="field srch"><input id="find" placeholder="Search a suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div>
 </div>
 
 <div class="timebar" id="timebar">
@@ -925,12 +1068,13 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
 <div class="main">
  <div class="mapbox"><div id="map" aria-label="Map of NSW suburbs"></div>
   <div class="maptools" data-a="tr">
-   <div class="mtrow"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select><span id="spopt" hidden><select id="spcol" aria-label="Colour individual sales by" title="Colour individual sales by"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></span><b id="spinfo" hidden></b></div>
+   <div class="mtrow">
    <button class="lbtn" id="panelBtn" aria-pressed="false" title="Show the side panel: suburbs in view, or the suburb you picked"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12M2 8h12M2 13h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Suburbs in view</span></button>
    <button class="lbtn" id="fullBtn" aria-pressed="false" title="Make the map full width"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Full width</span></button>
-   <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>Layers</button></div>
+   <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>More</button></div>
    <div class="spnote" id="spnote" hidden></div>
    <div class="lpanel" id="lpanel" hidden>
+    <div class="lrow lrow-sp"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select><span id="spopt" hidden><select id="spcol" aria-label="Colour individual sales by" title="Colour individual sales by"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></span><b id="spinfo" hidden></b></div></div>
     <div class="lrow" id="palrow"><span>Price colours</span><div class="pals" id="pals" role="group" aria-label="Colours for price maps"></div></div>
     <div class="lrow"><span>Base map</span><div class="seg" role="group" aria-label="Base map"><button data-base="map" aria-pressed="true">Map</button><button data-base="sat" aria-pressed="false">Satellite</button></div></div>
     <div class="lrow"><span>Suburb shading</span><input id="opac" type="range" min="0" max="100" value="72" aria-label="Suburb shading opacity"></div>
@@ -942,6 +1086,28 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
  <aside id="detail" aria-live="polite"></aside>
 </div>
 
+
+
+</div>
+<div id="tabAnalysis" role="tabpanel" hidden>
+<section class="an" aria-label="Analysis">
+ <div class="an-bar">
+  <div class="an-add"><div class="srch"><input id="anFind" placeholder="Add a suburb or area to the chart" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="anSugg" aria-label="Add a suburb or area"><ul id="anSugg" role="listbox" hidden></ul></div>
+   <select id="anMet" aria-label="What to chart"><option value="price">Median price</option><option value="band">Price range (middle half)</option><option value="sales">Number of sales</option><option value="rent">Median rent</option><option value="yield">Rental yield</option><option value="yoy">Change on a year</option></select>
+   <span class="seg" role="group" aria-label="Houses or units" id="anSeg"><button data-aseg="house" aria-pressed="true">Houses</button><button data-aseg="unit" aria-pressed="false">Units</button></span></div>
+  <div class="an-ctl"><span class="seg" role="group" aria-label="Years shown" id="anRng"><button data-r="1">1Y</button><button data-r="3">3Y</button><button data-r="5">5Y</button><button data-r="10">10Y</button><button data-r="20">20Y</button><button data-r="0">All</button></span>
+   <span class="seg" role="group" aria-label="Scale" id="anScale"><button data-sc="abs" title="Dollars on an even scale">$</button><button data-sc="log" title="Log scale: equal steps are equal percentage moves">Log</button><button data-sc="idx" title="Every line starts at 100 at the left edge">Index</button><button data-sc="pct" title="Change since the left edge">%</button></span>
+   <button class="lbtn" id="anReset" type="button">Reset</button></div>
+ </div>
+ <div class="an-presets"><span>Try</span><button data-pre="sr">Sydney v regional</button><button data-pre="hu">Houses v units</button><button data-pre="pr">Prices v rents</button><button data-pre="ar">Regions</button><button data-pre="clr">Clear</button></div>
+ <div class="an-chart" id="anChart"><svg id="anSvg" role="img" aria-label="Chart of the chosen series"></svg></div>
+ <p class="an-hint">Drag to move through time, scroll to zoom, double-click to show everything. Suburb prices are 12-month medians (each point covers the year to that month); areas use 3-month medians.</p>
+ <div class="tbl an-tbl"><table class="t"><thead><tr><th></th><th>Series</th><th>Start</th><th>End</th><th>Change</th><th>A year</th><th>High</th><th>Low</th><th>From high</th><th></th></tr></thead><tbody id="anRows"></tbody></table></div>
+</section>
+</div>
+<div id="tabSuburbs" role="tabpanel" hidden>
+<div id="subMkt">
+<div class="sub-area"><label class="field">Area <select id="subArea" aria-label="Area"></select></label></div>
 <section class="market" aria-label="Market">
  <h2 class="sec" id="mtitle">The market</h2>
  <p class="lede" id="mlede"></p>
@@ -953,16 +1119,15 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
   <p class="note" id="mbigN" style="margin:6px 0 0"></p>
  </div>
 </section>
-
-<section class="list"><details class="list-d"><summary><h2>All suburbs</h2><span>Every suburb in a table you can sort</span></summary>
+</div>
+<section class="list"><header class="v-head"><h2 class="sec">All suburbs</h2><p class="lede">Every suburb in one table. Sort by any column; click a suburb to see it on the map.</p></header>
  <div class="listhead">
   <div class="filters">
    <label><input type="checkbox" id="fAfford"> Only what I can afford</label>
    <label>Min sales, last year <input id="minn" type="number" value="15" style="width:68px"></label>
    <span id="count"></span></div></div>
  <div class="tbl"><table class="t"><thead></thead><tbody></tbody></table></div>
-</details></section>
-
+</section>
 </div>
 <div id="tabBudget" role="tabpanel" hidden>
 <div class="bx">
@@ -1038,7 +1203,7 @@ header.gh h2#ghH1 mark.up{background:#2FBF71;color:#0B1411;padding:0 .12em}
     <p class="bx-sub" id="repNote"></p>
    </div>
    <div class="bx-panel">
-    <div class="bx-lab" style="justify-content:space-between"><span>Loan left to pay</span><span class="k" style="margin:0"><span><i style="background:#8FA39A"></i>Minimum</span><span id="poKeyX"><i style="background:#1F6E68"></i>With extra</span></span></div>
+    <div class="bx-lab" style="justify-content:space-between"><span>Repayments each year</span><span class="k" style="margin:0"><span><i style="background:#8E3B46"></i>Interest</span><span><i style="background:#2F5C8A"></i>Paying off the loan</span><span id="poKeyX"><i style="background:#1F6E68;height:4px"></i>Right bar: with extra</span></span></div>
     <div id="poBal"></div>
     <div class="bx-tiles two" id="poTiles"></div>
    </div>
@@ -1176,7 +1341,7 @@ function pg(k){if(!RNG)return null;const a=sv(k,1,RNG.a),b=sv(k,1,RNG.b);if(!a||
 const pgTotal=v=>{const yrs=(RNG.b-RNG.a)/12;return yrs<1?v:Math.pow(1+v,yrs)-1;};
 const HCH=MS&&MS.chunk||1e9,hLoading={};
 function histLoad(c){if(hLoading[c]||(window.HIST&&window.HIST[c]))return;hLoading[c]=1;timeUI&&TB&&timeUI();const el=document.createElement("script");el.src=`data/web/hist_${c}.js`;
- el.onload=()=>{hLoading[c]=0;timeUI();if(!raf)raf=requestAnimationFrame(()=>{raf=0;paintMap();detail();market();});};el.onerror=()=>{hLoading[c]=0;};document.head.appendChild(el);}
+ el.onload=()=>{hLoading[c]=0;timeUI();if(typeof anDraw==="function")setTimeout(anDraw,0);if(!raf)raf=requestAnimationFrame(()=>{raf=0;paintMap();detail();market();});};el.onerror=()=>{hLoading[c]=0;};document.head.appendChild(el);}
 function sv(k,w,i=ti){if(!MS)return null;const c=Math.floor(i/HCH),H=window.HIST&&window.HIST[c];if(!H){histLoad(c);return null;}const s=H[k];if(!s)return null;const j=i-s[0];if(j<0||j>=s[1].length)return null;const v=s[w][j];return v==null?null:w===4?v:v*1000;}
 function rv(k,i=ti){const s=MS&&MS.r[k];if(!s)return null;const j=i-s[0];return j<0||j>=s[1].length?null:s[1][j];}
 function tg(k,back,i=ti){if(i-back<0)return null;const a=sv(k,1,i),b=sv(k,1,i-back);if(!a||!b)return null;const x=a/b;
@@ -1301,8 +1466,8 @@ const DIV=["#D11F2E","#F2766B","#F4F3EC","#3CCB85","#0B9150"],SEQ=["#F3F1E2","#B
 const DIP=["#A8201A","#E8866A","#F5F2E6"];
 // colour schemes for the price maps (cheap to dear); growth keeps red and green so they never look alike
 const PALS={warm:["#F6F0DF","#EAC88C","#D9874E","#A8483F","#5B2435"],blue:["#EEF2F5","#B7CCDD","#6F9CC0","#33658F","#14324F"],
- purple:["#F3EEF4","#D3BFD9","#A27FB3","#6B4785","#36204A"],vivid:["#FDE725","#7AD151","#22A884","#2A788E","#414487"],grey:INK};
-let pal=(()=>{try{const v=localStorage.getItem("hs_pal");return PALS[v]?v:"warm";}catch(e){return"warm";}})();
+ purple:["#F3EEF4","#D3BFD9","#A27FB3","#6B4785","#36204A"],vivid:["#414487","#2A788E","#22A884","#7AD151","#FDE725"],grey:INK};
+let pal=(()=>{try{const v=localStorage.getItem("hs_pal2");return PALS[v]?v:"vivid";}catch(e){return"vivid";}})();   // hs_pal2: new default (blue cheap, yellow dear) for everyone
 const stopsOf=M=>M.stops==="PRICE"?PALS[pal]:M.stops;
 // Budget bands from the spread of prices: below the cheapest quarter = out of budget; up to the median = a stretch;
 // median to upper quarter = within budget; above the upper quarter = comfortably within. Same for rents.
@@ -1561,7 +1726,7 @@ function setOpacity(v){opac=v;if(ready){map.setPaintProperty("fill","fill-opacit
 /* ---------- budget planner ---------- */
 const $=id=>document.getElementById(id);
 // Scroll so the map sits just below the sticky control header (scrollIntoView misbehaves once the header is stuck).
-function toMap(){const m=document.querySelector(".main"),c=$("mapctl");if(!m||!c)return;scrollTo({top:m.getBoundingClientRect().top+scrollY-c.offsetHeight-12,behavior:"smooth"});}
+function toMap(){scrollTo({top:0,behavior:"smooth"});}   // the map view fills the screen under the top bar
 // Price or rent limit above the map, shown only with "Where I can afford to buy / rent".
 // Buy: the price chosen in The home (Your budget, step 2), or your own figure. Rent: the rent from step 1, editable here.
 const mbudW=i=>{i.style.width=Math.max(7,(i.value||i.placeholder||"").length+1)+"ch";};   // grow with the figure so nothing is cut off
@@ -1587,6 +1752,32 @@ function lineChart(series,{years,fmt,lab,h=220,tick=null,w=520,mark=null,band=nu
  if(mark!=null){g+=`<line x1="${X(mark)}" x2="${X(mark)}" y1="${T}" y2="${h-B0}" stroke="#0E1A16" stroke-width="1.2" stroke-dasharray="3 3"/>`;for(const s of series)if(!s.dash&&s.v[mark]!=null)g+=`<circle cx="${X(mark)}" cy="${Y(s.v[mark])}" r="4.5" fill="${s.c}" stroke="#fff" stroke-width="2"/>`;}
  const hov={vw:w,t:T,b:h-B0,xs:series[0].v.map((v,i)=>+X(i).toFixed(1)),lab:series[0].v.map((v,i)=>lab(i)),rows:series[0].v.map((v,i)=>series.map(s=>[s.c,+Y(s.v[i]).toFixed(1),`${s.name}: ${fmt(s.v[i])}`]))};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}</svg>`;}
+/* ---------- stacked bar charts (budget) ---------- */
+// One group per year; in each group one bar per side (buying, then renting or saving). Each bar is stacked from its parts;
+// negative parts stack below zero. Hover a year for every part of both bars; click picks that year.
+// sides: [{name, c (side colour, drawn as a cap on the bar), segs:[{name, c, v:[per year]}]}]
+function stackChart(sides,{years,fmt,lab,h=270,w=1040,mark=null,el="bxChart",note=null,tick=null}){
+ const cw=($(el)||{}).clientWidth||w;if(window.innerWidth<=720){w=Math.max(320,cw||380);h=Math.round(Math.max(240,h*.9));}else{w=Math.max(360,Math.min(w,cw||w));h=Math.round(Math.max(h,Math.min(360,w*.42)));}
+ const n=years+1,L0=60,R=12,T=12,B0=24,tot=(s,i)=>s.segs.reduce((t,g)=>t+(g.v[i]||0),0);
+ let mx=1,mn=0;for(const s of sides)for(let i=0;i<n;i++){let up=0,dn=0;for(const g of s.segs){const v=g.v[i]||0;v>=0?up+=v:dn+=v;}mx=Math.max(mx,up);mn=Math.min(mn,dn);}
+ mx*=1.04;if(mn<0)mn*=1.04;
+ const slot=(w-L0-R)/n,X=i=>L0+(i+.5)*slot,gap=sides.length>1?Math.max(1,slot*.06):0,bw=Math.max(1.5,Math.min(30,(slot*.82-gap)/sides.length)),Y=v=>T+(h-T-B0)*(1-(v-mn)/(mx-mn));
+ let g="";
+ if(mark!=null&&mark>=0&&mark<n)g+=`<rect x="${(X(mark)-slot/2).toFixed(1)}" y="${T}" width="${slot.toFixed(1)}" height="${h-T-B0}" fill="#E6EAE2" rx="3"/>`;
+ for(let k=0;k<=4;k++){const v=mn+(mx-mn)*k/4;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="#E6EAE2"/><text x="${L0-8}" y="${(Y(v)+3.5).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`;}
+ const st=years>20?5:years>10?5:2;for(let y=0;y<=years;y+=st)g+=`<text x="${X(y).toFixed(1)}" y="${h-6}" text-anchor="middle">${tick?tick(y):y?y+" yrs":"Now"}</text>`;
+ for(let i=0;i<n;i++)sides.forEach((s,j)=>{const x0=X(i)-(bw*sides.length+gap*(sides.length-1))/2+j*(bw+gap);let up=0,dn=0,top=null;
+  for(const sg of s.segs){const v=sg.v[i]||0;if(Math.abs(v)<.5)continue;let a,b;if(v>0){a=Y(up+v);b=Y(up);up+=v;}else{a=Y(dn);b=Y(dn+v);dn+=v;}
+   g+=`<rect x="${x0.toFixed(1)}" y="${a.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(.5,b-a).toFixed(1)}" fill="${sg.c}"/>`;}
+  if(sides.length>1&&(up>.5||dn<-.5))g+=`<rect x="${x0.toFixed(1)}" y="${(Y(up)-3).toFixed(1)}" width="${bw.toFixed(1)}" height="3" fill="${s.c}"/>`;});
+ if(mn<0)g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" stroke="#55625C"/>`;
+ const rows=[];for(let i=0;i<n;i++){const r=[];sides.forEach(s=>{r.push([s.c,0,`<strong>${esc(s.name)}: ${fmt(tot(s,i))}</strong>`]);for(const sg of s.segs)if(Math.abs(sg.v[i]||0)>=.5)r.push([sg.c,0,`${esc(sg.name)}: ${fmt(sg.v[i])}`]);});
+  const nt=note&&note(i);if(nt)r.push(["transparent",0,`<span style="color:var(--slate)">${nt}</span>`]);rows.push(r);}
+ const hov={vw:w,t:T,b:h-B0,bars:1,xs:Array.from({length:n},(_,i)=>+X(i).toFixed(1)),lab:Array.from({length:n},(_,i)=>lab(i)),rows};
+ return`<svg viewBox="0 0 ${w} ${h}" role="img" class="bars" data-hov="${esc(JSON.stringify(hov))}">${g}</svg>`;}
+// legend: side caps, then every part once
+function stackKey(sides){const seen=new Set(),parts=[];for(const s of sides)for(const g of s.segs){const k=g.name+g.c;if(!seen.has(k)){seen.add(k);parts.push(g);}}
+ return(sides.length>1?sides.map(s=>`<span class="cap"><i style="background:${s.c};height:4px"></i>${esc(s.name)}</span>`).join(""):"")+parts.map(g=>`<span><i style="background:${g.c}"></i>${esc(g.name)}</span>`).join("")+`<span class="hint">Hover a year for the breakdown</span>`;}
 /* ---------- buy or rent planner (tab 2) ---------- */
 // Step 1 capacity, step 2 the home, step 3 the loan, step 4 buying against renting for every year of the loan.
 const isInv=()=>B.use==="inv";
@@ -1683,7 +1874,9 @@ function bxUI(){const cap=$("bxCap"),has=!!(ML&&maxP&&maxP.price>0);
  const a0=amort(ch.L,ch.repay,0),a1=amort(ch.L,ch.repay,ex),N=BB.term_years;
  $("repNote").innerHTML=exTop<=0?`<span class="warn">Nothing spare for extra at this price: the repayment and costs take all your pay.</span>`:ex?`Paying <b>${dollars(repMin+ex)}</b> a month in all.`:"Slide to see what paying extra saves.";
  $("poKeyX").hidden=!ex;
- $("poBal").innerHTML=lineChart(ex?[{name:"Minimum",c:"#8FA39A",v:a0.yb.slice(0,N+1)},{name:"With extra",c:"#1F6E68",v:a1.yb.slice(0,N+1)}]:[{name:"Loan",c:"#8FA39A",v:a0.yb.slice(0,N+1)}],{years:N,fmt:money,lab:i=>i?`After ${i} year${i>1?"s":""}`:"Now",h:190});
+ const yr=a=>Array.from({length:N+1},(_,y)=>y?Math.max(0,a.yi[y]-a.yi[y-1]):0),pr=a=>Array.from({length:N+1},(_,y)=>y?Math.max(0,a.yb[y-1]-a.yb[y]):0);
+ const rs=a=>[{name:"Interest",c:CK.int,v:yr(a)},{name:"Paying off the loan",c:CK.prin,v:pr(a)}],poS=ex?[{name:"Minimum",c:"#8FA39A",segs:rs(a0)},{name:"With extra",c:"#1F6E68",segs:rs(a1)}]:[{name:"Repayments",c:"#8FA39A",segs:rs(a0)}];
+ $("poBal").innerHTML=stackChart(poS,{years:N,w:560,h:220,el:"poBal",fmt:money,lab:i=>i?`Year ${i}`:"Now",note:i=>`Loan left: ${money(a0.yb[i]||0)}${ex?` (with extra ${money(a1.yb[i]||0)})`:""}`});
  $("poTiles").innerHTML=`<div class="bx-tile"><div class="bx-lab">Paid off in</div><div class="v num">${ymTxt(ex?a1.months:a0.months)}</div><div class="s">${ex?`${ymTxt(a0.months-a1.months)} sooner`:"on minimum repayments"}</div></div>
   <div class="bx-tile"><div class="bx-lab">Interest in total</div><div class="v num">${money(ex?a1.interest:a0.interest)}</div><div class="s">${ex?`saves ${money(a0.interest-a1.interest)}`:`on a ${money(ch.L)} loan`}</div></div>`;
  // ---- 4. year by year
@@ -1771,18 +1964,27 @@ function bxChart(){if(!SIM)return;const M=SIM.m,N=M.N,inv=isInv(),k=BXC[bxK]?bxK
  // Money in and out is sampled at the start of each year; shift so point i is year i (the year just finished) and 0 is "nothing yet",
  // matching the year slider and the statement. Running total adds up each year's 12 months.
  const sh=a=>[0,...a.slice(0,N)],acc=a=>{let t=0;return a.map((v,i)=>i?(t+=v*12):0);},fl=a=>cum?acc(sh(a)):sh(a),left=M.saveB.map((v,i)=>v-M.xB[i]);
- const ser=k==="pay"?[{name:inv?"Owning it: loan and costs, less rent and tax":"Buying: loan repayment and costs",c:BUY,v:fl(M.payB.map((v,i)=>v+M.xB[i]))},{name:inv?"Not buying: no cost":SD.r?"Renting: rent paid":"Saving: no rent",c:RENT,v:fl(M.payR)}].concat(inv?[]:[{name:"Buying: interest and running costs only (money gone)",c:BUY,v:fl(M.deadB),dash:1}])
-  :k==="save"?[{name:`Saved ${yb}`,c:BUY,v:fl(left)},{name:`Saved ${yr}`,c:RENT,v:fl(M.saveR)}]
-  :k==="pot"?[{name:`Savings ${yb}`,c:BUY,v:M.potB},{name:`Savings ${yr}`,c:RENT,v:M.potR}]
-  :k==="eq"?[{name:"Equity in the home",c:BUY,v:M.eq},{name:"Loan still owed",c:GREY,v:M.bal}]
-  :k==="bal"?[{name:"Loan still owed",c:GREY,v:M.bal}]
-  :[{name:`Net worth ${yb}`,c:BUY,v:M.nwB},{name:`Net worth ${yr}`,c:RENT,v:M.nwR}];
- const band=k==="nw"?{lo:SIM.lo.nwB,hi:SIM.hi.nwB,c:"rgba(91,75,168,.13)"}:null;
- $("bxCT").textContent=`${c.t}, ${mon?(cum?"running total":"a month, in each year"):"over time"}`;
+ // Bars: buying on the left of each year, the alternative on the right; each bar split into what it's made of.
+ const z=()=>Array(N+1).fill(0),run=M.oB.map((v,i)=>v+M.letB[i]+M.ltB[i]),retA=M.retA.map((v,i)=>Math.min(v,Math.max(0,M.invA[i]))),retR=M.retR.map((v,i)=>Math.min(v,Math.max(0,M.potR[i])));
+ const gr=M.val.map(v=>v-maxP.price),dep=Array(N+1).fill(M.dep),paid=M.paid.map(v=>Math.max(0,v));
+ const SB=(segs)=>({name:SD.a,c:BUY,segs}),SR=(segs)=>({name:SD.b,c:RENT,segs});
+ const bars=k==="pay"?[SB([{name:"Loan interest",c:CK.int,v:fl(M.intB)},{name:"Paying off the loan",c:CK.prin,v:fl(M.prinB)},{name:"Extra, into the offset",c:CK.off,v:fl(M.xB)},{name:"Running costs",c:CK.run,v:fl(run)}]
+    .concat(inv?[{name:"Rent received",c:CK.inc,v:fl(M.incB.map(v=>-v))},{name:"Tax saved (or owed)",c:CK.tax,v:fl(M.taxB.map(v=>-v))}]:[])),SR([{name:SD.r&&!inv?"Rent":"No housing cost",c:RENT,v:fl(inv?z():M.payR)}])]
+  :k==="save"?[SB([{name:"Left over, saved",c:CK.inv,v:fl(left)}]),SR([{name:"Left over, saved ("+SD.b.toLowerCase()+")",c:RENT,v:fl(M.saveR)}])]
+  :k==="pot"?[SB([{name:"Offset account",c:CK.off,v:M.offB},{name:"Money put in",c:CK.inv,v:M.invA.map((v,i)=>v-retA[i])},{name:"Interest earned",c:CK.ret,v:retA}]),SR([{name:"Money put in ("+SD.b.toLowerCase()+")",c:RENT,v:M.potR.map((v,i)=>v-retR[i])},{name:"Interest earned ("+SD.b.toLowerCase()+")",c:"#EDB57E",v:retR}])]
+  :k==="eq"?[SB([{name:"Your deposit",c:CK.dep,v:dep},{name:"Loan paid off",c:CK.prin,v:paid},{name:"Price growth",c:CK.growth,v:gr}])]
+  :k==="bal"?[{name:"Loan still owed",c:GREY,segs:[{name:"Loan still owed",c:CK.owed,v:M.bal}]}]
+  :[SB([{name:"Offset account",c:CK.off,v:M.offB},{name:"Money put in",c:CK.inv,v:M.invA.map((v,i)=>v-retA[i])},{name:"Interest earned",c:CK.ret,v:retA},{name:"Your deposit",c:CK.dep,v:dep},{name:"Loan paid off",c:CK.prin,v:paid},{name:"Price growth",c:CK.growth,v:gr}]),
+     SR([{name:"Money put in ("+SD.b.toLowerCase()+")",c:RENT,v:M.potR.map((v,i)=>v-retR[i])},{name:"Interest earned ("+SD.b.toLowerCase()+")",c:"#EDB57E",v:retR}])];
+ const fmt=mon&&!cum?f$:fM,dif=i=>{if(bars.length<2)return"";const a=bars[0].segs.reduce((t,g)=>t+(g.v[i]||0),0),b=bars[1].segs.reduce((t,g)=>t+(g.v[i]||0),0),d=a-b;
+  if(Math.abs(d)<1)return"The same either way";const more=k==="pay"?(d>0?"costs":"costs"):"";
+  return k==="pay"?`${d>0?SD.a:SD.b} costs ${fmt(Math.abs(d))} more`:`${d>0?SD.a:SD.b} ahead by ${fmt(Math.abs(d))}`;};
+ const note=k==="nw"?i=>`${dif(i)}. With growth 2% lower or higher, buying: ${fM(SIM.lo.nwB[i])} to ${fM(SIM.hi.nwB[i])}`:dif;
+ $("bxCT").textContent=`${c.t}, ${mon?(cum?"running total":"a month, in each year"):"year by year"}`;
  const cs=$("bxCum");cs.hidden=!mon;cs.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",(b.dataset.cum==="1")===bxCum));
- $("bxCK").innerHTML=ser.map(s=>`<span><i style="background:${s.dash?`repeating-linear-gradient(90deg,${s.c} 0 5px,transparent 5px 9px)`:s.c}"></i>${s.name}</span>`).join("")+(band?`<span><i style="background:${band.c};height:10px"></i>Net worth ${yb}, if growth is 2% lower or higher</span>`:"");
- $("bxChart").innerHTML=lineChart(ser,{years:N,w:1040,h:270,fmt:mon&&!cum?f$:fM,lab:i=>mon?(i?`Year ${i}`:"Before you start"):(i?`After ${i} year${i>1?"s":""}`:"Day one"),mark:Math.min(bxYr,N),band});
- $("bxCN").textContent=`Click a row above to chart it, or click the chart to move the year. All figures are in today's dollars (future amounts scaled back by inflation) and assume the loan rate stays put.`;}
+ $("bxCK").innerHTML=stackKey(bars);
+ $("bxChart").innerHTML=stackChart(bars,{years:N,w:1040,h:290,fmt,lab:i=>mon?(i?`Year ${i}`:"Before you start"):(i?`After ${i} year${i>1?"s":""}`:"Day one"),mark:Math.min(bxYr,N),note});
+ $("bxCN").textContent=`Click a row above to chart it, or click a year to move there. All figures are in today's dollars (future amounts scaled back by inflation) and assume the loan rate stays put.`;}
 let pend=0;const soon=()=>{if(!pend)pend=requestAnimationFrame(()=>{pend=0;all();});};
 // when a suburb is chosen, start from its median price for this type of home (capped at your limit)
 function toMedian(){const r=sel?rowFor(sel):null;if(r&&r[C.med_now]){B.price=Math.round(r[C.med_now]/5000)*5000;B.inv_rent=null;save();}}
@@ -2262,6 +2464,128 @@ function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].re
  ghLine();
  $("ghCap").innerHTML=`The headline and tiles are for the typical suburb. ${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. The chart is the median of every sale in the area each quarter, so it also moves with the mix of homes sold. ${mt} Source: NSW Valuer General.`;}
 
+/* ---------- analysis: a chart you build yourself ---------- */
+// Series are suburbs or areas, each with one measure. Measures that share a unit share a pane: prices in the top pane,
+// then rents, sales and percentages below, all on one time axis. Index and % scales put prices, rents and sales on one footing.
+const AN_COL=["#0E1A16","#2F6FB0","#1F8A70","#7A4FB5","#C9A227","#B5487A","#6B7C74","#8C5A2B","#3E9BC9","#5E8C2F"];
+const AN_MET={price:{t:"Median price",u:"$"},band:{t:"Price range",u:"$"},sales:{t:"Sales",u:"n"},rent:{t:"Median rent",u:"r"},yield:{t:"Rental yield",u:"%"},yoy:{t:"Change on a year",u:"%"}};
+const AN_PANE={"$":"Price","i":"Index","r":"Rent a week","n":"Sales","%":"Per cent"};
+const anAreas=Object.fromEntries((D.areas||[]).map(a=>[a[0],a[1]]));
+const anSubs=[...new Set(D.rows.map(r=>r[C.locality]))].sort();
+let AN=(()=>{const d={s:[],r:10,sc:"abs",seg:"house",met:"price"};try{const v=JSON.parse(localStorage.getItem("hs_ana"));if(v&&Array.isArray(v.s))return{...d,...v};}catch(e){}return null;})();
+const anDefault=()=>({s:[{k:"a",id:"syd",seg:"house",m:"price",c:AN_COL[0],on:1},{k:"a",id:"reg",seg:"house",m:"price",c:AN_COL[1],on:1},{k:"a",id:"syd",seg:"house",m:"sales",c:AN_COL[0],on:1}],r:10,sc:"abs",seg:"house",met:"price"});
+if(!AN)AN=anDefault();
+let anV=null,anHov=null;   // view: {a,b} month indices (floats)
+const anSave=()=>{try{localStorage.setItem("hs_ana",JSON.stringify(AN));}catch(e){}};
+const anName=s=>(s.k==="a"?anAreas[s.id]||s.id:title(s.id))+(s.seg==="unit"?" units":" houses");
+const anNextCol=()=>AN_COL.find(c=>!AN.s.some(s=>s.c===c))||AN_COL[AN.s.length%AN_COL.length];
+const anRow=s=>D.rows.find(r=>r[C.locality]===s.id&&r[C.segment]===s.seg);
+// quarterly sales for the three big areas sit at each quarter's last month
+const anQ=(()=>{const o={};if(!MS)return o;const ix={};MS.m.forEach((m,i)=>{ix[m]=i;});for(const[rg,segs]of Object.entries(D.market_series||{}))for(const[sg,d]of Object.entries(segs)){const a=Array(TL+1).fill(null);(d.q||[]).forEach((q,j)=>{const y=q.slice(0,4),k=+q.slice(5)*3,i=ix[`${y}-${String(k).padStart(2,"0")}`];if(i!=null)a[i]=d.n[j];});o[rg+"|"+sg]=a;}return o;})();
+// value of series s at month i (null if none); band returns [low, high]
+function anVal(s,i){const m=s.m;
+ if(s.k==="a"){const p=()=>{const a=MS.mkt3&&(MS.mkt3[s.id]||{})[s.seg];return a&&a[i]!=null?a[i]*1000:null;},r=()=>{const a=MS.rmkt3&&(MS.rmkt3[s.id]||{})[s.seg];return a&&a[i]!=null?a[i]:null;};
+  if(m==="price"||m==="band")return p();if(m==="rent")return r();if(m==="sales"){const a=anQ[s.id+"|"+s.seg];return a?a[i]:null;}
+  if(m==="yield"){const a=p(),b=r();return a&&b?b*52/a:null;}if(m==="yoy"){if(i<12)return null;const a=p(),pa=MS.mkt3[s.id][s.seg][i-12];return a&&pa?a/(pa*1000)-1:null;}return null;}
+ const k=s.id+"|"+s.seg;
+ if(m==="price")return sv(k,1,i);if(m==="band"){const lo=sv(k,2,i),hi=sv(k,3,i);return lo&&hi?[lo,hi]:null;}if(m==="sales")return sv(k,4,i);
+ const row=anRow(s),rent=row?rv(row[C.postcode]+"|"+s.seg,i):null;if(m==="rent")return rent;
+ if(m==="yield"){const p=sv(k,1,i);if(!p||rent==null)return null;const y=rent*52/p;return y>.12||y<.01?null:y;}
+ if(m==="yoy"){if(i<12)return null;const a=sv(k,1,i),b=sv(k,1,i-12);return a&&b&&Math.abs(a/b-1)<.6?a/b-1:null;}return null;}
+const anUnit=s=>{const u=AN_MET[s.m].u;return(AN.sc==="idx"||AN.sc==="pct")&&(u==="$"||u==="r"||u==="n")&&s.m!=="band"?"i":u;};
+const anFmt=(u,v)=>v==null?"–":u==="$"?money(v):u==="r"?"$"+Math.round(v):u==="n"?Math.round(v).toLocaleString("en-AU"):u==="%"?pct(v,1):AN.sc==="pct"?(v>=0?"+":"")+v.toFixed(1)+"%":v.toFixed(0);
+function anRange(){if(!MS)return{a:0,b:0};if(!anV){const n=AN.r?AN.r*12:TL;anV={a:Math.max(0,TL-n),b:TL};}return anV;}
+function anSetR(r){AN.r=r;anV=null;anSave();anDraw();}
+// one pass: values in view for each visible series, then panes, scales and the drawing
+function anDraw(){const svg=$("anSvg");if(!svg||!MS||$("tabAnalysis").hidden)return;const box=$("anChart"),W=Math.max(300,box.clientWidth),V=anRange(),a=Math.floor(V.a),b=Math.ceil(V.b);
+ document.querySelectorAll("#anRng button").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.r===AN.r&&!anV.z));
+ document.querySelectorAll("#anScale button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.sc===AN.sc));
+ document.querySelectorAll("#anSeg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.aseg===AN.seg));$("anMet").value=AN.met;
+ const vis=AN.s.filter(s=>s.on),data=vis.map(s=>{const raw=[];for(let i=a;i<=b;i++)raw.push(anVal(s,i));let v=raw;
+  if(anUnit(s)==="i"){const b0=raw.find(x=>x!=null);v=raw.map(x=>x==null||!b0?null:AN.sc==="idx"?x/b0*100:(x/b0-1)*100);}return{s,v,u:anUnit(s),sparse:s.k==="a"&&s.m==="sales"};});
+ const order=AN.sc==="idx"||AN.sc==="pct"?["i","$","r","n","%"]:["$","i","r","n","%"],units=order.filter(u=>data.some(d=>d.u===u));if(!units.length)units.push("$");
+ const L=12,R=70,T=8,XA=26,main=units.length>1?300:380,sub=140,H=T+main+(units.length-1)*(sub+14)+XA;
+ const X=i=>L+(i-V.a)/(V.b-V.a||1)*(W-L-R);let g="",panes=[];let y0=T;
+ units.forEach((u,pi)=>{const h=pi?sub:main,ds=data.filter(d=>d.u===u);let mn=Infinity,mx=-Infinity;
+  for(const d of ds)d.v.forEach((x,j)=>{const i=a+j;if(i<V.a-1||i>V.b+1||x==null)return;const vals=Array.isArray(x)?x:[x];for(const q of vals){mn=Math.min(mn,q);mx=Math.max(mx,q);}});
+  if(!isFinite(mn)){mn=0;mx=1;}const lg=AN.sc==="log"&&(u==="$"||u==="r")&&mn>0;if(u==="n"||(u==="%"&&mn>0))mn=Math.min(mn,0);
+  const pad=(mx-mn)*.08||Math.abs(mx)*.1||1;if(!lg){mn-=mn===0?0:pad;mx+=pad;}
+  const f=lg?(v=>Math.log(v)):(v=>v),fa=f(lg?mn*.95:mn),fb=f(lg?mx*1.05:mx),Y=v=>y0+h-(f(v)-fa)/(fb-fa||1)*h;
+  g+=`<rect x="${L}" y="${y0}" width="${W-L-R}" height="${h}" fill="#fff" stroke="#D5DAD2"/>`;
+  for(let k=0;k<=4;k++){const t=lg?Math.exp(fa+(fb-fa)*k/4):mn+(mx-mn)*k/4,yy=Y(t);g+=`<line x1="${L}" x2="${W-R}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="#EEF1EC"/><text x="${W-R+6}" y="${(yy+4).toFixed(1)}" class="ay">${anFmt(u,t)}</text>`;}
+  if(u==="i"){const base=AN.sc==="idx"?100:0;if(base>=mn&&base<=mx)g+=`<line x1="${L}" x2="${W-R}" y1="${Y(base).toFixed(1)}" y2="${Y(base).toFixed(1)}" stroke="#9DB0A6" stroke-dasharray="4 3"/>`;}
+  if(u==="%"&&mn<0&&mx>0)g+=`<line x1="${L}" x2="${W-R}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" stroke="#9DB0A6"/>`;
+  g+=`<clipPath id="anC${pi}"><rect x="${L}" y="${y0}" width="${W-L-R}" height="${h}"/></clipPath><g clip-path="url(#anC${pi})">`;
+  for(const d of ds){const c=d.s.c;
+   if(d.s.m==="band"){let up="",dn=[];d.v.forEach((x,j)=>{if(!x)return;const i=a+j;up+=(up?"L":"M")+X(i).toFixed(1)+","+Y(x[1]).toFixed(1);dn.push("L"+X(i).toFixed(1)+","+Y(x[0]).toFixed(1));});
+    if(up)g+=`<path d="${up}${dn.reverse().join("")}Z" fill="${c}" fill-opacity=".14" stroke="${c}" stroke-opacity=".35" stroke-width="1"/>`;continue;}
+   let p="",pen=false;d.v.forEach((x,j)=>{const i=a+j;if(x==null){if(!d.sparse)pen=false;return;}p+=(pen?"L":"M")+X(i).toFixed(1)+","+Y(x).toFixed(1);pen=true;});
+   g+=`<path d="${p}" fill="none" stroke="${c}" stroke-width="${d.s.m==="sales"&&u!=="i"?1.6:2.2}" stroke-linejoin="round"/>`;
+   const lj=d.v.map((x,j)=>[x,j]).filter(z=>z[0]!=null).pop();if(lj){const yy=Y(lj[0]);g+=`<rect x="${W-R+1}" y="${(yy-9).toFixed(1)}" width="${R-3}" height="18" rx="3" fill="${c}"/><text x="${W-R+6}" y="${(yy+4).toFixed(1)}" class="al">${anFmt(u,lj[0])}</text>`;}}
+  g+=`</g><text x="${L+8}" y="${y0+16}" class="ap">${AN_PANE[u]}${u==="i"?(AN.sc==="idx"?" (100 at the left edge)":" (% since the left edge)"):""}</text>`;
+  panes.push({u,y0,h,Y,ds});y0+=h+14;});
+ // years along the bottom
+ const span=(V.b-V.a)/12,pxy=(W-L-R)/Math.max(span,.1),st=[1,2,5,10].find(k=>k*pxy>=56)||10;const yb=y0-14;
+ for(let i=Math.ceil(V.a);i<=V.b;i++){const[yr,mo]=MS.m[i].split("-");if(mo==="01"&&+yr%st===0)g+=`<line x1="${X(i).toFixed(1)}" x2="${X(i).toFixed(1)}" y1="${T}" y2="${yb}" stroke="#EEF1EC"/><text x="${X(i).toFixed(1)}" y="${yb+18}" class="ax" text-anchor="middle">${yr}</text>`;}
+ svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width",W);svg.setAttribute("height",H);svg.innerHTML=g+`<g id="anX"></g>`;
+ svg.__an={X,panes,L,R,W,T,yb,V,a,data};anCross();anTable(data,a);}
+// crosshair: a line through every pane and each series' value at that month, top left of its pane
+function anCross(){const svg=$("anSvg"),P=svg&&svg.__an,g=$("anX");if(!P||!g)return;const i=anHov==null?Math.round(P.V.b):Math.max(Math.ceil(P.V.a),Math.min(Math.floor(P.V.b),anHov));
+ let h="";if(anHov!=null)h+=`<line x1="${P.X(i).toFixed(1)}" x2="${P.X(i).toFixed(1)}" y1="${P.T}" y2="${P.yb}" stroke="#0E1A16" stroke-opacity=".4" stroke-dasharray="3 3"/><rect x="${(P.X(i)-36).toFixed(1)}" y="${P.yb+4}" width="72" height="18" rx="3" fill="#0E1A16"/><text x="${P.X(i).toFixed(1)}" y="${P.yb+17}" class="axh" text-anchor="middle">${mlabel(i)}</text>`;
+ for(const pn of P.panes){let x=P.L+8,y=pn.y0+36;for(const d of pn.ds){let v=d.v[i-P.a];if(v==null&&d.sparse)for(let q=1;q<=3&&v==null&&i-P.a-q>=0;q++)v=d.v[i-P.a-q];const t=`${anName(d.s)}${d.s.m==="price"||pn.u==="$"&&d.s.m!=="band"?"":" · "+AN_MET[d.s.m].t.toLowerCase()} ${Array.isArray(v)?anFmt("$",v[0])+" to "+anFmt("$",v[1]):anFmt(pn.u,v)}`;
+   h+=`<circle cx="${x+4}" cy="${y-4}" r="4" fill="${d.s.c}"/><text x="${x+12}" y="${y}" class="av">${esc(t)}</text>`;y+=17;
+   if(anHov!=null&&v!=null&&!Array.isArray(v))h+=`<circle cx="${P.X(i).toFixed(1)}" cy="${pn.Y(v).toFixed(1)}" r="3.5" fill="${d.s.c}" stroke="#fff" stroke-width="1.5"/>`;}}
+ g.innerHTML=h;}
+// the table: each series over the months in view
+function anTable(data,a){const rows=AN.s.map((s,si)=>{const d=data.find(x=>x.s===s);let cells="<td colspan=\"7\" class=\"muted\">Hidden</td>";
+  if(d){const pts=d.v.map((x,j)=>[Array.isArray(x)?(x[0]+x[1])/2:x,j]).filter(z=>z[0]!=null);const u=AN_MET[s.m].u;
+   if(pts.length<2)cells=`<td colspan="7" class="muted">${anVal(s,TL)==null&&s.k==="s"&&!window.HIST?"Loading…":"No data in this period"}</td>`;
+   else{const raw=j=>{const x=anVal(s,a+j);return Array.isArray(x)?(x[0]+x[1])/2:x;},f=pts[0],l=pts[pts.length-1],v0=raw(f[1]),v1=raw(l[1]),yrs=(l[1]-f[1])/12;
+    let hi=-Infinity,lo=Infinity;pts.forEach(z=>{const r=raw(z[1]);hi=Math.max(hi,r);lo=Math.min(lo,r);});
+    const pc=u==="%";const ch=pc?v1-v0:v1/v0-1,pa=!pc&&yrs>=1&&v0>0&&v1>0?Math.pow(v1/v0,1/yrs)-1:null,fh=pc?v1-hi:v1/hi-1,F=x=>anFmt(u,x);
+    const sg=x=>x==null?"–":`<span class="${x>0?"pos":x<0?"neg":""}">${pc?(x>0?"+":"")+(x*100).toFixed(1)+" pts":(x>0?"+":"")+pct(x,1)}</span>`;
+    cells=`<td class="num">${F(v0)}<small>${mlabel(a+f[1])}</small></td><td class="num">${F(v1)}<small>${mlabel(a+l[1])}</small></td><td class="num">${sg(ch)}</td><td class="num">${pa==null?"–":sg(pa)}</td><td class="num">${F(hi)}</td><td class="num">${F(lo)}</td><td class="num">${sg(fh)}</td>`;}}
+  return`<tr data-i="${si}"><td><button class="an-sw" data-on="${si}" style="--c:${s.c}" aria-pressed="${!!s.on}" title="${s.on?"Hide":"Show"}"></button></td><td><b>${esc(anName(s))}</b><small>${AN_MET[s.m].t}${s.k==="s"&&s.m==="price"?", 12-month":s.k==="a"&&(s.m==="price"||s.m==="rent")?", 3-month":""}</small></td>${cells}<td><button class="an-x" data-x="${si}" aria-label="Remove">×</button></td></tr>`;});
+ $("anRows").innerHTML=rows.join("")||`<tr><td colspan="10" class="muted">Add a suburb or area above.</td></tr>`;}
+function anAdd(k,id,m=AN.met,seg=AN.seg){if(AN.s.some(s=>s.k===k&&s.id===id&&s.m===m&&s.seg===seg))return;
+ const same=AN.s.find(s=>s.k===k&&s.id===id&&s.seg===seg);AN.s.push({k,id,seg,m,c:same?same.c:anNextCol(),on:1});anSave();anDraw();}
+// search: areas first, then suburbs
+let anSg=[],anSi=-1;
+function anSuggest(q){q=q.trim().toUpperCase();if(q.length<2)return[];const ar=Object.entries(anAreas).filter(([c,n])=>n.toUpperCase().includes(q)).map(([c,n])=>({k:"a",id:c,n}));
+ const su=anSubs.filter(n=>n.startsWith(q)).concat(anSubs.filter(n=>!n.startsWith(q)&&n.includes(q))).slice(0,10).map(n=>({k:"s",id:n,n:title(n)}));return ar.concat(su).slice(0,12);}
+function anRenderSugg(){const ul=$("anSugg");ul.hidden=!anSg.length;$("anFind").setAttribute("aria-expanded",!!anSg.length);
+ ul.innerHTML=anSg.map((x,i)=>`<li role="option" data-i="${i}" aria-selected="${i===anSi}">${esc(x.n)}<span>${x.k==="a"?"area":"suburb"}</span></li>`).join("");}
+function anPick(x){anSg=[];anRenderSugg();if(!x)return;$("anFind").value="";anAdd(x.k,x.id);}
+{const f=$("anFind");f.addEventListener("input",()=>{anSg=anSuggest(f.value);anSi=anSg.length?0:-1;anRenderSugg();});
+ f.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="ArrowUp"){if(!anSg.length)return;e.preventDefault();anSi=(anSi+(e.key==="ArrowDown"?1:-1)+anSg.length)%anSg.length;anRenderSugg();}
+  else if(e.key==="Enter"){e.preventDefault();anPick(anSg[Math.max(0,anSi)]);}else if(e.key==="Escape"){anSg=[];anRenderSugg();}});
+ f.addEventListener("blur",()=>setTimeout(()=>{anSg=[];anRenderSugg();},150));
+ $("anSugg").addEventListener("mousedown",e=>{const li=e.target.closest("li");if(li){e.preventDefault();anPick(anSg[+li.dataset.i]);}});}
+$("anMet").addEventListener("change",e=>{AN.met=e.target.value;anSave();});
+document.querySelectorAll("#anSeg button").forEach(b=>b.addEventListener("click",()=>{AN.seg=b.dataset.aseg;anSave();anDraw();}));
+document.querySelectorAll("#anRng button").forEach(b=>b.addEventListener("click",()=>anSetR(+b.dataset.r)));
+document.querySelectorAll("#anScale button").forEach(b=>b.addEventListener("click",()=>{AN.sc=b.dataset.sc;anSave();anDraw();}));
+$("anReset").addEventListener("click",()=>{AN=anDefault();anV=null;anSave();anDraw();});
+$("anRows").addEventListener("click",e=>{const o=e.target.closest("[data-on]"),x=e.target.closest("[data-x]");
+ if(o){const s=AN.s[+o.dataset.on];s.on=s.on?0:1;anSave();anDraw();}if(x){AN.s.splice(+x.dataset.x,1);anSave();anDraw();}});
+document.querySelector(".an-presets").addEventListener("click",e=>{const b=e.target.closest("[data-pre]");if(!b)return;const p=b.dataset.pre,sg=AN.seg;
+ const S=(id,m,c,seg=sg)=>({k:"a",id,seg,m,c,on:1});
+ AN.s=p==="sr"?[S("syd","price",AN_COL[0]),S("reg","price",AN_COL[1]),S("syd","sales",AN_COL[0]),S("reg","sales",AN_COL[1])]
+  :p==="hu"?[S("syd","price",AN_COL[0],"house"),S("syd","price",AN_COL[2],"unit"),S("syd","yoy",AN_COL[0],"house"),S("syd","yoy",AN_COL[2],"unit")]
+  :p==="pr"?[S("syd","price",AN_COL[0]),S("syd","rent",AN_COL[4]),S("syd","yield",AN_COL[3])]
+  :p==="ar"?["syd","ncl","cc","ill","hun","nr"].filter(c=>anAreas[c]).map((c,i)=>S(c,"price",AN_COL[i])):[];
+ if(p==="pr"){AN.sc="idx";AN.r=5;anV=null;}if(p==="ar"){AN.sc="idx";}anSave();anDraw();});
+// pan, zoom, crosshair
+{const ch=$("anChart");let drag=null;const idx=e=>{const P=$("anSvg").__an;if(!P)return null;const r=$("anSvg").getBoundingClientRect(),x=(e.clientX-r.left)*P.W/r.width;return P.V.a+(x-P.L)/(P.W-P.L-P.R)*(P.V.b-P.V.a);};
+ const clamp=(a,b)=>{const w=Math.min(TL,Math.max(6,b-a));if(a<0){a=0;}if(a+w>TL)a=TL-w;return{a,b:a+w,z:1};};
+ ch.addEventListener("pointerdown",e=>{if(e.button)return;drag={x:e.clientX,v:{...anRange()}};ch.setPointerCapture(e.pointerId);ch.classList.add("drag");});
+ ch.addEventListener("pointermove",e=>{const P=$("anSvg").__an;if(!P)return;if(drag){const r=$("anSvg").getBoundingClientRect(),d=(e.clientX-drag.x)*P.W/r.width/(P.W-P.L-P.R)*(drag.v.b-drag.v.a);anV=clamp(drag.v.a-d,drag.v.b-d);anHov=null;anDraw();return;}
+  const i=idx(e);anHov=i==null?null:Math.round(i);anCross();});
+ const end=()=>{drag=null;ch.classList.remove("drag");};ch.addEventListener("pointerup",end);ch.addEventListener("pointercancel",end);
+ ch.addEventListener("pointerleave",()=>{if(!drag){anHov=null;anCross();}});
+ ch.addEventListener("wheel",e=>{const i=idx(e);if(i==null)return;e.preventDefault();const V=anRange(),k=Math.exp(e.deltaY*.0015),a=i-(i-V.a)*k,b=i+(V.b-i)*k;anV=clamp(a,b);anDraw();},{passive:false});
+ ch.addEventListener("dblclick",()=>{anSetR(0);});
+ let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(anDraw,150);});}
 /* ---------- table ---------- */
 const COLS=[["Suburb",r=>title(r[C.locality])],["Median price",r=>r[C.med_now],money],["Sales, 12 mths",r=>r[C.n_now]],
  ["Change, 12 mths",r=>r[C.growth_1y],v=>signed(v),1],["Avg yearly growth, 10 yrs",r=>r[C.cagr_10y],v=>pct(v)],["Below recent peak",r=>r[C.from_peak],v=>v==null?"–":v>-0.0005?"At peak":pct(-v,1)],
@@ -2271,12 +2595,12 @@ const BUDCOL=9;let sortI=3,dir=-1;
 function table(scroll){const minn=+document.getElementById("minn").value||0,fa=document.getElementById("fAfford").checked,fd=false,f=COLS[sortI][1];
  const v=D.rows.filter(r=>r[C.segment]===seg&&r[C.n_now]>=minn&&inArea(r)&&(!fa||bBand(r)>=2)&&(!fd||dip(r)));
  v.sort((a,b)=>{const x=f(a),y=f(b);if(x==null)return 1;if(y==null)return-1;return(x>y?1:x<y?-1:0)*dir;});
- document.querySelector(".t thead").innerHTML="<tr>"+COLS.map((c,i)=>`<th data-i="${i}" ${i===sortI?`aria-sort="${dir>0?"ascending":"descending"}"`:""}>${c[0]}${i===sortI?(dir>0?" ↑":" ↓"):""}</th>`).join("")+"</tr>";
- document.querySelector(".t tbody").innerHTML=v.map(r=>{const n=r[C.locality];return`<tr tabindex="0" data-n="${esc(n)}" class="${n===sel?"sel":""}">`+
+ document.querySelector("#tabSuburbs .t thead").innerHTML="<tr>"+COLS.map((c,i)=>`<th data-i="${i}" ${i===sortI?`aria-sort="${dir>0?"ascending":"descending"}"`:""}>${c[0]}${i===sortI?(dir>0?" ↑":" ↓"):""}</th>`).join("")+"</tr>";
+ document.querySelector("#tabSuburbs .t tbody").innerHTML=v.map(r=>{const n=r[C.locality];return`<tr tabindex="0" data-n="${esc(n)}" class="${n===sel?"sel":""}">`+
   COLS.map((c,i)=>{const x=c[1](r);const s=i===0?esc(x)+(r[C.cagr_10y]==null?'<span class="tag" title="Fewer than 10 years of sales here, usually a newly built area, so its growth comes from its region">new</span>':""):(c[2]?c[2](x,r):x??"–");
    const k=i===BUDCOL?(x==null?"":x>=2?"pos":x===0?"neg":""):c[3]?cls(x):"";return`<td class="${i?"num ":""}${k}">${s}</td>`}).join("")+"</tr>"}).join("");
  document.getElementById("count").textContent=`${v.length} suburbs · buying ahead after ${Math.round(A.hold_years)} years in ${v.filter(r=>r._m&&r._m.edge>0).length}`;
- if(scroll){const tr=document.querySelector(".t tr.sel");tr&&tr.scrollIntoView({block:"nearest"});}}
+ if(scroll){const tr=document.querySelector("#tabSuburbs .t tr.sel");tr&&tr.scrollIntoView({block:"nearest"});}}
 
 /* ---------- time slider ---------- */
 const TB={bar:document.getElementById("timebar"),sl:document.getElementById("tslider"),cur:document.getElementById("tcur"),play:document.getElementById("play"),latest:document.getElementById("tlatest")};
@@ -2357,20 +2681,44 @@ if(SPM&&MS&&MS.ad&&window.maplibregl){$("spsw").addEventListener("change",e=>set
 else document.querySelector(".spbar").hidden=true;
 
 /* ---------- tabs ---------- */
-function showTab(t){if(typeof tourS!=="undefined"&&tourS)tourEnd();setTimeout(()=>{if(t==="budget"&&SIM&&!store.get("hs_tour_budget")&&!tourS)tourStart("budget");},700);document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
- $("tabMap").hidden=t!=="map";$("tabBudget").hidden=t!=="budget";try{history.replaceState(null,"",t==="budget"?"#budget":location.pathname+location.search);}catch(e){}
- if(t==="map"&&map)setTimeout(()=>map.resize(),0);if(t==="budget")planUI();}
-document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
-document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.goto);$("tabBudget").scrollIntoView({behavior:"smooth"});}));
+// Five views, one at a time: Overview (home), Map, Analysis, Suburbs, Your budget. Each has its own address (#map, #analysis, #suburbs, #budget) so back and links work.
+const VIEWS={market:"tabMarket",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",budget:"tabBudget"};let view="market";
+function showTab(t,how){if(!VIEWS[t])t="market";if(typeof tourS!=="undefined"&&tourS)tourEnd();const was=view;view=t;
+ document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+ for(const[k,id]of Object.entries(VIEWS))$(id).hidden=k!==t;document.body.dataset.view=t;
+ if(how!=="pop"){const h=t==="market"?location.pathname+location.search:"#"+t;try{if(how==="init"||t===was)history.replaceState(null,"",h);else history.pushState(null,"",h);}catch(e){}}
+ if(t!==was&&how!=="keep")scrollTo(0,0);
+ if(t==="map"&&map){map.resize();setTimeout(()=>map.resize(),0);}
+ if(t==="suburbs"&&typeof market==="function"&&was!=="suburbs")setTimeout(()=>{try{market();}catch(e){}},0);
+ if(t==="budget")planUI();
+ if(t==="analysis")setTimeout(anDraw,0);
+ setTimeout(()=>{if(typeof tourS==="undefined"||tourS)return;if(t==="budget"&&SIM&&!store.get("hs_tour_budget"))tourStart("budget");
+  else if(t==="map"&&!store.get("hs_tour_map"))tourStart("map");},t==="map"?1200:700);}
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.goto)));
+addEventListener("popstate",()=>showTab((location.hash||"").slice(1)||"market","pop"));
+// Searching or picking a suburb from the table opens the map first, so the map has its size before it moves.
+$("sugg").addEventListener("mousedown",e=>{if(e.target.closest("li")&&view!=="map")showTab("map","keep");},true);
+$("find").addEventListener("keydown",e=>{if(e.key==="Enter"&&view!=="map")showTab("map","keep");},true);
+document.querySelector("#tabSuburbs .t tbody").addEventListener("click",e=>{if(e.target.closest("tr[data-n]"))showTab("map");},true);
+document.querySelector("#tabSuburbs .t tbody").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.closest("tr[data-n]"))showTab("map");},true);
 $("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&metric!=="g1"){metric="price";$("metric").value="price";}
- toMap();setTimeout(()=>{stopPlay();setTime(Math.max(0,TL-12));TB.play.click();},500);});
-if(location.hash==="#budget")setTimeout(()=>showTab("budget"),0);  // deferred: showTab reads tour state declared further down
+ setTimeout(()=>{stopPlay();setTime(Math.max(0,TL-12));TB.play.click();},500);});
+setTimeout(()=>showTab((location.hash||"").slice(1)||"market","init"),0);
+try{history.scrollRestoration="manual";}catch(e){}addEventListener("load",()=>setTimeout(()=>scrollTo(0,0),0));   // #map would otherwise jump to the map element  // deferred: showTab reads tour state declared further down
 
 $("layersBtn").addEventListener("click",()=>{const o=$("lpanel").hidden;$("lpanel").hidden=!o;$("layersBtn").setAttribute("aria-expanded",o);});
-$("mbud").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a==="edit"){showTab("budget");$("tabBudget").scrollIntoView({behavior:"smooth"});}
+$("mbud").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a==="edit"){showTab("budget");}
  else if(b.dataset.src){B.map_src=b.dataset.src==="own"?"own":"home";save();planChip();paintMap();detail();if(B.map_src==="own"){const i=$("mbudIn");i&&i.focus();}}});
 $("mbud").addEventListener("input",e=>{if(e.target.id!=="mbudIn")return;liveFmt(e.target);mbudW(e.target);const t=e.target.value.trim(),n=parseNum(t),v=t===""||n==null||!isFinite(n)||n<=0?null:n;
  if(metric==="rent")B.own_rent=v;else B.map_price=v;save();soon();});
+
+
+// Overview hero: slide between the introduction and the market read; the box takes the height of the slide showing.
+{const S=$("ghSlides"),sl=[...S.querySelectorAll(".gh-slide")],fit=()=>{S.style.height=sl[+S.dataset.s].offsetHeight+"px";};
+ const go=k=>{S.dataset.s=k;sl.forEach((x,i)=>{x.inert=i!==k;});document.querySelectorAll(".gh-dots button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.slide===k));fit();};
+ $("tabMarket").addEventListener("click",e=>{const b=e.target.closest("[data-slide]");if(b)go(+b.dataset.slide);});
+ new ResizeObserver(fit).observe(sl[0]);new ResizeObserver(fit).observe(sl[1]);go(0);}
 
 /* ---------- chart hover ---------- */
 // Every chart carries its points in data-hov; one handler draws a guide line, dots and a value box.
@@ -2396,16 +2744,16 @@ $("area").addEventListener("change",e=>{AREA=e.target.value;try{localStorage.set
 /* ---------- guided tour ---------- */
 // One tour per tab: shown once automatically (map on first visit, budget once figures are in), replayable from "Take the tour".
 const TOURS={map:[
- ['.tabs button[data-tab="map"]|.tabs button[data-tab="budget"]',"Two views","The map of suburbs, and a budget planner that compares buying with renting."],
- ['.seg[aria-label="Dwelling type"]',"Houses or units","Everything on the page switches between houses and units."],
+ ['.tabs',"Four views","The market at a glance, this map, every suburb in a table, and a budget planner that compares buying with renting."],
+ ['#timebar .seg[aria-label="Dwelling type"]',"Houses or units","Everything on the page switches between houses and units."],
  ["#area","Area","Greater Sydney, all of NSW or one region. The map, table and headline follow it."],
  ["#metric","Colour the map","Choose what the colours show: prices, price changes, rental yield, or what fits your budget once you've entered it."],
  ["#find","Search","Jump to a suburb or a street address and see its sales history."],
  ["#map|#detail","The map","Hover a suburb for its figure and click it for the full story in the panel on the right."],
- [".spbar|#map","Every sale, on the map","Switch on Individual sales to see every home sold in the last month or 12 months as a dot, coloured by price. Click a dot for the address, the price and that home's earlier sales.",{enter(){tourMap=map?{sp:spMode,c:map.getCenter(),z:map.getZoom()}:{sp:spMode};if(map)map.jumpTo({center:[151.214,-33.886],zoom:13.6});setSp("year");},exit(){if(!tourMap)return;setSp(tourMap.sp);if(map&&tourMap.c)map.jumpTo({center:tourMap.c,zoom:tourMap.z});tourMap=null;}}],
+ ["#layersBtn|#map","Every sale, on the map","Under More, switch on Sales to see every home sold in the last month or 12 months as a dot, coloured by price. Click a dot for the address, the price and that home's earlier sales.",{enter(){tourMap=map?{sp:spMode,c:map.getCenter(),z:map.getZoom()}:{sp:spMode};if(map)map.jumpTo({center:[151.214,-33.886],zoom:13.6});setSp("year");},exit(){if(!tourMap)return;setSp(tourMap.sp);if(map&&tourMap.c)map.jumpTo({center:tourMap.c,zoom:tourMap.z});tourMap=null;}}],
  ["#legend","Colour key","What each colour means. Hatched means too few sales to say. Hide it with the × and bring it back with the Colour key button.",{enter(){window._lg=lgMin;lgMin=false;legend();},exit(){lgMin=!!window._lg;legend();}}],
  ["#timebar","Travel in time","Press play to watch prices since 1990, or drag to any month. Press, hold and drag to pick a period and colour the map by growth across it."],
- ["#layersBtn","Layers","Turn on individual sales, change the colour scheme or switch to aerial photos."],
+ ["#layersBtn","More","Individual sales, colour schemes, aerial photos and arranging the map."],
  ["#detail","Suburb details","Prices, trends, recent sales and rents for the suburb you pick. Until then it sums up the suburbs in view."],
  ['.tabs button[data-tab="budget"]',"Plan your budget","Enter your savings and income to see what you can afford, and whether buying or renting leaves you better off."]],
 budget:[
@@ -2435,8 +2783,8 @@ function tourPos(){if(!tourS)return;const els=tourEls(tourS.steps[tourS.i][0]),o
  Object.assign(h.style,{left:r.left-pad+"px",top:top+"px",width:r.width+pad*2+"px",height:Math.max(0,bot-top)+"px"});
  const cw=c.offsetWidth,ch=c.offsetHeight;let y=bot+12,x=r.left;if(y+ch>vh-8)y=top-ch-12;if(y<8){y=Math.max(8,vh-ch-16);x=r.left+16;}   // big targets: card in the bottom-left corner
  c.style.left=Math.max(8,Math.min(vw-cw-8,x))+"px";c.style.top=y+"px";}
-$("tourBtn").addEventListener("click",()=>tourStart($("tabBudget").hidden?"map":"budget"));
-setTimeout(()=>{if(!tourS&&!store.get("hs_tour_map")&&!$("tabMap").hidden)tourStart("map");},1500);
+$("tourBtn").addEventListener("click",()=>{if(view==="budget")tourStart("budget");else{if(view!=="map")showTab("map");setTimeout(()=>tourStart("map"),300);}});
+
 
 /* ---------- wiring ---------- */
 function all(){recompute();paintMap();headline();planUI();table();detail();drawSpark();timeUI();}
@@ -2448,7 +2796,7 @@ document.querySelectorAll(".seg button[data-base]").forEach(b=>b.addEventListene
   const o=document.getElementById("opac");if(sat&&+o.value>45){o.value=40;setOpacity(.4);}else if(!sat&&+o.value<60){o.value=72;setOpacity(.72);}}}));
 document.getElementById("opac").addEventListener("input",e=>setOpacity(+e.target.value/100));
 function palUI(){$("pals").innerHTML=Object.entries(PALS).map(([k,s])=>`<button data-pal="${k}" aria-pressed="${k===pal}" title="${k}" style="background:linear-gradient(90deg,${s.join(",")})"></button>`).join("");}
-palUI();$("pals").addEventListener("click",e=>{const b=e.target.closest("[data-pal]");if(!b)return;pal=b.dataset.pal;try{localStorage.setItem("hs_pal",pal);}catch(x){}palUI();paintMap();});
+palUI();$("pals").addEventListener("click",e=>{const b=e.target.closest("[data-pal]");if(!b)return;pal=b.dataset.pal;try{localStorage.setItem("hs_pal2",pal);}catch(x){}palUI();paintMap();});
 document.getElementById("metric").addEventListener("change",e=>{metric=e.target.value;autoFrom=null;paintMap();planChip();detail();if(METRICS[metric].needs&&!(METRICS[metric].rent?rb:buyLim())){const i=$("mbudIn");i&&i.focus();}});
 ["minn","fAfford"].forEach(id=>document.getElementById(id).addEventListener("input",()=>table()));
 searchWire();
@@ -2471,10 +2819,10 @@ document.querySelectorAll("[data-c]").forEach(el=>{const k=el.dataset.c;el.value
  el.addEventListener("blur",()=>{el.value=Number(B.c[k]||0).toLocaleString("en-AU");});});
 document.querySelectorAll("[data-a],[data-bb]").forEach(el=>{const O=el.dataset.a?A:BB,k=el.dataset.a||el.dataset.bb,p="pct"in el.dataset;if(el.type==="checkbox")el.checked=!!O[k];else el.value=O[k]==null?"":p?+(O[k]*100).toFixed(3):O[k];
  el.addEventListener("input",()=>{if(k==="inv_tax"&&el.value===""){A.inv_tax=null;soon();return;}const x=el.type==="checkbox"?el.checked:el.tagName==="SELECT"?el.value:(+el.value)/(p?100:1);if(el.tagName!=="SELECT"&&el.type!=="checkbox"&&!isFinite(x))return;O[k]=x;soon();});});
-document.querySelector(".t thead").addEventListener("click",e=>{const th=e.target.closest("th");if(!th)return;const i=+th.dataset.i;dir=i===sortI?-dir:(i===0||i===BUDCOL?1:-1);sortI=i;table();});
+document.querySelector("#tabSuburbs .t thead").addEventListener("click",e=>{const th=e.target.closest("th");if(!th)return;const i=+th.dataset.i;dir=i===sortI?-dir:(i===0||i===BUDCOL?1:-1);sortI=i;table();});
 const pick=e=>{const tr=e.target.closest("tr[data-n]");if(tr){select(tr.dataset.n);toMap();}};
-document.querySelector(".t tbody").addEventListener("click",pick);
-document.querySelector(".t tbody").addEventListener("keydown",e=>{if(e.key==="Enter")pick(e);});
+document.querySelector("#tabSuburbs .t tbody").addEventListener("click",pick);
+document.querySelector("#tabSuburbs .t tbody").addEventListener("keydown",e=>{if(e.key==="Enter")pick(e);});
 const dt=s=>new Date(s).toLocaleDateString("en-AU",{day:"numeric",month:"long",year:"numeric"});
 document.getElementById("prov").textContent=`${D.n_sales.toLocaleString("en-AU")} sales to ${dt(D.asof)} and ${D.n_leases.toLocaleString("en-AU")} new leases to ${dt(D.rent_asof)}, from NSW Government records.`;
 market();all();
@@ -2509,6 +2857,10 @@ document.querySelectorAll("[data-ghy]").forEach(b=>b.addEventListener("click",()
  new ResizeObserver(fit).observe(ctl);addEventListener("resize",fit);fit();}
 document.querySelectorAll("#mtab [data-mt]").forEach(b=>b.addEventListener("click",()=>{mtab=b.dataset.mt;market();}));
 document.querySelectorAll("#myrs [data-my]").forEach(b=>b.addEventListener("click",()=>{mYrs=+b.dataset.my;store.set("hs_myrs",mYrs);market();}));
+
+// Suburbs view: its own area picker, kept in step with the map's
+{const sa=$("subArea"),ma=$("area");sa.innerHTML=ma.innerHTML;sa.value=ma.value;if(ma.closest("label").hidden)sa.closest(".sub-area").hidden=true;
+ sa.addEventListener("change",()=>{ma.value=sa.value;ma.dispatchEvent(new Event("change"));});ma.addEventListener("change",()=>{sa.value=ma.value;});}
 /* ---------- arrange the map: move and resize the boxes on it, snapping to set places (wide screens) ---------- */
 // Each box sits at one of a few anchors (top or bottom; left, centre or right) and can be widened within limits.
 // The side panel's width can be changed too. Saved in this browser (hs_layout). Phones keep the fixed layout.
@@ -2577,7 +2929,7 @@ document.addEventListener("input",e=>{if(e.target.matches&&e.target.matches(".bx
 rFillAll();
 /* ---------- prototype: masthead ---------- */
 {const big=n=>n>=1e6?(n/1e6).toFixed(1)+"m":Math.round(n/1e3)+"k",y0=1990,yrs=new Date(D.asof).getFullYear()-y0;
- $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${GEO.features.length.toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div><p class="prov">${esc($("prov").textContent)}</p>`;$("ghStats").title=$("prov").textContent;
+ $("ghStats").innerHTML=`<div><b>${big(D.n_sales)}</b><span>home sales</span></div><div><b>${big(D.n_leases)}</b><span>new leases</span></div><div><b>${(GEO.features.length||D.rows.length).toLocaleString("en-AU")}</b><span>suburbs</span></div><div><b>${yrs} yrs</b><span>since ${y0}</span></div>`;$("ghStats").title=$("prov").textContent;
  if(!matchMedia("(prefers-reduced-motion:reduce)").matches){const els=[...$("ghStats").querySelectorAll("b")],t0=performance.now();els.forEach(e=>{const m=e.textContent.match(/^([\d.,]+)(.*)$/);e._v=m?parseFloat(m[1].replace(/,/g,"")):null;e._s=m?m[2]:"";e._d=m&&m[1].includes(".")?1:0;e._c=m&&m[1].includes(",");e._t=e.textContent;});
   const step=t=>{const k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);els.forEach(e=>{if(e._v==null)return;const v=e._v*q;e.textContent=k===1?e._t:(e._c?Math.round(v).toLocaleString("en-AU"):v.toFixed(e._d))+e._s;});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
  let rzT,rzW=innerWidth;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(SIM&&!$("tabBudget").hidden)bxChart();if(innerWidth!==rzW){rzW=innerWidth;headline();}},200);});
