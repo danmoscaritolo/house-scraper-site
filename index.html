@@ -974,36 +974,9 @@ footer{padding-top:48px}
 @media(max-width:720px){.gh-slides .gh-hero .gh-stats{display:flex;gap:10px 28px;margin:24px 0 20px}.gh-slides .gh-stats div b{font-size:22px}}
 
 /* ================= Analysis view ================= */
-.an{padding:32px 0 72px}
-.an-bar{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;margin:0 0 12px}
-.an-add,.an-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-#anFind{width:340px;max-width:calc(100vw - 32px);font:400 15px var(--sans);padding:10px 14px;border:1px solid #C4CBC2;border-radius:10px;background:var(--sheet)}
-#anFind:focus{outline:2px solid var(--ink);outline-offset:1px}
-#anSugg{position:absolute;top:100%;left:0;min-width:100%;z-index:40;background:var(--sheet);border:1px solid var(--hair);border-radius:8px;margin:4px 0 0;padding:4px 0;list-style:none;box-shadow:0 8px 24px rgba(14,26,22,.14)}
-#anSugg li{padding:8px 12px;cursor:pointer;font-size:14.5px}#anSugg li[aria-selected=true],#anSugg li:hover{background:var(--wash)}#anSugg li span{color:var(--slate);font-size:12px;margin-left:8px;font-family:var(--mono);text-transform:uppercase}
-#anMet{font:500 14px var(--sans);padding:9px 10px;border:1px solid #C4CBC2;border-radius:10px;background:var(--sheet)}
-.an .seg button{padding:7px 12px;font-size:13.5px}
-.an-presets{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 16px;font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--slate)}
-.an-presets button{font:500 13px var(--sans);text-transform:none;letter-spacing:0;color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:99px;padding:5px 12px;cursor:pointer}
-.an-presets button:hover{border-color:var(--ink)}
-.an-chart{background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:10px 4px 4px 4px;cursor:crosshair;touch-action:pan-y;user-select:none;overflow:hidden;box-shadow:0 14px 34px -26px rgba(14,26,22,.4)}
-.an-chart.drag{cursor:grabbing}
-#anSvg{display:block;width:100%;height:auto}
-#anSvg text{font:500 11.5px var(--mono);fill:var(--slate)}
-#anSvg text.ap{font:600 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;fill:var(--ink)}
-#anSvg text.av{font:500 12.5px var(--sans);fill:var(--ink)}
-#anSvg text.al,#anSvg text.axh{fill:#fff;font-weight:600}
-.an-hint{font-size:13px;color:var(--slate);margin:10px 0 28px}
-.an-tbl td small{display:block;color:var(--slate);font-size:11.5px;font-weight:400}
-.an-tbl td.muted{color:var(--slate)}
-.an-tbl .pos{color:var(--gain)}.an-tbl .neg{color:var(--loss)}
-.an-sw{width:16px;height:16px;border-radius:4px;border:2px solid var(--c);background:var(--c);cursor:pointer;padding:0}
-.an-sw[aria-pressed=false]{background:transparent}
-.an-x{border:0;background:none;font-size:18px;color:var(--slate);cursor:pointer}.an-x:hover{color:var(--loss)}
 .sub-area{padding:40px 0 0}.sub-area select{font:500 14.5px var(--sans);padding:8px 10px;border-radius:10px;margin-left:8px}
 #subMkt section.market{padding-top:24px}
-@media(max-width:860px){header.top .tabs button{font-size:12.5px}.an{padding-top:20px}#anFind{width:100%}.an-add .srch{flex:1 1 100%}}
-.an-tbl td:nth-child(2),.an-tbl th:nth-child(2){text-align:left}
+@media(max-width:860px){header.top .tabs button{font-size:12.5px}}
 
 /* ================= Home and Weekly (v3) ================= */
 .gh-home{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:40px 64px;align-items:center;padding:72px 0 72px!important}
@@ -1034,7 +1007,7 @@ body[data-view=market] footer{padding-top:0}
 /* ================= Dark mode ([data-theme=dark] on <html>) ================= */
 [data-theme=dark]{--paper:#0B1411;--sheet:#121D19;--ink:#E4EBE6;--slate:#9DB0A6;--hair:#26352F;--wash:#1A2722;--gain:#4FCB86;--loss:#FF7A6B;color-scheme:dark}
 [data-theme=dark] body{background:var(--paper);color:var(--ink)}
-[data-theme=dark] .spbar,[data-theme=dark] .spnote,[data-theme=dark] .opac,[data-theme=dark] .legend,[data-theme=dark] .hoverbar,[data-theme=dark] .ctip,[data-theme=dark] .lbtn,[data-theme=dark] .lpanel,[data-theme=dark] #tip,[data-theme=dark] aside#detail,[data-theme=dark] #sugg,[data-theme=dark] #anSugg,[data-theme=dark] #tourO .tr-card{background:var(--sheet);color:var(--ink);border-color:var(--hair)}
+[data-theme=dark] .spbar,[data-theme=dark] .spnote,[data-theme=dark] .opac,[data-theme=dark] .legend,[data-theme=dark] .hoverbar,[data-theme=dark] .ctip,[data-theme=dark] .lbtn,[data-theme=dark] .lpanel,[data-theme=dark] #tip,[data-theme=dark] aside#detail,[data-theme=dark] #sugg,[data-theme=dark] #tourO .tr-card{background:var(--sheet);color:var(--ink);border-color:var(--hair)}
 [data-theme=dark] .cta button.pri,[data-theme=dark] .pbtn[aria-pressed=true],[data-theme=dark] #tourO .tr-next,[data-theme=dark] .seg button[aria-pressed=true],[data-theme=dark] .chip button.on,[data-theme=dark] .lbtn[aria-expanded=true],[data-theme=dark] #play[aria-pressed=true],[data-theme=dark] #tperiod[aria-pressed=true],[data-theme=dark] #panelBtn[aria-pressed=true],[data-theme=dark] .tmode button[aria-pressed=true],[data-theme=dark] .mbud .mbud-seg button[aria-pressed=true],[data-theme=dark] #mtab button[aria-pressed=true],[data-theme=dark] .tl-n,[data-theme=dark] .tl-b,[data-theme=dark] .bx-n{color:var(--night)}
 [data-theme=dark] input,[data-theme=dark] select,[data-theme=dark] textarea{background-color:var(--sheet);color:var(--ink);border-color:#34443D}
 [data-theme=dark] .mapctl{background:var(--paper)}
@@ -1049,32 +1022,154 @@ body[data-view=market] footer{padding-top:0}
 [data-theme=dark] svg [fill="#fff"]{fill:var(--sheet)}
 [data-theme=dark] svg [stroke="#fff"]{stroke:var(--sheet)}
 [data-theme=dark] svg text{fill:var(--slate)}
-[data-theme=dark] #anSvg text.ap,[data-theme=dark] #anSvg text.av{fill:var(--ink)}
-[data-theme=dark] #anSvg text.al,[data-theme=dark] #anSvg text.axh{fill:var(--night)}
 [data-theme=dark] svg.bars [fill="#0E1A16"]{fill:#E4EBE6}
-[data-theme=dark] .bx-step,[data-theme=dark] .mbig,[data-theme=dark] .mcards>*,[data-theme=dark] .tbl,[data-theme=dark] .an-chart,[data-theme=dark] .wk-col,[data-theme=dark] .bx-panel,[data-theme=dark] .bx-chart{background:var(--sheet);border-color:var(--hair)}
+[data-theme=dark] .bx-step,[data-theme=dark] .mbig,[data-theme=dark] .mcards>*,[data-theme=dark] .tbl,[data-theme=dark] .wk-col,[data-theme=dark] .bx-panel,[data-theme=dark] .bx-chart{background:var(--sheet);border-color:var(--hair)}
 .themeBtn{background:transparent;border:1px solid rgba(255,255,255,.28);color:#EAF0EA;border-radius:99px;width:34px;height:30px;display:inline-grid;place-items:center;cursor:pointer;padding:0}
 .themeBtn:hover{border-color:var(--hi);color:var(--hi)}
 .themeBtn svg{width:16px;height:16px}
 .themeBtn .mo{display:none}[data-theme=dark] .themeBtn .mo{display:block}[data-theme=dark] .themeBtn .su{display:none}
-[data-theme=dark] .an-sw[style*="#0E1A16"]{--c:#E4EBE6}
-.an-tools{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:0 0 12px;padding:10px 12px;background:var(--sheet);border:1px solid var(--hair);border-radius:12px}
-.an-grp{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
-.an-lab{font:600 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin-right:2px}
-.an-tools button{font:500 13px var(--sans);color:var(--ink);background:transparent;border:1px solid var(--hair);border-radius:8px;padding:5px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-.an-tools button:hover{border-color:var(--ink)}
-.an-tools button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.an-tools button svg{width:15px;height:15px}
-.an-tools input{width:86px;font:400 13px var(--sans);padding:5px 8px;border:1px solid var(--hair);border-radius:8px;background:var(--sheet);color:var(--ink)}
-.an-tools label{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--slate)}
-.an-tools .an-grp>span:not(.an-lab){font-size:13px;color:var(--slate)}
-.an-note{font-size:13px;color:var(--slate);margin:0 0 8px}
-.an-chart.drawing{cursor:crosshair}
-#anSvg text.anote{font:600 12px var(--sans);fill:var(--ink);paint-order:stroke;stroke:var(--sheet);stroke-width:3px}
-#anSvg text.atr{font:600 11.5px var(--mono);paint-order:stroke;stroke:var(--sheet);stroke-width:3px}
-#anSvg .adr{cursor:pointer}
-.an:fullscreen{background:var(--paper);padding:20px 24px;overflow:auto}
 @media(max-width:900px){header.gh .gh-home .gh-ask{display:grid;grid-template-columns:1fr;overflow:visible;margin:0;padding:0}.gh-home .gh-ask button{flex:none;padding:13px 14px}.gh-home .gh-ask .s{display:block}.gh-home .gh-ask b{white-space:normal;font-size:16.5px}}
+
+/* ---------- Analysis: chart workspace (12a-analysis.js) ---------- */
+.tv{position:relative;display:flex;flex-direction:column;height:calc(100vh - var(--toph));min-height:560px;margin:0 calc(50% - 50vw);background:var(--sheet);color:var(--ink);border-bottom:1px solid var(--hair)}
+.tv button{font:inherit;color:inherit}
+.tv-top,.tv-bot{display:flex;align-items:center;gap:4px;padding:0 8px;min-height:46px;border-bottom:1px solid var(--hair);overflow-x:auto;scrollbar-width:none;flex:none}
+.tv-top::-webkit-scrollbar,.tv-bot::-webkit-scrollbar{display:none}
+.tv-bot{border-bottom:0;border-top:1px solid var(--hair);min-height:38px}
+.tv-gap{flex:1 1 auto}
+.tv-sepv{width:1px;align-self:stretch;margin:10px 4px;background:var(--hair);flex:none}
+.tv-b,.tv-sym,.tv-left button,.tv-rail button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 9px;border:0;border-radius:6px;background:transparent;cursor:pointer;font:500 14px var(--sans);white-space:nowrap;flex:none}
+.tv-b:hover,.tv-sym:hover,.tv-left button:hover,.tv-rail button:hover{background:var(--wash)}
+.tv-b[aria-pressed=true]{color:var(--ink);background:var(--wash);box-shadow:inset 0 -2px 0 var(--hi)}
+.tv-b:disabled{opacity:.35;cursor:default;background:transparent}
+.tv button svg,.tv-sym svg{width:18px;height:18px;flex:none}
+.tv-sym{font:600 15px var(--sans);padding:0 12px 0 10px;border:1px solid var(--hair);background:var(--paper);max-width:340px}
+.tv-sym span{overflow:hidden;text-overflow:ellipsis}
+.tv-b i{font:600 11px var(--mono);font-style:normal;background:var(--hi);color:#0E1A16;border-radius:9px;padding:1px 6px}
+.tv-l1{font:600 12.5px var(--mono);letter-spacing:.04em}
+.tv select{font:500 14px var(--sans);height:34px;padding:0 26px 0 10px;border:1px solid transparent;border-radius:6px;background-color:transparent;color:var(--ink);cursor:pointer;flex:none}
+.tv select:hover{background-color:var(--wash)}.tv select:disabled{opacity:.35;cursor:default}
+.tv-seg{display:inline-flex;gap:2px;padding:2px;border-radius:8px;background:var(--wash);flex:none}
+.tv-seg button{height:30px;padding:0 10px;border:0;border-radius:6px;background:transparent;cursor:pointer;font:500 13.5px var(--sans);color:var(--slate)}
+.tv-seg button[aria-pressed=true]{background:var(--sheet);color:var(--ink);box-shadow:0 1px 2px rgba(14,26,22,.18)}
+.tv-rng{display:inline-flex;gap:2px;flex:none}
+.tv-rng button{height:28px;min-width:34px;padding:0 8px;border:0;border-radius:6px;background:transparent;cursor:pointer;font:500 13px var(--mono);color:var(--slate)}
+.tv-rng button:hover{background:var(--wash);color:var(--ink)}
+.tv-rng button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.tv-asof{font:500 12.5px var(--mono);color:var(--slate);margin-right:10px;white-space:nowrap}
+.tv-body{display:flex;flex:1 1 auto;min-height:0}
+.tv-left,.tv-rail{display:flex;flex-direction:column;align-items:center;gap:2px;width:48px;padding:6px 0;flex:none;overflow-y:auto;scrollbar-width:none}
+.tv-left{border-right:1px solid var(--hair)}.tv-rail{border-left:1px solid var(--hair)}
+.tv-left button,.tv-rail button{width:38px;height:38px;padding:0;justify-content:center;color:var(--slate)}
+.tv-left button[aria-pressed=true],.tv-rail button[aria-pressed=true]{color:var(--ink);background:var(--wash);box-shadow:inset 3px 0 0 var(--hi)}
+.tv-rail button[aria-pressed=true]{box-shadow:inset -3px 0 0 var(--hi)}
+.tv-left hr{width:26px;border:0;border-top:1px solid var(--hair);margin:6px 0}
+.tv-main{position:relative;flex:1 1 auto;min-width:0;display:flex}
+.tv-grid{flex:1 1 auto;display:grid;gap:1px;background:var(--hair);min-width:0;outline:none}
+.tv-grid[data-lay="1"]{grid-template:1fr/1fr}.tv-grid[data-lay="2h"]{grid-template:1fr/1fr 1fr}.tv-grid[data-lay="2v"]{grid-template:1fr 1fr/1fr}
+.tv-grid[data-lay="3"]{grid-template:1fr 1fr/2fr 1fr}.tv-grid[data-lay="3"]>:first-child{grid-row:span 2}.tv-grid[data-lay="4"]{grid-template:1fr 1fr/1fr 1fr}
+.tv-cell{position:relative;min-width:0;min-height:0;overflow:hidden;background:var(--sheet);cursor:crosshair;touch-action:none;user-select:none;-webkit-user-select:none}
+.tv-cell.act{box-shadow:inset 0 0 0 1.5px var(--hi)}
+.tv-grid.grab .tv-cell{cursor:grabbing}
+.tv.drawing .tv-cell{cursor:crosshair}
+.tv-cell svg.tv-svg{position:absolute;inset:0;display:block;width:100%;height:100%}
+.tv-svg .adr{cursor:pointer}.tv-svg .hit{pointer-events:stroke}.tv-svg [data-hd]{cursor:move}
+.tv-leg{position:absolute;inset:0 76px 26px 0;pointer-events:none}
+.tv-lp{position:absolute;left:10px;display:flex;flex-direction:column;gap:1px;text-shadow:0 0 3px var(--sheet),0 0 3px var(--sheet)}
+.tv-pl{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-bottom:2px}
+.tv-lr{pointer-events:auto;display:flex;align-items:center;gap:8px;font:500 13px var(--sans);line-height:22px;padding:0 6px;margin-left:-6px;border-radius:5px;white-space:nowrap;width:max-content;max-width:100%}
+.tv-lr:hover{background:color-mix(in srgb,var(--sheet) 82%,transparent);box-shadow:0 0 0 1px var(--hair)}
+.tv-lr i{width:9px;height:9px;border-radius:50%;flex:none}
+.tv-lr i.dash{border-radius:0;height:2px;width:12px;background:repeating-linear-gradient(90deg,var(--ink) 0 4px,transparent 4px 7px)}
+.tv-lr i.dot{border-radius:0;height:2px;width:12px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px)}
+.tv-lr b{font-weight:600}.tv-lr.main b{font-size:14px}
+.tv-lm{color:var(--slate)}.tv-lv{font-weight:600;font-variant-numeric:tabular-nums}.tv-lc{color:var(--slate);font-size:12.5px}
+.tv-lr.off{opacity:.5}.tv-lr.st{font-size:12.5px}
+.tv-lb{display:none;gap:1px}.tv-lr:hover .tv-lb{display:inline-flex}
+.tv-lb button{width:24px;height:22px;padding:0;border:0;border-radius:4px;background:transparent;cursor:pointer;color:var(--slate);display:inline-flex;align-items:center;justify-content:center}
+.tv-lb button:hover{background:var(--wash);color:var(--ink)}.tv-lb svg{width:15px;height:15px}
+.tv .pos{color:var(--gain)}.tv .neg{color:var(--loss)}.tv .muted{color:var(--slate)}
+.tv-empty{pointer-events:auto;font:400 14.5px var(--sans);margin-top:30px;color:var(--slate)}.tv-empty b{color:var(--ink)}
+.tv-empty button{border:0;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit}
+.tv-st{position:absolute;left:10px;bottom:32px;font:500 12px var(--sans);color:var(--slate);background:var(--sheet);padding:2px 6px;border-radius:4px;pointer-events:none}
+.tv-ni{position:absolute;z-index:5;font:600 13px var(--sans);padding:4px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--sheet);color:var(--ink);width:200px}
+.tv-rp{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--night);color:#fff;border-radius:10px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);z-index:8;font:500 13.5px var(--sans);white-space:nowrap}
+.tv-rp[hidden]{display:none}
+.tv-rp button,.tv-rp select{height:30px;padding:0 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:transparent;color:#fff;cursor:pointer;font:500 13px var(--sans)}
+.tv-rp select option{color:#000}.tv-rp .pri{background:var(--hi);color:#0E1A16;border-color:var(--hi);font-weight:600}.tv-rp b{font:600 13px var(--mono);min-width:76px;text-align:center}
+.tv-side{width:300px;flex:none;border-left:1px solid var(--hair);overflow-y:auto;padding:0 0 20px;font-size:14px}
+.tv-side[hidden]{display:none}
+.tv-sh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:12px 14px 6px;position:sticky;top:0;background:var(--sheet);z-index:1}
+.tv-sh h3{font:700 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;margin:0}.tv-sh small{color:var(--slate);font:500 12px var(--mono)}
+.tv-sh .tv-b{height:26px;font-size:18px;padding:0 8px}
+.tv-side h4{font:600 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--slate);margin:14px 14px 4px}
+.tv-wl{list-style:none;margin:0 0 8px;padding:0}
+.tv-wl li{display:grid;grid-template-columns:minmax(0,1fr) auto 22px;align-items:center;gap:8px;padding:7px 8px 7px 14px;cursor:pointer;border-bottom:1px solid var(--wash)}
+.tv-wl li:hover{background:var(--wash)}
+.tv-wl b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tv-wl small{display:block;color:var(--slate);font-size:12px}
+.tv-wl .num{white-space:nowrap;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.tv-wl .num small{font-weight:500}
+.tv-wl button,.tv-ot button{border:0;background:none;color:var(--slate);cursor:pointer;font-size:16px;padding:0;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border-radius:4px;visibility:hidden}
+.tv-wl li:hover button,.tv-ot li:hover button{visibility:visible}.tv-wl button:hover,.tv-ot button:hover{color:var(--loss);background:var(--sheet)}
+.tv-card{margin:6px 10px;padding:10px 12px;border:1px solid var(--hair);border-radius:10px}.tv-card.off{opacity:.55}
+.tv-ch{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.tv-ch b{flex:1;min-width:0}.tv-ch i{width:9px;height:9px;border-radius:50%}.tv-ch small{color:var(--slate);font-size:12px;width:100%;padding-left:16px}
+.tv-big{font:700 21px var(--sans);margin:6px 0 4px;font-variant-numeric:tabular-nums}.tv-big span{font-size:14px;font-weight:600}
+.tv-card dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0;font-size:13px}.tv-card dt{color:var(--slate)}.tv-card dd{margin:0;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.tv-card dd small{color:var(--slate);font-weight:400}
+.tv-card p{margin:6px 0 0;font-size:13px}
+.tv-dw{width:calc(100% - 28px);margin:0 14px;border-collapse:collapse;font-size:13.5px}.tv-dw td{padding:3px 0}.tv-dw td:last-child{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.tv-dw tr.hd td{padding-top:10px;font-weight:600;text-align:left}.tv-dw tr.hd i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+.tv-side>p.muted{margin:14px;font-size:12.5px}
+.tv-ot{list-style:none;margin:0;padding:0}.tv-ot li{display:flex;align-items:center;gap:8px;padding:5px 8px 5px 14px;font-size:13.5px;cursor:default}
+.tv-ot li:hover{background:var(--wash)}.tv-ot li.off{opacity:.5}.tv-ot li.sel{box-shadow:inset 3px 0 0 var(--hi);background:var(--wash)}.tv-ot li[data-otd]{cursor:pointer}
+.tv-ot li span{flex:1;min-width:0}.tv-ot li small{display:block;color:var(--slate);font-size:12px}.tv-ot li i{width:9px;height:9px;border-radius:50%;flex:none}.tv-ot svg{width:15px;height:15px}
+.tv-pop{position:absolute;z-index:30;background:var(--sheet);border:1px solid var(--hair);border-radius:10px;box-shadow:0 14px 40px -12px rgba(14,26,22,.35);min-width:220px;max-width:340px}
+.tv-pop[hidden]{display:none}
+.tv-pm{padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.tv-pm>b{font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.tv-pm label{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--slate)}
+.tv-pm select{border:1px solid var(--hair);min-width:160px}
+.tv-pm p{margin:0;font-size:12.5px}
+.tv-pm ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.tv-pm li{display:flex;align-items:center}.tv-pm li button{flex:1;text-align:left;border:0;background:none;padding:6px 8px;margin:0 -8px;border-radius:6px;cursor:pointer;font:500 14px var(--sans)}
+.tv-pm li button:hover{background:var(--wash)}.tv-pm li button[data-lx]{flex:none;width:26px;text-align:center;color:var(--slate);margin-left:4px}
+.tv-pm form{display:flex;gap:6px}.tv-pm form input{flex:1;min-width:0}
+.tv-pm input{font:400 14px var(--sans);padding:6px 8px;border:1px solid var(--hair);border-radius:6px;background:var(--sheet);color:var(--ink);width:100%}
+.tv-pm form button,.tv-pr button{font:500 13.5px var(--sans);padding:6px 12px;border:1px solid var(--hair);border-radius:6px;background:var(--sheet);cursor:pointer}
+.tv-pm form button{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tv-pr{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}.tv-pr button:hover{border-color:var(--ink)}.tv-pr .neg{color:var(--loss)}
+.tv-sw{display:flex;gap:5px;flex-wrap:wrap}.tv-sw button{width:20px;height:20px;border-radius:50%;border:0;background:var(--c);cursor:pointer;padding:0}.tv-sw button[aria-pressed=true]{box-shadow:0 0 0 2px var(--sheet),0 0 0 4px var(--ink)}
+.tv-fg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tv-fg label{flex-direction:column;align-items:stretch;gap:3px;font-size:12.5px}
+.tv-gl{display:flex;gap:4px}.tv-gl button{width:42px;height:36px;border:1px solid var(--hair);border-radius:6px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--slate)}
+.tv-gl button svg{width:26px;height:20px}.tv-gl button[aria-pressed=true]{border-color:var(--ink);color:var(--ink);box-shadow:inset 0 -2px 0 var(--hi)}
+.tv-ck{justify-content:flex-start!important;color:var(--ink)!important}
+.tv-modal{position:absolute;inset:0;z-index:40;background:rgba(11,20,17,.38);display:flex;align-items:flex-start;justify-content:center;padding:8vh 16px 16px}
+.tv-modal[hidden]{display:none}
+.tv-dlg{position:relative;width:min(620px,100%);max-height:78vh;display:flex;flex-direction:column;background:var(--sheet);border-radius:14px;box-shadow:0 24px 60px -16px rgba(0,0,0,.45);padding:18px 18px 10px}
+.tv-dlg h3{font:700 19px var(--sans);margin:0 40px 12px 0}
+.tv-mx{position:absolute;top:12px;right:12px;width:32px;height:32px;border:0;border-radius:6px;background:none;cursor:pointer;font-size:22px;color:var(--slate)}.tv-mx:hover{background:var(--wash);color:var(--ink)}
+.tv-sq input{width:100%;font:400 17px var(--sans);padding:11px 14px;border:1.5px solid var(--ink);border-radius:10px;background:var(--sheet);color:var(--ink)}
+.tv-sf{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 6px}.tv-sf select{border:1px solid var(--hair)}
+.tv-res{list-style:none;margin:0 -18px;padding:0;overflow-y:auto;flex:1;min-height:120px;border-top:1px solid var(--hair)}
+.tv-res li{display:grid;grid-template-columns:1fr auto 76px 64px;gap:12px;align-items:center;padding:9px 18px;cursor:pointer;border-bottom:1px solid var(--wash)}
+.tv-res li[aria-selected=true],.tv-res li:hover{background:var(--wash)}.tv-res li.muted{display:block;cursor:default}
+.tv-res b{font-weight:600}.tv-rt{font:500 12px var(--mono);color:var(--slate);text-transform:uppercase}.tv-res .num{text-align:right;font-variant-numeric:tabular-nums;font-size:13.5px}
+.tv-dlg>p.muted{margin:0 0 10px;font-size:13.5px}
+.tv-stl{list-style:none;margin:0 -18px;padding:0;overflow-y:auto;border-top:1px solid var(--hair)}.tv-stl label{display:flex;gap:12px;padding:12px 18px;cursor:pointer;border-bottom:1px solid var(--wash)}.tv-stl label:hover{background:var(--wash)}
+.tv-stl input{margin-top:3px;accent-color:var(--ink)}.tv-stl b{display:block;font-weight:600}.tv-stl small{display:block;color:var(--slate);font-size:13px;margin-top:2px}
+.tv-toast{position:absolute;left:50%;top:58px;transform:translate(-50%,-8px);background:var(--night);color:#fff;padding:8px 14px;border-radius:8px;font:500 13.5px var(--sans);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50}
+.tv-toast.on{opacity:1;transform:translate(-50%,0)}
+.tv:fullscreen{height:100vh;margin:0}
+.tv-how{margin:18px 0 8px;font-size:13.5px;color:var(--slate)}.tv-how summary{cursor:pointer;font-weight:600;color:var(--ink)}.tv-how p{max-width:880px}
+body[data-view=analysis] footer{padding-top:24px}
+[data-theme=dark] .tv-sym{background:var(--wash)}
+[data-theme=dark] .tv-seg button[aria-pressed=true]{background:var(--paper)}
+@media(max-width:1560px){.tv-l2{display:none}}@media(max-width:1100px){.tv-l{display:none}.tv-side{position:absolute;right:48px;top:0;bottom:0;z-index:20;box-shadow:-12px 0 30px -18px rgba(0,0,0,.4);background:var(--sheet)}}
+@media(max-width:720px){.tv{height:calc(100vh - var(--toph));min-height:600px}.tv-left,.tv-rail{width:40px}.tv-left button,.tv-rail button{width:34px;height:34px}.tv-side{right:40px;width:min(300px,calc(100vw - 60px))}
+ .tv-sym{max-width:190px}.tv-leg{right:62px}.tv-res li{grid-template-columns:1fr 70px 56px}.tv-res .tv-rt{display:none}.tv-lc{display:none}.tv-rp{bottom:10px}}
+
+#tvMet{max-width:230px}#tvSty{max-width:130px}
+[data-theme=dark] select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23E4EBE6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.tv select:not([multiple]){border-radius:6px;padding-right:26px!important;background-color:transparent;background-position:right 9px center}
+[data-theme=dark] .tv select{border-color:transparent}
 </style></head><body>
 <header class="top"><div class="top-in">
 <button type="button" class="gh-logo top-logo" data-tab="market" aria-label="Glasshouse, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</button>
@@ -1174,27 +1269,69 @@ body[data-view=market] footer{padding-top:0}
 
 </div>
 <div id="tabAnalysis" role="tabpanel" hidden>
-<section class="an" aria-label="Analysis">
- <div class="an-bar">
-  <div class="an-add"><div class="srch"><input id="anFind" placeholder="Add a suburb or area to the chart" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="anSugg" aria-label="Add a suburb or area"><ul id="anSugg" role="listbox" hidden></ul></div>
-   <select id="anMet" aria-label="What to chart"><optgroup label="Trends"><option value="price">Median price</option><option value="band">Price range (middle half)</option><option value="sales">Number of sales</option><option value="rent">Median rent</option><option value="yield">Rental yield</option><option value="yoy">Change on a year</option></optgroup><optgroup label="Sale by sale (suburbs and small areas)"><option value="dots">Every sale, as a dot</option><option value="box">Price spread, box and whisker</option><option value="candle">Candles: first, high, low, last sale</option></optgroup></select>
-   <span class="seg" role="group" aria-label="Houses or units" id="anSeg"><button data-aseg="house" aria-pressed="true">Houses</button><button data-aseg="unit" aria-pressed="false">Units</button></span></div>
-  <div class="an-ctl"><span class="seg" role="group" aria-label="Years shown" id="anRng"><button data-r="1">1Y</button><button data-r="3">3Y</button><button data-r="5">5Y</button><button data-r="10">10Y</button><button data-r="20">20Y</button><button data-r="0">All</button></span>
-   <span class="seg" role="group" aria-label="Scale" id="anScale"><button data-sc="abs" title="Dollars on an even scale">$</button><button data-sc="log" title="Log scale: equal steps are equal percentage moves">Log</button><button data-sc="idx" title="Every line starts at 100 at the left edge">Index</button><button data-sc="pct" title="Change since the left edge">%</button></span>
-   <button class="lbtn" id="anReset" type="button">Reset</button></div>
+<section class="tv" id="tv" aria-label="Analysis">
+ <div class="tv-top" id="tvTop">
+  <button class="tv-sym" id="tvSym" type="button" title="Change the main series (or just start typing on the chart)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M8 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM11.5 11.5 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="tvSymN">Pick a suburb or area</span></button>
+  <button class="tv-b" id="tvAdd" type="button" title="Compare: add another suburb or area"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l">Compare</span></button>
+  <span class="tv-sepv"></span>
+  <select id="tvMet" aria-label="Measure for the main series" title="What the main series shows"><optgroup label="Trends"><option value="price">Median price</option><option value="band">Price range (middle half)</option><option value="sales">Number of sales</option><option value="rent">Median rent</option><option value="yield">Rental yield</option><option value="yoy">Change on a year</option></optgroup><optgroup label="Sale by sale (suburbs and small areas)"><option value="dots">Every sale, as a dot</option><option value="box">Price spread, box and whisker</option><option value="candle">Candles: first, high, low, last sale</option></optgroup></select>
+  <span class="tv-seg" role="group" aria-label="Houses or units" id="tvSeg"><button data-aseg="house" type="button">Houses</button><button data-aseg="unit" type="button">Units</button></span>
+  <select id="tvSty" aria-label="Line style for the main series" title="Chart style"><option value="line">Line</option><option value="step">Step line</option><option value="area">Area</option><option value="base">Baseline</option><option value="col">Columns</option></select>
+  <span class="tv-sepv"></span>
+  <button class="tv-b" id="tvStudies" type="button" title="Studies: trend line, averages, fall from the high, growth a year"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 14c2-1 2.5-9 5-9s2.5 6 4 6 2-3 3-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l">Studies</span></button>
+  <button class="tv-b" id="tvFilt" type="button" title="Filter individual sales by price and land size"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 4h12l-4.5 5.5V14l-3 1.5V9.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l tv-l2">Filters</span><i id="tvFiltN" hidden></i></button>
+  <button class="tv-b" id="tvGrid" type="button" title="Chart layout: one, two or four charts"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3h5v5H3zM10 3h5v5h-5zM3 10h5v5H3zM10 10h5v5h-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <span class="tv-sepv"></span>
+  <button class="tv-b" id="tvUndo" type="button" title="Undo (Ctrl+Z)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6 5 3 8l3 3M3.5 8H11a3.5 3.5 0 0 1 0 7H8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="tv-b" id="tvRedo" type="button" title="Redo (Ctrl+Shift+Z)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="m12 5 3 3-3 3M14.5 8H7a3.5 3.5 0 0 0 0 7h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <span class="tv-gap"></span>
+  <button class="tv-b" id="tvLay" type="button" title="Saved layouts and ideas"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 3h10v12l-5-3.5L4 15Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l tv-l2" id="tvLayN">Layouts</span></button>
+  <button class="tv-b" id="tvReplay" type="button" title="Replay: pick a month and watch the market unfold from there"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4v10M7.5 4.5 14 9l-6.5 4.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l tv-l2">Replay</span></button>
+  <button class="tv-b" id="tvLink" type="button" title="Copy a link to this chart"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M7.5 10.5l3-3M8 5l1.5-1.5a3 3 0 0 1 4.2 4.2L12 9.5M10 13l-1.5 1.5a3 3 0 0 1-4.2-4.2L6 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="tv-b" id="tvSnap" type="button" title="Save a picture of the chart"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 6h2.5L7 4h4l1.5 2H15v8H3ZM9 8a2.3 2.3 0 1 0 0 4.6A2.3 2.3 0 0 0 9 8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="tv-b" id="tvCsv" type="button" title="Download the series in view as a spreadsheet (CSV)"><span class="tv-l tv-l1">CSV</span></button>
+  <button class="tv-b" id="tvFull" type="button" title="Full screen"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 7V3h4M11 3h4v4M15 11v4h-4M7 15H3v-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  </div>
-<div class="an-tools" id="anTools">
-  <span class="an-grp" role="group" aria-label="Studies"><span class="an-lab">Studies</span><button data-st="trend" aria-pressed="false" title="A straight-line fit through the period in view, with its growth a year and a band of two standard deviations">Trend line</button><button data-st="ma" aria-pressed="false" title="Average of the last 12 months">12-month average</button></span>
-  <span class="an-grp" role="group" aria-label="Draw"><span class="an-lab">Draw</span><button data-tool="pan" aria-pressed="true" title="Move and zoom"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v13M1.5 8h13M8 1.5 6 3.5M8 1.5l2 2M8 14.5l-2-2M8 14.5l2-2M1.5 8l2-2M1.5 8l2 2M14.5 8l-2-2M14.5 8l-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button data-tool="line" aria-pressed="false" title="Trend line: drag between two points"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5 13.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button data-tool="hline" aria-pressed="false" title="Horizontal line: click a level"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button data-tool="measure" aria-pressed="false" title="Measure: drag to see the change and the time between"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 12V4M14 12V4M2 8h12M5 6 2 8l3 2M11 6l3 2-3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button data-tool="note" aria-pressed="false" title="Note: click to add text"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h10v8H7l-3 3v-3H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button id="anUndo" title="Undo the last drawing">Undo</button><button id="anClr" title="Remove all drawings">Clear</button></span>
-  <span class="an-grp" id="anFilt" role="group" aria-label="Sale filters"><span class="an-lab">Sales</span><label>Price <input id="anF_pmin" inputmode="numeric" placeholder="min"></label><span>to</span><input id="anF_pmax" inputmode="numeric" placeholder="max" aria-label="Maximum price"><label>Land m² <input id="anF_lmin" inputmode="numeric" placeholder="min"></label><span>to</span><input id="anF_lmax" inputmode="numeric" placeholder="max" aria-label="Maximum land size"><button id="anFiltX" title="Clear the filters">×</button></span>
-  <span class="an-grp"><button id="anCsv" title="Download the series in view as a spreadsheet (CSV)">CSV</button><button id="anFull" title="Full screen"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5v-4h4M10.5 1.5h4v4M14.5 10.5v4h-4M5.5 14.5h-4v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span>
+ <div class="tv-body">
+  <div class="tv-left" id="tvTools" role="toolbar" aria-label="Drawing tools" aria-orientation="vertical">
+   <button data-tool="pan" title="Cross: move and zoom (Esc)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v14M2 9h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="l" title="Trend line (Alt+T)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 14.5 14.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="ray" title="Ray: a line that carries on to the right"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 13.5 16 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="h" title="Horizontal line (Alt+H)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="v" title="Vertical line (Alt+V)"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="r" title="Rectangle"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 5h11v8h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="m" title="Date and price range: drag to see the change, the time between and the growth a year"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 14V4M15 14V4M3 9h12M6 7 3 9l3 2M12 7l3 2-3 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="n" title="Note"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 3h11v8H8l-3.5 3.5V11h-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-tool="zoom" title="Zoom in: drag across a period"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M8 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM11.5 11.5 15 15M6 8h4M8 6v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <hr>
+   <button data-flag="mag" title="Magnet: drawings snap to the nearest value"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3v6a4 4 0 0 0 8 0V3M5 6h3M10 6h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-flag="keep" title="Keep drawing: stay on the tool after each drawing"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 14l2-.5L14 5.5 12.5 4 4.5 12ZM11 5.5l1.5 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-flag="lock" title="Lock drawings"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 8h8v7H5zM6.5 8V6a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-flag="hide" title="Hide drawings"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5ZM9 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button id="tvDrClr" title="Remove all drawings on this chart"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 5h10M7 5V3.5h4V5M5.5 5l.8 10h5.4l.8-10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="tv-main">
+   <div class="tv-grid" id="tvGridEl" data-lay="1"></div>
+   <div class="tv-rp" id="tvRp" hidden></div>
+  </div>
+  <aside class="tv-side" id="tvSide" aria-label="Side panel"></aside>
+  <nav class="tv-rail" id="tvRail" aria-label="Panels">
+   <button data-side="wl" title="Watchlist and series in view"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 4.5h12M3 9h12M3 13.5h8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-side="dw" title="Data window: every value at the crosshair"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3.5h12v11H3zM3 7.5h12M7.5 7.5v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+   <button data-side="ot" title="Object tree: series, studies and drawings"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2.5 2.5 6 9 9.5 15.5 6ZM2.5 9.5 9 13l6.5-3.5M2.5 12.5 9 16l6.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </nav>
  </div>
- <div class="an-presets"><span>Try</span><button data-pre="sr">Sydney v regional</button><button data-pre="hu">Houses v units</button><button data-pre="pr">Prices v rents</button><button data-pre="ar">Regions</button><button data-pre="sp">Every sale in a suburb</button><button data-pre="clr">Clear</button></div>
- <p class="an-note" id="anNote" hidden></p>
- <div class="an-chart" id="anChart"><svg id="anSvg" role="img" aria-label="Chart of the chosen series"></svg></div>
- <p class="an-hint">Drag to move through time, scroll to zoom, double-click to show everything. Suburb prices are 12-month medians (each point covers the year to that month); areas use 3-month medians. Sale-by-sale charts use contract dates; the price and land filters apply to them (land to houses only), and sales over four times or under a quarter of their suburb&rsquo;s typical price that year are left out (development sites, part shares). Candles take each month&rsquo;s first, highest, lowest and last sale: these are different homes, so a candle shows spread and timing, not one price moving. Double-click a drawing to delete it.</p>
- <div class="tbl an-tbl"><table class="t"><thead><tr><th></th><th>Series</th><th>Start</th><th>End</th><th>Change</th><th>A year</th><th>High</th><th>Low</th><th>From high</th><th></th></tr></thead><tbody id="anRows"></tbody></table></div>
+ <div class="tv-bot" id="tvBot">
+  <span class="tv-rng" id="tvRng" role="group" aria-label="Years shown"><button data-r="1">1Y</button><button data-r="3">3Y</button><button data-r="5">5Y</button><button data-r="10">10Y</button><button data-r="20">20Y</button><button data-r="0">All</button></span>
+  <button class="tv-b" id="tvGo" type="button" title="Go to a period"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12v10H3zM3 8h12M6.5 3v3M11.5 3v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tv-l">Period</span></button>
+  <span class="tv-gap"></span>
+  <span class="tv-asof" id="tvAsof"></span>
+  <span class="tv-rng" id="tvScale" role="group" aria-label="Scale"><button data-sc="abs" title="Dollars on an even scale">$</button><button data-sc="pct" title="Change since the left edge">%</button><button data-sc="log" title="Log scale: equal steps are equal percentage moves">log</button><button data-sc="idx" title="Every line starts at 100 at the left edge">100</button></span>
+ </div>
+ <div class="tv-pop" id="tvPop" hidden></div>
+ <div class="tv-modal" id="tvModal" hidden><div class="tv-dlg" role="dialog" aria-modal="true" aria-labelledby="tvDlgT"></div></div>
 </section>
+<div class="wrap"><details class="tv-how"><summary>How these figures are worked out</summary><p>Suburb prices are 12-month medians (each point covers the year to that month); areas use 3-month medians. Suburb rents are by postcode. Area sales are counted by quarter. Sale-by-sale charts use contract dates; the price and land filters apply to them (land to houses only), and sales over four times or under a quarter of their suburb&rsquo;s typical price that year are left out (development sites, part shares). Candles take each month&rsquo;s first, highest, lowest and last sale: these are different homes, so a candle shows spread and timing, not one price moving.</p><p>Drag to move through time, scroll to zoom, drag the price scale to stretch it and the date scale to zoom, double-click the chart for everything and a scale to reset it. Click a drawing to select it, drag its handles to change it, Delete to remove it. Start typing anywhere on the chart to change the main series.</p></details></div>
 </div>
 <div id="tabSuburbs" role="tabpanel" hidden>
 <div id="subMkt">
@@ -2555,40 +2692,42 @@ function headline(){const noun=seg==="house"?"house":"unit",area=areaDef()[1].re
  ghLine();
  $("ghCap").innerHTML=`The headline and tiles are for the typical suburb. ${esc(area)} ${noun}s: suburbs with ${MK.min} or more sales in the year to ${asof}. Typical suburb: the middle one when ranked. Six-month changes compare the median of the six months to ${asof} with the six before; they rest on fewer sales and are not adjusted for the season, so read them as a direction. Below peak: the 12-month median against its highest in the last three years. The chart is the median of every sale in the area each quarter, so it also moves with the mix of homes sold. ${mt} Source: NSW Valuer General.`;}
 
-/* ---------- analysis: a chart you build yourself ---------- */
-// Series are suburbs or areas, each with one measure. Measures that share a unit share a pane: prices in the top pane,
-// then rents, sales and percentages below, all on one time axis. Index and % scales put prices, rents and sales on one footing.
-// Sale-level measures (every sale, box plots, candles) read each suburb's property file (data/props), so an area is
-// allowed only when it has a manageable number of suburbs.
+/* ---------- analysis: a chart workspace modelled on TradingView ---------- */
+// Layout: top bar (main series, compare, measure, style, studies, filters, chart grid, undo, layouts, replay, link, picture, CSV,
+// full screen), drawing tools down the left, one to four charts in the middle (time and crosshair synced), a side panel on the
+// right (watchlist + series in view, data window, object tree), ranges and scales along the bottom.
+// Each chart holds series (a suburb or area, a measure, houses or units, a colour and a style). Measures that share a unit share
+// a pane; panes can be resized, price scales stretched, the time scale dragged. Sale-level measures (every sale, box plots,
+// candles) read each suburb's property file (data/props), so an area is allowed only when it has a manageable number of suburbs.
 const AN_COL=["#0E1A16","#2F6FB0","#1F8A70","#7A4FB5","#C9A227","#B5487A","#6B7C74","#8C5A2B","#3E9BC9","#5E8C2F"];
 const AN_MET={price:{t:"Median price",u:"$"},band:{t:"Price range",u:"$"},dots:{t:"Every sale",u:"$",sl:1},box:{t:"Price spread",u:"$",sl:1},candle:{t:"Candles",u:"$",sl:1},
  sales:{t:"Sales",u:"n"},rent:{t:"Median rent",u:"r"},yield:{t:"Rental yield",u:"%"},yoy:{t:"Change on a year",u:"%"}};
-const AN_PANE={"$":"Price","i":"Index","r":"Rent a week","n":"Sales","%":"Per cent"};
+const AN_PANE={"$":"Price","i":"Index","r":"Rent a week","n":"Sales","%":"Per cent","dd":"Below the high","cg":"Growth a year, past 5 years"};
+const AN_STY={line:"Line",step:"Step line",area:"Area",base:"Baseline",col:"Columns"};
+const AN_STUDY={trend:{t:"Trend line",d:"A straight-line fit through the period in view (log scale for prices), with its growth a year and a band of two standard deviations."},
+ ma:{t:"12-month average",d:"The average of the last 12 points, as a dotted line."},
+ dd:{t:"Fall from the high",d:"How far the main series sits below its highest point so far, in its own pane. Near 0% means at a record."},
+ cg:{t:"Growth a year (5-year)",d:"The main series' average yearly growth over the previous five years, in its own pane."}};
+const AN_LAY={"1":"One chart","2h":"Two, side by side","2v":"Two, stacked","3":"Three: one large, two small","4":"Four"};
+const AN_LAYN={"1":1,"2h":2,"2v":2,"3":3,"4":4};
 const AN_MAXSUB=80;
 const anAreas=Object.fromEntries((D.areas||[]).map(a=>[a[0],a[1]]));
 const anSubs=[...new Set(D.rows.map(r=>r[C.locality]))].sort();
-const AN_D0=()=>({s:[],r:10,sc:"abs",seg:"house",met:"price",f:{},st:{},dr:[]});
-let AN=(()=>{try{const v=JSON.parse(localStorage.getItem("hs_ana"));if(v&&Array.isArray(v.s))return{...AN_D0(),...v};}catch(e){}return null;})();
-const anDefault=()=>({...AN_D0(),s:[{k:"a",id:"syd",seg:"house",m:"price",c:AN_COL[0],on:1},{k:"a",id:"reg",seg:"house",m:"price",c:AN_COL[1],on:1},{k:"a",id:"syd",seg:"house",m:"sales",c:AN_COL[0],on:1}]});
-if(!AN)AN=anDefault();
-let anV=null,anHov=null,anTool="pan",anTmp=null;
-const anSave=()=>{try{localStorage.setItem("hs_ana",JSON.stringify(AN));}catch(e){}};
-const anName=s=>(s.k==="a"?anAreas[s.id]||s.id:title(s.id))+(s.seg==="unit"?" units":" houses");
-const anNextCol=()=>AN_COL.find(c=>!AN.s.some(s=>s.c===c))||AN_COL[AN.s.length%AN_COL.length];
 const anRow=s=>D.rows.find(r=>r[C.locality]===s.id&&r[C.segment]===s.seg);
 const anM0=MS?(()=>{const[y,m]=MS.m[0].split("-").map(Number);return y*12+m-1;})():0;
 const anMi=day=>{const d=new Date(SP_EP+day*864e5);return d.getUTCFullYear()*12+d.getUTCMonth()-anM0+(d.getUTCDate()-1)/31;};   // month index, with the day as a fraction
 // quarterly sales for the three big areas sit at each quarter's last month
 const anQ=(()=>{const o={};if(!MS)return o;const ix={};MS.m.forEach((m,i)=>{ix[m]=i;});for(const[rg,segs]of Object.entries(D.market_series||{}))for(const[sg,d]of Object.entries(segs)){const a=Array(TL+1).fill(null);(d.q||[]).forEach((q,j)=>{const y=q.slice(0,4),k=+q.slice(5)*3,i=ix[`${y}-${String(k).padStart(2,"0")}`];if(i!=null)a[i]=d.n[j];});o[rg+"|"+sg]=a;}return o;})();
-// ---- individual sales, from the suburb property files
+
+/* ---- individual sales, from the suburb property files ---- */
 const anQt=(a,q)=>{if(!a.length)return null;const x=(a.length-1)*q,lo=Math.floor(x),hi=Math.ceil(x);return a[lo]+(a[hi]-a[lo])*(x-lo);};
 const anPR={};let anSC={};
 function anSubsOf(s){if(s.k==="s")return[s.id];const a=D.areas.find(x=>x[0]===s.id);if(!a)return[];const[c,,,rng]=a;
  return[...new Set(D.rows.filter(r=>{const pc=r[C.postcode];return c==="all"||(c==="syd"?inSyd(pc):c==="reg"?!inSyd(pc):(rng||[]).some(([lo,hi])=>pc>=lo&&pc<=hi));}).map(r=>r[C.locality]))];}
 function anProps(loc){if(window.PR&&window.PR[loc])return window.PR[loc];if(!anPR[loc]){anPR[loc]="l";loadJS(`data/props/${pslug(loc)}.js`).then(()=>{anPR[loc]="ok";anSC={};clearTimeout(anProps.t);anProps.t=setTimeout(anDraw,80);}).catch(()=>{anPR[loc]="err";});}return null;}
-// every sale of the series that passes the filters: {i (month, with day), p, a (land m2)}; status says what's missing
+// every sale of the series that passes the filters: {i (month, with day), p, a (land m2)}; st says what's missing
 function anSales(s){const F=AN.f||{},key=s.k+s.id+s.seg+JSON.stringify(F);if(anSC[key])return anSC[key];const subs=anSubsOf(s);
- if(subs.length>AN_MAXSUB)return{st:`${subs.length} suburbs is too many for sale by sale: pick a smaller area or suburbs`,v:[]};
+ if(subs.length>AN_MAXSUB)return{st:`${subs.length} suburbs is too many for sale by sale: pick a smaller area or a suburb`,v:[]};
  const out=[];let wait=0;for(const loc of subs){const P=anProps(loc);if(!P){if(anPR[loc]!=="err")wait++;continue;}
   for(const row of P.p){if(!!row[5]!==(s.seg==="unit"))continue;const land=row[6];if(s.seg==="house"&&(F.lmin||F.lmax)){if(!land||(F.lmin&&land<F.lmin)||(F.lmax&&land>F.lmax))continue;}
    for(const t of row[7]){if(t[3]&&t[3]>1)continue;const p=t[2];if(!p||(F.pmin&&p<F.pmin)||(F.pmax&&p>F.pmax))continue;const i=anMi(t[1]??t[0]);if(i<0)continue;out.push({i,p,a:land||null,loc});}}}
@@ -2597,188 +2736,470 @@ function anSales(s){const F=AN.f||{},key=s.k+s.id+s.seg+JSON.stringify(F);if(anS
   const md=new Map();for(const[k,a]of byY){a.sort((u,v)=>u-v);md.set(k,anQt(a,.5));}
   for(let j=out.length-1;j>=0;j--){const x=out[j],m=md.get(x.loc+Math.floor(x.i/12));if(m&&(x.p>m*4||x.p<m/4))out.splice(j,1);}}
  out.sort((a,b)=>a.i-b.i);const r={v:out,st:wait?`loading ${wait} suburb${wait>1?"s":""}…`:""};if(!wait)anSC[key]=r;return r;}
-// groups of sales by period (months per group): box stats or candles
+// sales in replay stop at the replay month
+const anSalesV=s=>{const S=anSales(s);if(!anRp.on||anRp.i==null)return S;return{...S,v:S.v.filter(x=>x.i<anRp.i+1)};};
 function anGroups(v,per,a,b){const g=new Map();for(const x of v){if(x.i<a-per||x.i>b+per)continue;const k=Math.floor(Math.floor(x.i)/per);let e=g.get(k);if(!e){e=[];g.set(k,e);}e.push(x);}return g;}
 // value of series s at month i (null if none); band returns [low, high]; sale-level measures give that month's median sale
-function anVal(s,i){const m=s.m;
+function anVal(s,i){const m=s.m;if(i<0||i>TL)return null;
  if(AN_MET[m].sl){const S=anSales(s).v;let lo=0,hi=S.length;while(lo<hi){const md=(lo+hi)>>1;S[md].i<i?lo=md+1:hi=md;}const ps=[];for(let j=lo;j<S.length&&S[j].i<i+1;j++)ps.push(S[j].p);if(ps.length<3)return null;ps.sort((x,y)=>x-y);return anQt(ps,.5);}
- if(s.k==="a"){const p=()=>{const a=MS.mkt3&&(MS.mkt3[s.id]||{})[s.seg];return a&&a[i]!=null?a[i]*1000:null;},r=()=>{const a=MS.rmkt3&&(MS.rmkt3[s.id]||{})[s.seg];return a&&a[i]!=null?a[i]:null;};
-  if(m==="price"||m==="band")return p();if(m==="rent")return r();if(m==="sales"){const a=anQ[s.id+"|"+s.seg];return a?a[i]:null;}
-  if(m==="yield"){const a=p(),b=r();return a&&b?b*52/a:null;}if(m==="yoy"){if(i<12)return null;const a=p(),pa=MS.mkt3[s.id][s.seg][i-12];return a&&pa?a/(pa*1000)-1:null;}return null;}
+ if(s.k==="a"){const p=j=>{const a=MS.mkt3&&(MS.mkt3[s.id]||{})[s.seg];return a&&a[j]!=null?a[j]*1000:null;},r=()=>{const a=MS.rmkt3&&(MS.rmkt3[s.id]||{})[s.seg];return a&&a[i]!=null?a[i]:null;};
+  if(m==="price"||m==="band")return p(i);if(m==="rent")return r();if(m==="sales"){const a=anQ[s.id+"|"+s.seg];return a?a[i]:null;}
+  if(m==="yield"){const a=p(i),b=r();return a&&b?b*52/a:null;}if(m==="yoy"){if(i<12)return null;const a=p(i),pa=p(i-12);return a&&pa?a/pa-1:null;}return null;}
  const k=s.id+"|"+s.seg;
  if(m==="price")return sv(k,1,i);if(m==="band"){const lo=sv(k,2,i),hi=sv(k,3,i);return lo&&hi?[lo,hi]:null;}if(m==="sales")return sv(k,4,i);
  const row=anRow(s),rent=row?rv(row[C.postcode]+"|"+s.seg,i):null;if(m==="rent")return rent;
  if(m==="yield"){const p=sv(k,1,i);if(!p||rent==null)return null;const y=rent*52/p;return y>.12||y<.01?null:y;}
  if(m==="yoy"){if(i<12)return null;const a=sv(k,1,i),b=sv(k,1,i-12);return a&&b&&Math.abs(a/b-1)<.6?a/b-1:null;}return null;}
-const anUnit=s=>{const u=AN_MET[s.m].u;return(AN.sc==="idx"||AN.sc==="pct")&&(u==="$"||u==="r"||u==="n")&&s.m!=="band"&&!AN_MET[s.m].sl?"i":u;};
-const anFmt=(u,v)=>v==null?"–":u==="$"?money(v):u==="r"?"$"+Math.round(v):u==="n"?Math.round(v).toLocaleString("en-AU"):u==="%"?pct(v,1):AN.sc==="pct"?(v>=0?"+":"")+v.toFixed(1)+"%":v.toFixed(0);
-const anSpan=n=>{const y=Math.floor(n/12),m=Math.round(n%12);return(y?y+"y ":"")+(m||!y?m+"m":"");};
-function anRange(){if(!MS)return{a:0,b:0};if(!anV){const n=AN.r?AN.r*12:TL;anV={a:Math.max(0,TL-n),b:TL};}return anV;}
+const anGet=(s,i)=>anRp.on&&anRp.i!=null&&i>anRp.i?null:anVal(s,i);
+
+/* ---- state: charts, view, history ---- */
+const anCh0=(s=[])=>({s,dr:[],st:{},sc:"abs",ph:{},ys:{}});
+const anSer=(k,id,m="price",seg="house",c=AN_COL[0])=>({k,id,seg,m,c,on:1,sty:m==="sales"?"col":"line"});
+const AN_D0=()=>({v:2,ch:[anCh0()],lay:"1",act:0,r:10,f:{},met:"price",seg:"house",side:"wl",wl:[["a","syd","house"],["a","reg","house"],["a","ncl","house"],["a","cc","house"],["a","ill","house"]],sync:1});
+const anDefault=()=>({...AN_D0(),ch:[anCh0([anSer("a","syd"),anSer("a","reg","price","house",AN_COL[1]),anSer("a","syd","sales")])]});
+function anMigrate(v){if(!v||typeof v!=="object")return null;const fix=c=>({...anCh0(),...c,s:(c.s||[]).map(s=>({sty:s.m==="sales"?"col":"line",on:1,...s})),dr:(c.dr||[]).map(d=>d.t==="h"||d.t==="n"||d.t==="m"||d.t==="l"?d:d)});
+ if(v.v===2&&Array.isArray(v.ch)&&v.ch.length)return{...AN_D0(),...v,ch:v.ch.map(fix),act:Math.min(v.act||0,v.ch.length-1)};
+ if(Array.isArray(v.s))return{...AN_D0(),r:v.r??10,f:v.f||{},met:v.met||"price",seg:v.seg||"house",ch:[fix({s:v.s,dr:v.dr||[],st:v.st||{},sc:v.sc||"abs"})]};return null;}
+// a chart can travel in the address: #analysis?c=... (series, studies, scales, layout, range)
+const anB64=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const anUnB64=s=>decodeURIComponent(escape(atob(s.replace(/-/g,"+").replace(/_/g,"/"))));
+function anFromHash(){const m=(location.hash||"").match(/^#analysis\?c=([\w-]+)/);if(!m)return null;try{const o=JSON.parse(anUnB64(m[1]));
+ return anMigrate({v:2,lay:o.l||"1",r:o.r??10,act:0,ch:o.c.map(c=>({s:c.s.map(([k,id,seg,mm,ci,sty,on])=>({k,id,seg,m:mm,c:AN_COL[ci]||AN_COL[0],sty:sty||"line",on:on??1})),st:c.t||{},sc:c.sc||"abs",dr:c.d||[]}))});}catch(e){return null;}}
+function anToHash(){const o={l:AN.lay,r:AN.r,c:AN.ch.slice(0,AN_LAYN[AN.lay]).map(c=>({s:c.s.map(s=>[s.k,s.id,s.seg,s.m,Math.max(0,AN_COL.indexOf(s.c)),s.sty,s.on]),t:c.st,sc:c.sc,d:c.dr.slice(0,20)}))};return location.origin+location.pathname+location.search+"#analysis?c="+anB64(JSON.stringify(o));}
+let AN=anFromHash()||anMigrate(store.get("hs_ana"))||anDefault();
+let anV=null,anHov=null,anTool="pan",anTmp=null,anSel=null,anHist=[],anFut=[],anE=[],anRp={on:0,pick:0,i:null,t:0,spd:1},anLayN=null;
+if(innerWidth<=1100)AN.side="";   // the panel covers the chart on narrow screens, so it starts closed there
+const anSave=()=>store.set("hs_ana",AN);
+const anSnap=()=>{anHist.push(JSON.stringify(AN));if(anHist.length>80)anHist.shift();anFut=[];};
+const anDo=fn=>{anSnap();fn();anSave();anDraw();};
+function anUndo(r){const from=r?anFut:anHist,to=r?anHist:anFut;if(!from.length)return;to.push(JSON.stringify(AN));AN=anMigrate(JSON.parse(from.pop()));anSel=null;anSC={};anSave();anBuild();anDraw();}
+const CH=()=>AN.ch[AN.act]||AN.ch[0];
+const anMain=c=>(c||CH()).s[0]||null;
+const anName=s=>(s.k==="a"?anAreas[s.id]||s.id:title(s.id))+(s.seg==="unit"?" units":" houses");
+const anNextCol=c=>AN_COL.find(x=>!c.s.some(s=>s.c===x))||AN_COL[c.s.length%AN_COL.length];
+const anDark=()=>document.documentElement.dataset.theme==="dark";
+const anC=c=>c==="#0E1A16"&&anDark()?"#E4EBE6":c;
+const anOn=c=>{const h=anC(c).slice(1),n=parseInt(h,16),l=(.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))/255;return l>.6?"#0E1A16":"#FFFFFF";};
+const anLast=()=>anRp.on&&anRp.i!=null?anRp.i:TL;
+function anRange(){if(!MS)return{a:0,b:0};if(!anV){const n=AN.r?AN.r*12:TL+1,b=anLast();anV={a:Math.max(0,b-n),b:Math.max(b,6)};}return anV;}
 function anSetR(r){AN.r=r;anV=null;anSave();anDraw();}
+const anUnit=(s,sc)=>{const u=AN_MET[s.m].u;return(sc==="idx"||sc==="pct")&&(u==="$"||u==="r"||u==="n")&&s.m!=="band"&&!AN_MET[s.m].sl?"i":u;};
+const anMx=v=>"$"+(v>=1e6?+(v/1e6).toFixed(v>=1e7?1:2)+"m":Math.round(v/1e3)+"k");
+const anFmt=(u,v,sc,ax)=>v==null||!isFinite(v)?"–":u==="$"?(ax?anMx(v):money(v)):u==="r"?"$"+Math.round(v):u==="n"?Math.round(v).toLocaleString("en-AU"):u==="%"||u==="dd"||u==="cg"?pct(v,ax?0:1):sc==="pct"?(v>=0?"+":"")+v.toFixed(ax?0:1)+"%":v.toFixed(0);
+const anSpan=n=>{const y=Math.floor(n/12),m=Math.round(n%12);return(y?y+"y ":"")+(m||!y?m+"m":"");};
+const anSg=(x,pts)=>x==null||!isFinite(x)?"–":`<span class="${x>0?"pos":x<0?"neg":""}">${pts?(x>0?"+":"")+(x*100).toFixed(1)+" pts":(x>0?"+":"")+pct(x,1)}</span>`;
+// round-number ticks for a scale
+function anTicks(mn,mx,lg,n){if(lg&&mn>0){for(const ks of[[1],[1,5],[1,2,5],[1,1.5,2,3,5,7]]){const o=[];for(let e=Math.floor(Math.log10(mn));e<=Math.ceil(Math.log10(mx));e++)for(const k of ks){const v=k*10**e;if(v>=mn&&v<=mx)o.push(v);}if(o.length>=Math.max(3,n-2))return o;}}
+ const st=(mx-mn)/n||1,p=10**Math.floor(Math.log10(st)),q=st/p,step=(q<1.5?1:q<3?2:q<3.5?2.5:q<7?5:10)*p,o=[];for(let v=Math.ceil(mn/step)*step;v<=mx+step*1e-6;v+=step)o.push(+v.toPrecision(12));return o;}
 // least-squares line through log values (or plain values for %): growth a year and the spread around it
 function anTrend(pts,lg){if(pts.length<6)return null;const n=pts.length;let sx=0,sy=0,sxx=0,sxy=0;const ys=pts.map(p=>lg?Math.log(p[1]):p[1]);
  pts.forEach((p,k)=>{sx+=p[0];sy+=ys[k];sxx+=p[0]*p[0];sxy+=p[0]*ys[k];});const b=(n*sxy-sx*sy)/(n*sxx-sx*sx||1),a=(sy-b*sx)/n;
  let ss=0;pts.forEach((p,k)=>{ss+=(ys[k]-(a+b*p[0]))**2;});const sd=Math.sqrt(ss/Math.max(1,n-2)),f=x=>lg?Math.exp(a+b*x):a+b*x;return{f,sd,lg,pa:lg?Math.exp(b*12)-1:b*12,band:k=>x=>lg?Math.exp(a+b*x+k*sd):a+b*x+k*sd};}
-// one pass: values in view for each visible series, then panes, scales and the drawing
-function anDraw(){const svg=$("anSvg");if(!svg||!MS||$("tabAnalysis").hidden)return;const box=$("anChart"),W=Math.max(300,box.clientWidth),V=anRange(),a=Math.max(0,Math.floor(V.a)-1),b=Math.min(TL,Math.ceil(V.b)+1);
- document.querySelectorAll("#anRng button").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.r===AN.r&&!anV.z));
- document.querySelectorAll("#anScale button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.sc===AN.sc));
- document.querySelectorAll("#anSeg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.aseg===AN.seg));$("anMet").value=AN.met;
- document.querySelectorAll("#anTools [data-tool]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.tool===anTool));
- document.querySelectorAll("#anTools [data-st]").forEach(x=>x.setAttribute("aria-pressed",!!AN.st[x.dataset.st]));
- box.classList.toggle("drawing",anTool!=="pan");
- const span=V.b-V.a,vis=AN.s.filter(s=>s.on),data=vis.map(s=>{const sl=AN_MET[s.m].sl;let v=[],S=null;
-   if(sl){S=anSales(s);}else{const raw=[];for(let i=a;i<=b;i++)raw.push(anVal(s,i));v=raw;
-    if(anUnit(s)==="i"){const b0=raw.find((x,j)=>x!=null&&a+j>=V.a);v=raw.map(x=>x==null||!b0?null:AN.sc==="idx"?x/b0*100:(x/b0-1)*100);}}
-   return{s,v,S,u:anUnit(s),sparse:s.k==="a"&&s.m==="sales"};});
- const order=AN.sc==="idx"||AN.sc==="pct"?["i","$","r","n","%"]:["$","i","r","n","%"],units=order.filter(u=>data.some(d=>d.u===u));if(!units.length)units.push("$");
- const L=12,R=70,T=8,XA=26,main=units.length>1?320:400,sub=140,H=T+main+(units.length-1)*(sub+14)+XA;
- const X=i=>L+(i-V.a)/(span||1)*(W-L-R);let g="",panes=[],y0=T,notes=[];
- const boxPer=span>180?12:3,candPer=span>72?3:1;
- units.forEach((u,pi)=>{const h=pi?sub:main,ds=data.filter(d=>d.u===u),vals=[],core=[];
-  for(const d of ds){if(d.S){const inV=d.S.v.filter(x=>x.i>=V.a&&x.i<=V.b+1);const ps=inV.map(x=>x.p).sort((x,y)=>x-y);if(ps.length){core.push(anQt(ps,.03),anQt(ps,.97));}if(d.S.st)notes.push(`${anName(d.s)}: ${d.S.st}`);continue;}
-   d.v.forEach((x,j)=>{const i=a+j;if(i<V.a-1||i>V.b+1||x==null)return;(Array.isArray(x)?x:[x]).forEach(q=>vals.push(q));});}
-  let mn=Math.min(...vals,...core),mx=Math.max(...vals,...core);
-  if(!isFinite(mn)){mn=0;mx=1;}const lg=AN.sc==="log"&&(u==="$"||u==="r")&&mn>0;if(u==="n"||(u==="%"&&mn>0))mn=Math.min(mn,0);
-  const pad=(mx-mn)*.08||Math.abs(mx)*.1||1;if(!lg){mn-=mn===0?0:pad;mx+=pad;}
-  const f=lg?(v=>Math.log(v)):(v=>v),fa=f(lg?mn*.95:mn),fb=f(lg?mx*1.05:mx),Y=v=>y0+h-(f(v)-fa)/(fb-fa||1)*h,inv=y=>{const q=fa+(y0+h-y)/h*(fb-fa);return lg?Math.exp(q):q;};
-  g+=`<rect x="${L}" y="${y0}" width="${W-L-R}" height="${h}" fill="#fff" stroke="#D5DAD2"/>`;
-  for(let k=0;k<=4;k++){const t=lg?Math.exp(fa+(fb-fa)*k/4):mn+(mx-mn)*k/4,yy=Y(t);g+=`<line x1="${L}" x2="${W-R}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="#EEF1EC"/><text x="${W-R+6}" y="${(yy+4).toFixed(1)}" class="ay">${anFmt(u,t)}</text>`;}
-  if(u==="i"){const base=AN.sc==="idx"?100:0;if(base>=mn&&base<=mx)g+=`<line x1="${L}" x2="${W-R}" y1="${Y(base).toFixed(1)}" y2="${Y(base).toFixed(1)}" stroke="#9DB0A6" stroke-dasharray="4 3"/>`;}
-  if(u==="%"&&mn<0&&mx>0)g+=`<line x1="${L}" x2="${W-R}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" stroke="#9DB0A6"/>`;
-  g+=`<clipPath id="anC${pi}"><rect x="${L}" y="${y0}" width="${W-L-R}" height="${h}"/></clipPath><g clip-path="url(#anC${pi})">`;
-  const nBox=ds.filter(d=>d.s.m==="box"||d.s.m==="candle").length;let kBox=0;
-  for(const d of ds){const c=d.s.c,m=d.s.m;
+// SVG styles written once with page colours, and again with resolved colours for a saved picture
+const anCss=v=>`.tv-svg text{font:500 11.5px "IBM Plex Mono",ui-monospace,monospace;fill:${v("--slate")}}.tv-svg .bg{fill:${v("--sheet")}}.tv-svg .gl{stroke:${v("--wash")}}.tv-svg .hr{stroke:${v("--hair")};fill:none}
+.tv-svg .ink{stroke:${v("--ink")}}.tv-svg .inkf{fill:${v("--ink")}}.tv-svg .mist{stroke:${v("--mist")}}.tv-svg .gain{stroke:${v("--gain")}}.tv-svg .gainf{fill:${v("--gain")}}.tv-svg .loss{stroke:${v("--loss")}}.tv-svg .lossf{fill:${v("--loss")}}
+.tv-svg text.an{font:600 12px "IBM Plex Sans",system-ui,sans-serif;fill:${v("--ink")};paint-order:stroke;stroke:${v("--sheet")};stroke-width:3px}.tv-svg text.tr{font:600 11.5px "IBM Plex Mono",ui-monospace,monospace;paint-order:stroke;stroke:${v("--sheet")};stroke-width:3px}
+.tv-svg text.xl{fill:${v("--sheet")};font-weight:600}.tv-svg .xb{fill:${v("--ink")}}.tv-svg .hl{fill:${v("--hi")}}.tv-svg .sel{stroke:${v("--hi")}}`;
+document.head.insertAdjacentHTML("beforeend",`<style id="tvSvgCss">${anCss(n=>`var(${n})`)}</style>`);
+
+/* ---- the chart grid ---- */
+function anBuild(){const n=AN_LAYN[AN.lay]||1;while(AN.ch.length<n){const src=CH();AN.ch.push({...anCh0(src.s.map(s=>({...s}))),st:{...src.st},sc:src.sc});}if(AN.act>=n)AN.act=0;
+ const g=$("tvGridEl");g.dataset.lay=AN.lay;g.innerHTML=Array.from({length:n},(_,i)=>`<div class="tv-cell" data-ci="${i}"><svg class="tv-svg" role="img" aria-label="Chart ${i+1}"></svg><div class="tv-leg"></div><div class="tv-st" hidden></div></div>`).join("");
+ anE=[...g.children].map(cell=>({cell,svg:cell.querySelector("svg"),leg:cell.querySelector(".tv-leg"),st:cell.querySelector(".tv-st"),P:null}));}
+// one pass: every chart, then the bars and panels around them
+function anDraw(){if(!$("tvGridEl")||!MS||$("tabAnalysis").hidden)return;if(!anE.length||anE.length!==(AN_LAYN[AN.lay]||1))anBuild();
+ anE.forEach((E,ci)=>{E.cell.classList.toggle("act",ci===AN.act&&anE.length>1);try{anChart(ci);}catch(e){console.error(e);}});anTop();anSide();anRpBar();}
+function anChart(ci){const ch=AN.ch[ci],E=anE[ci],svg=E.svg,W=Math.max(240,E.cell.clientWidth),H=Math.max(220,E.cell.clientHeight),V=anRange(),span=V.b-V.a||1,lastI=anLast();
+ const a=Math.max(0,Math.floor(V.a)-1),b=Math.min(lastI,Math.ceil(V.b)+1),sc=ch.sc||"abs",L=0,R=W<480?62:76,T=0,XA=26,SEP=7,notes=[];
+ const data=ch.s.filter(s=>s.on).map(s=>{const sl=AN_MET[s.m].sl,u=anUnit(s,sc);let v=[],raw=[],S=null;
+   if(sl){S=anSalesV(s);if(S.st)notes.push(`${anName(s)}: ${S.st}`);}
+   else{for(let i=a;i<=b;i++)raw.push(anGet(s,i));v=raw;
+    if(u==="i"){const b0=raw.find((x,j)=>x!=null&&a+j>=V.a);v=raw.map(x=>x==null||!b0?null:sc==="idx"?x/b0*100:(x/b0-1)*100);}}
+   return{s,v,raw,S,u,sparse:s.k==="a"&&s.m==="sales"};});
+ // studies in their own panes take the main series' own values from the start, so "the high" is the high so far, not in view
+ const main=data.find(d=>!d.S&&d.s.m!=="band"&&d.s.m!=="yoy"&&d.s.m!=="yield"),xs=[];
+ if(main&&(ch.st.dd||ch.st.cg)){const full=[];for(let i=0;i<=b;i++)full.push(anGet(main.s,i));
+  if(ch.st.dd){let hi=-Infinity;const v=[];full.forEach((x,i)=>{if(x!=null)hi=Math.max(hi,x);if(i>=a)v.push(x==null||!isFinite(hi)?null:x/hi-1);});xs.push({s:{...main.s,m:"_dd",c:main.s.c},v,u:"dd",study:"dd"});}
+  if(ch.st.cg){const v=[];for(let i=a;i<=b;i++){const x=full[i],y=full[i-60];v.push(x&&y&&i>=60?Math.pow(x/y,1/5)-1:null);}xs.push({s:{...main.s,m:"_cg",c:main.s.c},v,u:"cg",study:"cg"});}}
+ const all=data.concat(xs),order=sc==="idx"||sc==="pct"?["i","$","r","n","%","dd","cg"]:["$","i","r","n","%","dd","cg"],units=order.filter(u=>all.some(d=>d.u===u));if(!units.length)units.push("$");
+ const avail=H-T-XA-(units.length-1)*SEP,w=units.map((u,j)=>ch.ph[u]||(j?1.1:3)),ws=w.reduce((x,y)=>x+y,0);
+ const X=i=>L+(i-V.a)/span*(W-L-R),boxPer=span>180?12:3,candPer=span>72?3:1;let g=`<rect class="bg" x="0" y="0" width="${W}" height="${H}"/>`,yC=T;const panes=[];
+ // years (or quarters, zoomed in) down every pane
+ const pxm=(W-L-R)/span,stY=[1,2,5,10].find(k=>k*12*pxm>=64)||10,mq=pxm*3>=46,xt=[];
+ for(let i=Math.ceil(V.a);i<=Math.floor(V.b)&&i<=TL;i++){const[yr,mo]=MS.m[i].split("-");if(mo==="01"&&+yr%stY===0)xt.push([i,yr,1]);else if(mq&&(mo==="04"||mo==="07"||mo==="10"))xt.push([i,MON[+mo-1],0]);}
+ units.forEach((u,pi)=>{const y0=yC,h=Math.max(40,avail*w[pi]/ws),ds=all.filter(d=>d.u===u),vals=[];
+  for(const d of ds){if(d.S){const ps=d.S.v.filter(x=>x.i>=V.a&&x.i<=V.b+1).map(x=>x.p).sort((x,y)=>x-y);if(ps.length)vals.push(anQt(ps,.03),anQt(ps,.97));continue;}
+   d.v.forEach((x,j)=>{const i=a+j;if(i<V.a-1||i>V.b+1||x==null)return;(Array.isArray(x)?x:[x]).forEach(q=>vals.push(q));});
+   if(d.s.sty==="col"&&!d.S)vals.push(0);}
+  let mn=Math.min(...vals),mx=Math.max(...vals);if(!isFinite(mn)){mn=0;mx=1;}
+  const lg=sc==="log"&&(u==="$"||u==="r")&&mn>0;if(u==="n"&&!lg)mn=Math.min(mn,0);
+  const pad=(mx-mn)*.08||Math.abs(mx)*.1||1;if(lg){mn*=.96;mx*=1.04;}else{if(mn!==0)mn-=pad;mx+=pad;}
+  const man=ch.ys[u];if(man&&man[2]===sc){mn=man[0];mx=man[1];}
+  const f=lg?Math.log:(v=>v),fa=f(mn),fb=f(mx),Y=v=>y0+h-(f(v)-fa)/(fb-fa||1)*h,inv=y=>{const q=fa+(y0+h-y)/h*(fb-fa);return lg?Math.exp(q):q;};
+  g+=`<line class="hr" x1="${W-R}" x2="${W-R}" y1="${y0}" y2="${y0+h}"/>`;
+  for(const t of xt)g+=`<line class="gl" x1="${X(t[0]).toFixed(1)}" x2="${X(t[0]).toFixed(1)}" y1="${y0}" y2="${y0+h}"/>`;
+  const tk=[];for(const t of anTicks(mn,mx,lg,Math.max(2,Math.round(h/78)))){const yy=Y(t);if(yy<y0+6||yy>y0+h-4)continue;tk.push(yy);g+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}"/><text x="${W-R+7}" y="${(yy+4).toFixed(1)}" data-tk="${yy.toFixed(1)}">${anFmt(u,t,sc,1)}</text>`;}
+  const base=u==="i"?(sc==="idx"?100:0):(u==="%"||u==="dd"||u==="cg")?0:null;if(base!=null&&base>=mn&&base<=mx)g+=`<line class="mist" x1="${L}" x2="${W-R}" y1="${Y(base).toFixed(1)}" y2="${Y(base).toFixed(1)}" stroke-dasharray="4 3"/>`;
+  g+=`<clipPath id="tvC${ci}_${pi}"><rect x="${L}" y="${y0}" width="${W-L-R}" height="${h}"/></clipPath><g clip-path="url(#tvC${ci}_${pi})">`;
+  const nBox=ds.filter(d=>d.s.m==="box"||d.s.m==="candle").length;let kBox=0;const tags=[];
+  for(const d of ds){const c=anC(d.s.c),m=d.s.m,sty=d.s.sty||"line";
    if(m==="dots"){const inV=d.S.v.filter(x=>x.i>=V.a-1&&x.i<=V.b+1),step=Math.max(1,Math.ceil(inV.length/14000)),r=inV.length>4000?1.6:2.4;let dd="";
     for(let j=0;j<inV.length;j+=step){const x=inV[j];dd+=`M${X(x.i).toFixed(1)},${Y(x.p).toFixed(1)}h0`;}g+=`<path d="${dd}" stroke="${c}" stroke-opacity="${inV.length>3000?.35:.6}" stroke-width="${r*2}" stroke-linecap="round" fill="none"/>`;
     if(step>1)notes.push(`${anName(d.s)}: showing 1 in ${step} of ${inV.length.toLocaleString("en-AU")} sales`);continue;}
-   if(m==="box"||m==="candle"){const per=m==="box"?boxPer:candPer,G=anGroups(d.S.v,per,V.a,V.b),pw=(W-L-R)/(span||1)*per,bw=Math.max(2,Math.min(40,pw*.7/nBox)),off=(kBox-(nBox-1)/2)*bw;kBox++;
+   if(m==="box"||m==="candle"){const per=m==="box"?boxPer:candPer,G=anGroups(d.S.v,per,V.a,V.b),pw=(W-L-R)/span*per,bw=Math.max(2,Math.min(40,pw*.7/nBox)),off=(kBox-(nBox-1)/2)*bw;kBox++;
     for(const[k,arr]of G){const xm=X(k*per+per/2)+off;
      if(m==="box"){if(arr.length<5)continue;const ps=arr.map(x=>x.p).sort((x,y)=>x-y),q=[.1,.25,.5,.75,.9].map(t=>anQt(ps,t));
       g+=`<line x1="${xm.toFixed(1)}" x2="${xm.toFixed(1)}" y1="${Y(q[4]).toFixed(1)}" y2="${Y(q[0]).toFixed(1)}" stroke="${c}"/><rect x="${(xm-bw/2+.5).toFixed(1)}" y="${Y(q[3]).toFixed(1)}" width="${Math.max(1,bw-1).toFixed(1)}" height="${Math.max(1,Y(q[1])-Y(q[3])).toFixed(1)}" fill="${c}" fill-opacity=".22" stroke="${c}"/><line x1="${(xm-bw/2+.5).toFixed(1)}" x2="${(xm+bw/2-.5).toFixed(1)}" y1="${Y(q[2]).toFixed(1)}" y2="${Y(q[2]).toFixed(1)}" stroke="${c}" stroke-width="2.2"/>`;}
-     else{if(arr.length<2)continue;const o=arr[0].p,cl=arr[arr.length-1].p,hi=Math.max(...arr.map(x=>x.p)),lo=Math.min(...arr.map(x=>x.p)),col=cl>=o?"#167A49":"#C2372B";
-      g+=`<line x1="${xm.toFixed(1)}" x2="${xm.toFixed(1)}" y1="${Y(hi).toFixed(1)}" y2="${Y(lo).toFixed(1)}" stroke="${col}"/><rect x="${(xm-bw/2+.5).toFixed(1)}" y="${Y(Math.max(o,cl)).toFixed(1)}" width="${Math.max(1,bw-1).toFixed(1)}" height="${Math.max(1,Math.abs(Y(o)-Y(cl))).toFixed(1)}" fill="${col}" class="cdl"/>`;}}
+     else{if(arr.length<2)continue;const o=arr[0].p,cl=arr[arr.length-1].p,hi=Math.max(...arr.map(x=>x.p)),lo=Math.min(...arr.map(x=>x.p)),k2=cl>=o?"gain":"loss";
+      g+=`<line class="${k2}" x1="${xm.toFixed(1)}" x2="${xm.toFixed(1)}" y1="${Y(hi).toFixed(1)}" y2="${Y(lo).toFixed(1)}"/><rect class="${k2}f" x="${(xm-bw/2+.5).toFixed(1)}" y="${Y(Math.max(o,cl)).toFixed(1)}" width="${Math.max(1,bw-1).toFixed(1)}" height="${Math.max(1,Math.abs(Y(o)-Y(cl))).toFixed(1)}"/>`;}}
     continue;}
    if(m==="band"){let up="",dn=[];d.v.forEach((x,j)=>{if(!x)return;const i=a+j;up+=(up?"L":"M")+X(i).toFixed(1)+","+Y(x[1]).toFixed(1);dn.push("L"+X(i).toFixed(1)+","+Y(x[0]).toFixed(1));});
     if(up)g+=`<path d="${up}${dn.reverse().join("")}Z" fill="${c}" fill-opacity=".14" stroke="${c}" stroke-opacity=".35" stroke-width="1"/>`;continue;}
-   let p="",pen=false;d.v.forEach((x,j)=>{const i=a+j;if(x==null){if(!d.sparse)pen=false;return;}p+=(pen?"L":"M")+X(i).toFixed(1)+","+Y(x).toFixed(1);pen=true;});
-   g+=`<path d="${p}" fill="none" stroke="${c}" stroke-width="${m==="sales"&&u!=="i"?1.6:2.2}" stroke-linejoin="round"/>`;
-   const pts=d.v.map((x,j)=>[a+j,x]).filter(z=>z[1]!=null&&z[0]>=V.a&&z[0]<=V.b);
-   if(AN.st.ma&&pts.length>12){let q="";const w=12;for(let k=w-1;k<pts.length;k++){let t=0;for(let z=k-w+1;z<=k;z++)t+=pts[z][1];q+=(q?"L":"M")+X(pts[k][0]).toFixed(1)+","+Y(t/w).toFixed(1);}g+=`<path d="${q}" fill="none" stroke="${c}" stroke-width="1.4" stroke-opacity=".75" stroke-dasharray="2 3"/>`;}
-   if(AN.st.trend){const tr=anTrend(pts,u!=="%"&&u!=="i"||AN.sc==="idx");if(tr){const x0=pts[0][0],x1=pts[pts.length-1][0],seg_=fn=>`M${X(x0).toFixed(1)},${Y(fn(x0)).toFixed(1)}L${X(x1).toFixed(1)},${Y(fn(x1)).toFixed(1)}`;
-     const hi=tr.band(2),lo=tr.band(-2);g+=`<path d="M${X(x0).toFixed(1)},${Y(hi(x0)).toFixed(1)}L${X(x1).toFixed(1)},${Y(hi(x1)).toFixed(1)}L${X(x1).toFixed(1)},${Y(lo(x1)).toFixed(1)}L${X(x0).toFixed(1)},${Y(lo(x0)).toFixed(1)}Z" fill="${c}" fill-opacity=".06"/><path d="${seg_(tr.f)}" stroke="${c}" stroke-width="1.4" stroke-dasharray="7 4" fill="none"/>`;
-     if(u!=="%"&&!(u==="i"&&AN.sc==="pct"))g+=`<text x="${(X(x1)-6).toFixed(1)}" y="${(Y(tr.f(x1))-8).toFixed(1)}" text-anchor="end" class="atr" style="fill:${c}">trend ${tr.pa>=0?"+":""}${pct(tr.pa,1)} a year</text>`;}}
-   const lj=pts[pts.length-1];if(lj){const yy=Y(lj[1]);g+=`<rect x="${W-R+1}" y="${(yy-9).toFixed(1)}" width="${R-3}" height="18" rx="3" fill="${c}"/><text x="${W-R+6}" y="${(yy+4).toFixed(1)}" class="al">${anFmt(u,lj[1])}</text>`;}}
-  g+=`</g><text x="${L+8}" y="${y0+16}" class="ap">${AN_PANE[u]}${u==="i"?(AN.sc==="idx"?" (100 at the left edge)":" (% since the left edge)"):""}</text>`;
-  panes.push({u,y0,h,Y,inv,ds});y0+=h+14;});
- // years along the bottom
- const pxy=(W-L-R)/Math.max(span/12,.1),st=[1,2,5,10].find(k=>k*pxy>=56)||10,yb=y0-14;
- for(let i=Math.ceil(V.a);i<=V.b;i++){const[yr,mo]=MS.m[i].split("-");if(mo==="01"&&+yr%st===0)g+=`<line x1="${X(i).toFixed(1)}" x2="${X(i).toFixed(1)}" y1="${T}" y2="${yb}" stroke="#EEF1EC"/><text x="${X(i).toFixed(1)}" y="${yb+18}" class="ax" text-anchor="middle">${yr}</text>`;}
- svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width",W);svg.setAttribute("height",H);svg.innerHTML=g+`<g id="anDr"></g><g id="anX"></g>`;
- svg.__an={X,panes,L,R,W,T,yb,V,a,data,span,boxPer,candPer};anDrawings();anCross();anTable(data,a);
- $("anNote").textContent=notes.join(" · ");$("anNote").hidden=!notes.length;}
-// drawings: kept in data terms (month, value) for the pane with that unit
-function anDrawings(){const svg=$("anSvg"),P=svg&&svg.__an,g=$("anDr");if(!P||!g)return;const list=AN.dr.concat(anTmp?[anTmp]:[]);let h="";
- list.forEach((d,k)=>{const pn=P.panes.find(p=>p.u===d.u);if(!pn)return;const x1=P.X(d.i1),y1=pn.Y(d.v1),col="#D2FF3A",ink="#0E1A16",del=k<AN.dr.length?` data-dr="${k}"`:"";
-  if(d.t==="h"){h+=`<g${del} class="adr"><line x1="${P.L}" x2="${P.W-P.R}" y1="${y1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="${ink}" stroke-dasharray="6 4" stroke-width="1.4"/><rect x="${P.W-P.R+1}" y="${(y1-9).toFixed(1)}" width="${P.R-3}" height="18" rx="3" fill="${ink}"/><text x="${P.W-P.R+6}" y="${(y1+4).toFixed(1)}" class="al">${anFmt(d.u,d.v1)}</text></g>`;return;}
-  if(d.t==="n"){h+=`<g${del} class="adr"><circle cx="${x1.toFixed(1)}" cy="${y1.toFixed(1)}" r="4" fill="${ink}"/><text x="${(x1+8).toFixed(1)}" y="${(y1-6).toFixed(1)}" class="anote">${esc(d.txt||"")}</text></g>`;return;}
-  const x2=P.X(d.i2),y2=pn.Y(d.v2),ch=d.u==="%"?null:d.v2/d.v1-1,mo=Math.abs(d.i2-d.i1),pa=ch!=null&&mo>=6&&d.v1>0&&d.v2>0?Math.pow(d.v2/d.v1,12/mo)-1:null;
-  const lab=`${ch==null?(d.v2-d.v1>=0?"+":"")+((d.v2-d.v1)*100).toFixed(1)+" pts":(ch>=0?"+":"")+pct(ch,1)} · ${anSpan(mo)}${pa!=null?` · ${pa>=0?"+":""}${pct(pa,1)} a year`:""}`;
-  if(d.t==="m")h+=`<g${del} class="adr"><rect x="${Math.min(x1,x2).toFixed(1)}" y="${Math.min(y1,y2).toFixed(1)}" width="${Math.abs(x2-x1).toFixed(1)}" height="${Math.abs(y2-y1).toFixed(1)}" fill="${ch!=null&&ch<0?"#C2372B":"#167A49"}" fill-opacity=".12" stroke="${ch!=null&&ch<0?"#C2372B":"#167A49"}" stroke-dasharray="3 3"/>`;
-  else h+=`<g${del} class="adr"><line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${ink}" stroke-width="1.8"/><circle cx="${x1.toFixed(1)}" cy="${y1.toFixed(1)}" r="3" fill="${col}" stroke="${ink}"/><circle cx="${x2.toFixed(1)}" cy="${y2.toFixed(1)}" r="3" fill="${col}" stroke="${ink}"/>`;
-  const tx=Math.max(x1,x2),ty=Math.min(y1,y2)-8;h+=`<text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="end" class="anote">${lab}</text></g>`;});
+   const pts=d.v.map((x,j)=>[a+j,x]).filter(z=>z[1]!=null);
+   if(sty==="col"){const per=d.sparse?3:1,bw=Math.max(1,Math.min(28,(W-L-R)/span*per*.72)),y0b=Y(Math.max(mn,Math.min(mx,base??(lg?mn:0))));let p="";
+    for(const[i,x]of pts)p+=`M${X(d.sparse?i-1:i).toFixed(1)},${y0b.toFixed(1)}V${Y(x).toFixed(1)}`;g+=`<path d="${p}" stroke="${c}" stroke-opacity="${d.study?.5:.55}" stroke-width="${bw.toFixed(1)}" fill="none"/>`;}
+   else{let p="",pen=false,last=null;d.v.forEach((x,j)=>{const i=a+j;if(x==null){if(!d.sparse)pen=false;return;}const xx=X(i).toFixed(1),yy=Y(x).toFixed(1);p+=pen?(sty==="step"?`H${xx}V${yy}`:`L${xx},${yy}`):`M${xx},${yy}`;pen=true;last=[xx,yy];});
+    if(p&&(sty==="area"||d.study==="dd")){const fst=pts[0],lst=pts[pts.length-1],yb2=d.study==="dd"?Y(0):y0+h;g+=`<path d="${p}L${X(lst[0]).toFixed(1)},${yb2.toFixed(1)}L${X(fst[0]).toFixed(1)},${yb2.toFixed(1)}Z" fill="${d.study==="dd"?"var(--loss)":c}" fill-opacity="${d.study==="dd"?.12:.13}" stroke="none"/>`;}
+    if(p&&sty==="base"&&pts.length){const bv=(pts.find(z=>z[0]>=V.a)||pts[0])[1],by=Y(bv).toFixed(1),fst=pts[0],lst=pts[pts.length-1];
+     g+=`<clipPath id="tvB${ci}_${pi}u"><rect x="${L}" y="${y0}" width="${W}" height="${Math.max(0,by-y0)}"/></clipPath><clipPath id="tvB${ci}_${pi}d"><rect x="${L}" y="${by}" width="${W}" height="${Math.max(0,y0+h-by)}"/></clipPath>`;
+     const ar=`${p}L${X(lst[0]).toFixed(1)},${by}L${X(fst[0]).toFixed(1)},${by}Z`;
+     g+=`<g clip-path="url(#tvB${ci}_${pi}u)"><path d="${ar}" class="gainf" fill-opacity=".14"/><path d="${p}" class="gain" fill="none" stroke-width="2"/></g><g clip-path="url(#tvB${ci}_${pi}d)"><path d="${ar}" class="lossf" fill-opacity=".14"/><path d="${p}" class="loss" fill="none" stroke-width="2"/></g><line class="mist" x1="${L}" x2="${W-R}" y1="${by}" y2="${by}" stroke-dasharray="2 3"/>`;}
+    else if(p)g+=`<path d="${p}" fill="none" stroke="${d.study==="dd"?"var(--loss)":c}" stroke-width="${d.study?1.6:2}" stroke-linejoin="round"/>`;}
+   const pv=pts.filter(z=>z[0]>=V.a&&z[0]<=V.b);
+   if(!d.study&&ch.st.ma&&pv.length>12){let q="";const wn=12;for(let k=wn-1;k<pv.length;k++){let t=0;for(let z=k-wn+1;z<=k;z++)t+=pv[z][1];q+=(q?"L":"M")+X(pv[k][0]).toFixed(1)+","+Y(t/wn).toFixed(1);}g+=`<path d="${q}" fill="none" stroke="${c}" stroke-width="1.4" stroke-opacity=".8" stroke-dasharray="2 3"/>`;}
+   if(!d.study&&ch.st.trend&&u!=="n"){const tr=anTrend(pv,u!=="%"&&u!=="i"||sc==="idx");d.tr=tr;if(tr){const x0=pv[0][0],x1=pv[pv.length-1][0],sg=fn=>`M${X(x0).toFixed(1)},${Y(fn(x0)).toFixed(1)}L${X(x1).toFixed(1)},${Y(fn(x1)).toFixed(1)}`;
+     const hi=tr.band(2),lo=tr.band(-2);g+=`<path d="M${X(x0).toFixed(1)},${Y(hi(x0)).toFixed(1)}L${X(x1).toFixed(1)},${Y(hi(x1)).toFixed(1)}L${X(x1).toFixed(1)},${Y(lo(x1)).toFixed(1)}L${X(x0).toFixed(1)},${Y(lo(x0)).toFixed(1)}Z" fill="${c}" fill-opacity=".06"/><path d="${sg(tr.f)}" stroke="${c}" stroke-width="1.4" stroke-dasharray="7 4" fill="none"/>`;}}
+   const lj=pv[pv.length-1];if(lj){const yy=Y(lj[1]);if(yy>=y0-2&&yy<=y0+h+2){tags.push([yy,d.study==="dd"?"#C2372B":c,anFmt(u,lj[1],sc)]);g+=`<line x1="${X(lj[0]).toFixed(1)}" x2="${W-R}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="${c}" stroke-opacity=".5" stroke-dasharray="1 3"/>`;}}}
+  g+=`</g>`;
+  // last-value tags on the scale, nudged apart so they don't overlap
+  tags.sort((p,q)=>p[0]-q[0]);for(let k=1;k<tags.length;k++)if(tags[k][0]-tags[k-1][0]<19)tags[k][0]=tags[k-1][0]+19;
+  if(tags.length)g=g.replace(/<text([^>]*) data-tk="([\d.]+)">[^<]*<\/text>/g,(m0,at,y)=>tags.some(tg=>Math.abs(tg[0]-y)<14)?"":m0);
+  for(const[yy,c,t]of tags)g+=`<rect x="${W-R+1}" y="${(yy-9).toFixed(1)}" width="${R-3}" height="18" rx="3" fill="${c}"/><text x="${W-R+7}" y="${(yy+4).toFixed(1)}" style="fill:${anOn(c)};font-weight:600">${t}</text>`;
+  panes.push({u,y0,h,Y,inv,ds,lg,mn,mx});yC+=h+SEP;});
+ const yb=yC-SEP;g+=`<line class="hr" x1="0" x2="${W}" y1="${yb}" y2="${yb}"/>`;
+ for(let k=0;k<panes.length-1;k++){const sy=panes[k].y0+panes[k].h+SEP/2;g+=`<line class="hr" x1="0" x2="${W}" y1="${sy}" y2="${sy}" data-sep="${k}"/>`;}
+ for(const t of xt)g+=`<text x="${X(t[0]).toFixed(1)}" y="${yb+17}" text-anchor="middle"${t[2]?' style="font-weight:600"':""}>${t[1]}</text>`;
+ if(anRp.on&&anRp.i!=null)g+=`<line x1="${X(anRp.i+.5).toFixed(1)}" x2="${X(anRp.i+.5).toFixed(1)}" y1="0" y2="${yb}" stroke="#2F6FB0" stroke-width="1.5"/>`;
+ svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width",W);svg.setAttribute("height",H);svg.innerHTML=g+`<g class="tv-dr"></g><g class="tv-x"></g>`;
+ E.P={X,ix:x=>V.a+(x-L)/(W-L-R)*span,panes,L,R,W,H,T,yb,V,a,b,data,all,span,boxPer,candPer,sc,SEP};
+ E.st.textContent=notes.join(" · ");E.st.hidden=!notes.length;anDrawings(ci);anCross(ci);}
+
+/* ---- drawings, kept in data terms (month, value) for the pane with that unit ---- */
+function anDrawings(ci){const E=anE[ci],P=E&&E.P,ch=AN.ch[ci];if(!P)return;const g=E.svg.querySelector(".tv-dr");if(AN.hide){g.innerHTML="";return;}
+ const list=ch.dr.map((d,k)=>[d,k]);if(anTmp&&anTmp.ci===ci)list.push([anTmp,-1]);let h="";
+ for(const[d,k]of list){if(d.hid)continue;const pn=P.panes.find(p=>p.u===d.u);if(!pn&&d.t!=="v")continue;const sel=anSel&&anSel.ci===ci&&anSel.k===k,id=k>=0?` data-dr="${k}"`:"",hit=s=>`<path d="${s}" stroke="transparent" stroke-width="12" fill="none" class="hit"/>`;
+  const x1=P.X(d.i1),y1=pn?pn.Y(d.v1):0,hd=(x,y,n)=>sel&&!AN.lock?`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.5" class="hl ink" stroke-width="1.6" data-hd="${n}"/>`:"";let s="";
+  if(d.t==="h"){s+=hit(`M${P.L},${y1}H${P.W-P.R}`)+`<line x1="${P.L}" x2="${P.W-P.R}" y1="${y1.toFixed(1)}" y2="${y1.toFixed(1)}" class="ink" stroke-dasharray="6 4" stroke-width="${sel?2:1.4}"/><rect x="${P.W-P.R+1}" y="${(y1-9).toFixed(1)}" width="${P.R-3}" height="18" rx="3" class="xb"/><text x="${P.W-P.R+7}" y="${(y1+4).toFixed(1)}" class="xl">${anFmt(d.u,d.v1,P.sc)}</text>`+hd(Math.max(P.L+20,Math.min(P.W-P.R-20,P.X((P.V.a+P.V.b)/2))),y1,1);}
+  else if(d.t==="v"){s+=hit(`M${x1},0V${P.yb}`)+`<line x1="${x1.toFixed(1)}" x2="${x1.toFixed(1)}" y1="0" y2="${P.yb}" class="ink" stroke-dasharray="6 4" stroke-width="${sel?2:1.4}"/><rect x="${(x1-36).toFixed(1)}" y="${P.yb+4}" width="72" height="18" rx="3" class="xb"/><text x="${x1.toFixed(1)}" y="${P.yb+17}" text-anchor="middle" class="xl">${mlabel(Math.max(0,Math.min(TL,Math.round(d.i1))))}</text>`+hd(x1,P.yb/2,1);}
+  else if(d.t==="n"){s+=`<circle cx="${x1.toFixed(1)}" cy="${y1.toFixed(1)}" r="4" class="inkf"/><text x="${(x1+8).toFixed(1)}" y="${(y1-6).toFixed(1)}" class="an">${esc(d.txt||"")}</text>`+hit(`M${x1-4},${y1}h${8+7*(d.txt||"").length}`)+hd(x1,y1,1);}
+  else{const x2=P.X(d.i2),y2=pn.Y(d.v2),pc=d.u==="%"||d.u==="dd"||d.u==="cg"||(d.u==="i"&&P.sc==="pct"),ch2=pc?null:d.v2/d.v1-1,mo=Math.abs(d.i2-d.i1),pa=ch2!=null&&mo>=6&&d.v1>0&&d.v2>0?Math.pow(d.v2/d.v1,12/mo)-1:null;
+   const lab=`${ch2==null?(d.v2-d.v1>=0?"+":"")+((d.v2-d.v1)*(d.u==="i"?1:100)).toFixed(1)+" pts":(ch2>=0?"+":"")+pct(ch2,1)} · ${anSpan(mo)}${pa!=null?` · ${pa>=0?"+":""}${pct(pa,1)} a year`:""}`;
+   if(d.t==="m"||d.t==="r"){const rx=Math.min(x1,x2),ry=Math.min(y1,y2),rw=Math.abs(x2-x1),rh=Math.abs(y2-y1),up=ch2==null?d.v2>=d.v1:ch2>=0;
+    s+=d.t==="m"?`<rect x="${rx.toFixed(1)}" y="${ry.toFixed(1)}" width="${rw.toFixed(1)}" height="${rh.toFixed(1)}" class="${up?"gainf":"lossf"}" fill-opacity=".12"/><rect x="${rx.toFixed(1)}" y="${ry.toFixed(1)}" width="${rw.toFixed(1)}" height="${rh.toFixed(1)}" fill="none" class="${up?"gain":"loss"}" stroke-dasharray="3 3"/><path d="M${x1.toFixed(1)},${y1.toFixed(1)}L${x2.toFixed(1)},${y2.toFixed(1)}" class="${up?"gain":"loss"}" stroke-width="1.2" marker-end=""/>`
+     :`<rect x="${rx.toFixed(1)}" y="${ry.toFixed(1)}" width="${rw.toFixed(1)}" height="${rh.toFixed(1)}" class="hl ink" fill-opacity=".22" stroke-width="${sel?2:1.2}"/>`;
+    s+=hit(`M${rx},${ry}h${rw}v${rh}h${-rw}Z`);if(d.t==="m"||sel)s+=`<text x="${(rx+rw/2).toFixed(1)}" y="${(ry-7).toFixed(1)}" text-anchor="middle" class="an">${lab}</text>`;}
+   else{let ex=x2,ey=y2;if(d.t==="ray"&&x2!==x1){ex=P.W-P.R;ey=y1+(y2-y1)*(ex-x1)/(x2-x1);}
+    s+=hit(`M${x1},${y1}L${ex},${ey}`)+`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" class="ink" stroke-width="${sel?2.4:1.8}"/>`;
+    s+=`<text x="${Math.max(x1,x2).toFixed(1)}" y="${(Math.min(y1,y2)-8).toFixed(1)}" text-anchor="end" class="an">${lab}</text>`;}
+   s+=hd(x1,y1,1)+hd(x2,y2,2);}
+  h+=`<g class="adr"${id}>${s}</g>`;}
  g.innerHTML=h;}
-// crosshair: a line through every pane and each series' value at that month, top left of its pane
-function anCross(){const svg=$("anSvg"),P=svg&&svg.__an,g=$("anX");if(!P||!g)return;const i=anHov==null?Math.round(P.V.b):Math.max(Math.ceil(P.V.a),Math.min(Math.floor(P.V.b),anHov));
- let h="";if(anHov!=null)h+=`<line x1="${P.X(i).toFixed(1)}" x2="${P.X(i).toFixed(1)}" y1="${P.T}" y2="${P.yb}" stroke="#0E1A16" stroke-opacity=".4" stroke-dasharray="3 3"/><rect x="${(P.X(i)-36).toFixed(1)}" y="${P.yb+4}" width="72" height="18" rx="3" fill="#0E1A16"/><text x="${P.X(i).toFixed(1)}" y="${P.yb+17}" class="axh" text-anchor="middle">${mlabel(i)}</text>`;
- for(const pn of P.panes){let x=P.L+8,y=pn.y0+36;for(const d of pn.ds){const m=d.s.m;let t;
-   if(d.S){const per=m==="box"?P.boxPer:m==="candle"?P.candPer:1,k=Math.floor(i/per),arr=d.S.v.filter(z=>Math.floor(Math.floor(z.i)/per)===k),ps=arr.map(z=>z.p).sort((u,v)=>u-v),lab=per===12?MS.m[i].slice(0,4):per===3?qOf(i):mlabel(i);
-    t=!arr.length?`${anName(d.s)} · no sales in ${lab}`:m==="candle"?`${anName(d.s)} ${lab} · first ${money(arr[0].p)} · high ${money(ps[ps.length-1])} · low ${money(ps[0])} · last ${money(arr[arr.length-1].p)} (${arr.length})`
-     :m==="box"?`${anName(d.s)} ${lab} · median ${money(anQt(ps,.5))} · middle half ${money(anQt(ps,.25))} to ${money(anQt(ps,.75))} · ${arr.length} sales`:`${anName(d.s)} ${lab} · ${arr.length} sale${arr.length>1?"s":""}, median ${money(anQt(ps,.5))}`;}
-   else{let v=d.v[i-P.a];if(v==null&&d.sparse)for(let q=1;q<=3&&v==null&&i-P.a-q>=0;q++)v=d.v[i-P.a-q];
-    t=`${anName(d.s)}${m==="price"||pn.u==="$"&&m!=="band"?"":" · "+AN_MET[m].t.toLowerCase()} ${Array.isArray(v)?anFmt("$",v[0])+" to "+anFmt("$",v[1]):anFmt(pn.u,v)}`;
-    if(anHov!=null&&v!=null&&!Array.isArray(v))h+=`<circle cx="${P.X(i).toFixed(1)}" cy="${pn.Y(v).toFixed(1)}" r="3.5" fill="${d.s.c}" stroke="#fff" stroke-width="1.5"/>`;}
-   h+=`<circle cx="${x+4}" cy="${y-4}" r="4" fill="${d.s.c}"/><text x="${x+12}" y="${y}" class="av">${esc(t)}</text>`;y+=17;}}
- g.innerHTML=h;}
-// the table: each series over the months in view
-function anTable(data,a){const rows=AN.s.map((s,si)=>{const d=data.find(x=>x.s===s);let cells="<td colspan=\"7\" class=\"muted\">Hidden</td>";
-  if(d){const u=AN_MET[s.m].u,pc=u==="%",raw=i=>{const x=anVal(s,i);return Array.isArray(x)?(x[0]+x[1])/2:x;},V=anRange(),pts=[];
-   for(let i=Math.ceil(V.a);i<=Math.floor(V.b);i++){const r=raw(i);if(r!=null)pts.push([i,r]);}
-   if(pts.length<2)cells=`<td colspan="7" class="muted">${d.S&&d.S.st?esc(d.S.st):"No data in this period"}</td>`;
-   else{const f=pts[0],l=pts[pts.length-1],v0=f[1],v1=l[1],yrs=(l[0]-f[0])/12;let hi=-Infinity,lo=Infinity;pts.forEach(z=>{hi=Math.max(hi,z[1]);lo=Math.min(lo,z[1]);});
-    const ch=pc?v1-v0:v1/v0-1,pa=!pc&&yrs>=1&&v0>0&&v1>0?Math.pow(v1/v0,1/yrs)-1:null,fh=pc?v1-hi:v1/hi-1,F=x=>anFmt(u,x);
-    const sg=x=>x==null?"–":`<span class="${x>0?"pos":x<0?"neg":""}">${pc?(x>0?"+":"")+(x*100).toFixed(1)+" pts":(x>0?"+":"")+pct(x,1)}</span>`;
-    cells=`<td class="num">${F(v0)}<small>${mlabel(f[0])}</small></td><td class="num">${F(v1)}<small>${mlabel(l[0])}</small></td><td class="num">${sg(ch)}</td><td class="num">${pa==null?"–":sg(pa)}</td><td class="num">${F(hi)}</td><td class="num">${F(lo)}</td><td class="num">${sg(fh)}</td>`;}}
-  const sub=s.k==="s"&&s.m==="price"?", 12-month":s.k==="a"&&(s.m==="price"||s.m==="rent")?", 3-month":AN_MET[s.m].sl?", from each sale"+(d&&d.S?` (${d.S.v.length.toLocaleString("en-AU")} sales)`:""):"";
-  return`<tr data-i="${si}"><td><button class="an-sw" data-on="${si}" style="--c:${s.c}" aria-pressed="${!!s.on}" title="${s.on?"Hide":"Show"}"></button></td><td><b>${esc(anName(s))}</b><small>${AN_MET[s.m].t}${sub}</small></td>${cells}<td><button class="an-x" data-x="${si}" aria-label="Remove">×</button></td></tr>`;});
- $("anRows").innerHTML=rows.join("")||`<tr><td colspan="10" class="muted">Add a suburb or area above.</td></tr>`;}
-function anAdd(k,id,m=AN.met,seg=AN.seg){if(AN.s.some(s=>s.k===k&&s.id===id&&s.m===m&&s.seg===seg))return;
- const same=AN.s.find(s=>s.k===k&&s.id===id&&s.seg===seg);AN.s.push({k,id,seg,m,c:same?same.c:anNextCol(),on:1});if(AN_MET[m].sl&&!anV)AN.r=Math.min(AN.r||99,5);anSave();anDraw();}
-// search: areas first, then suburbs
-let anSg=[],anSi=-1;
-function anSuggest(q){q=q.trim().toUpperCase();if(q.length<2)return[];const ar=Object.entries(anAreas).filter(([c,n])=>n.toUpperCase().includes(q)).map(([c,n])=>({k:"a",id:c,n}));
- const su=anSubs.filter(n=>n.startsWith(q)).concat(anSubs.filter(n=>!n.startsWith(q)&&n.includes(q))).slice(0,10).map(n=>({k:"s",id:n,n:title(n)}));return ar.concat(su).slice(0,12);}
-function anRenderSugg(){const ul=$("anSugg");ul.hidden=!anSg.length;$("anFind").setAttribute("aria-expanded",!!anSg.length);
- ul.innerHTML=anSg.map((x,i)=>`<li role="option" data-i="${i}" aria-selected="${i===anSi}">${esc(x.n)}<span>${x.k==="a"?"area":"suburb"}</span></li>`).join("");}
-function anPick(x){anSg=[];anRenderSugg();if(!x)return;$("anFind").value="";anAdd(x.k,x.id);}
-{const f=$("anFind");f.addEventListener("input",()=>{anSg=anSuggest(f.value);anSi=anSg.length?0:-1;anRenderSugg();});
- f.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="ArrowUp"){if(!anSg.length)return;e.preventDefault();anSi=(anSi+(e.key==="ArrowDown"?1:-1)+anSg.length)%anSg.length;anRenderSugg();}
-  else if(e.key==="Enter"){e.preventDefault();anPick(anSg[Math.max(0,anSi)]);}else if(e.key==="Escape"){anSg=[];anRenderSugg();}});
- f.addEventListener("blur",()=>setTimeout(()=>{anSg=[];anRenderSugg();},150));
- $("anSugg").addEventListener("mousedown",e=>{const li=e.target.closest("li");if(li){e.preventDefault();anPick(anSg[+li.dataset.i]);}});}
-$("anMet").addEventListener("change",e=>{AN.met=e.target.value;anSave();});
-document.querySelectorAll("#anSeg button").forEach(b=>b.addEventListener("click",()=>{AN.seg=b.dataset.aseg;anSave();anDraw();}));
-document.querySelectorAll("#anRng button").forEach(b=>b.addEventListener("click",()=>anSetR(+b.dataset.r)));
-document.querySelectorAll("#anScale button").forEach(b=>b.addEventListener("click",()=>{AN.sc=b.dataset.sc;anSave();anDraw();}));
-$("anReset").addEventListener("click",()=>{AN=anDefault();anV=null;anSave();anFill();anDraw();});
-$("anRows").addEventListener("click",e=>{const o=e.target.closest("[data-on]"),x=e.target.closest("[data-x]");
- if(o){const s=AN.s[+o.dataset.on];s.on=s.on?0:1;anSave();anDraw();}if(x){AN.s.splice(+x.dataset.x,1);anSave();anDraw();}});
-document.querySelector(".an-presets").addEventListener("click",e=>{const b=e.target.closest("[data-pre]");if(!b)return;const p=b.dataset.pre,sg=AN.seg;
- const S=(id,m,c,seg=sg,k="a")=>({k,id,seg,m,c,on:1});
- AN.s=p==="sr"?[S("syd","price",AN_COL[0]),S("reg","price",AN_COL[1]),S("syd","sales",AN_COL[0]),S("reg","sales",AN_COL[1])]
-  :p==="hu"?[S("syd","price",AN_COL[0],"house"),S("syd","price",AN_COL[2],"unit"),S("syd","yoy",AN_COL[0],"house"),S("syd","yoy",AN_COL[2],"unit")]
-  :p==="pr"?[S("syd","price",AN_COL[0]),S("syd","rent",AN_COL[4]),S("syd","yield",AN_COL[3])]
-  :p==="ar"?["syd","ncl","cc","ill","hun","nr"].filter(c=>anAreas[c]).map((c,i)=>S(c,"price",AN_COL[i]))
-  :p==="sp"?(()=>{const n=sel||"PARRAMATTA";return[S(n,"dots",AN_COL[1],sg,"s"),S(n,"box",AN_COL[0],sg,"s")];})():[];
- if(p==="pr"){AN.sc="idx";AN.r=5;anV=null;}if(p==="ar"){AN.sc="idx";}if(p==="sp"){AN.sc="abs";AN.r=5;anV=null;}anSave();anDraw();});
-// tools: studies, drawing, filters, export, full screen
-function anFill(){const F=AN.f||{};for(const k of["pmin","pmax","lmin","lmax"]){const el=$("anF_"+k);if(el)el.value=F[k]?F[k].toLocaleString("en-AU"):"";}}
-$("anTools").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
- if(b.dataset.tool){anTool=anTool===b.dataset.tool&&b.dataset.tool!=="pan"?"pan":b.dataset.tool;anTmp=null;anDraw();}
- else if(b.dataset.st){AN.st[b.dataset.st]=!AN.st[b.dataset.st];anSave();anDraw();}
- else if(b.id==="anUndo"){AN.dr.pop();anSave();anDraw();}else if(b.id==="anClr"){AN.dr=[];anSave();anDraw();}
- else if(b.id==="anCsv")anCsv();else if(b.id==="anFull"){const s=document.querySelector(".an");try{document.fullscreenElement?document.exitFullscreen():s.requestFullscreen();}catch(x){}}});
-document.querySelectorAll("#anFilt input").forEach(el=>el.addEventListener("change",()=>{const k=el.id.slice(4),n=parseNum(el.value);AN.f=AN.f||{};if(n&&isFinite(n)&&n>0)AN.f[k]=n;else delete AN.f[k];anSC={};anSave();anFill();anDraw();}));
-$("anFiltX").addEventListener("click",()=>{AN.f={};anSC={};anSave();anFill();anDraw();});
-document.addEventListener("fullscreenchange",()=>setTimeout(anDraw,60));
-function anCsv(){const V=anRange(),vis=AN.s.filter(s=>s.on),rows=[["Month",...vis.map(s=>`${anName(s)} - ${AN_MET[s.m].t}`)]];
- for(let i=Math.ceil(V.a);i<=Math.floor(V.b);i++)rows.push([MS.m[i],...vis.map(s=>{const v=anVal(s,i);return v==null?"":Array.isArray(v)?v.join("-"):+v.toFixed(4);})]);
+// crosshair through every chart; the hovered pane also gets a level line and its value on the scale
+function anCross(ci){const E=anE[ci],P=E&&E.P;if(!P)return;const g=E.svg.querySelector(".tv-x");let h="";const hv=anHov&&(AN.sync||anHov.ci===ci)?anHov:null;
+ if(hv&&!anRp.pick){const i=Math.max(0,Math.min(anLast(),Math.round(hv.i))),x=P.X(i);h+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="0" y2="${P.yb}" class="ink" stroke-opacity=".45" stroke-dasharray="3 3"/><rect x="${(x-38).toFixed(1)}" y="${P.yb+4}" width="76" height="18" rx="3" class="xb"/><text x="${x.toFixed(1)}" y="${P.yb+17}" text-anchor="middle" class="xl">${mlabel(i)}</text>`;
+  for(const pn of P.panes)for(const d of pn.ds){if(d.S)continue;const v=d.v[i-P.a];if(v!=null&&!Array.isArray(v))h+=`<circle cx="${x.toFixed(1)}" cy="${pn.Y(v).toFixed(1)}" r="3.5" fill="${d.study==="dd"?"var(--loss)":anC(d.s.c)}" stroke="var(--sheet)" stroke-width="1.5"/>`;}
+  const pn=hv.ci===ci&&hv.y!=null&&P.panes.find(p=>hv.y>=p.y0&&hv.y<=p.y0+p.h);
+  if(pn){h+=`<line x1="${P.L}" x2="${P.W-P.R}" y1="${hv.y.toFixed(1)}" y2="${hv.y.toFixed(1)}" class="ink" stroke-opacity=".35" stroke-dasharray="3 3"/><rect x="${P.W-P.R+1}" y="${(hv.y-9).toFixed(1)}" width="${P.R-3}" height="18" rx="3" class="xb"/><text x="${P.W-P.R+7}" y="${(hv.y+4).toFixed(1)}" class="xl">${anFmt(pn.u,pn.inv(hv.y),P.sc)}</text>`;}}
+ if(anRp.pick&&hv&&hv.ci===ci){const x=P.X(Math.round(hv.i));h+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="0" y2="${P.yb}" stroke="#2F6FB0" stroke-width="2"/><rect x="${x.toFixed(1)}" y="0" width="${Math.max(0,P.W-P.R-x).toFixed(1)}" height="${P.yb}" fill="#2F6FB0" fill-opacity=".08"/>`;}
+ g.innerHTML=h;anLegend(ci);}
+
+/* ---- legend: one line per series at the top of its pane, values at the crosshair (or the latest), controls on hover ---- */
+function anLegend(ci){const E=anE[ci],P=E&&E.P,ch=AN.ch[ci];if(!P)return;const hv=anHov&&(AN.sync||anHov.ci===ci)?anHov:null,i=hv?Math.max(0,Math.min(anLast(),Math.round(hv.i))):null;
+ const btn=(a,t,svg)=>`<button data-la="${a}" title="${t}" type="button"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="${svg}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+ const EYE="M2 9s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5ZM9 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z",GEAR="M9 6.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM9 2v2M9 14v2M2 9h2M14 9h2M4 4l1.5 1.5M12.5 12.5 14 14M4 14l1.5-1.5M12.5 5.5 14 4",X_="M5 5l8 8M13 5l-8 8";
+ let h="";P.panes.forEach((pn,pi)=>{let rows=pi?`<div class="tv-pl">${AN_PANE[pn.u]}${pn.u==="i"?(P.sc==="idx"?" · 100 at the left edge":" · % since the left edge"):""}</div>`:"";
+  for(const d of pn.ds){const si=ch.s.indexOf(d.s),m=d.s.m,c=anC(d.s.c);let val="",chg="";
+   if(d.study){const k=i??Math.min(P.b,Math.floor(P.V.b)),v=d.v[k-P.a];val=v==null?"–":pct(v,1);rows+=`<div class="tv-lr st" data-ci="${ci}" data-study="${d.study}"><i style="background:${d.study==="dd"?"var(--loss)":c}"></i><b>${AN_STUDY[d.study].t}</b><span class="tv-lm">${esc(anName(d.s))}</span><span class="tv-lv">${val}</span><span class="tv-lb">${btn("sx","Remove this study",X_)}</span></div>`;continue;}
+   if(d.S){const inV=d.S.v.filter(z=>z.i<=P.V.b+1),k=i??(inV.length?Math.min(TL,Math.floor(inV[inV.length-1].i)):Math.min(TL,Math.floor(P.V.b))),per=m==="box"?P.boxPer:m==="candle"?P.candPer:1,kk=Math.floor(k/per),arr=d.S.v.filter(z=>Math.floor(Math.floor(z.i)/per)===kk),ps=arr.map(z=>z.p).sort((u,v)=>u-v),lab=per===12?MS.m[k].slice(0,4):per===3?qOf(k):mlabel(k);
+    val=!arr.length?`no sales in ${lab}`:m==="candle"?`${lab} · first ${money(arr[0].p)} · high ${money(ps[ps.length-1])} · low ${money(ps[0])} · last ${money(arr[arr.length-1].p)}`:m==="box"?`${lab} · median ${money(anQt(ps,.5))} · middle half ${money(anQt(ps,.25))} to ${money(anQt(ps,.75))}`:`${lab} · median ${money(anQt(ps,.5))}`;
+    chg=arr.length?`<span class="tv-lc">${arr.length} sale${arr.length>1?"s":""}</span>`:"";}
+   else{const k=i??(()=>{for(let j=Math.min(P.b,Math.floor(P.V.b));j>=P.a;j--)if(d.v[j-P.a]!=null)return j;return Math.floor(P.V.b);})();let v=d.v[k-P.a];if(v==null&&d.sparse)for(let q=1;q<=3&&v==null;q++)v=d.v[k-P.a-q];
+    val=Array.isArray(v)?anFmt("$",v[0])+" to "+anFmt("$",v[1]):anFmt(pn.u,v,P.sc);
+    const r0=anGet(d.s,k),r1=anGet(d.s,k-12);if(r0!=null&&r1!=null&&!Array.isArray(r0)&&AN_MET[m].u!=="%")chg=`<span class="tv-lc">${anSg(r0/r1-1)} on a year</span>`;
+    if(d.tr&&ch.st.trend)chg+=`<span class="tv-lc">trend ${d.tr.pa>=0?"+":""}${pct(d.tr.pa,1)}${AN_MET[m].u==="%"&&pn.u!=="i"?" pts":""} a year</span>`;}
+   rows+=`<div class="tv-lr${si===0?" main":""}" data-ci="${ci}" data-si="${si}"><i style="background:${c}"></i><b>${esc(anName(d.s))}</b><span class="tv-lm">${m==="price"?"":AN_MET[m].t.toLowerCase()}${d.s.k==="s"&&m==="price"?"12-month median":d.s.k==="a"&&m==="price"?"3-month median":""}</span><span class="tv-lv">${val}</span>${chg}<span class="tv-lb">${btn("eye","Hide",EYE)}${btn("set","Settings",GEAR)}${btn("x","Remove",X_)}</span></div>`;}
+  if(!pi){for(const s of ch.s.filter(s=>!s.on)){const si=ch.s.indexOf(s);rows+=`<div class="tv-lr off" data-ci="${ci}" data-si="${si}"><i style="background:${anC(s.c)}"></i><b>${esc(anName(s))}</b><span class="tv-lm">${AN_MET[s.m].t.toLowerCase()} · hidden</span><span class="tv-lb">${btn("eye","Show",EYE)}${btn("x","Remove",X_)}</span></div>`;}
+   if(ch.st.trend)rows+=`<div class="tv-lr st" data-ci="${ci}" data-study="trend"><i class="dash"></i><b>Trend line</b><span class="tv-lm">2 sd band</span><span class="tv-lb">${btn("sx","Remove this study",X_)}</span></div>`;
+   if(ch.st.ma)rows+=`<div class="tv-lr st" data-ci="${ci}" data-study="ma"><i class="dot"></i><b>12-month average</b><span class="tv-lb">${btn("sx","Remove this study",X_)}</span></div>`;
+   if(!ch.s.length)rows+=`<div class="tv-empty"><b>Empty chart.</b> Start typing a suburb or area, or use <button data-la="find" type="button">search</button>.</div>`;}
+  h+=`<div class="tv-lp" style="top:${pn.y0+6}px;max-width:${Math.max(160,P.W-P.R-20)}px">${rows}</div>`;});
+ if(E.leg.__h!==h){E.leg.__h=h;E.leg.innerHTML=h;}}
+function anCrossAll(){anE.forEach((E,ci)=>anCross(ci));if(AN.side==="dw")anSide();}
+
+/* ---- top and bottom bars ---- */
+function anTop(){const c=CH(),m=anMain(c);$("tvSymN").textContent=m?anName(m):"Pick a suburb or area";$("tvMet").value=m?m.m:AN.met;
+ document.querySelectorAll("#tvSeg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.aseg===(m?m.seg:AN.seg)));
+ $("tvSty").value=m&&m.sty||"line";$("tvSty").disabled=!m||!!AN_MET[m.m].sl||m.m==="band";
+ const nf=Object.keys(AN.f||{}).length;$("tvFiltN").hidden=!nf;$("tvFiltN").textContent=nf;$("tvFilt").setAttribute("aria-pressed",!!nf);
+ $("tvStudies").setAttribute("aria-pressed",Object.values(c.st).some(Boolean));$("tvUndo").disabled=!anHist.length;$("tvRedo").disabled=!anFut.length;
+ $("tvReplay").setAttribute("aria-pressed",!!anRp.on);$("tvLayN").textContent=anLayN||"Layouts";
+ document.querySelectorAll("#tvRng button").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.r===AN.r&&!(anV&&anV.z)));
+ document.querySelectorAll("#tvScale button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.sc===(c.sc||"abs")));
+ document.querySelectorAll("#tvTools [data-tool]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.tool===anTool));
+ document.querySelectorAll("#tvTools [data-flag]").forEach(x=>x.setAttribute("aria-pressed",!!AN[x.dataset.flag]));
+ document.querySelectorAll("#tvRail [data-side]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.side===AN.side));
+ $("tvSide").hidden=!AN.side;$("tv").classList.toggle("drawing",anTool!=="pan");
+ $("tvAsof").textContent=anRp.on&&anRp.i!=null?`Replay at ${mlabel(anRp.i)}`:`Sales to ${mlabel(TL)}`;}
+
+/* ---- side panels: watchlist + series in view, data window, object tree ---- */
+function anWlVal(k,id,seg){if(k==="s"){const r=D.rows.find(x=>x[C.locality]===id&&x[C.segment]===seg);return r?{v:r[C.med_now],c:r[C.growth_1y],n:r[C.n_now]}:null;}
+ const a=MS.mkt3&&(MS.mkt3[id]||{})[seg];if(!a)return null;let j=a.length-1;while(j>0&&a[j]==null)j--;return{v:a[j]*1000,c:a[j-12]?a[j]/a[j-12]-1:null};}
+function anStats(s){const u=AN_MET[s.m].u,pc=u==="%",V=anRange(),pts=[];if(AN_MET[s.m].sl){const S=anSalesV(s);if(S.st)return{st:S.st};}
+ for(let i=Math.ceil(V.a);i<=Math.floor(V.b);i++){const x=anGet(s,i),r=Array.isArray(x)?(x[0]+x[1])/2:x;if(r!=null)pts.push([i,r]);}
+ if(pts.length<2)return{st:"No data in this period"};const f=pts[0],l=pts[pts.length-1],v0=f[1],v1=l[1],yrs=(l[0]-f[0])/12;let hi=-Infinity,lo=Infinity,hiI=0;pts.forEach(z=>{if(z[1]>hi){hi=z[1];hiI=z[0];}lo=Math.min(lo,z[1]);});
+ return{u,pc,f,l,v0,v1,hi,lo,hiI,ch:pc?v1-v0:v1/v0-1,pa:!pc&&yrs>=1&&v0>0&&v1>0?Math.pow(v1/v0,1/yrs)-1:null,fh:pc?v1-hi:v1/hi-1};}
+function anSide(){const el=$("tvSide");if(!AN.side){el.innerHTML="";return;}const c=CH();let h="";
+ if(AN.side==="wl"){h=`<div class="tv-sh"><h3>Watchlist</h3><button class="tv-b" data-sa="wladd" title="Add to the watchlist" type="button">+</button></div><ul class="tv-wl">`+
+  AN.wl.map(([k,id,seg],j)=>{const x=anWlVal(k,id,seg),nm=k==="a"?anAreas[id]||id:title(id);return`<li data-wl="${j}" title="Make this the main series"><span><b>${esc(nm)}</b><small>${seg==="unit"?"units":"houses"}${k==="a"?" · area":""}</small></span><span class="num">${x?money(x.v):"–"}<small>${x&&x.c!=null?anSg(x.c)+" a year":""}</small></span><button data-wlx="${j}" aria-label="Remove from the watchlist" type="button">×</button></li>`;}).join("")+`</ul>`;
+  h+=`<div class="tv-sh"><h3>In this chart</h3><small>${mlabel(Math.max(0,Math.ceil(anRange().a)))} to ${mlabel(Math.min(anLast(),Math.floor(anRange().b)))}</small></div>`;
+  h+=c.s.map((s,si)=>{const t=anStats(s),F=x=>anFmt(t.u,x);return`<div class="tv-card${s.on?"":" off"}" data-si="${si}"><div class="tv-ch"><i style="background:${anC(s.c)}"></i><b>${esc(anName(s))}</b><small>${AN_MET[s.m].t}</small></div>`+
+   (t.st?`<p class="muted">${esc(t.st)}</p>`:`<div class="tv-big">${F(t.v1)} <span>${anSg(t.ch,t.pc)}</span></div><dl><dt>Start</dt><dd>${F(t.v0)}</dd><dt>A year</dt><dd>${t.pa==null?"–":anSg(t.pa)}</dd><dt>High</dt><dd>${F(t.hi)} <small>${mlabel(t.hiI)}</small></dd><dt>Low</dt><dd>${F(t.lo)}</dd><dt>From high</dt><dd>${anSg(t.fh,t.pc)}</dd></dl>`)+`</div>`;}).join("")||`<p class="muted">Nothing on this chart yet.</p>`;}
+ else if(AN.side==="dw"){const P=anE[AN.act]&&anE[AN.act].P,i=anHov?Math.max(0,Math.min(anLast(),Math.round(anHov.i))):Math.min(anLast(),Math.floor(anRange().b));
+  h=`<div class="tv-sh"><h3>Data window</h3><small>${mlabel(i)}</small></div><table class="tv-dw">`;
+  for(const s of c.s){let v=anGet(s,i);if(v==null&&s.k==="a"&&s.m==="sales")for(let q=1;q<=2&&v==null;q++)v=anGet(s,i-q);const u=anUnit(s,"abs"),p=anGet(s,i-12);h+=`<tr class="hd"><td colspan="2"><i style="background:${anC(s.c)}"></i>${esc(anName(s))}</td></tr><tr><td>${AN_MET[s.m].t}</td><td>${Array.isArray(v)?money(v[0])+" to "+money(v[1]):anFmt(u,v)}</td></tr>`;
+   if(v!=null&&p!=null&&!Array.isArray(v)&&u!=="%")h+=`<tr><td>On a year</td><td>${anSg(v/p-1)}</td></tr>`;
+   if(P){const d=P.data.find(x=>x.s===s);if(d&&d.u==="i"){const x=d.v[i-P.a];h+=`<tr><td>${c.sc==="idx"?"Index":"Since left edge"}</td><td>${anFmt("i",x,c.sc)}</td></tr>`;}}}
+  if(P)for(const d of P.all.filter(x=>x.study)){const x=d.v[i-P.a];h+=`<tr class="hd"><td colspan="2">${AN_STUDY[d.study].t}</td></tr><tr><td>${esc(anName(d.s))}</td><td>${x==null?"–":pct(x,1)}</td></tr>`;}
+  h+=`</table><p class="muted">Move over the chart to read any month.</p>`;}
+ else if(AN.side==="ot"){const nm=d=>({l:"Trend line",ray:"Ray",h:"Horizontal line",v:"Vertical line",r:"Rectangle",m:"Date and price range",n:"Note"}[d.t]||"Drawing")+(d.t==="n"&&d.txt?`: ${esc(d.txt.slice(0,24))}`:d.t==="v"?`: ${mlabel(Math.max(0,Math.min(TL,Math.round(d.i1))))}`:d.t==="h"?`: ${anFmt(d.u,d.v1,c.sc)}`:"");
+  const EYE='<svg viewBox="0 0 18 18"><path d="M2 9s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5ZM9 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+  h=`<div class="tv-sh"><h3>Object tree</h3><small>Chart ${AN.act+1}</small></div><h4>Series</h4><ul class="tv-ot">`+c.s.map((s,si)=>`<li class="${s.on?"":"off"}"><i style="background:${anC(s.c)}"></i><span>${esc(anName(s))}<small>${AN_MET[s.m].t}${si===0?" · main":""}</small></span><button data-ot="se${si}" title="Show or hide" type="button">${EYE}</button><button data-ot="sx${si}" title="Remove" type="button">×</button></li>`).join("")+`</ul>`;
+  const sts=Object.keys(c.st).filter(k=>c.st[k]);h+=`<h4>Studies</h4><ul class="tv-ot">`+(sts.map(k=>`<li><span>${AN_STUDY[k].t}</span><button data-ot="tx${k}" title="Remove" type="button">×</button></li>`).join("")||`<li class="muted">None. Add one from Studies.</li>`)+`</ul>`;
+  h+=`<h4>Drawings</h4><ul class="tv-ot">`+(c.dr.map((d,k)=>`<li class="${d.hid?"off":""}${anSel&&anSel.ci===AN.act&&anSel.k===k?" sel":""}" data-otd="${k}"><span>${nm(d)}</span><button data-ot="de${k}" title="Show or hide" type="button">${EYE}</button><button data-ot="dx${k}" title="Remove" type="button">×</button></li>`).join("")||`<li class="muted">None. Use the tools on the left.</li>`)+`</ul>`;}
+ el.innerHTML=h;}
+
+/* ---- pop-up menus and dialogs ---- */
+const anPopClose=()=>{$("tvPop").hidden=true;$("tvPop").innerHTML="";anPop.on=null;};
+function anPop(anchor,html,bind){const p=$("tvPop");if(anPop.on===anchor){anPopClose();return;}anPop.on=anchor;p.innerHTML=html;p.hidden=false;const tv=$("tv").getBoundingClientRect(),r=anchor.getBoundingClientRect();
+ let x=r.left-tv.left,y=r.bottom-tv.top+6;p.style.left="0px";p.style.top="0px";const pw=p.offsetWidth,ph=p.offsetHeight;if(x+pw>tv.width-8)x=Math.max(8,tv.width-pw-8);if(y+ph>tv.height-8&&r.top-tv.top-ph-6>0)y=r.top-tv.top-ph-6;
+ p.style.left=x+"px";p.style.top=y+"px";bind&&bind(p);const f=p.querySelector("input,select");f&&f.focus();}
+document.addEventListener("pointerdown",e=>{if(!$("tvPop").hidden&&!e.target.closest("#tvPop")&&e.target.closest("button")!==anPop.on)anPopClose();},true);
+const anModalClose=()=>{$("tvModal").hidden=true;$("tvModal").firstElementChild.innerHTML="";};
+function anModal(html,bind){const m=$("tvModal"),d=m.firstElementChild;d.innerHTML=html+`<button class="tv-mx" data-mx type="button" aria-label="Close">×</button>`;m.hidden=false;bind&&bind(d);const f=d.querySelector("input");if(f){f.focus();const n=f.value.length;try{f.setSelectionRange(n,n);}catch(e){}}}
+$("tvModal").addEventListener("pointerdown",e=>{if(e.target.id==="tvModal"||e.target.closest("[data-mx]"))anModalClose();});
+const anToast=t=>{let el=$("tvToast");if(!el){el=document.createElement("div");el.id="tvToast";el.className="tv-toast";$("tv").appendChild(el);}el.textContent=t;el.classList.add("on");clearTimeout(anToast.t);anToast.t=setTimeout(()=>el.classList.remove("on"),2200);};
+// search: areas and suburbs, with each one's latest median and change on a year. mode main = replace, add = compare, wl = watchlist
+function anSearch(mode,q0=""){let f="all",sel=0,res=[];const T={main:"Change the main series",add:"Compare: add a series",wl:"Add to the watchlist"}[mode];
+ const met=`<select id="tvSmet" aria-label="Measure">${$("tvMet").innerHTML}</select><span class="tv-seg" id="tvSseg"><button data-ss="house" aria-pressed="${AN.seg==="house"}" type="button">Houses</button><button data-ss="unit" aria-pressed="${AN.seg==="unit"}" type="button">Units</button></span>`;
+ anModal(`<h3 id="tvDlgT">${T}</h3><div class="tv-sq"><input id="tvSq" placeholder="Suburb or area, e.g. Newtown, Central Coast" autocomplete="off" value="${esc(q0)}"></div><div class="tv-sf"><span class="tv-seg" id="tvSf"><button data-sf="all" type="button">All</button><button data-sf="a" type="button">Areas</button><button data-sf="s" type="button">Suburbs</button></span>${mode==="add"?met:""}</div><ul class="tv-res" id="tvRes" role="listbox"></ul>`,d=>{
+  const inp=d.querySelector("#tvSq"),ul=d.querySelector("#tvRes");if(mode==="add"){d.querySelector("#tvSmet").value=AN.met;}
+  const seg=()=>mode==="add"?AN.seg:(anMain()||{}).seg||AN.seg;
+  const run=()=>{const q=inp.value.trim().toUpperCase();const ar=Object.entries(anAreas).filter(([c,n])=>!q||n.toUpperCase().includes(q)).map(([c,n])=>({k:"a",id:c,n,t:"area"}));
+   const su=q.length?anSubs.filter(n=>n.startsWith(q)).concat(anSubs.filter(n=>!n.startsWith(q)&&n.includes(q))).slice(0,60).map(n=>{const r=D.rows.find(x=>x[C.locality]===n);return{k:"s",id:n,n:title(n),t:r?"suburb · "+r[C.postcode]:"suburb"};}):[];
+   res=(f==="a"?ar:f==="s"?su:ar.concat(su)).slice(0,80);sel=Math.min(sel,Math.max(0,res.length-1));
+   d.querySelectorAll("#tvSf button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.sf===f));
+   ul.innerHTML=res.map((x,j)=>{const v=anWlVal(x.k,x.id,seg());return`<li role="option" data-j="${j}" aria-selected="${j===sel}"><b>${esc(x.n)}</b><span class="tv-rt">${x.t}</span><span class="num">${v?money(v.v):""}</span><span class="num">${v&&v.c!=null?anSg(v.c):""}</span></li>`;}).join("")||`<li class="muted">No match. Try part of the name.</li>`;
+   const s=ul.querySelector("[aria-selected=true]");s&&s.scrollIntoView({block:"nearest"});};
+  const pick=x=>{if(!x)return;const mv=mode==="add"?d.querySelector("#tvSmet").value:null;anModalClose();if(mode==="wl"){if(!AN.wl.some(w=>w[0]===x.k&&w[1]===x.id&&w[2]===seg())){anSnap();AN.wl.push([x.k,x.id,seg()]);anSave();anSide();}return;}
+   if(mode==="main")anSetMain(x.k,x.id);else{AN.met=mv;anAdd(x.k,x.id,AN.met,AN.seg);}};
+  inp.addEventListener("input",()=>{sel=0;run();});
+  inp.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();sel=(sel+(e.key==="ArrowDown"?1:-1)+res.length)%Math.max(1,res.length);run();}else if(e.key==="Enter"){e.preventDefault();pick(res[sel]);}else if(e.key==="Escape")anModalClose();});
+  ul.addEventListener("click",e=>{const li=e.target.closest("[data-j]");if(li)pick(res[+li.dataset.j]);});
+  d.querySelector("#tvSf").addEventListener("click",e=>{const b=e.target.closest("[data-sf]");if(b){f=b.dataset.sf;run();inp.focus();}});
+  const ss=d.querySelector("#tvSseg");if(ss)ss.addEventListener("click",e=>{const b=e.target.closest("[data-ss]");if(b){AN.seg=b.dataset.ss;ss.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));run();}});
+  run();});}
+function anSetMain(k,id){const c=CH(),m=anMain(c);anDo(()=>{if(m){m.k=k;m.id=id;}else c.s.unshift(anSer(k,id,AN.met,AN.seg,anNextCol(c)));if(m&&AN_MET[m.m].sl&&!anV)AN.r=Math.min(AN.r||99,5);});anLayN=null;}
+function anAdd(k,id,m=AN.met,seg=AN.seg){const c=CH();if(c.s.some(s=>s.k===k&&s.id===id&&s.m===m&&s.seg===seg)){anToast("Already on this chart");return;}
+ const same=c.s.find(s=>s.k===k&&s.id===id&&s.seg===seg);anDo(()=>{c.s.push({...anSer(k,id,m,seg,same?same.c:anNextCol(c))});if(AN_MET[m].sl&&!anV)AN.r=Math.min(AN.r||99,5);});}
+function anStudies(){const c=CH();anModal(`<h3 id="tvDlgT">Studies</h3><p class="muted">For chart ${AN.act+1}. Trend line and average apply to every line; the other two to the main series, in a pane of their own.</p><ul class="tv-stl">`+
+ Object.entries(AN_STUDY).map(([k,s])=>`<li><label><input type="checkbox" data-stk="${k}"${c.st[k]?" checked":""}><span><b>${s.t}</b><small>${s.d}</small></span></label></li>`).join("")+`</ul>`,d=>{
+  d.addEventListener("change",e=>{const k=e.target.dataset.stk;if(k)anDo(()=>{c.st[k]=e.target.checked;});});});}
+function anSeriesMenu(anchor,ci,si){const c=AN.ch[ci],s=c.s[si];if(!s)return;
+ anPop(anchor,`<div class="tv-pm"><b>${esc(anName(s))}</b><label>Measure <select data-sm="m">${$("tvMet").innerHTML}</select></label><label>Homes <select data-sm="seg"><option value="house">Houses</option><option value="unit">Units</option></select></label>
+  <label>Style <select data-sm="sty">${Object.entries(AN_STY).map(([k,t])=>`<option value="${k}">${t}</option>`).join("")}</select></label><div class="tv-sw">${AN_COL.map(x=>`<button data-col="${x}" style="--c:${anC(x)}" aria-pressed="${x===s.c}" type="button" aria-label="Colour"></button>`).join("")}</div>
+  <div class="tv-pr">${si?`<button data-sma="main" type="button">Make main</button>`:""}<button data-sma="wl" type="button">Add to watchlist</button><button data-sma="x" class="neg" type="button">Remove</button></div></div>`,p=>{
+  p.querySelector('[data-sm="m"]').value=s.m;p.querySelector('[data-sm="seg"]').value=s.seg;p.querySelector('[data-sm="sty"]').value=s.sty||"line";
+  p.addEventListener("change",e=>{const k=e.target.dataset.sm;if(!k)return;anDo(()=>{s[k]=e.target.value;if(k==="m")s.sty=s.m==="sales"?"col":s.sty==="col"?"line":s.sty;});});
+  p.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+   if(b.dataset.col){anDo(()=>{s.c=b.dataset.col;});p.querySelectorAll("[data-col]").forEach(x=>x.setAttribute("aria-pressed",x===b));}
+   else if(b.dataset.sma==="main"){anDo(()=>{c.s.splice(si,1);c.s.unshift(s);});anPopClose();}
+   else if(b.dataset.sma==="wl"){if(!AN.wl.some(w=>w[0]===s.k&&w[1]===s.id&&w[2]===s.seg)){anSnap();AN.wl.push([s.k,s.id,s.seg]);anSave();AN.side="wl";anSide();anTop();}anToast("Added to the watchlist");anPopClose();}
+   else if(b.dataset.sma==="x"){anDo(()=>{c.s.splice(si,1);});anPopClose();}});});}
+// ideas: ready-made charts, kept from the old presets plus a few that use the new pieces
+const anIdeas={sr:"Sydney v regional",hu:"Houses v units",pr:"Prices v rents",ar:"Regions, indexed",sp:"Every sale in a suburb",dd:"Sydney: fall from the high",g4:"Four areas, side by side"};
+function anIdea(p){const sg=AN.seg,S=(id,m,c,seg=sg,k="a",sty)=>({...anSer(k,id,m,seg,c),...(sty?{sty}:{})});anSnap();anV=null;anSel=null;
+ let ch=[anCh0()],lay="1";const one=s=>{ch=[anCh0(s)];};
+ if(p==="sr")one([S("syd","price",AN_COL[0]),S("reg","price",AN_COL[1]),S("syd","sales",AN_COL[0]),S("reg","sales",AN_COL[1])]);
+ else if(p==="hu")one([S("syd","price",AN_COL[0],"house"),S("syd","price",AN_COL[2],"unit"),S("syd","yoy",AN_COL[0],"house"),S("syd","yoy",AN_COL[2],"unit")]);
+ else if(p==="pr"){one([S("syd","price",AN_COL[0]),S("syd","rent",AN_COL[4]),S("syd","yield",AN_COL[3])]);ch[0].sc="idx";AN.r=5;}
+ else if(p==="ar"){one(["syd","ncl","cc","ill","hun","nr"].filter(c=>anAreas[c]).map((c,i)=>S(c,"price",AN_COL[i])));ch[0].sc="idx";}
+ else if(p==="sp"){const n=sel||"PARRAMATTA";one([S(n,"dots",AN_COL[1],sg,"s"),S(n,"box",AN_COL[0],sg,"s")]);AN.r=5;}
+ else if(p==="dd"){one([S("syd","price",AN_COL[0],sg,"a","area")]);ch[0].st={dd:1,trend:1};AN.r=0;}
+ else if(p==="g4"){lay="4";ch=["syd","ncl","cc","ill"].map((c,i)=>({...anCh0([S(c,"price",AN_COL[i],sg,"a","area"),S(c,"rent",AN_COL[i])])}));AN.r=10;}
+ AN.ch=ch;AN.lay=lay;AN.act=0;anLayN=anIdeas[p];anSave();anBuild();anDraw();}
+function anLayouts(btn){const L=store.get("hs_ana_lay")||{};const names=Object.keys(L);
+ anPop(btn,`<div class="tv-pm tv-lm2"><b>Saved layouts</b>${names.length?`<ul>${names.map(n=>`<li><button data-ll="${esc(n)}" type="button">${esc(n)}</button><button data-lx="${esc(n)}" aria-label="Delete" type="button">×</button></li>`).join("")}</ul>`:`<p class="muted">None yet.</p>`}
+  <form data-lsave><input placeholder="Name this layout" maxlength="40" value="${esc(anLayN&&!Object.values(anIdeas).includes(anLayN)?anLayN:"")}"><button type="submit">Save</button></form>
+  <b>Ideas</b><ul>${Object.entries(anIdeas).map(([k,t])=>`<li><button data-li="${k}" type="button">${t}</button></li>`).join("")}</ul><div class="tv-pr"><button data-lr type="button">Reset to the default</button></div></div>`,p=>{
+  p.addEventListener("submit",e=>{e.preventDefault();const n=e.target.querySelector("input").value.trim();if(!n)return;const Lx=store.get("hs_ana_lay")||{};const {wl,side,...rest}=AN;Lx[n]=rest;store.set("hs_ana_lay",Lx);anLayN=n;anTop();anToast(`Saved “${n}”`);anPopClose();});
+  p.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+   if(b.dataset.ll){const Lx=store.get("hs_ana_lay")||{},v=Lx[b.dataset.ll];if(v){anSnap();AN=anMigrate({...v,wl:AN.wl,side:AN.side});anV=null;anSel=null;anSC={};anLayN=b.dataset.ll;anSave();anBuild();anDraw();}anPopClose();}
+   else if(b.dataset.lx){const Lx=store.get("hs_ana_lay")||{};delete Lx[b.dataset.lx];store.set("hs_ana_lay",Lx);anPopClose();anLayouts(btn);}
+   else if(b.dataset.li){anIdea(b.dataset.li);anPopClose();}
+   else if(b.hasAttribute("data-lr")){anSnap();const wl=AN.wl;AN=anDefault();AN.wl=wl;anV=null;anSel=null;anLayN=null;anSave();anBuild();anDraw();anPopClose();}});});}
+function anGridMenu(btn){const ic={"1":'<rect x="2" y="2" width="20" height="14"/>',"2h":'<rect x="2" y="2" width="9.5" height="14"/><rect x="12.5" y="2" width="9.5" height="14"/>',"2v":'<rect x="2" y="2" width="20" height="6.5"/><rect x="2" y="9.5" width="20" height="6.5"/>',"3":'<rect x="2" y="2" width="12" height="14"/><rect x="15" y="2" width="7" height="6.5"/><rect x="15" y="9.5" width="7" height="6.5"/>',"4":'<rect x="2" y="2" width="9.5" height="6.5"/><rect x="12.5" y="2" width="9.5" height="6.5"/><rect x="2" y="9.5" width="9.5" height="6.5"/><rect x="12.5" y="9.5" width="9.5" height="6.5"/>'};
+ anPop(btn,`<div class="tv-pm"><b>Charts</b><div class="tv-gl">${Object.entries(AN_LAY).map(([k,t])=>`<button data-gl="${k}" aria-pressed="${AN.lay===k}" title="${t}" type="button"><svg viewBox="0 0 24 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.4">${ic[k]}</g></svg></button>`).join("")}</div>
+  <label class="tv-ck"><input type="checkbox" data-sync${AN.sync?" checked":""}> Crosshair on every chart</label><p class="muted">Time moves together on every chart. Click a chart to make it the one the top bar changes.</p></div>`,p=>{
+  p.addEventListener("click",e=>{const b=e.target.closest("[data-gl]");if(b){anDo(()=>{AN.lay=b.dataset.gl;});anBuild();anDraw();anPopClose();}});
+  p.addEventListener("change",e=>{if(e.target.hasAttribute("data-sync")){AN.sync=e.target.checked?1:0;anSave();}});});}
+function anFiltMenu(btn){const F=AN.f||{},v=k=>F[k]?F[k].toLocaleString("en-AU"):"";
+ anPop(btn,`<div class="tv-pm"><b>Filter individual sales</b><p class="muted">For the sale-by-sale measures. Land applies to houses.</p><div class="tv-fg"><label>Price from<input data-fk="pmin" inputmode="numeric" placeholder="any" value="${v("pmin")}"></label><label>to<input data-fk="pmax" inputmode="numeric" placeholder="any" value="${v("pmax")}"></label>
+  <label>Land m² from<input data-fk="lmin" inputmode="numeric" placeholder="any" value="${v("lmin")}"></label><label>to<input data-fk="lmax" inputmode="numeric" placeholder="any" value="${v("lmax")}"></label></div><div class="tv-pr"><button data-fx type="button">Clear</button></div></div>`,p=>{
+  p.addEventListener("change",e=>{const k=e.target.dataset.fk;if(!k)return;const n=parseNum(e.target.value);anDo(()=>{AN.f=AN.f||{};if(n&&isFinite(n)&&n>0)AN.f[k]=n;else delete AN.f[k];anSC={};});});
+  p.addEventListener("click",e=>{if(e.target.closest("[data-fx]")){anDo(()=>{AN.f={};anSC={};});anPopClose();}});});}
+function anGoMenu(btn){const V=anRange(),mm=i=>MS.m[Math.max(0,Math.min(TL,Math.round(i)))];
+ anPop(btn,`<div class="tv-pm"><b>Show a period</b><div class="tv-fg"><label>From<input type="month" data-go="a" min="${MS.m[0]}" max="${MS.m[TL]}" value="${mm(V.a)}"></label><label>To<input type="month" data-go="b" min="${MS.m[0]}" max="${MS.m[TL]}" value="${mm(V.b)}"></label></div><div class="tv-pr"><button data-goa type="button">Show</button></div></div>`,p=>{
+  p.addEventListener("click",e=>{if(!e.target.closest("[data-goa]"))return;const ix=v=>MS.m.indexOf(v),a=ix(p.querySelector('[data-go="a"]').value),b=ix(p.querySelector('[data-go="b"]').value);if(a>=0&&b>a){anV={a,b,z:1};anDraw();anPopClose();}});});}
+
+/* ---- replay: pick a month, then step or play forward from there ---- */
+function anRpBar(){const el=$("tvRp");if(!anRp.on){el.hidden=true;return;}el.hidden=false;
+ el.innerHTML=anRp.pick?`<span>Click the chart where the replay should start</span><button data-rp="x" type="button">Cancel</button>`
+  :`<button data-rp="pick" title="Pick another start" type="button">Start</button><button data-rp="play" class="pri" type="button">${anRp.t?"Pause":"Play"}</button><button data-rp="step" title="Forward one month" type="button">+1 month</button><select data-rp="spd" aria-label="Speed"><option value="1">1×</option><option value="3">3×</option><option value="10">10×</option></select><b>${mlabel(anRp.i)}</b><button data-rp="x" title="Leave replay" type="button">×</button>`;
+ const s=el.querySelector("select");if(s)s.value=anRp.spd;}
+function anRpStep(){if(anRp.i>=TL){anRpStop();return;}anRp.i++;const V=anRange();if(anRp.i+2>V.b){const w=V.b-V.a;anV={a:anRp.i+2-w,b:anRp.i+2,z:1};}anDraw();}
+function anRpStop(){clearInterval(anRp.t);anRp.t=0;anRpBar();}
+function anRpOff(){anRpStop();anRp={on:0,pick:0,i:null,t:0,spd:anRp.spd};anV=null;anDraw();}
+$("tvRp").addEventListener("click",e=>{const b=e.target.closest("[data-rp]");if(!b)return;const k=b.dataset.rp;
+ if(k==="x")anRpOff();else if(k==="pick"){anRpStop();anRp.pick=1;anRp.i=null;anV=null;anDraw();}else if(k==="step"){anRpStop();anRpStep();}
+ else if(k==="play"){if(anRp.t)anRpStop();else{anRp.t=setInterval(anRpStep,700/anRp.spd);anRpBar();}}});
+$("tvRp").addEventListener("change",e=>{if(e.target.dataset.rp==="spd"){anRp.spd=+e.target.value;if(anRp.t){anRpStop();anRp.t=setInterval(anRpStep,700/anRp.spd);anRpBar();}}});
+
+/* ---- export: picture, CSV, link ---- */
+async function anPicture(){const css=getComputedStyle(document.documentElement),v=n=>css.getPropertyValue(n).trim()||"#000",g=$("tvGridEl").getBoundingClientRect(),k=2,cv=document.createElement("canvas"),FT=34;
+ cv.width=g.width*k;cv.height=(g.height+FT)*k;const x=cv.getContext("2d");x.scale(k,k);x.fillStyle=v("--sheet");x.fillRect(0,0,g.width,g.height+FT);const style=anCss(v);
+ for(const E of anE){const r=E.cell.getBoundingClientRect(),cl=E.svg.cloneNode(true);cl.setAttribute("xmlns","http://www.w3.org/2000/svg");cl.querySelector(".tv-x").innerHTML="";cl.insertAdjacentHTML("afterbegin",`<style>${style.replace(/var\(--(\w+)\)/g,(m,n)=>v("--"+n))}</style>`);
+  const src=new XMLSerializer().serializeToString(cl).replace(/var\(--(\w+)\)/g,(m,n)=>v("--"+n)),img=new Image();await new Promise(res=>{img.onload=res;img.onerror=res;img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(src);});
+  x.drawImage(img,r.left-g.left,r.top-g.top,r.width,r.height);
+  E.leg.querySelectorAll(".tv-lr").forEach(row=>{const rr=row.getBoundingClientRect(),dot=row.querySelector("i");let tx=rr.left-g.left,ty=rr.top-g.top+rr.height/2+4;
+   if(dot){x.fillStyle=getComputedStyle(dot).backgroundColor;x.beginPath();x.arc(tx+5,ty-4,4,0,7);x.fill();}tx+=16;
+   for(const sp of row.querySelectorAll("b,.tv-lm,.tv-lv,.tv-lc")){const t=sp.innerText.trim();if(!t)continue;x.font=`${sp.tagName==="B"?600:500} 12.5px "IBM Plex Sans",system-ui,sans-serif`;x.fillStyle=getComputedStyle(sp).color;x.fillText(t,tx,ty);tx+=x.measureText(t).width+8;}});
+  if(anE.length>1){x.strokeStyle=v("--hair");x.strokeRect(r.left-g.left+.5,r.top-g.top+.5,r.width-1,r.height-1);}}
+ x.font='600 13px "IBM Plex Sans",system-ui,sans-serif';x.fillStyle=v("--ink");x.fillText("Glasshouse",12,g.height+22);x.font='500 12px "IBM Plex Sans",system-ui,sans-serif';x.fillStyle=v("--slate");
+ x.fillText(`NSW sales on the record (Valuer General), rents from Fair Trading bonds. Sales to ${mlabel(TL)}.`,96,g.height+22);
+ const a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download=`glasshouse-chart-${MS.m[TL]}.png`;document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),300);}
+function anCsv(){const V=anRange(),vis=AN.ch.slice(0,anE.length).flatMap(c=>c.s.filter(s=>s.on)),seen=new Set(),cols=vis.filter(s=>{const k=s.k+s.id+s.seg+s.m;if(seen.has(k))return false;seen.add(k);return true;});
+ const rows=[["Month",...cols.map(s=>`${anName(s)} - ${AN_MET[s.m].t}`)]];
+ for(let i=Math.ceil(V.a);i<=Math.min(anLast(),Math.floor(V.b));i++)rows.push([MS.m[i],...cols.map(s=>{const v=anGet(s,i);return v==null?"":Array.isArray(v)?v.join("-"):+v.toFixed(4);})]);
  const csv=rows.map(r=>r.map(x=>/[",]/.test(String(x))?`"${String(x).replace(/"/g,'""')}"`:x).join(",")).join("\n"),a=document.createElement("a");
  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="glasshouse-chart.csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
-// pan, zoom, crosshair and drawing on the chart
-{const ch=$("anChart");let drag=null;const svgPt=e=>{const P=$("anSvg").__an,r=$("anSvg").getBoundingClientRect();return P?{P,x:(e.clientX-r.left)*P.W/r.width,y:(e.clientY-r.top)*P.W/r.width}:null;};
- const idx=e=>{const q=svgPt(e);if(!q)return null;return q.P.V.a+(q.x-q.P.L)/(q.P.W-q.P.L-q.P.R)*(q.P.V.b-q.P.V.a);};
- const paneAt=q=>q.P.panes.find(p=>q.y>=p.y0&&q.y<=p.y0+p.h);
- const clamp=(a,b)=>{const w=Math.min(TL,Math.max(6,b-a));if(a<0){a=0;}if(a+w>TL)a=TL-w;return{a,b:a+w,z:1};};
- ch.addEventListener("pointerdown",e=>{if(e.button)return;const dr=e.target.closest&&e.target.closest("[data-dr]");
-  if(dr&&anTool==="pan"&&(e.altKey||e.detail>1)){AN.dr.splice(+dr.dataset.dr,1);anSave();anDraw();return;}
-  if(anTool!=="pan"){const q=svgPt(e),pn=q&&paneAt(q);if(!pn)return;const i=idx(e),v=pn.inv(q.y);
-   if(anTool==="hline"){AN.dr.push({t:"h",u:pn.u,i1:i,v1:v});anSave();anDrawings();return;}
-   if(anTool==="note"){const txt=prompt("Note");if(txt){AN.dr.push({t:"n",u:pn.u,i1:i,v1:v,txt:txt.slice(0,80)});anSave();anDrawings();}return;}
-   anTmp={t:anTool==="measure"?"m":"l",u:pn.u,i1:i,v1:v,i2:i,v2:v,pn};ch.setPointerCapture(e.pointerId);return;}
-  drag={x:e.clientX,v:{...anRange()}};ch.setPointerCapture(e.pointerId);ch.classList.add("drag");});
- ch.addEventListener("pointermove",e=>{const P=$("anSvg").__an;if(!P)return;
-  if(anTmp){const q=svgPt(e);anTmp.i2=idx(e);anTmp.v2=anTmp.pn.inv(Math.max(anTmp.pn.y0,Math.min(anTmp.pn.y0+anTmp.pn.h,q.y)));anDrawings();return;}
-  if(drag){const r=$("anSvg").getBoundingClientRect(),d=(e.clientX-drag.x)*P.W/r.width/(P.W-P.L-P.R)*(drag.v.b-drag.v.a);anV=clamp(drag.v.a-d,drag.v.b-d);anHov=null;anDraw();return;}
-  const i=idx(e);anHov=i==null?null:Math.round(i);anCross();});
- const end=()=>{if(anTmp){const{pn,...d}=anTmp;anTmp=null;if(Math.abs(d.i2-d.i1)>.3){AN.dr.push(d);anSave();}anDrawings();}drag=null;ch.classList.remove("drag");};
- ch.addEventListener("pointerup",end);ch.addEventListener("pointercancel",end);
- ch.addEventListener("pointerleave",()=>{if(!drag&&!anTmp){anHov=null;anCross();}});
- ch.addEventListener("wheel",e=>{const i=idx(e);if(i==null)return;e.preventDefault();const V=anRange(),k=Math.exp(e.deltaY*.0015),a=i-(i-V.a)*k,b=i+(V.b-i)*k;anV=clamp(a,b);anDraw();},{passive:false});
- ch.addEventListener("dblclick",e=>{if(anTool==="pan"&&!(e.target.closest&&e.target.closest("[data-dr]")))anSetR(0);});
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&anTool!=="pan"&&!$("tabAnalysis").hidden){anTool="pan";anTmp=null;anDraw();}});
- let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(anDraw,150);});}
-anFill();
+async function anLink(){const u=anToHash();try{await navigator.clipboard.writeText(u);anToast("Link copied: it opens this chart");}catch(e){prompt("Copy this link",u);}}
+
+/* ---- note: a text box where the click was ---- */
+function anNoteAt(ci,i,v,u,px,py){const E=anE[ci];const f=document.createElement("input");f.className="tv-ni";f.placeholder="Note, then Enter";f.maxLength=80;f.style.left=px+"px";f.style.top=py+"px";E.cell.appendChild(f);f.focus();
+ const done=ok=>{if(!f.isConnected)return;const t=f.value.trim();f.remove();if(ok&&t)anDo(()=>{AN.ch[ci].dr.push({t:"n",u,i1:i,v1:v,txt:t});});};
+ f.addEventListener("keydown",e=>{e.stopPropagation();if(e.key==="Enter")done(1);else if(e.key==="Escape")done(0);});f.addEventListener("blur",()=>done(1));}
+
+/* ---- pointer: pan, zoom, scales, pane sizes, drawing, picking ---- */
+{const grid=$("tvGridEl");let drag=null;
+ const at=(e,fix)=>{let cell=fix!=null&&anE[fix]?anE[fix].cell:e.target.closest&&e.target.closest(".tv-cell");if(!cell){const el=document.elementFromPoint(e.clientX,e.clientY);cell=el&&el.closest&&el.closest(".tv-cell");}if(!cell)return null;const ci=+cell.dataset.ci,E=anE[ci],P=E&&E.P;if(!P)return null;const r=E.svg.getBoundingClientRect();
+  const x=(e.clientX-r.left)*P.W/r.width,y=(e.clientY-r.top)*P.H/r.height;return{ci,E,P,x,y,i:P.ix(x),pn:P.panes.find(p=>y>=p.y0&&y<=p.y0+p.h)};};
+ const zone=q=>{for(let k=0;k<q.P.panes.length-1;k++){const sy=q.P.panes[k].y0+q.P.panes[k].h+q.P.SEP/2;if(Math.abs(q.y-sy)<=5&&q.x<q.P.W-q.P.R)return{z:"sep",k};}
+  if(q.y>q.P.yb)return{z:"xax"};if(q.x>q.P.W-q.P.R&&q.pn)return{z:"yax"};return q.pn?{z:"plot"}:{z:"none"};};
+ const clampV=(a,b)=>{const w=Math.min(TL+12,Math.max(6,b-a));if(a<-6)a=-6;if(a+w>anLast()+12)a=anLast()+12-w;return{a,b:a+w,z:1};};
+ const snap=(q,pn)=>{let i=q.i,v=pn.inv(q.y);if(!AN.mag)return{i,v};const ii=Math.max(0,Math.min(anLast(),Math.round(i)));let best=null;
+  for(const d of pn.ds){if(d.S)continue;const x=d.v[ii-q.P.a];if(x==null||Array.isArray(x))continue;const dy=Math.abs(pn.Y(x)-q.y);if(!best||dy<best[0])best=[dy,x];}return{i:ii,v:best&&best[0]<60?best[1]:v};};
+ grid.addEventListener("pointerdown",e=>{if(e.button)return;const q=at(e);if(!q)return;if(e.target.closest(".tv-leg")&&!e.target.closest(".tv-empty"))return;if(e.target.closest(".tv-ni"))return;
+  if(q.ci!==AN.act){AN.act=q.ci;anSave();anE.forEach((E,ci)=>E.cell.classList.toggle("act",ci===AN.act&&anE.length>1));anTop();anSide();}
+  if(innerWidth<=1100&&AN.side){AN.side="";anTop();anSide();}
+  grid.focus({preventScroll:true});const z=zone(q),ch=AN.ch[q.ci];
+  if(anRp.pick){if(z.z==="plot"){anRp.pick=0;anRp.i=Math.max(12,Math.min(TL-1,Math.round(q.i)));const V=anRange(),w=Math.min(V.b-V.a,120);anV={a:anRp.i+2-w,b:anRp.i+2,z:1};anDraw();}return;}
+  const hd=e.target.closest("[data-hd]"),dr=e.target.closest("[data-dr]");
+  if(hd&&anSel&&anSel.ci===q.ci&&!AN.lock){anSnap();drag={m:"hd",q0:q,h:+hd.dataset.hd,d:ch.dr[anSel.k]};grid.setPointerCapture(e.pointerId);return;}
+  if(dr&&anTool==="pan"){const k=+dr.dataset.dr;anSel={ci:q.ci,k};anDrawings(q.ci);if(AN.side==="ot")anSide();if(!AN.lock){anSnap();drag={m:"mv",q0:q,d:ch.dr[k],o:JSON.parse(JSON.stringify(ch.dr[k])),moved:0};grid.setPointerCapture(e.pointerId);}return;}
+  if(anSel){const c0=anSel.ci;anSel=null;anDrawings(c0);if(AN.side==="ot")anSide();}
+  if(anTool!=="pan"&&z.z==="plot"){const pn=q.pn,p=snap(q,pn);
+   if(anTool==="h"||anTool==="v"){anDo(()=>{ch.dr.push(anTool==="h"?{t:"h",u:pn.u,i1:p.i,v1:p.v}:{t:"v",u:pn.u,i1:Math.round(q.i),v1:p.v});});if(!AN.keep){anTool="pan";anTop();}return;}
+   if(anTool==="n"){anNoteAt(q.ci,p.i,p.v,pn.u,q.x+6,q.y-14);if(!AN.keep){anTool="pan";anTop();}return;}
+   anTmp={ci:q.ci,t:anTool,u:pn.u,i1:p.i,v1:p.v,i2:p.i,v2:p.v,pn,zx:q.x};grid.setPointerCapture(e.pointerId);return;}
+  if(z.z==="sep"){drag={m:"sep",q0:q,k:z.k,w:q.P.panes.map(p=>ch.ph[p.u]||null)};grid.setPointerCapture(e.pointerId);return;}
+  if(z.z==="yax"){const pn=q.pn;drag={m:"yax",q0:q,pn,u:pn.u,mn:pn.mn,mx:pn.mx};grid.setPointerCapture(e.pointerId);return;}
+  if(z.z==="xax"){drag={m:"xax",q0:q,v:{...anRange()}};grid.setPointerCapture(e.pointerId);return;}
+  drag={m:"pan",q0:q,v:{...anRange()},pn:q.pn,ys:q.pn&&ch.ys[q.pn.u]?[...ch.ys[q.pn.u]]:null};grid.setPointerCapture(e.pointerId);grid.classList.add("grab");});
+ grid.addEventListener("pointermove",e=>{const q=at(e,anTmp?anTmp.ci:drag?drag.q0.ci:null);
+  if(anTmp){if(!q||q.ci!==anTmp.ci)return;const pn=anTmp.pn;if(anTool==="zoom"){anTmp.i2=q.i;const P=q.P;anE[q.ci].svg.querySelector(".tv-dr").innerHTML=`<rect x="${Math.min(anTmp.zx,q.x)}" y="0" width="${Math.abs(q.x-anTmp.zx)}" height="${P.yb}" class="hl" fill-opacity=".25"/>`;return;}
+   const p=snap({...q,y:Math.max(pn.y0,Math.min(pn.y0+pn.h,q.y))},pn);anTmp.i2=p.i;anTmp.v2=p.v;anDrawings(q.ci);return;}
+  if(drag){const P=drag.q0.P,ch=AN.ch[drag.q0.ci],dx=e.clientX-(drag.cx??(drag.cx=e.clientX)),dy=e.clientY-(drag.cy??(drag.cy=e.clientY)),r=drag.q0.E.svg.getBoundingClientRect(),kx=P.W/r.width;
+   if(drag.m==="pan"){const d=dx*kx/(P.W-P.L-P.R)*(drag.v.b-drag.v.a);anV=clampV(drag.v.a-d,drag.v.b-d);if(drag.ys&&drag.pn){const pn=drag.pn,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),s=(f(drag.ys[1])-f(drag.ys[0]))/pn.h*dy*kx;ch.ys[pn.u]=[fi(f(drag.ys[0])+s),fi(f(drag.ys[1])+s),drag.ys[2]];}anHov=null;anDraw();return;}
+   if(drag.m==="xax"){const k=Math.exp(-dx*kx*.006),w=(drag.v.b-drag.v.a)*k;anV=clampV(drag.v.b-w,drag.v.b);anDraw();return;}
+   if(drag.m==="yax"){const pn=drag.pn,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),k=Math.exp(dy*kx*.006),c=(f(drag.mn)+f(drag.mx))/2,hw=(f(drag.mx)-f(drag.mn))/2*k;ch.ys[drag.u]=[fi(c-hw),fi(c+hw),P.sc];anDraw();return;}
+   if(drag.m==="sep"){const ps=P.panes,a=ps[drag.k],b=ps[drag.k+1],tot=a.h+b.h,ha=Math.max(40,Math.min(tot-40,a.h+dy*kx)),wa=ch.ph[a.u]||(drag.k?1.1:3),wb=ch.ph[b.u]||1.1,sw=wa+wb;
+    ch.ph[a.u]=sw*ha/tot;ch.ph[b.u]=sw*(tot-ha)/tot;drag.cy=e.clientY;drag.q0={...drag.q0,P:anE[drag.q0.ci].P};anChart(drag.q0.ci);drag.q0.P=anE[drag.q0.ci].P;return;}
+   if(drag.m==="hd"||drag.m==="mv"){if(!q||q.ci!==drag.q0.ci)return;const d=drag.d,pn=P.panes.find(p=>p.u===d.u)||q.pn;if(!pn)return;
+    if(drag.m==="hd"){const p=snap({...q,y:Math.max(pn.y0,Math.min(pn.y0+pn.h,q.y))},pn);if(d.t==="v")d.i1=Math.round(q.i);else if(drag.h===1){d.i1=p.i;d.v1=p.v;}else{d.i2=p.i;d.v2=p.v;}}
+    else{drag.moved=1;const o=drag.o,di=q.i-drag.q0.i,lg=pn.lg,f=lg?Math.log:(v=>v),fi=lg?Math.exp:(v=>v),dv=f(pn.inv(q.y))-f(pn.inv(drag.q0.y));d.i1=o.i1+di;if(o.v1!=null)d.v1=fi(f(o.v1)+dv);if(o.i2!=null){d.i2=o.i2+di;d.v2=fi(f(o.v2)+dv);}if(d.t==="v")d.i1=Math.round(d.i1);}
+    anDrawings(drag.q0.ci);return;}
+   return;}
+  if(!q||e.target.closest(".tv-lr,.tv-empty"))return;const z=zone(q);grid.style.cursor=anRp.pick?"pointer":z.z==="sep"?"row-resize":z.z==="yax"?"ns-resize":z.z==="xax"?"ew-resize":e.target.closest("[data-hd]")?"move":e.target.closest("[data-dr]")&&anTool==="pan"?"pointer":"";
+  anHov=z.z==="plot"||z.z==="yax"?{ci:q.ci,i:q.i,y:z.z==="plot"?q.y:null}:null;anCrossAll();});
+ const end=e=>{grid.classList.remove("grab");
+  if(anTmp){const{pn,ci,zx,...d}=anTmp;anTmp=null;if(d.t==="zoom"){if(Math.abs(d.i2-d.i1)>=2){anV=clampV(Math.min(d.i1,d.i2),Math.max(d.i1,d.i2));}if(!AN.keep)anTool="pan";anDraw();return;}
+   if(Math.abs(d.i2-d.i1)>.3||Math.abs(pn.Y(d.v2)-pn.Y(d.v1))>4){anDo(()=>{AN.ch[ci].dr.push(d);});anSel={ci,k:AN.ch[ci].dr.length-1};}if(!AN.keep)anTool="pan";anDraw();return;}
+  if(drag){const m=drag.m;if(m==="hd"||m==="mv"){if(m==="mv"&&!drag.moved)anHist.pop();anSave();anDraw();}else if(m==="sep"||m==="yax"||m==="pan"&&drag.ys)anSave();drag=null;}};
+ grid.addEventListener("pointerup",end);grid.addEventListener("pointercancel",end);
+ grid.addEventListener("pointerleave",()=>{if(!drag&&!anTmp){anHov=null;anCrossAll();grid.style.cursor="";}});
+ grid.addEventListener("wheel",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;e.preventDefault();const V=anRange(),k=Math.exp(e.deltaY*.0015),i=Math.max(V.a,Math.min(V.b,q.i));anV=clampV(i-(i-V.a)*k,i+(V.b-i)*k);anDraw();},{passive:false});
+ grid.addEventListener("dblclick",e=>{const q=at(e);if(!q||e.target.closest(".tv-leg"))return;const z=zone(q),ch=AN.ch[q.ci];
+  if(z.z==="yax"){delete ch.ys[q.pn.u];anSave();anDraw();}else if(z.z==="sep"){ch.ph={};anSave();anDraw();}else if(z.z==="xax"||(z.z==="plot"&&anTool==="pan"&&!e.target.closest("[data-dr]"))){ch.ys={};anSetR(AN.r||0);if(z.z==="plot")anSetR(0);}});
+ // legend buttons
+ grid.addEventListener("click",e=>{const b=e.target.closest("[data-la]");if(!b)return;const row=b.closest(".tv-lr"),ci=row?+row.dataset.ci:AN.act,c=AN.ch[ci];
+  if(b.dataset.la==="find"){anSearch("main");return;}if(!row)return;
+  if(row.dataset.study){const k=row.dataset.study;anDo(()=>{c.st[k]=false;});return;}
+  const si=+row.dataset.si,s=c.s[si];if(!s)return;
+  if(b.dataset.la==="eye")anDo(()=>{s.on=s.on?0:1;});else if(b.dataset.la==="x")anDo(()=>{c.s.splice(si,1);});else if(b.dataset.la==="set"){AN.act=ci;anSeriesMenu(b,ci,si);}});
+ grid.tabIndex=0;
+ let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(anDraw,120);});
+ if(window.ResizeObserver)new ResizeObserver(()=>{clearTimeout(rz);rz=setTimeout(anDraw,60);}).observe(grid);}
+
+/* ---- keyboard: TradingView's habits ---- */
+document.addEventListener("keydown",e=>{if($("tabAnalysis").hidden)return;const tg=e.target,typing=tg.closest&&tg.closest("input,select,textarea,[contenteditable]");
+ if(e.key==="Escape"){if(!$("tvModal").hidden){anModalClose();return;}if(!$("tvPop").hidden){anPopClose();return;}if(anTmp){anTmp=null;anDraw();return;}if(anRp.pick){anRpOff();return;}if(anTool!=="pan"){anTool="pan";anTop();return;}if(anSel){const c0=anSel.ci;anSel=null;anDrawings(c0);}return;}
+ if(typing||!$("tvModal").hidden)return;const mod=e.ctrlKey||e.metaKey;
+ if(mod&&e.key.toLowerCase()==="z"){e.preventDefault();anUndo(e.shiftKey);return;}if(mod&&e.key.toLowerCase()==="y"){e.preventDefault();anUndo(1);return;}
+ if((e.key==="Delete"||e.key==="Backspace")&&anSel){e.preventDefault();const{ci,k}=anSel;anSel=null;anDo(()=>{AN.ch[ci].dr.splice(k,1);});return;}
+ if(e.altKey&&!mod){const t={KeyT:"l",KeyH:"h",KeyV:"v",KeyR:"r",KeyM:"m",KeyN:"n"}[e.code];if(t){e.preventDefault();anTool=t;anTop();return;}}
+ if(mod||e.altKey)return;
+ if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();const V=anRange(),d=(V.b-V.a)*.08*(e.key==="ArrowLeft"?-1:1),w=V.b-V.a;let a=V.a+d;a=Math.max(-6,Math.min(anLast()+12-w,a));anV={a,b:a+w,z:1};anDraw();return;}
+ if(e.key==="+"||e.key==="="||e.key==="-"){const V=anRange(),k=e.key==="-"?1.25:.8,c=(V.a+V.b)/2,w=Math.max(6,Math.min(TL+12,(V.b-V.a)*k));anV={a:Math.max(-6,V.b-w),b:V.b,z:1};anDraw();return;}
+ // start typing anywhere on the workspace to change the main series
+ if(/^[a-z0-9]$/i.test(e.key)&&(tg===document.body||tg.closest("#tv"))){e.preventDefault();anSearch("main",e.key);}});
+
+/* ---- wiring ---- */
+$("tvSym").addEventListener("click",()=>anSearch("main"));$("tvAdd").addEventListener("click",()=>anSearch("add"));
+$("tvMet").addEventListener("change",e=>{const m=anMain(),v=e.target.value;AN.met=v;if(!m){anSave();return;}anDo(()=>{m.m=v;m.sty=v==="sales"?"col":m.sty==="col"?"line":m.sty;if(AN_MET[v].sl&&!anV)AN.r=Math.min(AN.r||99,5);});});
+$("tvSeg").addEventListener("click",e=>{const b=e.target.closest("[data-aseg]");if(!b)return;AN.seg=b.dataset.aseg;const m=anMain();if(m)anDo(()=>{m.seg=b.dataset.aseg;});else{anSave();anTop();}});
+$("tvSty").addEventListener("change",e=>{const m=anMain();if(m)anDo(()=>{m.sty=e.target.value;});});
+$("tvStudies").addEventListener("click",anStudies);$("tvFilt").addEventListener("click",e=>anFiltMenu(e.currentTarget));$("tvGrid").addEventListener("click",e=>anGridMenu(e.currentTarget));
+$("tvUndo").addEventListener("click",()=>anUndo(0));$("tvRedo").addEventListener("click",()=>anUndo(1));$("tvLay").addEventListener("click",e=>anLayouts(e.currentTarget));
+$("tvReplay").addEventListener("click",()=>{if(anRp.on)anRpOff();else{anRp={on:1,pick:1,i:null,t:0,spd:anRp.spd||1};anDraw();}});
+$("tvLink").addEventListener("click",anLink);$("tvSnap").addEventListener("click",()=>anPicture().catch(e=>{console.error(e);anToast("Couldn't make the picture in this browser");}));$("tvCsv").addEventListener("click",anCsv);
+$("tvFull").addEventListener("click",()=>{const s=$("tv");try{document.fullscreenElement?document.exitFullscreen():s.requestFullscreen();}catch(x){}});
+document.addEventListener("fullscreenchange",()=>setTimeout(anDraw,80));
+$("tvRng").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(b){if(anRp.on)anRpOff();anSetR(+b.dataset.r);}});
+$("tvGo").addEventListener("click",e=>anGoMenu(e.currentTarget));
+$("tvScale").addEventListener("click",e=>{const b=e.target.closest("[data-sc]");if(!b)return;const c=CH();anDo(()=>{c.sc=b.dataset.sc;c.ys={};});});
+$("tvTools").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.tool){anTool=anTool===b.dataset.tool&&b.dataset.tool!=="pan"?"pan":b.dataset.tool;anTmp=null;anTop();}
+ else if(b.dataset.flag){AN[b.dataset.flag]=AN[b.dataset.flag]?0:1;if(b.dataset.flag==="lock"||b.dataset.flag==="hide")anSel=null;anSave();anDraw();}
+ else if(b.id==="tvDrClr"){const c=CH();if(c.dr.length)anDo(()=>{c.dr=[];anSel=null;});}});
+$("tvRail").addEventListener("click",e=>{const b=e.target.closest("[data-side]");if(!b)return;AN.side=AN.side===b.dataset.side?"":b.dataset.side;anSave();anTop();anSide();setTimeout(anDraw,0);});
+$("tvSide").addEventListener("click",e=>{const t=e.target,c=CH();
+ if(t.closest('[data-sa="wladd"]')){anSearch("wl");return;}
+ const wx=t.closest("[data-wlx]");if(wx){anSnap();AN.wl.splice(+wx.dataset.wlx,1);anSave();anSide();return;}
+ const wl=t.closest("[data-wl]");if(wl){const[k,id,seg]=AN.wl[+wl.dataset.wl];const m=anMain();anDo(()=>{if(m){m.k=k;m.id=id;m.seg=seg;}else c.s.unshift(anSer(k,id,AN.met,seg,anNextCol(c)));});anLayN=null;return;}
+ const ot=t.closest("[data-ot]");if(ot){const a=ot.dataset.ot,op=a.slice(0,2),k=a.slice(2);
+  anDo(()=>{if(op==="se")c.s[+k].on=c.s[+k].on?0:1;else if(op==="sx")c.s.splice(+k,1);else if(op==="tx")c.st[k]=false;else if(op==="de")c.dr[+k].hid=!c.dr[+k].hid;else if(op==="dx"){c.dr.splice(+k,1);anSel=null;}});return;}
+ const od=t.closest("[data-otd]");if(od){anSel={ci:AN.act,k:+od.dataset.otd};anDrawings(AN.act);anSide();}});
+if(!MS)$("tvGridEl").innerHTML=`<p class="muted" style="padding:24px">No monthly figures in this build.</p>`;
 /* ---------- weekly snapshot: the suburbs moving most ---------- */
 // Each suburb's 12-month median now against three months ago (the same measure the map uses), for suburbs in the
 // chosen area with 50+ sales in the last year. Moves over 15% are dropped: that is a change in what sold, not in prices. Raw 3-month medians would be mostly noise: too few sales.
