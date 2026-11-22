@@ -1173,6 +1173,11 @@ body[data-view=analysis] footer{padding-top:24px}
 
 .tv-auto{height:28px;padding:0 10px;margin-right:6px;border:1px solid var(--hair);border-radius:6px;background:transparent;cursor:pointer;font:600 12.5px var(--mono);color:var(--slate);flex:none}
 .tv-auto:hover{color:var(--ink);border-color:var(--ink)}.tv-auto[aria-pressed=true]{background:var(--hi);border-color:var(--hi);color:#0E1A16}
+
+/* Live location note (05-map) */
+.geo-note{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);max-width:min(420px,calc(100% - 32px));background:var(--ink);color:var(--paper);font-size:13px;line-height:1.4;padding:10px 14px;border-radius:6px;z-index:5;opacity:0;pointer-events:none;transition:opacity .2s}
+.geo-note.on{opacity:1}
+[data-theme=dark] .geo-note{background:var(--sheet);color:var(--ink);border:1px solid var(--hair)}
 </style></head><body>
 <header class="top"><div class="top-in">
 <button type="button" class="gh-logo top-logo" data-tab="market" aria-label="Glasshouse, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 4l12 11v13H4z" fill="none" stroke="#D2FF3A" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 4v24M4 20h24" stroke="#D2FF3A" stroke-width="1.6"/></svg>Glasshouse</button>
@@ -1764,8 +1769,15 @@ function tipHtml(n){const r=rowFor(n),k=n+"|"+seg;
   return`<b>${esc(title(n))}</b>${METRICS[metric].label}: ${valueText(r,k)}<br><span>Sales ${mshift(ti,-12)} to ${mlabel()} · median ${money(md)} · middle half ${money(sv(k,2))}–${money(sv(k,3))} · ${sv(k,4)} sales${sv(k,4)<8?" (few, so treat with caution)":""}${since!=null?` · ${signed(since,0)} since`:""}</span>`;}if(!r)return`<b>${esc(title(n))}</b><span>Too few ${seg==="house"?"house":"unit"} sales in the last year</span>`;
  return`<b>${esc(title(n))}</b>${METRICS[metric].label}: ${valueText(r,k)}<br><span>${metric==="price"?"":`Median ${money(r[C.med_now])} · `}${r[C.n_now]} sales${r[C.n_now]<8?" (few, so treat with caution)":""}${metric==="g1"?"":` · ${signed(r[C.growth_1y])} in 12 months`}</span>`;}
 if(window.maplibregl){
- map=new maplibregl.Map({container:"map",style:"https://tiles.openfreemap.org/styles/positron",bounds:[[all_b[0],all_b[1]],[all_b[2],all_b[3]]],fitBoundsOptions:{padding:16},maxZoom:18,minZoom:4.5,attributionControl:{compact:true}});
+ map=new maplibregl.Map({container:"map",style:"https://tiles.openfreemap.org/styles/positron",bounds:[[all_b[0],all_b[1]],[all_b[2],all_b[3]]],fitBoundsOptions:{padding:16},maxZoom:18,minZoom:4.5,attributionControl:{compact:true},locale:{"GeolocateControl.FindMyLocation":"Show my location (stays on this device)","GeolocateControl.LocationNotAvailable":"Location is off or blocked for this site. Allow it in your browser settings to use this."}});
  map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-left");
+ // Live location (Dan, 22 Nov): browser-only, follows until switched off, nothing stored or sent to us.
+ if("geolocation" in navigator&&window.isSecureContext!==false){
+  const geo=new maplibregl.GeolocateControl({positionOptions:{enableHighAccuracy:true,timeout:15000,maximumAge:10000},trackUserLocation:true,showAccuracyCircle:true,showUserLocation:true,fitBoundsOptions:{maxZoom:15}});
+  map.addControl(geo,"top-left");
+  const geoNote=m=>{let el=document.getElementById("geoNote");if(!el){el=document.createElement("div");el.id="geoNote";el.className="geo-note";el.setAttribute("role","status");document.getElementById("map").appendChild(el);}el.textContent=m;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),6000);};
+  geo.on("error",e=>geoNote(e&&e.code===1?"Location is blocked for this site. You can allow it in your browser's site settings.":"Couldn't find your location. Check location services are on and try again."));
+ }
  map.on("load",()=>{const firstSym=(map.getStyle().layers.find(l=>l.type==="symbol")||{}).id;
   map.addSource("sat",{type:"raster",tileSize:256,maxzoom:20,tiles:["https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Imagery/MapServer/tile/{z}/{y}/{x}"],attribution:"Imagery © Spatial Services NSW"});
   map.addLayer({id:"sat",type:"raster",source:"sat",layout:{visibility:"none"}},firstSym);
