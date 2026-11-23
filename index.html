@@ -1481,6 +1481,34 @@ header.pt .pl-glass h1{margin-bottom:28px}
 [data-theme=dark] .pl-glass{box-shadow:0 30px 70px -36px rgba(0,0,0,.7)}
 @media(max-width:720px){.pl-glass{padding:26px 16px 22px;border-radius:20px}.pl-hfoot{margin-top:16px}}
 header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!important;gap:10px}
+
+/* The Brew: "Your suburbs" is a slim watchlist (right rail on wide screens) */
+.brew{padding:44px 0 4px}.brew-top{margin-bottom:8px}
+.brew-rail{padding:16px 16px 10px;border-radius:16px}
+.brew-rail .brew-fh{margin-bottom:6px}.brew-rail .brew-fh h2{font-size:15px}
+.brew-rail .brew-add{padding:4px 11px;font-size:13px}
+.brew-rail .brew-cards{display:flex;flex-direction:column;gap:0}
+.brew-rail .bcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:6px;align-items:center;background:none;border:0;border-top:1px solid var(--wash);border-radius:0;padding:9px 0}
+.brew-rail .bcard:first-child{border-top:0}
+.brew-rail .bcard .fav{grid-row:1/3;margin:0}
+.brew-rail .bname{font:600 14.5px var(--sans);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brew-rail .bmed{font:700 14.5px var(--sans);letter-spacing:-.01em;text-align:right}
+.brew-rail .bch{grid-column:3;grid-row:2;margin:0;font:600 12.5px var(--sans);text-align:right;display:block}
+.brew-rail .bwk{grid-column:2;grid-row:2;font:400 12px var(--sans);color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brew-rail .bload{grid-column:2/4;grid-row:2;margin:0;font-size:12px}
+.brew-rail .brew-empty b{font-size:14px}.brew-rail .brew-empty span{font-size:13px}
+.brew-rail .wk-pop{top:52px;left:8px;right:8px;width:auto}
+@media(min-width:1180px){
+ #tabWeekly:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:0;align-items:start}
+ #tabWeekly>*:not(.brew-rail){grid-column:1}
+ #tabWeekly>.brew-rail{grid-column:2;grid-row:1/span 4;position:sticky;top:20px;margin:44px 24px 24px 0;max-height:calc(100vh - 40px);overflow:auto}
+}
+@media(max-width:1179px){
+ #tabWeekly:not([hidden]){display:flex;flex-direction:column}
+ #tabWeekly>.brew{order:1}#tabWeekly>.brew-rail{order:2;margin:14px 32px 0}#tabWeekly>header{order:3}#tabWeekly>.wrap{order:4}
+}
+@media(max-width:720px){#tabWeekly>.brew-rail{margin:12px 16px 0}}
+@media(min-width:1180px){#tabWeekly header.pt h2#ptH1{font-size:clamp(28px,2.7vw,42px)}#tabWeekly .pt-tiles b{font-size:32px}}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -1516,7 +1544,6 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
 <div id="tabWeekly" role="tabpanel" hidden>
 <section class="brew" aria-label="Your brew"><div class="wrap">
  <div class="brew-top"><span class="brew-cup" aria-hidden="true"><svg class="bc" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h9v3.5a3.5 3.5 0 0 1-3.5 3.5H6A3.5 3.5 0 0 1 2.5 9.5zM11.5 7h1a1.8 1.8 0 0 1 0 3.6h-1.2M5 1.8c-.6.7.6 1.3 0 2.2M8 1.8c-.6.7.6 1.3 0 2.2M2 14.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p class="brew-hi" id="brewHi">Good morning.</p><h1 class="brew-h">Here’s your brew.</h1><p class="brew-sub" id="brewSub"></p></div></div>
- <div class="brew-fav"><div class="brew-fh"><h2>Your suburbs</h2><button type="button" class="brew-add" id="brewAdd">+ Track a suburb</button></div><div class="brew-cards" id="brewCards"></div></div>
 </div></section>
 <header class="pt pt-wk"><div class="wrap">
 <section class="pt-mkt" aria-label="Which way is the market going?">
@@ -1538,6 +1565,7 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
  <p class="note" id="wkN"></p>
 </section>
 </div>
+<aside class="brew-fav brew-rail" aria-label="Your suburbs"><div class="brew-fh"><h2>Your suburbs</h2><button type="button" class="brew-add" id="brewAdd">+ Track</button></div><div class="brew-cards" id="brewCards"></div></aside>
 </div>
 <div class="wrap">
 <div id="tabMap" role="tabpanel" hidden>
@@ -3694,15 +3722,15 @@ function brewStats(R,u){const hi=MS.ad[TL],now=[],prev=[],wk=[];
   if(d<=hi&&d>hi-365)now.push(x[2]);if(d<=hi-7&&d>hi-372)prev.push(x[2]);if(d<=hi&&d>hi-7)wk.push([x,p]);}}
  const mN=brewMed(now.slice()),mP=brewMed(prev.slice());return{n:now.length,mN,mP,ch:mN&&mP?mN/mP-1:null,wk:wk.sort((a,b)=>b[0][2]-a[0][2])};}
 async function brewCards(){const el=$("brewCards");if(!el)return;const tok=++brewTok,f=favs(),u=seg==="unit",noun=u?"unit":"house";
- if(!f.length){el.innerHTML=`<div class="brew-empty"><b>Track the suburbs you care about.</b><span>Each week you'll see, at a glance, how their prices moved and what sold. Star a suburb here, on the map or in the Suburbs table.</span></div>`;return;}
- el.innerHTML=f.map(l=>`<article class="bcard" data-bs="${esc(l)}"><header><button class="bname" data-bopen="${esc(l)}">${esc(title(l))}</button>${favBtn(l)}</header><p class="bload">Pouring…</p></article>`).join("");
+ if(!f.length){el.innerHTML=`<div class="brew-empty"><b>Track the suburbs you care about.</b><span>See each week how their prices moved and what sold. Star a suburb here, on the map or in the Suburbs table.</span></div>`;return;}
+ el.innerHTML=f.map(l=>`<div class="bcard" data-bs="${esc(l)}">${favBtn(l)}<button class="bname" data-bopen="${esc(l)}">${esc(title(l))}</button><p class="bload">…</p></div>`).join("");
  await Promise.all(f.map(async l=>{let R=null;try{R=await propsOf(l);}catch(e){}if(tok!==brewTok)return;const c=el.querySelector(`[data-bs="${CSS.escape(l)}"]`);if(!c)return;
   const body=c.querySelector(".bload");if(!R){body.textContent="No sales file for this suburb.";return;}
-  const s=brewStats(R,u);if(!s.mN||s.n<5){body.innerHTML=`Too few ${noun} sales in the last year for a median.${s.wk.length?` ${s.wk.length} sold this week.`:""}`;return;}
+  const s=brewStats(R,u);if(!s.mN||s.n<5){body.outerHTML=`<span class="bwk">Too few ${noun} sales for a median${s.wk.length?` · ${s.wk.length} sold this week`:""}</span>`;return;}
   const ch=s.ch,dir=ch==null||Math.abs(ch)<.0005?"flat":ch>0?"up":"dn",arrow=dir==="up"?"▲":dir==="dn"?"▼":"●";
-  const top=s.wk[0],line=s.wk.length?`${s.wk.length} sold this week${top?`, top ${money(top[0][2])}`:""}`:"No sales settled this week";
-  body.outerHTML=`<p class="bmed"><b>${money(s.mN)}</b><span>12-month median${s.n<15?", few sales":""}</span></p>`+
-   `<p class="bch ${dir}"><i>${arrow}</i>${ch==null?"No change to compare":dir==="flat"?"Unchanged on last week":`${ch>0?"Up":"Down"} ${pct(Math.abs(ch),1)} on last week`}</p><p class="bwk">${line}</p>`;}));}
+  const top=s.wk[0];
+  body.outerHTML=`<b class="bmed" title="12-month median${s.n<15?", few sales":""}">${money(s.mN)}</b>`+
+   `<span class="bch ${dir}" title="12-month median, change on last week">${arrow} ${ch==null||dir==="flat"?"0.0%":pct(Math.abs(ch),1)}</span><span class="bwk">${s.wk.length?`${s.wk.length} sold this week${top?`, top ${money(top[0][2])}`:""}`:"No sales this week"}</span>`;}));}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-bopen]");if(!b)return;wkChooseSub(b.dataset.bopen);});
 $("brewAdd").addEventListener("click",e=>{e.stopPropagation();document.querySelector(".brew-fav").appendChild($("wkPop"));wkOpen(true,"track");});
 document.addEventListener("favs",()=>{if(view==="weekly")brewCards();});
