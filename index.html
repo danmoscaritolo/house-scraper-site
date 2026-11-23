@@ -9,12 +9,12 @@
 <meta property="og:description" content="Every NSW home sale since 1990, on a map. What homes really sold for, and whether buying or renting leaves you ahead.">
 <meta property="og:image" content="https://danmoscaritolo.github.io/house-scraper-site/og.png?v=plotted">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23131A2A'/%3E%3Cpath d='M13 22 45 14 51 47 18 51Z' fill='none' stroke='%23F4F1E8' stroke-width='4.6' stroke-linejoin='round'/%3E%3Ccircle cx='45' cy='14' r='8' fill='%235B6CFF' stroke='%23131A2A' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23131A2A'/%3E%3Cpath d='M13 22 45 14 51 47 18 51Z' fill='none' stroke='%23F4F1E8' stroke-width='4.6' stroke-linejoin='round'/%3E%3Ccircle cx='45' cy='14' r='8' fill='%236B7AD9' stroke='%23131A2A' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="data/web/geo.js"></script><script src="data/web/hist_6.js"></script><script src="data/web/hist_7.js"></script>
@@ -427,9 +427,9 @@ h1,h2,h3,.bx-big,.bx-verdict,.tdate,.stat .v,.cards2 .v,.mstats .v,.bx-tile .v,.
 /* masthead */
 header.pt{background:var(--night);color:#EAF0EA;border-bottom:0;padding:0;position:relative;overflow:hidden}
 header.pt::before{content:"";position:absolute;inset:0;pointer-events:none;background:
- linear-gradient(90deg,rgba(47,69,255,.06) 1px,transparent 1px) 0 0/112px 112px,
- linear-gradient(0deg,rgba(47,69,255,.06) 1px,transparent 1px) 0 0/112px 112px,
- radial-gradient(900px 460px at 88% -12%,rgba(47,69,255,.17),transparent 62%)}
+ linear-gradient(90deg,rgba(63,81,199,.06) 1px,transparent 1px) 0 0/112px 112px,
+ linear-gradient(0deg,rgba(63,81,199,.06) 1px,transparent 1px) 0 0/112px 112px,
+ radial-gradient(900px 460px at 88% -12%,rgba(63,81,199,.17),transparent 62%)}
 header.pt .wrap{position:relative}
 .pt-bar{display:flex;align-items:center;gap:14px;padding:20px 0 0}
 .pt-logo{display:inline-flex;align-items:center;gap:10px;font:800 23px/1 var(--serif);letter-spacing:-.03em;color:#fff}
@@ -442,10 +442,10 @@ header.pt .wrap{position:relative}
 header.pt h1{font:800 clamp(44px,6.4vw,92px)/.92 var(--serif);font-stretch:72%;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 20px;color:#fff}
 header.pt h1 mark{background:var(--hi);color:var(--night);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #headline{font:400 18px/1.5 var(--sans);color:#C9D4CD;max-width:54ch;margin:0}
-#headline b{color:#fff;font-weight:600;box-shadow:inset 0 -.45em 0 rgba(47,69,255,.3)}
+#headline b{color:#fff;font-weight:600;box-shadow:inset 0 -.45em 0 rgba(63,81,199,.3)}
 .pt-ask{display:grid;gap:10px}
 .pt-ask button{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:15px 18px;color:#fff;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
-.pt-ask button:hover{background:rgba(47,69,255,.1);border-color:var(--hi);transform:translateX(3px)}
+.pt-ask button:hover{background:rgba(63,81,199,.1);border-color:var(--hi);transform:translateX(3px)}
 .pt-ask .n{font:500 11.5px var(--mono);color:var(--hi)}
 .pt-ask b{display:block;font:700 19px/1.2 var(--serif);letter-spacing:-.01em}
 .pt-ask .s{display:block;font:400 13px/1.35 var(--sans);color:var(--mist);margin-top:2px}
@@ -461,8 +461,8 @@ header.pt h1 mark{background:var(--hi);color:var(--night);padding:0 .1em;-webkit
 header.pt .pt-hero h1{margin:0 0 26px;max-width:17ch}
 .pt-sub{font:400 21px/1.4 var(--sans);color:#C9D4CD;margin:0 0 22px}.pt-sub b{color:#fff;font-weight:600}
 .pt-fresh{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px;color:#EAF0EA;font:500 14.5px var(--sans);cursor:pointer;transition:border-color .15s,background .15s}
-.pt-fresh:hover{border-color:var(--hi);background:rgba(47,69,255,.08)}
-.pt-fresh i{width:8px;height:8px;border-radius:50%;background:var(--hi);box-shadow:0 0 0 4px rgba(47,69,255,.18)}.pt-fresh u{text-decoration:none;color:var(--hi)}
+.pt-fresh:hover{border-color:var(--hi);background:rgba(63,81,199,.08)}
+.pt-fresh i{width:8px;height:8px;border-radius:50%;background:var(--hi);box-shadow:0 0 0 4px rgba(63,81,199,.18)}.pt-fresh u{text-decoration:none;color:var(--hi)}
 .pt-mkt{border-top:1px solid rgba(255,255,255,.13);padding:44px 0 40px}
 .pt-kick{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin:0 0 30px;font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hi)}
 .pt-ctl{display:inline-flex;gap:8px;align-items:center}
@@ -648,7 +648,7 @@ details.how.lic{margin-top:0;border-top:0}
 .bx-rentblk .bx-sub{margin:0 0 8px}
 .bx-rentin{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font:700 28px/1.1 var(--serif);font-stretch:85%;color:var(--ink)}
 .bx-rentin input{width:5.5ch;font:inherit;font-stretch:inherit;color:inherit;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:0 2px}
-.bx-rentin input:focus{outline:none;border-bottom-color:var(--hi);background:rgba(47,69,255,.18)}
+.bx-rentin input:focus{outline:none;border-bottom-color:var(--hi);background:rgba(63,81,199,.18)}
 .bx-rentin>span:not(:first-child){font:400 14.5px var(--sans);color:var(--slate)}
 .bx-rentin .bx-link{font-size:13px}
 
@@ -695,7 +695,7 @@ select:not([multiple]){-webkit-appearance:none;appearance:none;cursor:pointer;fo
  background:var(--sheet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230E1A16' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center/10px 6px;
  transition:border-color .15s,box-shadow .15s}
 select:not([multiple]):hover{border-color:var(--ink)}
-select:not([multiple]):focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(47,69,255,.6)}
+select:not([multiple]):focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(63,81,199,.6)}
 header.pt select:not([multiple]){background-color:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.22);
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23D2FF3A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 header.pt select:not([multiple]):hover{border-color:var(--hi)}
@@ -717,17 +717,17 @@ header.pt select option{color:var(--ink);background:#fff}
 @media(max-width:720px){.mapctl{position:static}.mapctl .timebar{grid-template-columns:auto auto 1fr}}
 .tcur i{box-sizing:border-box;width:16px;height:16px;left:-8px}
 .tcur[hidden]{display:none}
-.trng{background:rgba(47,69,255,.45);border-radius:4px}
+.trng{background:rgba(63,81,199,.45);border-radius:4px}
 .trng .g{background:var(--ink)}
 .tmode button[aria-pressed=true]{background:var(--ink);color:#fff}
 
 /* ---- price or rent limit above the map ---- */
-.mbud{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:6px 8px 6px 14px;border:1px solid var(--ink);border-radius:12px;background:var(--sheet);box-shadow:0 0 0 3px rgba(47,69,255,.45)}
+.mbud{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:6px 8px 6px 14px;border:1px solid var(--ink);border-radius:12px;background:var(--sheet);box-shadow:0 0 0 3px rgba(63,81,199,.45)}
 .mbud[hidden]{display:none}
 .mbud label{display:flex;align-items:center;gap:10px;font:500 11.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--slate)}
 .mbud-in{display:flex;align-items:baseline;gap:4px;font:700 19px/1 var(--serif);font-stretch:85%;color:var(--ink);text-transform:none;letter-spacing:0}
 .mbud-in input{width:7ch;font:inherit;font-stretch:inherit;border:0;border-bottom:2px solid var(--ink);border-radius:0;background:transparent;padding:0 2px}
-.mbud-in input:focus-visible{box-shadow:none;background:rgba(47,69,255,.25)}
+.mbud-in input:focus-visible{box-shadow:none;background:rgba(63,81,199,.25)}
 .mbud-in em{font:400 13px var(--sans);font-style:normal;color:var(--slate)}
 .mbud-h{font:400 13px var(--sans);color:var(--slate)}
 .mbud button{border:0;background:var(--wash);border-radius:999px;padding:7px 12px;font:500 13px var(--sans);color:var(--ink);cursor:pointer}
@@ -1183,15 +1183,15 @@ body[data-view=analysis] footer{padding-top:24px}
 [data-theme=dark] .geo-note{background:var(--sheet);color:var(--ink);border:1px solid var(--hair)}
 /* ================= Plotted skin (prototype, 23 Nov 2026) =================
    Survey-plan look: drafting-paper cream, navy ink, one cobalt "survey ink" accent.
-   Hanken Grotesk throughout (heavy and tight for headlines), JetBrains Mono for labels. Wordmark: "plotted", lowercase.
+   Geist Mono for headlines, numbers and labels (light, code-like), Geist for body text. Wordmark: "plotted", lowercase.
    Loaded after skin.css; everything here overrides it. */
 :root{--paper:#F4F1E8;--sheet:#FFFDF8;--ink:#131A2A;--slate:#5C6273;--hair:#DDD6C5;--wash:#EAE5D6;
---hi:#2F45FF;--on-hi:#FFFFFF;--hi-soft:rgba(47,69,255,.09);--night:#131A2A;--mist:#8A90A0;--focus:#2F45FF;
+--hi:#3F51C7;--on-hi:#FFFFFF;--hi-soft:rgba(63,81,199,.09);--night:#131A2A;--mist:#8A90A0;--focus:#3F51C7;
 --grid:rgba(19,26,42,.07);--grid2:rgba(19,26,42,.035);
---disp:"Hanken Grotesk",-apple-system,"Segoe UI",sans-serif;--serif:"Hanken Grotesk",-apple-system,"Segoe UI",sans-serif;
---sans:"Hanken Grotesk",-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+--disp:"Geist Mono",ui-monospace,Menlo,monospace;--serif:"Geist",-apple-system,"Segoe UI",sans-serif;
+--sans:"Geist",-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,Menlo,monospace}
 [data-theme=dark]{--paper:#0D1324;--sheet:#141C31;--ink:#E9EBF3;--slate:#9AA1B6;--hair:#26304A;--wash:#1B2440;
---hi:#8E9BFF;--on-hi:#0D1324;--hi-soft:rgba(142,155,255,.12);--night:#070B17;--mist:#7D84A0;--focus:#8E9BFF;
+--hi:#A3ACEB;--on-hi:#0D1324;--hi-soft:rgba(163,172,235,.12);--night:#070B17;--mist:#7D84A0;--focus:#A3ACEB;
 --grid:rgba(233,235,243,.06);--grid2:rgba(233,235,243,.03)}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans)}
 ::selection{background:var(--hi);color:var(--on-hi)}
@@ -1201,11 +1201,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans)}
 [data-theme=dark] .cta button.pri,[data-theme=dark] #tourO .tr-next,[data-theme=dark] .chip button.on,[data-theme=dark] .bx-n{background:var(--hi);color:var(--on-hi);border-color:var(--hi)}
 .pt-next:hover,.pt-ask button.pri:hover{background:var(--hi);filter:brightness(1.08)}
 .pt-next .k,.pt-next .s,.pt-ask button.pri .n,.pt-ask button.pri .s{color:var(--on-hi);opacity:.78}
-.pt-next b{font:700 24px/1.1 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.025em}
+.pt-next b{font:500 24px/1.1 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.025em}
 
 /* ---------- top bar: paper, not night ---------- */
 header.top{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--hair)}
-.pt-logo,.top-logo{color:var(--ink);gap:9px;font:750 25px/1 var(--disp);letter-spacing:-.045em;text-transform:lowercase}
+.pt-logo,.top-logo{color:var(--ink);gap:9px;font:500 25px/1 var(--disp);letter-spacing:-.02em;text-transform:lowercase}
 .pt-logo .pl-mark,.top-logo .pl-mark{width:26px;height:26px;flex:none;color:var(--ink)}
 .pl-mark .pl-dot{fill:var(--hi)}
 .pl-word{transform:translateY(1px)}
@@ -1242,11 +1242,11 @@ header.pt .wrap{z-index:1}
 .pl-kick{display:flex;flex-wrap:wrap;gap:0;margin:0 0 26px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
 .pl-kick span{display:inline-flex;align-items:center}
 .pl-kick span+span::before{content:"";width:5px;height:5px;margin:0 14px;border-radius:50%;background:var(--hi)}
-header.pt h1,.pt-slides header.pt h1,header.pt .pt-slides h1{font:750 clamp(46px,6.6vw,100px)/.95 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.025em;color:var(--ink);margin:0 0 30px;max-width:11ch}
+header.pt h1,.pt-slides header.pt h1,header.pt .pt-slides h1{font:500 clamp(46px,6.6vw,100px)/.95 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.025em;color:var(--ink);margin:0 0 30px;max-width:11ch}
 header.pt h1 mark{background:none;color:var(--hi);padding:0}
 .pt-sub{font:400 21px/1.45 var(--sans);color:var(--slate);max-width:40ch}.pt-sub b{color:var(--ink);font-weight:600}
 .pt-stats,.pt-slides .pt-hero .pt-stats{border-color:var(--hair)}
-.pt-stats div b,.pt-hero .pt-stats div b{font:700 34px/1 var(--disp);font-stretch:normal;color:var(--ink);letter-spacing:-.035em}
+.pt-stats div b,.pt-hero .pt-stats div b{font:500 34px/1 var(--disp);font-stretch:normal;color:var(--ink);letter-spacing:-.02em}
 .pt-stats div span{font:500 11px var(--mono);letter-spacing:.1em;color:var(--slate)}
 .pt-fresh{background:var(--sheet);border:1px solid var(--hair);color:var(--ink)}
 .pt-fresh:hover{border-color:var(--hi);background:var(--sheet)}
@@ -1259,7 +1259,7 @@ header.pt h1 mark{background:none;color:var(--hi);padding:0}
 .pt-ask button:hover{background:var(--sheet);border-color:var(--hi);transform:translateX(3px)}
 .pt-ask button:hover::before{background:var(--hi);border-color:var(--hi)}
 .pt-ask .n{font:500 11.5px var(--mono);color:var(--hi);letter-spacing:.06em}
-.pt-ask b{font:600 18.5px/1.2 var(--sans);letter-spacing:-.01em}
+.pt-ask b{font:500 18px/1.2 var(--sans);letter-spacing:-.01em}
 .pt-ask .s{color:var(--slate);font-size:13.5px}
 .pt-ask .go{color:var(--hi)}
 
@@ -1269,33 +1269,33 @@ header.pt h1 mark{background:none;color:var(--hi);padding:0}
 .pt-ctl .seg,#ptArea,header.pt select:not([multiple]){background-color:var(--sheet);border-color:var(--hair);color:var(--ink)}
 .pt-ctl .seg button{color:var(--slate)}
 .pt-ctl .seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
-header.pt h2#ptH1{font:750 clamp(32px,3.7vw,54px)/1.04 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.04em;color:var(--ink)}
+header.pt h2#ptH1{font:500 clamp(32px,3.7vw,54px)/1.04 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.02em;color:var(--ink)}
 header.pt h2#ptH1 mark{color:var(--hi)}
 header.pt h2#ptH1 mark.dn{background:none;color:var(--loss);padding:0}
 header.pt h2#ptH1 mark.up{background:none;color:var(--gain);padding:0}
 #headline{color:var(--slate)}#headline b{color:var(--ink);box-shadow:inset 0 -.4em 0 var(--hi-soft)}
 .pt-tiles,.pt-tiles div+div{border-color:var(--hair)}
-.pt-tiles b{font:700 40px/1.05 var(--disp);font-stretch:normal;color:var(--ink);letter-spacing:-.035em}
+.pt-tiles b{font:500 40px/1.05 var(--disp);font-stretch:normal;color:var(--ink);letter-spacing:-.02em}
 .pt-tiles b.up{color:var(--gain)}.pt-tiles b.dn{color:var(--loss)}
 .pt-now b{color:var(--ink)}
 .pt-cap summary,.pt-cap dd{color:var(--slate)}
 #ptFig text{fill:var(--slate)}#ptFig text.v,#ptFig text.call{fill:var(--ink);stroke:var(--paper)}#ptFig text.v.now{fill:var(--ink)}
 #ptFig [stroke="#EAF0EA"]{stroke:var(--ink)}#ptFig [fill="#EAF0EA"]{fill:var(--ink)}
-#ptFig [stroke="rgba(255,255,255,.18)"]{stroke:var(--hair)}#ptFig [fill="#2F45FF"]{fill:var(--hi)}
+#ptFig [stroke="rgba(255,255,255,.18)"]{stroke:var(--hair)}#ptFig [fill="#3F51C7"]{fill:var(--hi)}
 #ptFig .hovg line{stroke:var(--ink)}
 .pt-back{border-color:var(--hair);color:var(--ink)}.pt-dots button{background:var(--hair)}
 .pt-ask button.pri .n,.pt-ask button.pri .s{color:var(--on-hi)}
 
 /* section titles elsewhere pick up the display face */
 .wk-move h2,.wk-move>h2,section h2.sec,.how summary{letter-spacing:-.01em}
-.wk-move h2{font:750 clamp(28px,2.9vw,40px)/1.1 var(--disp);letter-spacing:-.035em}
+.wk-move h2{font:500 clamp(28px,2.9vw,40px)/1.1 var(--disp);letter-spacing:-.02em}
 .pt-stats div b,.pt-tiles b,.wk-move .pc,.wk-move b.v{font-variant-numeric:tabular-nums}
 
 /* footer manifesto: an ink sheet */
 .pt-foot{background:var(--ink);color:var(--paper);border-radius:6px}
 .pt-foot .pt-logo{color:var(--paper)}.pt-foot .pl-mark{color:var(--paper)}
-.pt-foot p{font:750 clamp(22px,2.5vw,34px)/1.15 var(--disp);letter-spacing:-.035em}
-.pt-foot p mark{background:none;color:#8E9BFF;padding:0}
+.pt-foot p{font:500 clamp(22px,2.5vw,34px)/1.15 var(--disp);letter-spacing:-.02em}
+.pt-foot p mark{background:none;color:#A3ACEB;padding:0}
 .pt-foot small{color:#A9AEBD}
 [data-theme=dark] .pt-foot,[data-theme=dark] footer .pt-foot{background:var(--sheet);color:var(--ink)}
 [data-theme=dark] .pt-foot .pt-logo,[data-theme=dark] .pt-foot .pl-mark{color:var(--ink)}
@@ -1314,8 +1314,8 @@ header.pt h2#ptH1 mark.up{background:none;color:var(--gain);padding:0}
 }
 
 /* remaining condensed-caps titles become display serif, sentence case */
-#detail h2{font:750 32px/1.05 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.035em}
-.bx-top h2.sec{font:750 clamp(32px,3.7vw,50px)/1.04 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.04em}
+#detail h2{font:500 32px/1.05 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.02em}
+.bx-top h2.sec{font:500 clamp(32px,3.7vw,50px)/1.04 var(--disp);font-stretch:normal;text-transform:none;letter-spacing:-.02em}
 .bx-top .warn,.bx-top aside{border-left-color:var(--hi)}
 
 /* ================= Shell v2: centred search home + left sidebar ================= */
@@ -1397,8 +1397,8 @@ header.pt .pt-ask.pl-chips{display:flex!important;flex-wrap:wrap;justify-content
 #ptArea{display:none!important}
 .pt-kick.wk-head{align-items:flex-end;font:inherit;letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:34px}
 .wk-place{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
-.wk-q{font:600 clamp(20px,2vw,28px)/1.15 var(--disp);letter-spacing:-.025em;color:var(--slate)}
-.wk-pick{display:inline-flex;align-items:center;gap:10px;font:750 clamp(26px,2.9vw,40px)/1.1 var(--disp);letter-spacing:-.035em;color:var(--ink);
+.wk-q{font:450 clamp(20px,2vw,28px)/1.15 var(--disp);letter-spacing:-.025em;color:var(--slate)}
+.wk-pick{display:inline-flex;align-items:center;gap:10px;font:500 clamp(26px,2.9vw,40px)/1.1 var(--disp);letter-spacing:-.02em;color:var(--ink);
  background:var(--sheet);border:1.5px solid var(--hi);border-radius:14px;padding:4px 14px 7px 18px;cursor:pointer;box-shadow:0 0 0 5px var(--hi-soft);transition:box-shadow .15s,transform .15s}
 .wk-pick svg{width:22px;height:22px;color:var(--hi);margin-top:6px;transition:transform .2s}
 .wk-pick:hover{box-shadow:0 0 0 7px var(--hi-soft)}
@@ -1420,7 +1420,7 @@ header.pt .pt-ask.pl-chips{display:flex!important;flex-wrap:wrap;justify-content
 .ws-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px}
 .ws-win button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
 .wk-col h3.neu{color:var(--slate)}
-.ws-cols .wk-col li button .num{font:700 20px var(--disp);letter-spacing:-.02em;color:var(--ink)}
+.ws-cols .wk-col li button .num{font:500 20px var(--disp);letter-spacing:-.02em;color:var(--ink)}
 .ws-cols .wk-col li button small i{font-style:normal}
 .wk-col li.muted{padding:16px 0;color:var(--slate);font-size:14px;border:0}
 @media(max-width:720px){.wk-q{font-size:21px;width:100%}.wk-pick{font-size:30px}.pt-kick.wk-head{flex-direction:column;align-items:flex-start;gap:16px}}
@@ -1440,20 +1440,20 @@ header.pt .pt-ask.pl-chips{display:flex!important;flex-wrap:wrap;justify-content
 .brew-cup{flex:none;width:58px;height:58px;border-radius:16px;background:var(--hi-soft);color:var(--hi);display:grid;place-items:center}
 .brew-cup .bc{width:30px;height:30px}
 .brew-hi{margin:0 0 2px;font:600 15px var(--sans);color:var(--hi)}
-.brew-h{margin:0 0 6px;font:750 clamp(32px,3.6vw,50px)/1.05 var(--disp);letter-spacing:-.04em;color:var(--ink)}
+.brew-h{margin:0 0 6px;font:500 clamp(32px,3.6vw,50px)/1.05 var(--disp);letter-spacing:-.02em;color:var(--ink)}
 .brew-sub{margin:0;font:400 17px/1.45 var(--sans);color:var(--slate);max-width:60ch}
 .brew-fav{position:relative;padding:22px 24px 24px;background:var(--sheet);border:1px solid var(--hair);border-radius:20px}
 .brew-fh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-.brew-fh h2{margin:0;font:700 19px var(--sans);letter-spacing:-.02em}
+.brew-fh h2{margin:0;font:500 15px var(--disp);letter-spacing:-.02em}
 .brew-add{background:none;border:1px solid var(--hair);border-radius:999px;padding:7px 14px;font:500 14px var(--sans);color:var(--ink);cursor:pointer}
 .brew-add:hover{border-color:var(--hi);color:var(--hi)}
 .brew-fav .wk-pop{top:64px;left:auto;right:24px}
 .brew-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
 .bcard{background:var(--paper);border:1px solid var(--hair);border-radius:14px;padding:14px 16px 14px}
 .bcard header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
-.bname{background:none;border:0;padding:0;font:700 17px var(--sans);letter-spacing:-.02em;color:var(--ink);cursor:pointer;text-align:left}
+.bname{background:none;border:0;padding:0;font:500 17px var(--sans);letter-spacing:-.02em;color:var(--ink);cursor:pointer;text-align:left}
 .bname:hover{color:var(--hi)}
-.bmed{margin:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.bmed b{font:750 26px var(--disp);letter-spacing:-.035em}.bmed span{font:400 12.5px var(--sans);color:var(--slate)}
+.bmed{margin:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.bmed b{font:500 26px var(--disp);letter-spacing:-.02em}.bmed span{font:400 12.5px var(--sans);color:var(--slate)}
 .bch{margin:6px 0 2px;font:600 14px var(--sans);display:flex;align-items:center;gap:6px}.bch i{font-style:normal;font-size:11px}
 .bch.up{color:var(--gain)}.bch.dn{color:var(--loss)}.bch.flat{color:var(--slate)}
 .bwk{margin:0;font:400 13.5px var(--sans);color:var(--slate)}
@@ -1471,16 +1471,6 @@ header.pt .pt-ask.pl-chips{display:flex!important;flex-wrap:wrap;justify-content
 .sub-srch{margin:0 0 14px;max-width:440px}.sub-srch input{width:100%;box-sizing:border-box;height:46px;border-radius:12px;border:1px solid var(--hair);background:var(--sheet);color:var(--ink);padding:0 14px;font:400 16px var(--sans)}
 .sub-srch input:focus{outline:0;border-color:var(--hi);box-shadow:0 0 0 3px var(--hi-soft)}
 @media(max-width:720px){.brew{padding:32px 0 4px}.brew-top{gap:14px}.brew-cup{width:46px;height:46px;border-radius:13px}.brew-cup .bc{width:24px;height:24px}.brew-fav{padding:18px 16px}.brew-fav .wk-pop{right:0;left:0;width:auto}}
-/* home: one frosted plate behind the headline, search and shortcuts */
-.pl-glass{display:flex;flex-direction:column;align-items:center;width:min(940px,100%);box-sizing:border-box;padding:40px 52px 36px;border-radius:28px;
- background:color-mix(in srgb,var(--paper) 62%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.25);backdrop-filter:blur(16px) saturate(1.25);
- border:1px solid color-mix(in srgb,var(--hair) 75%,transparent);box-shadow:0 30px 70px -40px rgba(19,26,42,.35)}
-header.pt .pl-glass h1{margin-bottom:28px}
-.pl-glass .pt-ask.pl-chips{padding-top:16px}
-.pl-hfoot{margin-top:28px}
-[data-theme=dark] .pl-glass{box-shadow:0 30px 70px -36px rgba(0,0,0,.7)}
-@media(max-width:720px){.pl-glass{padding:26px 16px 22px;border-radius:20px}.pl-hfoot{margin-top:16px}}
-header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!important;gap:10px}
 
 /* The Brew: "Your suburbs" is a slim watchlist (right rail on wide screens) */
 .brew{padding:44px 0 4px}.brew-top{margin-bottom:8px}
@@ -1491,8 +1481,8 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
 .brew-rail .bcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:6px;align-items:center;background:none;border:0;border-top:1px solid var(--wash);border-radius:0;padding:9px 0}
 .brew-rail .bcard:first-child{border-top:0}
 .brew-rail .bcard .fav{grid-row:1/3;margin:0}
-.brew-rail .bname{font:600 14.5px var(--sans);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.brew-rail .bmed{font:700 14.5px var(--sans);letter-spacing:-.01em;text-align:right}
+.brew-rail .bname{font:500 14.5px var(--sans);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brew-rail .bmed{font:500 14px var(--disp);letter-spacing:-.01em;text-align:right}
 .brew-rail .bch{grid-column:3;grid-row:2;margin:0;font:600 12.5px var(--sans);text-align:right;display:block}
 .brew-rail .bwk{grid-column:2;grid-row:2;font:400 12px var(--sans);color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brew-rail .bload{grid-column:2/4;grid-row:2;margin:0;font-size:12px}
@@ -1536,10 +1526,36 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
 .mf-pop *{box-sizing:border-box}
 .mf-f{grid-template-columns:108px minmax(0,1fr)}.mf-f select{min-width:0;max-width:100%}
 .mf-pop .spbar{display:flex;flex-direction:column;align-items:stretch;gap:8px;background:none;border:0;border-bottom:1px solid var(--wash);border-radius:0;padding:0 0 14px;margin:0 0 14px;box-shadow:none}
+
+/* ================= Minimal pass (23 Nov evening): lighter type, free-standing home ================= */
+h2.sec,.v-head h2,.wk-move h2{font:500 clamp(22px,2.3vw,30px)/1.2 var(--disp);letter-spacing:-.02em}
+header.pt h1,.pt-slides header.pt h1,header.pt .pt-slides h1{font-weight:500;letter-spacing:-.03em}
+header.pt .pl-home h1{font-size:clamp(34px,4.2vw,62px);line-height:1.08}
+header.pt h2#ptH1,#tabWeekly header.pt h2#ptH1{font-weight:500;letter-spacing:-.025em}
+.pt-logo,.top-logo{font-weight:500;letter-spacing:-.03em}
+.pt-stats div b,.pt-hero .pt-stats div b,.pt-tiles b,.bmed b,.brew-h{font-weight:500}
+.brew-h{font-family:var(--disp);letter-spacing:-.025em}
+b,strong{font-weight:600}
+/* home: words stand free; a soft fog behind the centre calms the plan lines without a box */
+.pl-home{position:relative}
+.pl-home::before{content:"";position:absolute;z-index:-1;left:50%;top:46%;width:min(1100px,96%);height:78%;transform:translate(-50%,-50%);pointer-events:none;
+ background:radial-gradient(closest-side,color-mix(in srgb,var(--paper) 88%,transparent) 0%,color-mix(in srgb,var(--paper) 70%,transparent) 55%,transparent 100%);filter:blur(6px)}
+header.pt .pl-home{isolation:isolate}
+/* each shortcut: frosted, soft-edged, no hard outline */
+.pl-chips button{border:0!important;background:color-mix(in srgb,var(--sheet) 52%,transparent)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--hair) 45%,transparent),0 0 18px 6px color-mix(in srgb,var(--paper) 60%,transparent)!important}
+.pl-chips button:hover{background:color-mix(in srgb,var(--sheet) 85%,transparent)!important;box-shadow:0 0 0 1px var(--hi),0 0 18px 6px color-mix(in srgb,var(--paper) 60%,transparent)!important}
+.pl-chips b{font-weight:450!important}
+/* stats: same soft frost, no card edge */
+.pl-hfoot{border:0;box-shadow:0 0 30px 14px color-mix(in srgb,var(--paper) 55%,transparent);background:color-mix(in srgb,var(--paper) 55%,transparent);border-radius:28px}
+[data-theme=dark] .pl-chips button{box-shadow:0 0 0 1px color-mix(in srgb,var(--hair) 60%,transparent),0 0 18px 6px color-mix(in srgb,var(--paper) 60%,transparent)!important}
+[data-theme=dark] .pl-hfoot{box-shadow:0 0 30px 14px color-mix(in srgb,var(--paper) 55%,transparent)!important}
+.pl-hsrch #find{font-family:var(--sans)}
+@media(min-width:1180px){#tabWeekly header.pt h2#ptH1{font-size:clamp(24px,2.3vw,36px)}}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
-<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h9v3.5a3.5 3.5 0 0 1-3.5 3.5H6A3.5 3.5 0 0 1 2.5 9.5zM11.5 7h1a1.8 1.8 0 0 1 0 3.6h-1.2M5 1.8c-.6.7.6 1.3 0 2.2M8 1.8c-.6.7.6 1.3 0 2.2M2 14.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">The Brew</span><span class="t-s">Brew</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
+<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
 <div class="top-srch"><div class="field srch"><input id="find" placeholder="Search any NSW suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div></div>
 <div class="sb-foot"><button type="button" class="themeBtn" id="themeBtn" aria-label="Dark mode" title="Light or dark"><svg class="su" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="mo" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
 <button type="button" class="tourBtn" id="tourBtn">Tour</button></div>
@@ -1548,17 +1564,15 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
 <div id="tabMarket" role="tabpanel">
 <header class="pt"><div class="pl-planw"><svg class="pl-plan" viewBox="0 0 720 560" aria-hidden="true" focusable="false"><path class="pl-road" d="M20,330 L700,250 M30,392 L710,312"/><text class="pl-t pl-rd" transform="translate(365,326) rotate(-6.7)" text-anchor="middle">R O A D   ·   2 0 . 1 1 5   W I D E</text><path class="pl-lot" d="M20.0,330.0 L135.6,316.4 L150.5,59.8 L40.0,70.0Z"/><text class="pl-t pl-n" x="87" y="194" text-anchor="middle">11</text><text class="pl-t pl-d" transform="translate(78,315) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot pl-hl" d="M135.6,316.4 L230.8,305.2 L241.5,51.4 L150.5,59.8Z"/><text class="pl-t pl-n" x="190" y="183" text-anchor="middle">12</text><text class="pl-t pl-d" transform="translate(183,303) rotate(-6.7)" text-anchor="middle">10.53</text><circle class="pl-peg" cx="135.6" cy="316.4" r="4.5"/><circle class="pl-peg" cx="230.8" cy="305.2" r="4.5"/><circle class="pl-peg" cx="241.5" cy="51.4" r="4.5"/><circle class="pl-peg" cx="150.5" cy="59.8" r="4.5"/><text class="pl-t pl-tag" x="190" y="203" text-anchor="middle">SOLD</text><path class="pl-lot" d="M230.8,305.2 L332.8,293.2 L339.0,42.4 L241.5,51.4Z"/><text class="pl-t pl-n" x="286" y="173" text-anchor="middle">13</text><text class="pl-t pl-d" transform="translate(282,291) rotate(-6.7)" text-anchor="middle">11.29</text><path class="pl-lot" d="M332.8,293.2 L441.6,280.4 L443.0,32.8 L339.0,42.4Z"/><text class="pl-t pl-n" x="389" y="162" text-anchor="middle">14</text><text class="pl-t pl-d" transform="translate(387,279) rotate(-6.7)" text-anchor="middle">12.04</text><path class="pl-lot" d="M441.6,280.4 L557.2,266.8 L553.5,22.6 L443.0,32.8Z"/><text class="pl-t pl-n" x="499" y="151" text-anchor="middle">15</text><text class="pl-t pl-d" transform="translate(499,266) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot" d="M557.2,266.8 L700.0,250.0 L690.0,10.0 L553.5,22.6Z"/><text class="pl-t pl-n" x="625" y="137" text-anchor="middle">16</text><text class="pl-t pl-d" transform="translate(629,250) rotate(-6.7)" text-anchor="middle">15.80</text><path class="pl-lot" d="M30.0,392.0 L166.0,376.0 L152.0,526.0 L10.0,540.0Z"/><text class="pl-t pl-n" x="90" y="458" text-anchor="middle">21</text><text class="pl-t pl-d" transform="translate(98,400) rotate(-6.7)" text-anchor="middle">15.05</text><path class="pl-lot" d="M166.0,376.0 L281.6,362.4 L272.7,514.1 L152.0,526.0Z"/><text class="pl-t pl-n" x="218" y="445" text-anchor="middle">22</text><text class="pl-t pl-d" transform="translate(224,385) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot" d="M281.6,362.4 L404.0,348.0 L400.5,501.5 L272.7,514.1Z"/><text class="pl-t pl-n" x="340" y="432" text-anchor="middle">23</text><text class="pl-t pl-d" transform="translate(343,371) rotate(-6.7)" text-anchor="middle">13.54</text><path class="pl-lot" d="M404.0,348.0 L519.6,334.4 L521.2,489.6 L400.5,501.5Z"/><text class="pl-t pl-n" x="461" y="418" text-anchor="middle">24</text><text class="pl-t pl-d" transform="translate(462,357) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot" d="M519.6,334.4 L710.0,312.0 L720.0,470.0 L521.2,489.6Z"/><text class="pl-t pl-n" x="618" y="402" text-anchor="middle">25</text><text class="pl-t pl-d" transform="translate(615,339) rotate(-6.7)" text-anchor="middle">21.07</text><g class="pl-north" transform="translate(660,96)"><path d="M0,-30 L9,8 L0,1 L-9,8Z"/><text class="pl-t" x="0" y="26" text-anchor="middle">N</text></g></svg></div><div class="wrap">
 <section class="pt-hero pt-home pl-home" aria-label="Plotted">
-<div class="pl-glass">
 <p class="pl-kick"><span>NSW</span><span>Sales since 1990</span><span>Rents since 2021</span></p>
 <h1>The property market, <mark>plotted.</mark></h1>
 <div class="pl-hsrch" id="homeSrch"></div>
 <div class="pt-ask pl-chips">
-<button data-goto="weekly"><span class="n">01</span><span><b>Your morning brew</b><span class="s">What changed this week, in a minute.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button data-goto="weekly"><span class="n">01</span><span><b>Weekly snapshot</b><span class="s">What changed this week, in a minute.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askFind"><span class="n">02</span><span><b>Sales in the last week</b><span class="s">Every home that settled in the past seven days, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="ctaPlay"><span class="n">03</span><span><b>Where are prices moving?</b><span class="s">Watch the last three years play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button data-goto="budget"><span class="n">04</span><span><b>Where can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button data-goto="analysis"><span class="n">05</span><span><b>Dig deeper</b><span class="s">Chart any suburb or area your way: every sale, trends and your own lines.</span></span><span class="go" aria-hidden="true">→</span></button>
-</div>
 </div>
 <div class="pl-hfoot"><div class="pt-stats num" id="ptStats"></div>
 <button class="pt-fresh" id="ptFresh" hidden></button></div>
@@ -1569,8 +1583,8 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
 </div>
 
 <div id="tabWeekly" role="tabpanel" hidden>
-<section class="brew" aria-label="Your brew"><div class="wrap">
- <div class="brew-top"><span class="brew-cup" aria-hidden="true"><svg class="bc" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h9v3.5a3.5 3.5 0 0 1-3.5 3.5H6A3.5 3.5 0 0 1 2.5 9.5zM11.5 7h1a1.8 1.8 0 0 1 0 3.6h-1.2M5 1.8c-.6.7.6 1.3 0 2.2M8 1.8c-.6.7.6 1.3 0 2.2M2 14.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p class="brew-hi" id="brewHi">Good morning.</p><h1 class="brew-h">Here’s your brew.</h1><p class="brew-sub" id="brewSub"></p></div></div>
+<section class="brew" aria-label="Your snapshot"><div class="wrap">
+ <div class="brew-top"><span class="brew-cup" aria-hidden="true"><svg class="bc" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p class="brew-hi" id="brewHi">Good morning.</p><h1 class="brew-h">Here’s your snapshot.</h1><p class="brew-sub" id="brewSub"></p></div></div>
 </div></section>
 <header class="pt pt-wk"><div class="wrap">
 <section class="pt-mkt" aria-label="Which way is the market going?">
@@ -2183,7 +2197,7 @@ if(window.maplibregl){
    map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["case",["boolean",["feature-state","has"],false],0,.45]}},firstSym);}
   map.addLayer({id:"edge",type:"line",source:"sub",paint:{"line-color":["case",["boolean",["feature-state","hover"],false],"#0E1A16","#FFFFFF"],
    "line-width":["interpolate",["linear"],["zoom"],9,["case",["boolean",["feature-state","hover"],false],1.8,.3],13,["case",["boolean",["feature-state","hover"],false],2.2,1]],"line-opacity":.9}},firstSym);
-  map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#2F45FF","line-width":6}},firstSym);
+  map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#3F51C7","line-width":6}},firstSym);
   map.addLayer({id:"sel2",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#0E1A16","line-width":1.6}},firstSym);   // the chosen suburb: lime with a dark core
   ready=true;paintMap();});
  map.on("mousemove","fill",e=>{if(spHover(e))return;const f=e.features[0];if(!f)return;map.getCanvas().style.cursor="pointer";
@@ -2275,7 +2289,7 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  if(ml>1)h+=`<div class="ln warn">Part of one sale of <b>${ml} properties</b> for ${dollars(P.p[i])} in total (about ${dollars(P.p[i]/ml)} each). Left out of medians and growth.</div>`;
  else if(ml<0)h+=`<div class="ln warn">Far from anything else sold in ${esc(title(loc))} that year: often a development site, a big holding or a family transfer. Left out of medians and growth.</div>`;
  h+=`<div class="ft"><a href="#" data-prop="1">Full history of this address</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;
- if(!pMarker)pMarker=new maplibregl.Marker({color:"#2F45FF"});pMarker.setLngLat(f.geometry.coordinates).addTo(map);spSeen(y,i);spCur=y+"|"+i;   // same lime pin as a searched address
+ if(!pMarker)pMarker=new maplibregl.Marker({color:"#3F51C7"});pMarker.setLngLat(f.geometry.coordinates).addTo(map);spSeen(y,i);spCur=y+"|"+i;   // same lime pin as a searched address
  // The card sits beside the pin, never on it, and the map moves so the card is fully in view.
  spPop.setOffset({"bottom":[0,-44],"top":[0,8],"left":[16,-22],"right":[-16,-22],"bottom-left":[10,-40],"bottom-right":[-10,-40],"top-left":[10,6],"top-right":[-10,6]}).setLngLat(f.geometry.coordinates).setHTML(h);spSwap=true;spPop.addTo(map);spSwap=false;
  requestAnimationFrame(()=>{const pe=spPop.getElement(),mr=map.getContainer().getBoundingClientRect();if(!pe)return;const pr=pe.getBoundingClientRect(),pad=12;let dx=0,dy=0;
@@ -2320,7 +2334,7 @@ async function openAddress(loc,st,num,unit,exact){try{if(!(window.PR&&window.PR[
  let c=onSt.filter(p=>!num||p[1].toUpperCase()===String(num).toUpperCase());if(unit||exact)c=c.filter(p=>uNorm(p[2])===uNorm(unit));
  P_SEL={loc,st,num,unit,R,street:onSt,list:c.length===1?null:(c.length?c:onSt),p:c.length===1?c[0]:null,miss:!c.length};
  const pr=P_SEL.p||P_SEL.list.find(p=>p[3]!=null);
- if(pr&&pr[3]!=null&&map){const ll=[150+pr[3]/1e5,-34+pr[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#2F45FF"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:P_SEL.p?16:15,duration:800});}
+ if(pr&&pr[3]!=null&&map){const ll=[150+pr[3]/1e5,-34+pr[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#3F51C7"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:P_SEL.p?16:15,duration:800});}
  sel=loc;paintMap();detail();if(window.innerWidth<1000)$("detail").scrollIntoView({behavior:"smooth"});}
 function propEstimate(loc,unit,price,day){const rg=((byKey[loc+"|house"]||byKey[loc+"|unit"])||[])[C.region]||"all";if(!MS||!MS.ad)return null;const k=loc+"|"+(unit?"unit":"house");let i=MS.ad.findIndex(a=>a>=day);
  const early=i<0?false:i===0&&day<MS.ad[0]-200;if(i<0)i=TL;let a=sv(k,1,i),b=sv(k,1,TL),src="suburb";
@@ -2672,7 +2686,7 @@ function chart(pts,fmt,stroke,fill,mark){if(!pts||pts.length<3)return'<p class="
  let band="";const seg_=[];let cur=[];pts.forEach((p,i)=>{if(p[2]!=null&&p[3]!=null)cur.push([i,p[2],p[3]]);else{if(cur.length>1)seg_.push(cur);cur=[];}});if(cur.length>1)seg_.push(cur);
  for(const sg of seg_)band+=`<path d="${sg.map(([i,,h_],j)=>(j?"L":"M")+X(i).toFixed(1)+","+Y(h_).toFixed(1)).join("")}${sg.slice().reverse().map(([i,l_])=>"L"+X(i).toFixed(1)+","+Y(l_).toFixed(1)).join("")}Z" fill="${fill}"/>`;
  if(mark&&typeof mark==="object"){const ia=pts.findIndex(p=>p[0]>=mark.a);let ib=pts.findIndex(p=>p[0]>mark.b);ib=ib<0?pts.length-1:ib-1;
-  if(ia>=0&&ib>=ia)g+=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(47,69,255,.3)"/>`;mark=null;}
+  if(ia>=0&&ib>=ia)g+=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(63,81,199,.3)"/>`;mark=null;}
  const mi=mark?pts.findIndex(p=>p[0]===mark):-1;
  if(mi>=0)g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#0E1A16" stroke-width="1.2" stroke-dasharray="3 3"/>`;
  const mdot=mi>=0&&pts[mi][1]!=null?`<circle cx="${X(mi)}" cy="${Y(pts[mi][1])}" r="4" fill="#2F5C8A" stroke="#fff" stroke-width="1.5"/>`:"";
@@ -2694,7 +2708,7 @@ function mline(ix,v,lo,hi,fmt,stroke,fill,shade){if(v.filter(x=>x!=null).length<
  const lj=v.length-1-[...v].reverse().findIndex(x=>x!=null);
  const hov={vw:w,t:T,b:h-B_,q:ix.map(i=>MS.m[i]),xs:ix.map((_,j)=>+X(j).toFixed(1)),lab:ix.map(i=>"12 months to "+mlabel(i)),
   rows:v.map((x,j)=>x==null?[]:[[stroke,+Y(x).toFixed(1),`Median ${fmt(x)}`+(lo[j]!=null&&hi[j]!=null?`<br><span style="color:var(--slate)">Middle half ${fmt(lo[j])}–${fmt(hi[j])}</span>`:"")]])};
- return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/><circle cx="${X(lj).toFixed(1)}" cy="${Y(v[lj]).toFixed(1)}" r="4" fill="#2F45FF" stroke="${stroke}" stroke-width="1.5"/></svg>`;}
+ return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${band}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/><circle cx="${X(lj).toFixed(1)}" cy="${Y(v[lj]).toFixed(1)}" r="4" fill="#3F51C7" stroke="${stroke}" stroke-width="1.5"/></svg>`;}
 function ovCharts(r){const k=r[C.locality]+"|"+r[C.segment],rk=r[C.postcode]+"|"+r[C.segment],e=ti,n=ovYrs*12,ix=[];for(let i=Math.max(0,e-n);i<=e;i++)ix.push(i);
  const pv=ix.map(i=>sv(k,1,i)),pl=ix.map(i=>sv(k,2,i)),ph=ix.map(i=>sv(k,3,i)),rvv=ix.map(i=>rv(rk,i)),nul=ix.map(()=>null);
  const yb=`<span class="seg ovyrs" role="group" aria-label="Years shown">${[5,10].map(y=>`<button data-ovy="${y}" aria-pressed="${ovYrs===y}">${y} yrs</button>`).join("")}</span>`;
@@ -2704,7 +2718,7 @@ function rangeStrip(label,v,fmt,col,mark,markLbl,note){let[mn,p10,p25,md,p75,p90
  const w=400,h=72,L0=48,R=48,lo=p10-(p90-p10)*.08,hi=p90+(p90-p10)*.08,X=x=>L0+(w-L0-R)*(Math.max(lo,Math.min(hi,x))-lo)/(hi-lo),y=30;
  let g=`<line x1="${X(p10)}" x2="${X(p90)}" y1="${y}" y2="${y}" stroke="#C9D0C7" stroke-width="4" stroke-linecap="round"/>
  <rect x="${X(p25)}" y="${y-7}" width="${Math.max(2,X(p75)-X(p25))}" height="14" rx="7" fill="${col}"/>
- <circle cx="${X(md)}" cy="${y}" r="6.5" fill="#2F45FF" stroke="${col}" stroke-width="2"/>
+ <circle cx="${X(md)}" cy="${y}" r="6.5" fill="#3F51C7" stroke="${col}" stroke-width="2"/>
  <text x="${X(md)}" y="${y-15}" text-anchor="middle" style="fill:${col};font-weight:600;font-size:14.5px">${fmt(md)}</text>
  <text x="${X(p25)}" y="${y+25}" text-anchor="middle">${fmt(p25)}</text><text x="${X(p75)}" y="${y+25}" text-anchor="middle">${fmt(p75)}</text>
  ${half?"":`<text x="${X(p10)}" y="${y+4}" text-anchor="end" dx="-8">${fmt(p10)}</text><text x="${X(p90)}" y="${y+4}" dx="8">${fmt(p90)}</text>`}`;
@@ -2767,7 +2781,7 @@ function detail(){const el=document.getElementById("detail");
    const st=(P_SEL.R.st.find(x=>x.toUpperCase()===st0.toUpperCase()))||st0;openAddress(P_SEL.loc,st,n,u||"",true);}));
   const sb=$("propStreet");sb&&sb.addEventListener("click",()=>{P_SEL.p=null;P_SEL.list=P_SEL.street;P_SEL.num=null;P_SEL.unit=null;P_SEL.miss=false;detail();});
   el.querySelectorAll(".plist button").forEach(x=>x.addEventListener("click",()=>{const p=P_SEL.R.p[+x.dataset.k];P_SEL.p=p;P_SEL.list=null;
-   if(p[3]!=null&&map){const ll=[150+p[3]/1e5,-34+p[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#2F45FF"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:16,duration:600});}detail();}));return;}
+   if(p[3]!=null&&map){const ll=[150+p[3]/1e5,-34+p[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:"#3F51C7"});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:16,duration:600});}detail();}));return;}
  if(!sel){inViewPanel(el);return;}
  const r=rowFor(sel);if(!r){thinPanel(el,sel);return;}
  const m=r._m,k=r[C.locality]+"|"+r[C.segment],rs=D.rent_series[r[C.postcode]+"|"+r[C.segment]],noun=seg==="house"?"house":"unit",unit=seg==="unit";
@@ -2929,15 +2943,15 @@ function multiLine(qs,series,fmt,{bars=false,h=190,mark=null,tfmt=null,w=440,now
  const mo=/^\d{4}-\d{2}$/.test(qs[0]),per=mo?12:4,yrs=Math.max(1,Math.ceil(n/per/6));let lastY=-1;qs.forEach((q,i)=>{const y=+q.slice(0,4);if((mo?q.endsWith("-01"):q.endsWith("Q1"))&&y%yrs===0&&y!==lastY){lastY=y;g+=`<text x="${X(i)}" y="${h-5}" text-anchor="middle">${y}</text>`;}});
  const nl=now?n-1:-1;
  if(bars){const bw=(w-L0-R)/n/series.length*.8;series.forEach((s,k)=>s.v.forEach((v,i)=>{if(v==null)return;const x=X(i)-bw*series.length/2+k*bw;
-  if(i===nl&&s.est>v)g+=`<rect x="${x+.5}" y="${Y(s.est)}" width="${Math.max(1,bw-1)}" height="${Y(0)-Y(s.est)}" fill="rgba(47,69,255,.55)" stroke="#0E1A16" stroke-width="1" stroke-dasharray="3 2"/>`;
+  if(i===nl&&s.est>v)g+=`<rect x="${x+.5}" y="${Y(s.est)}" width="${Math.max(1,bw-1)}" height="${Y(0)-Y(s.est)}" fill="rgba(63,81,199,.55)" stroke="#0E1A16" stroke-width="1" stroke-dasharray="3 2"/>`;
   g+=`<rect x="${x}" y="${Y(v)}" width="${bw}" height="${Y(0)-Y(v)}" fill="${s.c}"/>`;}));}
  else series.forEach(s=>{let d="",pen=false;s.v.forEach((v,i)=>{if(v==null||i===nl){pen=false;return;}d+=(pen?"L":"M")+X(i).toFixed(1)+","+Y(v).toFixed(1);pen=true;});g+=`<path d="${d}" fill="none" stroke="${s.c}" stroke-width="2"/>`;
-  if(nl>0&&s.v[nl]!=null&&s.v[nl-1]!=null)g+=`<path d="M${X(nl-1).toFixed(1)},${Y(s.v[nl-1]).toFixed(1)}L${X(nl).toFixed(1)},${Y(s.v[nl]).toFixed(1)}" fill="none" stroke="${s.c}" stroke-width="2" stroke-dasharray="4 3"/><circle cx="${X(nl).toFixed(1)}" cy="${Y(s.v[nl]).toFixed(1)}" r="4.5" fill="#2F45FF" stroke="${s.c}" stroke-width="2"/>`;});
+  if(nl>0&&s.v[nl]!=null&&s.v[nl-1]!=null)g+=`<path d="M${X(nl-1).toFixed(1)},${Y(s.v[nl-1]).toFixed(1)}L${X(nl).toFixed(1)},${Y(s.v[nl]).toFixed(1)}" fill="none" stroke="${s.c}" stroke-width="2" stroke-dasharray="4 3"/><circle cx="${X(nl).toFixed(1)}" cy="${Y(s.v[nl]).toFixed(1)}" r="4.5" fill="#3F51C7" stroke="${s.c}" stroke-width="2"/>`;});
  if(mark&&typeof mark==="object"){const ia=qs.findIndex(q=>q>=mark.a);let ib=qs.findIndex(q=>q>mark.b);ib=ib<0?n-1:ib-1;
-  if(ia>=0&&ib>=ia)g=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(47,69,255,.3)"/>`+g;mark=null;}
+  if(ia>=0&&ib>=ia)g=`<rect x="${X(ia)}" y="${T}" width="${Math.max(2,X(ib)-X(ia))}" height="${h-B_-T}" fill="rgba(63,81,199,.3)"/>`+g;mark=null;}
  const mi=mark?qs.indexOf(mark):-1;
  if(mi>=0){g+=`<line x1="${X(mi)}" x2="${X(mi)}" y1="${T}" y2="${h-B_}" stroke="#0E1A16" stroke-width="1.2" stroke-dasharray="3 3"/>`;
-  if(!bars)series.forEach(s=>{if(s.v[mi]!=null)g+=`<circle cx="${X(mi)}" cy="${Y(s.v[mi])}" r="4.5" fill="#2F45FF" stroke="#0E1A16" stroke-width="1.5"/>`;});}
+  if(!bars)series.forEach(s=>{if(s.v[mi]!=null)g+=`<circle cx="${X(mi)}" cy="${Y(s.v[mi])}" r="4.5" fill="#3F51C7" stroke="#0E1A16" stroke-width="1.5"/>`;});}
  const hov={vw:w,t:T,b:h-B_,bars,xs:qs.map((q,i)=>+X(i).toFixed(1)),lab:qs.map((q,i)=>qlab(q)+(i===nl?" so far":"")),rows:qs.map((q,i)=>series.filter(s=>s.v[i]!=null).map(s=>[s.c,+Y(s.v[i]).toFixed(1),`${s.name?s.name+": ":""}${(tfmt||fmt)(s.v[i])}${i===nl&&s.est?`, about ${(tfmt||fmt)(s.est)} expected`:""}`]))};
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}</svg>`;}
 const qlab=q=>{const m=String(q).match(/^(\d{4})Q([1-4])$/);if(m)return["Jan–Mar","Apr–Jun","Jul–Sep","Oct–Dec"][+m[2]-1]+" "+m[1];const k=String(q).match(/^(\d{4})-(\d{2})$/);return k?MON[+k[2]-1]+" "+k[1]:q;};
@@ -3018,7 +3032,7 @@ function ptLine(){const el=$("ptFig"),S=((D.market_series||{})[mreg()]||{})[seg]
  let d="",g="";v.forEach((x,i)=>{d+=(i?"L":"M")+X(i).toFixed(1)+","+Y(x).toFixed(1);});
  g+=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="rgba(255,255,255,.18)"/>`;
  g+=`<path d="${d}" fill="none" stroke="#EAF0EA" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
- v.forEach((x,i)=>{const last=i===v.length-1;g+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:3}" fill="${last?"#2F45FF":"#EAF0EA"}"><title>${ql(q[i])}: ${money(x)}</title></circle>`;
+ v.forEach((x,i)=>{const last=i===v.length-1;g+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:3}" fill="${last?"#3F51C7":"#EAF0EA"}"><title>${ql(q[i])}: ${money(x)}</title></circle>`;
   g+=`<text x="${X(i).toFixed(1)}" y="${H-6}" text-anchor="${i===0?"start":last?"end":"middle"}">${ql(q[i])}</text>`;
   if(i===0||last)g+=`<text class="v${last?" now":""}" x="${X(i).toFixed(1)}" y="${(Y(x)-11).toFixed(1)}" text-anchor="${i===0?"start":"end"}">${money(x)}</text>`;});
  $("ptLab").textContent=`Median ${seg==="house"?"house":"unit"} price, ${mregName()}, each quarter`;
@@ -3067,7 +3081,7 @@ function ptLine3(M,noun,an){const el=$("ptFig"),i0=Math.max(0,M.n-12*ptYrs),idx=
  const pk=v.indexOf(Math.max(...v)),st=ptYrs>1?6:3;let d="",g=`<line x1="${L}" x2="${W-R}" y1="${H-Bm}" y2="${H-Bm}" stroke="rgba(255,255,255,.18)"/>`;
  v.forEach((x,k)=>{d+=(k?"L":"M")+X(k).toFixed(1)+","+Y(x).toFixed(1);});
  g+=`<path d="${d}" fill="none" stroke="#EAF0EA" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
- v.forEach((x,k)=>{const last=k===v.length-1;if(last||k===pk||k===idx.indexOf(M.n-12)||ptYrs===1)g+=`<circle cx="${X(k).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:k===pk?4:2.2}" fill="${last?"#2F45FF":k===pk?"none":"#EAF0EA"}" ${k===pk&&!last?'stroke="#EAF0EA" stroke-width="1.5"':""}/>`;
+ v.forEach((x,k)=>{const last=k===v.length-1;if(last||k===pk||k===idx.indexOf(M.n-12)||ptYrs===1)g+=`<circle cx="${X(k).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="${last?5:k===pk?4:2.2}" fill="${last?"#3F51C7":k===pk?"none":"#EAF0EA"}" ${k===pk&&!last?'stroke="#EAF0EA" stroke-width="1.5"':""}/>`;
   if((v.length-1-k)%st===0)g+=`<text x="${X(k).toFixed(1)}" y="${H-6}" text-anchor="${k===0?"start":last?"end":"middle"}">${sl(idx[k])}</text>`;});
  // Call out now, the peak and a year ago (the three figures in the summary), placed so they never sit on the line.
  const ya=idx.indexOf(M.n-12),last=v.length-1,cs=[];const add=(k,t)=>{if(k<0)return;const c=cs.find(c=>c.k===k);if(c)c.t.push(t);else cs.push({k,t:[t]});};
@@ -3079,7 +3093,7 @@ function ptLine3(M,noun,an){const el=$("ptFig"),i0=Math.max(0,M.n-12*ptYrs),idx=
   const opts=[y-13,y+22].filter(ty=>ty-12>2&&ty<H-Bm+16).map(ty=>({ty,s:clear(ty)-(hit(ty)?1e6:0)+(c.k===pk&&ty<y?25:0)})).sort((a,b)=>b.s-a.s);
   const ty=(opts[0]||{ty:y-13}).ty;
   box.push([x0,ty-12,x0+tw,ty+3]);g+=`<text class="call" x="${(an==="start"?x-4:an==="end"?x+4:x).toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${an}">${txt}</text>`;});
- const hov={vw:W,t:T,b:H-Bm,q:idx.map(i=>MS.m[i]),xs:v.map((_,k)=>+X(k).toFixed(1)),lab:idx.map(i=>m3lab(i)),rows:v.map((x,k)=>[["#2F45FF",+Y(x).toFixed(1),money(x)]])};
+ const hov={vw:W,t:T,b:H-Bm,q:idx.map(i=>MS.m[i]),xs:v.map((_,k)=>+X(k).toFixed(1)),lab:idx.map(i=>m3lab(i)),rows:v.map((x,k)=>[["#3F51C7",+Y(x).toFixed(1),money(x)]])};
  $("ptLab").textContent=`Median ${noun} price, ${an}`;
  $("ptNow").textContent="";
  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" data-hov="${esc(JSON.stringify(hov))}" aria-label="Median price by month: ${v.map((x,k)=>sl(idx[k])+" "+money(x)).join(", ")}">${g}</svg>`;}
@@ -3225,9 +3239,9 @@ function anTrend(pts,lg){if(pts.length<6)return null;const n=pts.length;let sx=0
  pts.forEach((p,k)=>{sx+=p[0];sy+=ys[k];sxx+=p[0]*p[0];sxy+=p[0]*ys[k];});const b=(n*sxy-sx*sy)/(n*sxx-sx*sx||1),a=(sy-b*sx)/n;
  let ss=0;pts.forEach((p,k)=>{ss+=(ys[k]-(a+b*p[0]))**2;});const sd=Math.sqrt(ss/Math.max(1,n-2)),f=x=>lg?Math.exp(a+b*x):a+b*x;return{f,sd,lg,pa:lg?Math.exp(b*12)-1:b*12,band:k=>x=>lg?Math.exp(a+b*x+k*sd):a+b*x+k*sd};}
 // SVG styles written once with page colours, and again with resolved colours for a saved picture
-const anCss=v=>`.tv-svg text{font:500 11.5px "JetBrains Mono",ui-monospace,monospace;fill:${v("--slate")}}.tv-svg .bg{fill:${v("--sheet")}}.tv-svg .gl{stroke:${v("--wash")}}.tv-svg .hr{stroke:${v("--hair")};fill:none}
+const anCss=v=>`.tv-svg text{font:500 11.5px "Geist Mono",ui-monospace,monospace;fill:${v("--slate")}}.tv-svg .bg{fill:${v("--sheet")}}.tv-svg .gl{stroke:${v("--wash")}}.tv-svg .hr{stroke:${v("--hair")};fill:none}
 .tv-svg .ink{stroke:${v("--ink")}}.tv-svg .inkf{fill:${v("--ink")}}.tv-svg .mist{stroke:${v("--mist")}}.tv-svg .gain{stroke:${v("--gain")}}.tv-svg .gainf{fill:${v("--gain")}}.tv-svg .loss{stroke:${v("--loss")}}.tv-svg .lossf{fill:${v("--loss")}}
-.tv-svg text.an{font:600 12px "Hanken Grotesk",system-ui,sans-serif;fill:${v("--ink")};paint-order:stroke;stroke:${v("--sheet")};stroke-width:3px}.tv-svg text.tr{font:600 11.5px "JetBrains Mono",ui-monospace,monospace;paint-order:stroke;stroke:${v("--sheet")};stroke-width:3px}
+.tv-svg text.an{font:600 12px "Geist",system-ui,sans-serif;fill:${v("--ink")};paint-order:stroke;stroke:${v("--sheet")};stroke-width:3px}.tv-svg text.tr{font:600 11.5px "Geist Mono",ui-monospace,monospace;paint-order:stroke;stroke:${v("--sheet")};stroke-width:3px}
 .tv-svg text.xl{fill:${v("--sheet")};font-weight:600}.tv-svg .xb{fill:${v("--ink")}}.tv-svg .hl{fill:${v("--hi")}}.tv-svg .sel{stroke:${v("--hi")}}`;
 document.head.insertAdjacentHTML("beforeend",`<style id="tvSvgCss">${anCss(n=>`var(${n})`)}</style>`);
 
@@ -3517,9 +3531,9 @@ async function anPicture(){const css=getComputedStyle(document.documentElement),
   x.drawImage(img,r.left-g.left,r.top-g.top,r.width,r.height);
   E.leg.querySelectorAll(".tv-lr").forEach(row=>{const rr=row.getBoundingClientRect(),dot=row.querySelector("i");let tx=rr.left-g.left,ty=rr.top-g.top+rr.height/2+4;
    if(dot){x.fillStyle=getComputedStyle(dot).backgroundColor;x.beginPath();x.arc(tx+5,ty-4,4,0,7);x.fill();}tx+=16;
-   for(const sp of row.querySelectorAll("b,.tv-lm,.tv-lv,.tv-lc")){const t=sp.innerText.trim();if(!t)continue;x.font=`${sp.tagName==="B"?600:500} 12.5px "Hanken Grotesk",system-ui,sans-serif`;x.fillStyle=getComputedStyle(sp).color;x.fillText(t,tx,ty);tx+=x.measureText(t).width+8;}});
+   for(const sp of row.querySelectorAll("b,.tv-lm,.tv-lv,.tv-lc")){const t=sp.innerText.trim();if(!t)continue;x.font=`${sp.tagName==="B"?600:500} 12.5px "Geist",system-ui,sans-serif`;x.fillStyle=getComputedStyle(sp).color;x.fillText(t,tx,ty);tx+=x.measureText(t).width+8;}});
   if(anE.length>1){x.strokeStyle=v("--hair");x.strokeRect(r.left-g.left+.5,r.top-g.top+.5,r.width-1,r.height-1);}}
- x.font='600 13px "Hanken Grotesk",system-ui,sans-serif';x.fillStyle=v("--ink");x.fillText("Plotted",12,g.height+22);x.font='500 12px "Hanken Grotesk",system-ui,sans-serif';x.fillStyle=v("--slate");
+ x.font='600 13px "Geist",system-ui,sans-serif';x.fillStyle=v("--ink");x.fillText("Plotted",12,g.height+22);x.font='500 12px "Geist",system-ui,sans-serif';x.fillStyle=v("--slate");
  x.fillText(`NSW sales on the record (Valuer General), rents from Fair Trading bonds. Sales to ${mlabel(TL)}.`,96,g.height+22);
  const a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download=`plotted-chart-${MS.m[TL]}.png`;document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),300);}
 function anCsv(){const V=anRange(),vis=AN.ch.slice(0,anE.length).flatMap(c=>c.s.filter(s=>s.on)),seen=new Set(),cols=vis.filter(s=>{const k=s.k+s.id+s.seg+s.m;if(seen.has(k))return false;seen.add(k);return true;});
