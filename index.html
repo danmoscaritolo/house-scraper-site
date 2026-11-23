@@ -1509,6 +1509,33 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
 }
 @media(max-width:720px){#tabWeekly>.brew-rail{margin:12px 16px 0}}
 @media(min-width:1180px){#tabWeekly header.pt h2#ptH1{font-size:clamp(28px,2.7vw,42px)}#tabWeekly .pt-tiles b{font-size:32px}}
+
+/* ================= Map: Filters button and popover ================= */
+.mf{position:relative;align-self:flex-end}
+.mf-btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border:1px solid var(--hair);border-radius:10px;background:var(--sheet);color:var(--ink);font:500 14.5px var(--sans);cursor:pointer}
+.mf-btn svg{width:16px;height:16px}.mf-btn:hover{border-color:var(--hi)}
+.mf-btn.on{border-color:var(--hi);box-shadow:0 0 0 3px var(--hi-soft)}
+.mf-btn b{min-width:18px;height:18px;border-radius:9px;background:var(--hi);color:var(--on-hi);font:700 11.5px/18px var(--sans);text-align:center;padding:0 4px;box-sizing:border-box}
+.mf-pop{position:absolute;z-index:80;top:calc(100% + 8px);left:0;width:340px;max-width:calc(100vw - 32px);background:var(--sheet);border:1px solid var(--hair);border-radius:16px;box-shadow:0 24px 60px -24px rgba(19,26,42,.35);padding:16px}
+.mf-sec{display:flex;flex-direction:column;gap:8px;padding:0 0 14px;margin:0 0 14px;border-bottom:1px solid var(--wash)}
+.mf-sec.spbar{flex-wrap:nowrap;align-items:stretch;background:none;border-radius:0;box-shadow:none;padding:0 0 14px}
+.mf-h{margin:0;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.mf-f{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:center;gap:10px;font:400 14px var(--sans);color:var(--slate)}
+.mf-f select{width:100%}
+#spopt:not([hidden]){display:block}
+.mf-two{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center}
+.mf-two span{color:var(--slate);font-size:13.5px}
+.mf-two input{width:100%;box-sizing:border-box;height:40px;border:1px solid var(--hair);border-radius:9px;background:var(--paper);color:var(--ink);padding:0 10px;font:400 15px var(--sans)}
+.mf-two input:focus{outline:0;border-color:var(--hi);box-shadow:0 0 0 3px var(--hi-soft)}
+.mf-foot{display:flex;justify-content:space-between;align-items:center}
+.mf-done{background:var(--ink);color:var(--paper);border:0;border-radius:9px;padding:9px 18px;font:600 14px var(--sans);cursor:pointer;margin-left:auto}
+.mf-note{margin:10px 0 0;font-size:12.5px}
+#spinfo:not([hidden]){font:400 12.5px var(--sans);color:var(--slate)}
+@media(max-width:720px){.mf{align-self:auto}.mf-pop{position:fixed;left:16px;right:16px;top:auto;bottom:16px;width:auto}}
+.mf-pop{left:auto;right:0}
+.mf-pop *{box-sizing:border-box}
+.mf-f{grid-template-columns:108px minmax(0,1fr)}.mf-f select{min-width:0;max-width:100%}
+.mf-pop .spbar{display:flex;flex-direction:column;align-items:stretch;gap:8px;background:none;border:0;border-bottom:1px solid var(--wash);border-radius:0;padding:0 0 14px;margin:0 0 14px;box-shadow:none}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -1578,6 +1605,18 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
   <optgroup label="Rental return"><option value="yield">Rental yield (yearly rent as % of price)</option></optgroup>
   <optgroup label="My budget"><option value="afford">Where I can afford to buy</option><option value="rent">Where I can afford to rent</option></optgroup></select></label>
  <div class="mbud" id="mbud" hidden></div>
+<div class="mf"><button type="button" class="mf-btn" id="mfBtn" aria-expanded="false" aria-controls="mfPop"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12l-4.6 5.4V13l-2.8 1.3V8.4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Filters</span><b id="mfOn" hidden></b></button>
+<div class="mf-pop" id="mfPop" hidden role="dialog" aria-label="Map filters">
+ <div class="mf-sec spbar"><p class="mf-h">Sales on the map</p>
+  <label class="mf-f"><span>Show sales from</span><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select></label>
+  <label class="mf-f"><span>Which sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select></label>
+  <span id="spopt" hidden><label class="mf-f"><span>Colour dots by</span><select id="spcol" aria-label="Colour individual sales by"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></label></span>
+  <b id="spinfo" hidden></b></div>
+ <div class="mf-sec"><p class="mf-h">Price</p><div class="mf-two"><input id="mfPmin" inputmode="numeric" placeholder="Min, e.g. 800k" aria-label="Minimum price"><span>to</span><input id="mfPmax" inputmode="numeric" placeholder="Max, e.g. 1.5m" aria-label="Maximum price"></div></div>
+ <div class="mf-sec"><p class="mf-h" id="mfAh">Land size (m²)</p><div class="mf-two"><input id="mfAmin" inputmode="numeric" placeholder="Min" aria-label="Minimum land size"><span>to</span><input id="mfAmax" inputmode="numeric" placeholder="Max" aria-label="Maximum land size"></div></div>
+ <div class="mf-foot"><button type="button" class="linkbtn" id="mfClr">Clear filters</button><button type="button" class="mf-done" id="mfDone">Done</button></div>
+ <p class="note mf-note">Filters apply to the sale dots and the sales lists in the side panel. Land size is the lot area on the title (strata lot for units).</p>
+</div></div>
 </div>
 
 <div class="timebar" id="timebar">
@@ -1601,7 +1640,6 @@ header.pt .pl-glass .pt-ask.pl-chips{margin-top:20px!important;padding:0!importa
    <button class="lbtn" id="layersBtn" aria-expanded="false" aria-controls="lpanel"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 1 4.5 8 8l7-3.5L8 1Zm-5.6 6.3L1 8l7 3.5L15 8l-1.4-.7L8 10.1 2.4 7.3Zm0 3.5L1 11.5 8 15l7-3.5-1.4-.7L8 13.6l-5.6-2.8Z" fill="currentColor"/></svg>More</button></div>
    <div class="spnote" id="spnote" hidden></div>
    <div class="lpanel" id="lpanel" hidden>
-    <div class="lrow lrow-sp"><div class="spbar"><span class="lf">Sales</span><select id="spfilt" hidden aria-label="Which sales to show"><option value="all">All sales</option><option value="loss">Sold at a loss</option><option value="odd">Unusual prices</option></select><select id="spsw" aria-label="Individual sales: period"><option value="off">Off</option><option value="week">Past week</option><option value="month">Past month</option><option value="year">Past year</option></select><span id="spopt" hidden><select id="spcol" aria-label="Colour individual sales by" title="Colour individual sales by"><option value="rel" selected>Price vs suburb median</option><option value="size">Price vs similar-size homes</option><option value="abs">Price</option></select></span><b id="spinfo" hidden></b></div></div>
     <div class="lrow" id="palrow"><span>Price colours</span><div class="pals" id="pals" role="group" aria-label="Colours for price maps"></div></div>
     <div class="lrow"><span>Base map</span><div class="seg" role="group" aria-label="Base map"><button data-base="map" aria-pressed="true">Map</button><button data-base="sat" aria-pressed="false">Satellite</button></div></div>
     <div class="lrow"><span>Suburb shading</span><input id="opac" type="range" min="0" max="100" value="72" aria-label="Suburb shading opacity"></div>
@@ -3903,7 +3941,7 @@ const TOURS={map:[
  ["#metric","Colour the map","Choose what the colours show: prices, price changes, rental yield, or what fits your budget once you've entered it."],
  ["#find","Search","Jump to a suburb or a street address and see its sales history."],
  ["#map|#detail","The map","Hover a suburb for its figure and click it for the full story in the panel on the right."],
- ["#layersBtn|#map","Every sale, on the map","Under More, switch on Sales to see every home sold in the last month or 12 months as a dot, coloured by price. Click a dot for the address, the price and that home's earlier sales.",{enter(){tourMap=map?{sp:spMode,c:map.getCenter(),z:map.getZoom()}:{sp:spMode};if(map)map.jumpTo({center:[151.214,-33.886],zoom:13.6});setSp("year");},exit(){if(!tourMap)return;setSp(tourMap.sp);if(map&&tourMap.c)map.jumpTo({center:tourMap.c,zoom:tourMap.z});tourMap=null;}}],
+ ["#mfBtn|#map","Every sale, on the map","Open Filters and pick a period to see every home sold as a dot, coloured by price. You can narrow them by price and land size there too. Click a dot for the address, the price and that home's earlier sales.",{enter(){tourMap=map?{sp:spMode,c:map.getCenter(),z:map.getZoom()}:{sp:spMode};if(map)map.jumpTo({center:[151.214,-33.886],zoom:13.6});setSp("year");},exit(){if(!tourMap)return;setSp(tourMap.sp);if(map&&tourMap.c)map.jumpTo({center:tourMap.c,zoom:tourMap.z});tourMap=null;}}],
  ["#legend","Colour key","What each colour means. Hatched means too few sales to say. Hide it with the × and bring it back with the Colour key button.",{enter(){window._lg=lgMin;lgMin=false;legend();},exit(){lgMin=!!window._lg;legend();}}],
  ["#timebar","Travel in time","Press play to watch prices since 1990, or drag to any month. Press, hold and drag to pick a period and colour the map by growth across it."],
  ["#layersBtn","More","Individual sales, colour schemes, aerial photos and arranging the map."],
@@ -4123,4 +4161,27 @@ rFillAll();
  addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();$("sbSearch").click();}
   if((e.metaKey||e.ctrlKey)&&e.key==="."){e.preventDefault();btn.click();}});
 })();
+/* ---------- map Filters: sales on the map, price and land size ---------- */
+// A button beside the map controls (not in Layers, which is for the map's look). Price and land feed SF, the same
+// filters the side panel's sales lists use, so dots and lists always agree.
+(function(){const btn=$("mfBtn"),pop=$("mfPop"),F={pmin:"mfPmin",pmax:"mfPmax",amin:"mfAmin",amax:"mfAmax"};
+ const fmt=x=>x==null?"":Number(x).toLocaleString("en-AU");
+ const sync=()=>{for(const k in F)if(document.activeElement!==$(F[k]))$(F[k]).value=fmt(SF[k]);$("mfAh").textContent=seg==="unit"?"Lot size (m²)":"Land size (m²)";
+  const n=["pmin","pmax","amin","amax"].filter(k=>SF[k]!=null).length+(typeof spFilt!=="undefined"&&spFilt!=="all"?1:0),b=$("mfOn");
+  b.hidden=!n;b.textContent=n;btn.classList.toggle("on",n>0);$("mfClr").hidden=!n;};
+ const open=on=>{pop.hidden=!on;btn.setAttribute("aria-expanded",on);if(on)sync();};
+ btn.addEventListener("click",e=>{e.stopPropagation();open(pop.hidden);});
+ $("mfDone").addEventListener("click",()=>open(false));
+ document.addEventListener("click",e=>{if(!pop.hidden&&!e.target.closest(".mf"))open(false);});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!pop.hidden)open(false);});
+ const refresh=()=>{spApply();try{detail();}catch(e){}sync();};
+ for(const k in F){const el=$(F[k]);el.addEventListener("change",()=>{const x=parseNum(el.value);SF[k]=x&&x>0?x:null;
+   if(spMode==="off")setSp("month");   // a price or land filter only means something with the sale dots on
+   refresh();});el.addEventListener("keydown",e=>{if(e.key==="Enter")el.blur();});}
+ $("mfClr").addEventListener("click",()=>{SF.pmin=SF.pmax=SF.amin=SF.amax=null;const f=$("spfilt");if(f.value!=="all"){f.value="all";f.dispatchEvent(new Event("change"));}refresh();});
+ $("spfilt").addEventListener("change",()=>setTimeout(sync,0));
+ document.querySelectorAll(".seg button[data-seg]").forEach(b=>b.addEventListener("click",()=>setTimeout(sync,0)));
+ // the panel's own filter boxes change SF too: keep the button's count in step
+ $("detail").addEventListener("change",()=>setTimeout(sync,0));
+ sync();})();
 </script></body></html>
