@@ -1426,7 +1426,7 @@ header.pt .pt-ask.pl-chips{display:flex!important;flex-wrap:wrap;justify-content
 @media(max-width:720px){.wk-q{font-size:21px;width:100%}.wk-pick{font-size:30px}.pt-kick.wk-head{flex-direction:column;align-items:flex-start;gap:16px}}
 
 /* home: frosted panels so the shortcuts and stats sit clear of the plan lines */
-.pl-chips button{background:color-mix(in srgb,var(--sheet) 72%,transparent)!important;-webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3);border-color:color-mix(in srgb,var(--hair) 80%,var(--ink) 8%)!important;box-shadow:0 6px 18px -12px rgba(19,26,42,.25)!important}
+.pl-chips button{background:var(--sheet)!important;-webkit-backdrop-filter:none;backdrop-filter:none;border:1px solid var(--hair)!important;box-shadow:0 1px 2px rgba(19,26,42,.06)!important}
 .pl-chips b{color:var(--ink)!important}
 .pl-chips button:hover{background:var(--sheet)!important;border-color:var(--hi)!important}
 .pl-hfoot{padding:22px 34px 20px;border-radius:20px;background:color-mix(in srgb,var(--sheet) 66%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);border:1px solid color-mix(in srgb,var(--hair) 70%,transparent);box-shadow:0 18px 40px -26px rgba(19,26,42,.3)}
@@ -1541,14 +1541,9 @@ b,strong{font-weight:600}
 .pl-home::before{content:"";position:absolute;z-index:-1;left:50%;top:46%;width:min(1100px,96%);height:78%;transform:translate(-50%,-50%);pointer-events:none;
  background:radial-gradient(closest-side,color-mix(in srgb,var(--paper) 88%,transparent) 0%,color-mix(in srgb,var(--paper) 70%,transparent) 55%,transparent 100%);filter:blur(6px)}
 header.pt .pl-home{isolation:isolate}
-/* each shortcut: frosted, soft-edged, no hard outline */
-.pl-chips button{border:0!important;background:color-mix(in srgb,var(--sheet) 52%,transparent)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
- box-shadow:0 0 0 1px color-mix(in srgb,var(--hair) 45%,transparent),0 0 18px 6px color-mix(in srgb,var(--paper) 60%,transparent)!important}
-.pl-chips button:hover{background:color-mix(in srgb,var(--sheet) 85%,transparent)!important;box-shadow:0 0 0 1px var(--hi),0 0 18px 6px color-mix(in srgb,var(--paper) 60%,transparent)!important}
 .pl-chips b{font-weight:450!important}
 /* stats: same soft frost, no card edge */
 .pl-hfoot{border:0;box-shadow:0 0 30px 14px color-mix(in srgb,var(--paper) 55%,transparent);background:color-mix(in srgb,var(--paper) 55%,transparent);border-radius:28px}
-[data-theme=dark] .pl-chips button{box-shadow:0 0 0 1px color-mix(in srgb,var(--hair) 60%,transparent),0 0 18px 6px color-mix(in srgb,var(--paper) 60%,transparent)!important}
 [data-theme=dark] .pl-hfoot{box-shadow:0 0 30px 14px color-mix(in srgb,var(--paper) 55%,transparent)!important}
 .pl-hsrch #find{font-family:var(--sans)}
 @media(min-width:1180px){#tabWeekly header.pt h2#ptH1{font-size:clamp(24px,2.3vw,36px)}}
@@ -1660,11 +1655,12 @@ path.ln-draw.ln-go{stroke-dashoffset:0;transition:stroke-dashoffset 1.1s cubic-b
 <h1>The property market, <mark>plotted.</mark></h1>
 <div class="pl-hsrch" id="homeSrch"></div>
 <div class="pt-ask pl-chips">
-<button data-goto="weekly"><span class="n">01</span><span><b>Weekly snapshot</b><span class="s">What changed this week, in a minute.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="askFind"><span class="n">02</span><span><b>Sales in the last week</b><span class="s">Every home that settled in the past seven days, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="ctaPlay"><span class="n">03</span><span><b>Where are prices moving?</b><span class="s">Watch the last three years play across the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button data-goto="budget"><span class="n">04</span><span><b>Where can I afford?</b><span class="s">Your borrowing limit, then buy against rent.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button data-goto="analysis"><span class="n">05</span><span><b>Dig deeper</b><span class="s">Chart any suburb or area your way: every sale, trends and your own lines.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="askLoss"><span class="n">01</span><span><b>Who sold at a loss this week?</b><span class="s">Homes that settled for less than they last sold for, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="askMove"><span class="n">02</span><span><b>This week’s biggest movers</b><span class="s">The suburbs whose prices shifted most.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="askStreet"><span class="n">03</span><span><b>What sold on my street?</b><span class="s">Type a street and see every sale on it since 1990.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="askPeak"><span class="n">04</span><span><b>Suburbs still below their peak</b><span class="s">How far each suburb sits under its recent high.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button id="askZone"><span class="n">05</span><span><b>Which school zone am I in?</b><span class="s">Public school intake zones and schools on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
+<button data-goto="budget"><span class="n">06</span><span><b>Buy or keep renting?</b><span class="s">Your borrowing limit, then buying against renting over the years.</span></span><span class="go" aria-hidden="true">→</span></button>
 </div>
 <div class="pl-hfoot"><div class="pt-stats num" id="ptStats"></div>
 <button class="pt-fresh" id="ptFresh" hidden></button></div>
@@ -4169,7 +4165,7 @@ $("sugg").addEventListener("mousedown",e=>{if(e.target.closest("li")&&view!=="ma
 $("find").addEventListener("keydown",e=>{if(e.key==="Enter"&&view!=="map")showTab("map","keep");},true);
 document.querySelector("#tabSuburbs .t tbody").addEventListener("click",e=>{if(e.target.closest("tr[data-n]"))showTab("map");},true);
 document.querySelector("#tabSuburbs .t tbody").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.closest("tr[data-n]"))showTab("map");},true);
-$("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&metric!=="g1"){metric="price";$("metric").value="price";}
+$("ctaPlay")&&$("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&metric!=="g1"){metric="price";$("metric").value="price";}
  setTimeout(()=>{stopPlay();setTime(Math.max(0,TL-36));TB.play.click();},500);});
 setTimeout(()=>showTab((location.hash||"").slice(1)||"market","init"),0);
 try{history.scrollRestoration="manual";}catch(e){}addEventListener("load",()=>setTimeout(()=>scrollTo(0,0),0));   // #map would otherwise jump to the map element  // deferred: showTab reads tour state declared further down
@@ -4421,7 +4417,13 @@ rFillAll();
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
  document.querySelectorAll(".pt-ask button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll(".pt-ask button").forEach(x=>x.classList.toggle("pri",x===b))));
  $("ptFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");toMap();});
- $("askFind").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");toMap();if(map)map.flyTo({center:[151.225,-33.858],zoom:11.7,duration:900});});}
+ // home shortcuts (25 Nov): weekly hooks first, then personal ones
+ const atLatest=()=>{if(isLatest&&!isLatest())setTime(TL);};
+ $("askLoss").addEventListener("click",()=>{showTab("map");atLatest();const f=$("spfilt");if(f&&f.value!=="loss"){f.value="loss";try{f.dispatchEvent(new Event("change"));}catch(e){}}setSp("week");toMap();if(map)map.flyTo({center:[151.0,-33.85],zoom:9.6,duration:900});});
+ $("askMove").addEventListener("click",()=>{showTab("weekly");setTimeout(()=>{const m=$("wkMove");if(m)m.scrollIntoView({behavior:"smooth",block:"start"});},350);});
+ $("askStreet").addEventListener("click",()=>{const f=$("find");if(!f)return;f.dataset.ph=f.dataset.ph||f.placeholder;f.placeholder="Type your street, e.g. Pyrmont St, Pyrmont";f.focus();f.addEventListener("blur",()=>{if(!f.value)f.placeholder=f.dataset.ph;},{once:true});});
+ $("askPeak").addEventListener("click",()=>{showTab("map");const m=$("metric");if(m&&m.value!=="peak"){m.value="peak";m.dispatchEvent(new Event("change"));}toMap();});
+ $("askZone").addEventListener("click",()=>{showTab("map");PL_ON.zP=true;PL_ON.sc=true;plSave();if(ready)plApply();else plUI();toMap();});}
 // Plotted shell (prototype): search sits centre stage on Home and in the top bar elsewhere;
 // on wide screens the tabs live in a collapsible left sidebar (html[data-sb=mini], saved in hs_sb).
 (function(){
