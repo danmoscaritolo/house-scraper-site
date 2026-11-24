@@ -1635,6 +1635,10 @@ path.ln-draw.ln-go{stroke-dashoffset:0;transition:stroke-dashoffset 1.1s cubic-b
 @media(prefers-reduced-motion:reduce){
  .on-home .pl-planw,.pl-plan>.pl-peg,.pl-home .pl-hsrch,.pl-home .pl-chips,.pl-home .pl-hfoot{animation:none}
  .pl-chips button:hover,.bcard:hover,.wk-pick:hover{transform:none!important}}
+
+/* Places toggles (06b-places.js): six buttons wrap inside the More panel */
+.lpanel .plseg{flex-wrap:wrap;gap:2px;max-width:100%}
+.lpanel .lrow:has(.plseg){flex-wrap:wrap;align-items:flex-start;gap:6px}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -1739,7 +1743,7 @@ path.ln-draw.ln-go{stroke-dashoffset:0;transition:stroke-dashoffset 1.1s cubic-b
    <div class="lpanel" id="lpanel" hidden>
     <div class="lrow" id="palrow"><span>Price colours</span><div class="pals" id="pals" role="group" aria-label="Colours for price maps"></div></div>
     <div class="lrow"><span>Base map</span><div class="seg" role="group" aria-label="Base map"><button data-base="map" aria-pressed="true">Map</button><button data-base="sat" aria-pressed="false">Satellite</button></div></div>
-    <div class="lrow"><span>Places</span><div class="seg plseg" role="group" aria-label="Places on the map"><button data-pl="st" aria-pressed="false" type="button">Stations</button><button data-pl="bus" aria-pressed="false" type="button">Bus stops</button><button data-pl="sc" aria-pressed="false" type="button">Schools</button></div></div>
+    <div class="lrow"><span>Places</span><div class="seg plseg" role="group" aria-label="Places on the map"><button data-pl="st" aria-pressed="false" type="button">Stations</button><button data-pl="bus" aria-pressed="false" type="button">Bus stops</button><button data-pl="sc" aria-pressed="false" type="button">Schools</button><button data-pl="zP" aria-pressed="false" type="button" title="Primary school intake zones: living inside one gives a right to enrol">Primary zones</button><button data-pl="zS" aria-pressed="false" type="button" title="High school intake zones: living inside one gives a right to enrol">High school zones</button><button data-pl="ho" aria-pressed="false" type="button">Hospitals</button></div></div>
     <div class="lrow"><span>Suburb shading</span><input id="opac" type="range" min="0" max="100" value="72" aria-label="Suburb shading opacity"></div>
     <div class="lrow" id="arrRow"><span>Layout</span><button class="lbtn" id="arrBtn" type="button">Arrange the map</button></div>
    </div>
@@ -2383,7 +2387,7 @@ function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$
  if(m==="off"&&spPop)spPop.remove();{const o=document.getElementById("opac");if(m!=="off"&&+o.value>40){o.value=30;setOpacity(.3);}else if(m==="off"&&+o.value<=30){o.value=72;setOpacity(.72);}}if(m!=="off"&&ready&&map.getZoom()<11)map.easeTo({zoom:11,duration:600});spApply();legend();}
 let sumT=0;if(window.maplibregl)setTimeout(()=>map&&map.on("moveend",()=>{if(spMode!=="off")spApply();if(!sel&&!P_SEL){clearTimeout(sumT);sumT=setTimeout(detail,150);}}),0);
 
-/* ---------- places on the map: stations, bus stops, schools and their intake zones ----------
+/* ---------- places on the map: stations, bus stops, schools, school intake zones, hospitals ----------
    Data from tools/build_places.py: data/web/places.js (PLACES), bus.js (BUS), catch.js (CATCH), loaded the first
    time a layer is switched on. Facts only: no scores or labels. Toggles saved in hs_places. */
 const PL_ON=(()=>{try{return JSON.parse(localStorage.getItem("hs_places"))||{};}catch(e){return{};}})();
@@ -2394,7 +2398,7 @@ const plSave=()=>{try{localStorage.setItem("hs_places",JSON.stringify(PL_ON));}c
 function plLoad(f,v){if(window[v])return Promise.resolve(window[v]);if(!plLoading[f])plLoading[f]=loadJS(`data/web/${f}.js`).then(()=>window[v]).catch(()=>null);return plLoading[f];}
 const plFC=feats=>({type:"FeatureCollection",features:feats});
 const plPt=(lon,lat,p)=>({type:"Feature",geometry:{type:"Point",coordinates:[lon,lat]},properties:p});
-function plAdd(id,data,layers){if(!ready)return;if(!map.getSource(id))map.addSource(id,{type:"geojson",data,attribution:"Places: Transport for NSW, NSW Dept of Education (CC BY)"});for(const l of layers)if(!map.getLayer(l.id))map.addLayer({source:id,...l});}
+function plAdd(id,data,layers){if(!ready)return;if(!map.getSource(id))map.addSource(id,{type:"geojson",data,attribution:"Places: Transport for NSW, NSW Dept of Education, NSW Spatial Services (CC BY)"});for(const l of layers)if(!map.getLayer(l.id))map.addLayer({source:id,...l});}
 function plVis(ids,on){if(!ready)return;for(const id of ids)if(map.getLayer(id))map.setLayoutProperty(id,"visibility",on?"visible":"none");}
 async function plStations(on){if(on){const P=await plLoad("places","PLACES");if(!P)return plMiss();
   plAdd("pl-st",plFC(P.st.map(([n,lon,lat,m])=>plPt(lon,lat,{n,m}))),[
@@ -2413,7 +2417,21 @@ async function plSchools(on){if(on){const P=await plLoad("places","PLACES");if(!
  plVis(["pl-sc","pl-scl","pl-zone","pl-zonel"],on);if(!on&&plPop)plPop.remove();}
 function plNote(m){let el=$("plNote");if(!el){el=document.createElement("div");el.id="plNote";el.className="geo-note";el.setAttribute("role","status");$("map").appendChild(el);}el.textContent=m;el.classList.add("on");clearTimeout(plNote.t);plNote.t=setTimeout(()=>el.classList.remove("on"),4000);}
 const plMiss=()=>plNote("These places aren't available yet.");
-const PL_FN={st:plStations,bus:plBuses,sc:plSchools};
+async function plHosp(on){if(on){const P=await plLoad("places","PLACES");if(!P||!P.ho)return plMiss();
+  plAdd("pl-ho",plFC(P.ho.map(([n,lon,lat])=>plPt(lon,lat,{n}))),[
+   {id:"pl-ho",type:"circle",paint:{"circle-radius":["interpolate",["linear"],["zoom"],8,3,13,5.5,16,8],"circle-color":"#B5487A","circle-stroke-color":"#fff","circle-stroke-width":1.5}},
+   {id:"pl-hol",type:"symbol",minzoom:12.5,layout:{"text-field":["get","n"],"text-size":11,"text-offset":[0,1.1],"text-anchor":"top","text-font":["Noto Sans Regular"]},paint:{"text-color":"#7A2F52","text-halo-color":"#fff","text-halo-width":1.4}}]);}
+ plVis(["pl-ho","pl-hol"],on);}
+// every intake zone at once (primary or high school), outlined and named; overlapping zones simply overlap
+async function plZones(k,on){const id="pl-z"+k;if(on){const[C,P]=await Promise.all([plLoad("catch","CATCH"),plLoad("places","PLACES")]);if(!C||!P)return plMiss();
+  const nm={};for(const r of P.sc)nm[r[7]]=r[0];const col=k==="P"?"#7A4FB5":"#2F6FB0";
+  plAdd(id,plFC(Object.entries(C[k]||{}).map(([code,rings])=>({type:"Feature",geometry:{type:"MultiPolygon",coordinates:rings.map(r=>[r])},properties:{n:nm[code]||""}}))),[
+   {id:id+"f",type:"fill",minzoom:9,paint:{"fill-color":col,"fill-opacity":.04}},
+   {id,type:"line",minzoom:9,paint:{"line-color":col,"line-width":["interpolate",["linear"],["zoom"],9,.6,14,1.8],"line-opacity":.8}},
+   {id:id+"l",type:"symbol",minzoom:12,layout:{"text-field":["get","n"],"text-size":10.5,"text-font":["Noto Sans Regular"],"symbol-placement":"point","text-max-width":8},paint:{"text-color":col,"text-halo-color":"#fff","text-halo-width":1.3}}]);
+  if(map.getZoom()<9)plNote("School zones show when you zoom in to a district.");}
+ plVis([id+"f",id,id+"l"],on);}
+const PL_FN={st:plStations,bus:plBuses,sc:plSchools,ho:plHosp,zP:on=>plZones("P",on),zS:on=>plZones("S",on)};
 function plApply(){for(const[k,fn]of Object.entries(PL_FN))if(PL_ON[k]||(ready&&map.getLayer("pl-"+k)))fn(!!PL_ON[k]);plUI();}
 function plUI(){document.querySelectorAll("[data-pl]").forEach(b=>b.setAttribute("aria-pressed",!!PL_ON[b.dataset.pl]));}
 // a school's intake zone (primary or secondary) when the school is clicked
@@ -2421,8 +2439,9 @@ async function plZone(code,lv){const src=ready&&map.getSource("pl-zone");if(!src
  const ks=lv==="S"?["S"]:lv==="P"?["P"]:["P","S"],rings=ks.flatMap(k=>(C[k]||{})[code]||[]);
  src.setData(plFC(rings.length?[{type:"Feature",geometry:{type:"MultiPolygon",coordinates:rings.map(r=>[r])},properties:{}}]:[]));
  return rings.length?"Intake zone shown (dashed). Living inside it gives a right to enrol.":"No intake zone published for this school.";}
-function plClick(e){if(!ready)return false;const ls=["pl-sc","pl-st"].filter(l=>map.getLayer(l)&&map.getLayoutProperty(l,"visibility")!=="none");if(!ls.length)return false;
+function plClick(e){if(!ready)return false;const ls=["pl-sc","pl-st","pl-ho"].filter(l=>map.getLayer(l)&&map.getLayoutProperty(l,"visibility")!=="none");if(!ls.length)return false;
  const f=map.queryRenderedFeatures([[e.point.x-5,e.point.y-5],[e.point.x+5,e.point.y+5]],{layers:ls})[0];if(!f)return false;const p=f.properties,ll=f.geometry.coordinates;
+ if(f.layer.id==="pl-ho"){plPop.setLngLat(ll).setHTML(`<b>${esc(p.n)}</b><span>Hospital or day surgery</span>`).addTo(map);return true;}
  if(f.layer.id==="pl-st"){plPop.setLngLat(ll).setHTML(`<b>${esc(p.n)}</b><span>${[...p.m].map(c=>PL_MODE[c]).join(" · ")}</span>`).addTo(map);return true;}
  const sel=+p.sel===2?"Fully selective":+p.sel===1?"Has selective classes":"";
  const html=z=>`<b>${esc(p.n)}</b><span>${PL_LV[p.lv]||"School"} · government${sel?" · "+sel:""}</span>${p.en&&p.en!=="null"?`<br><span>About ${(+p.en).toLocaleString("en-AU")} students${p.ic&&p.ic!=="null"?` · ICSEA ${p.ic}`:""}</span>`:""}${z?`<br><span>${z}</span>`:""}`;
