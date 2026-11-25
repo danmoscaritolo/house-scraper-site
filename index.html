@@ -1664,10 +1664,59 @@ header.pt .pl-home h1 mark{color:var(--hi-t);background:none;padding:0}
 }
 .pl-hsrch #find:focus{border-color:color-mix(in srgb,var(--ink) 22%,var(--hair))!important;box-shadow:0 1px 0 rgba(20,20,19,.03),0 18px 40px -22px rgba(20,20,19,.25)!important}
 [data-theme=dark] .pl-hsrch #find:focus{box-shadow:0 18px 40px -22px rgba(0,0,0,.55)!important}
+
+/* ---------- Check a listing (22-check.js) ---------- */
+#tabCheck{padding:clamp(20px,3vw,40px) max(4vw,16px) 64px}
+.ck{max-width:1080px;margin:0 auto}
+.ck-top .lede{font-size:16.5px;max-width:62ch;margin:6px 0 18px;color:var(--slate)}
+.ck-form{display:flex;flex-wrap:wrap;gap:8px;max-width:820px}
+.ck-in{flex:1 1 360px;min-width:0;height:46px;padding:0 14px;font:16px var(--sans);color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:10px}
+.ck-in.ck-p{flex:0 1 180px}
+.ck-in:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:transparent}
+.ck-go{height:46px;padding:0 20px;border:0;border-radius:10px;background:var(--hi);color:var(--on-hi);font:500 15px var(--sans);cursor:pointer}
+.ck-go.sm{height:38px;padding:0 14px;font-size:14px;margin-top:6px}
+.ck-go:hover{filter:brightness(1.08)}
+.ck-ext{margin:12px 0 0;font-size:14px;color:var(--slate)}.ck-ext a{color:var(--hi-t)}
+.ck-msg{min-height:1.2em;margin:8px 0 0;font-size:14px;color:var(--loss)}
+.ck-empty,.ck-wait{margin:28px 0;color:var(--slate);font-size:16px}
+.ck-home{margin:22px 0 18px}
+.ck-kick{margin:0 0 6px;font:500 12.5px var(--mono);color:var(--slate)}
+.ck-h{margin:0;font:500 clamp(26px,3.6vw,38px)/1.1 var(--disp);text-wrap:balance}
+.ck-facts{margin:8px 0 0;color:var(--slate);font-size:15.5px}
+.ck-ask{margin:6px 0 0;font:500 17px var(--mono)}
+.ck-ver{margin:6px 0 22px;padding:20px 22px;background:var(--sheet);border:1px solid var(--hair);border-left:4px solid var(--hi-line);border-radius:12px}
+.ck-ver.k-below{border-left-color:var(--gain)}.ck-ver.k-above{border-left-color:var(--loss)}
+.ck-vk{margin:0 0 6px;font:500 clamp(22px,2.6vw,28px)/1.15 var(--disp)}
+.ck-ver.k-below .ck-vk{color:var(--gain)}.ck-ver.k-above .ck-vk{color:var(--loss)}
+.ck-vs{margin:0;font-size:16.5px;max-width:70ch;line-height:1.55}
+.ck-src{margin:10px 0 0;font-size:13.5px;color:var(--slate);max-width:80ch}
+.ck-conf{font-weight:600;color:var(--ink)}.ck-conf.c-few{color:var(--loss)}
+.ck-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin:0 0 18px}
+.ck-card{padding:18px 18px 16px;background:var(--sheet);border:1px solid var(--hair);border-radius:12px;min-width:0}
+.ck-card h3{margin:0 0 10px;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
+.ck-card p{margin:0 0 8px;font-size:15px;line-height:1.5}
+.ck-big{font:500 22px/1.2 var(--mono)!important;margin-bottom:8px!important}
+.ck-big span{font:400 13.5px var(--sans);color:var(--slate);margin-left:4px}
+.ck-fit.f-in .ck-big{color:var(--gain)}.ck-fit.f-stretch .ck-big{color:var(--rent)}.ck-fit.f-out .ck-big{color:var(--loss)}
+.ck-mini{font-size:13.5px!important;color:var(--slate)}
+.ck-note{margin:0 0 22px;font-size:15px;color:var(--slate);max-width:80ch}
+.ck-list h3{margin:8px 0 4px;font:500 16px var(--disp)}
+.ck-tw{overflow-x:auto;margin-top:10px;border:1px solid var(--hair);border-radius:10px}
+.ck-t{width:100%;border-collapse:collapse;font-size:14.5px}
+.ck-t th,.ck-t td{padding:9px 12px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--hair)}
+.ck-t .n{text-align:right;font-variant-numeric:tabular-nums}
+.ck-t tbody tr{cursor:pointer}.ck-t tbody tr:hover{background:var(--hi-soft)}
+.ck-t tbody tr:last-child td{border-bottom:0}
+.ck-fine{margin:22px 0 0;font-size:13px;color:var(--slate);max-width:90ch}
+@media(max-width:600px){.ck-in.ck-p{flex:1 1 100%}.ck-go{flex:1 1 100%}.ck-ver{padding:16px}}
+/* seven tabs on phones (Check added 25 Nov): tighter, and scroll sideways rather than widen the page */
+@media(max-width:860px){header.top .tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}header.top .tabs::-webkit-scrollbar{display:none}
+ header.top .tabs button{flex:1 0 auto;min-width:0;padding:0 5px;font-size:13px}}
+@media(max-width:400px){header.top .tabs button{padding:0 3px;font-size:12.5px}}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
-<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
+<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="check" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5 12 2.5l1.5 9.5-9.5 1.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m5.5 8 1.8 1.8 3.4-3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Check a listing</span><span class="t-s">Check</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
 <div class="top-srch"><div class="field srch"><input id="find" placeholder="Search any NSW suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div></div>
 <div class="sb-foot"><button type="button" class="themeBtn" id="themeBtn" aria-label="Dark mode" title="Light or dark"><svg class="su" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="mo" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
 <button type="button" class="tourBtn" id="tourBtn">Tour</button></div>
@@ -1873,6 +1922,7 @@ header.pt .pl-home h1 mark{color:var(--hi-t);background:none;padding:0}
  <div class="tbl"><table class="t"><thead></thead><tbody></tbody></table></div>
 </section>
 </div>
+<div id="tabCheck" role="tabpanel" hidden></div>
 <div id="tabBudget" role="tabpanel" hidden>
 <div class="bx">
  <header class="bx-top">
@@ -2192,7 +2242,7 @@ function recompute(){METRICS.edge.label=`Buying vs renting after ${Math.round(A.
  if(ML){const mx=plan(ML.L);if(B.price!=null&&B.price>=mx.price){B.price=Math.floor(mx.price/5000)*5000||null;B.dep=null;}
   const want=B.price;
   if(want!=null){const dr=depRange(want);if(B.dep!=null&&B.dep>=dr.max)B.dep=null;if(B.dep!=null&&B.dep<dr.min)B.dep=dr.min;maxP=planAt(want,B.dep);maxP.dr=dr;}else maxP=mx;maxP.max=mx;}else maxP=null;
- for(const r of D.rows)r._m=model(r);}
+ for(const r of D.rows)r._m=model(r);if(typeof capSave==="function")capSave();}
 const byKey={};for(const r of D.rows)byKey[r[C.locality]+"|"+r[C.segment]]=r;
 /* ---------- tracked suburbs (favourites) ---------- */
 // A short list of suburbs the visitor follows, kept in this browser only (hs_favs). The Brew reports on them each week,
@@ -4171,15 +4221,16 @@ else document.querySelector(".spbar").hidden=true;
 
 /* ---------- tabs ---------- */
 // Views, one at a time: Home (the logo), Weekly, Map, Analysis, Suburbs, Your budget. Each has its own address (#map, #analysis, #suburbs, #budget) so back and links work.
-const VIEWS={market:"tabMarket",weekly:"tabWeekly",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",budget:"tabBudget"};let view="market";
-function showTab(t,how){if(!VIEWS[t])t="market";if(typeof tourS!=="undefined"&&tourS)tourEnd();const was=view;view=t;
+const VIEWS={market:"tabMarket",weekly:"tabWeekly",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",check:"tabCheck",budget:"tabBudget"};let view="market";
+function showTab(t,how){t=String(t||"").split("?")[0];if(!VIEWS[t])t="market";if(typeof tourS!=="undefined"&&tourS)tourEnd();const was=view;view=t;
  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
  for(const[k,id]of Object.entries(VIEWS))$(id).hidden=k!==t;document.body.dataset.view=t;
- if(how!=="pop"){const h=t==="market"?location.pathname+location.search:"#"+t;try{if(how==="init"||t===was)history.replaceState(null,"",h);else history.pushState(null,"",h);}catch(e){}}
+ if(how!=="pop"){const h=t==="market"?location.pathname+location.search:"#"+t+(t==="check"&&typeof CHK!=="undefined"&&CHK.qs?CHK.qs:"");try{if(how==="init"||t===was)history.replaceState(null,"",h);else history.pushState(null,"",h);}catch(e){}}
  if(t!==was&&how!=="keep")scrollTo(0,0);
  if(t==="map"&&map){map.resize();setTimeout(()=>map.resize(),0);}
  if(t==="suburbs"&&typeof market==="function"&&was!=="suburbs")setTimeout(()=>{try{market();}catch(e){}},0);
  if(t==="budget")planUI();
+ if(t==="check"&&typeof ckShow==="function")ckShow();
  if(t==="analysis")setTimeout(anDraw,0);
  if(t==="weekly")setTimeout(()=>{try{headline();}catch(e){}weekly();},0);
  setTimeout(()=>{if(typeof tourS==="undefined"||tourS)return;if(t==="budget"&&SIM&&!store.get("hs_tour_budget"))tourStart("budget");
@@ -4588,4 +4639,213 @@ rFillAll();
   stream(document.querySelector(".pl-home h1"),70);
   const k=document.querySelector(".pl-kick");if(k&&!calm())k.classList.add("kick-in");},60);
 }
+/* ---------- Check a listing ---------- */
+// A listing from the browser extension (#check?addr=...&price=...) or typed in: find the home in the sales records,
+// compare its price with recent sales (or rents) of similar homes nearby, bring its last sale forward, read the suburb,
+// and test it against the budget. Wording rule: "homes like this sold for", never "worth".
+const CHK={L:null,res:null,qs:""};
+const ckNow=()=>Math.round((Date.parse(D.asof+"T00:00:00Z")-SP_EP)/864e5);
+const ckQ=(a,q)=>{if(!a.length)return null;const s=a.slice().sort((x,y)=>x-y),i=(s.length-1)*q,lo=Math.floor(i);return s[lo]+(s[Math.min(lo+1,s.length-1)]-s[lo])*(i-lo);};
+const ckDist=(ax,ay,bx,by)=>ax==null||bx==null?null:Math.hypot((ax-bx)*0.92,ay-by);   // props units: 1e-5 degrees; ~1.1 m each, lon shrunk at -34
+const ckMon=d=>dday(d).replace(/^\d+ /,"");
+
+// "Auction Guide $795,000" -> 795000; "$2.15m - $2.35m" -> 2250000; "$890 per week" -> 890 (rent); "Contact agent" -> null
+function ckPrice(t,rent){if(t==null)return null;const s=String(t).toLowerCase().replace(/,/g,"");
+ const ms=[...s.matchAll(/\$\s?(\d+(?:\.\d+)?)\s*(k|m|mil|million)?\b/g)].map(m=>+m[1]*(m[2]==="k"?1e3:m[2]?1e6:1));
+ const ok=ms.filter(v=>rent?v>=50&&v<=20000:v>=50000);if(!ok.length)return null;
+ const lo=ok[0],hi=ok.length>1&&ok[1]>lo?ok[1]:lo;return{v:(lo+hi)/2,lo,hi};}
+
+// Which suburb file: the plain name, or "NAME POSTCODE" for same-named places (see geo build).
+function ckLoc(sub,pc){if(!sub)return null;const n=String(sub).toUpperCase().trim(),cand=[n+" "+pc,n];
+ const rows=D.rows.filter(r=>cand.includes(r[C.locality]));if(!rows.length)return null;
+ const hit=rows.find(r=>String(r[C.postcode])===String(pc))||rows.find(r=>r[C.locality]===n)||rows[0];return hit[C.locality];}
+
+const ckUnitType=t=>/apartment|unit|flat|studio/i.test(t||"");
+// The home itself: same street (any spelling), number and unit; else the nearest record to the listing's map point.
+function ckFind(R,L){const nk=L.street?norm(L.street).join(" "):"",sis=new Set(R.st.map((x,i)=>nk&&norm(x).join(" ")===nk?i:-1).filter(i=>i>=0));
+ // "74-76" is recorded as 74, "300A" sometimes as "300 A"; a complex is every number sharing the same leading digits (300A, 300B)
+ const nK=x=>String(x||"").toUpperCase().replace(/\s+/g,""),num=nK(L.num),first=num.split("-")[0],base=(first.match(/^\d+/)||[""])[0],un=uNorm(L.unit);
+ const onSt=R.p.filter(p=>sis.has(p[0]));let atNum=onSt.filter(p=>nK(p[1])===num);if(!atNum.length&&first!==num)atNum=onSt.filter(p=>nK(p[1])===first);
+ const cplx=base?onSt.filter(p=>(nK(p[1]).match(/^\d+/)||[""])[0]===base):[];
+ let p=atNum.find(q=>uNorm(q[2])===un)||(!un&&atNum.length===1?atNum[0]:null);
+ const lx=L.lon!=null?Math.round((+L.lon-150)*1e5):null,ly=L.lat!=null?Math.round((+L.lat+34)*1e5):null;
+ if(!p&&lx!=null&&!un){let best=null,bd=1e9;for(const q of R.p){if(q[5])continue;const d=ckDist(q[3],q[4],lx,ly);if(d!=null&&d<bd){bd=d;best=q;}}if(bd<=25)p=best;}
+ const bld=(cplx.length?cplx:atNum).filter(q=>q[5]===1);
+ // no point yet: the middle of the homes at that number, else of the street
+ let fx=p&&p[3]!=null?p[3]:lx,fy=p&&p[4]!=null?p[4]:ly;
+ if(fx==null){const pts=(atNum.length?atNum:onSt).filter(q=>q[3]!=null);if(pts.length){const xs=pts.map(q=>q[3]).sort((a,b)=>a-b),ys=pts.map(q=>q[4]).sort((a,b)=>a-b);fx=xs[xs.length>>1];fy=ys[ys.length>>1];}}
+ return{p,onSt,bld,multi:new Set(bld.map(q=>nK(q[1]))).size>1,lx:fx,ly:fy};}
+
+const ckLast=p=>{const s=p[7].filter(x=>!x[3]);return s.length?s[s.length-1]:null;};   // multi-property sales out
+const ckAdj=(loc,unit,price,day)=>{const e=propEstimate(loc,unit,price,day);return e?e.v:price;};
+
+// Recent sales of similar homes, prices moved to today's market with the suburb's 12-month median.
+function ckComps(R,loc,unit,F,L){const now=ckNow(),land=L.land||(F.p&&F.p[6])||null,out=[];
+ const base=R.p.filter(p=>p!==F.p&&p[5]===(unit?1:0)&&!(p[8]&&p[8][0]==="p"));
+ const steps=unit?[[12,0],[24,0]]:land?[[12,.25],[12,.4],[24,.4],[24,0]]:[[12,0],[24,0]];
+ let pick=[],used=steps[0];
+ for(const st of steps){used=st;const[mo,tol]=st;pick=[];
+  for(const p of base){const s=ckLast(p);if(!s||s[0]<now-mo*30.44)continue;if(tol&&!(p[6]>0&&Math.abs(p[6]/land-1)<=tol))continue;pick.push({p,s});}
+  if(pick.length>=8)break;}
+ for(const c of pick){c.adj=ckAdj(loc,unit,c.s[2],c.s[0]);c.d=ckDist(c.p[3],c.p[4],F.lx,F.ly);}
+ pick.sort((a,b)=>(a.d==null?1e9:a.d)-(b.d==null?1e9:b.d)||b.s[0]-a.s[0]);
+ return{list:pick.slice(0,25),months:used[0],tol:used[1],land};}
+// Every sale in the complex (units) or on the street (houses) in the last `yrs` years, newest first.
+function ckNear(loc,unit,ps,F,yrs){const now=ckNow(),out=[];for(const p of ps){if(p===F.p||p[5]!==(unit?1:0)||(p[8]&&p[8][0]==="p"))continue;
+  for(const s of p[7]){if(s[3]||s[0]<now-yrs*365.25)continue;out.push({p,s,adj:ckAdj(loc,unit,s[2],s[0]),d:ckDist(p[3],p[4],F.lx,F.ly)});}}
+ return out.sort((a,b)=>b.s[0]-a.s[0]);}
+function ckBuilding(loc,F){const now=ckNow();return ckNear(loc,true,F.bld,F,3).filter((c,i,a)=>a.findIndex(x=>x.p===c.p)===i);}
+
+function ckStats(list){const v=list.map(c=>c.adj).filter(x=>x>0);return v.length?{n:v.length,q25:ckQ(v,.25),med:ckQ(v,.5),q75:ckQ(v,.75)}:null;}
+const ckConf=n=>n>=12?"good":n>=6?"fair":"few";
+function ckVerdict(v,st){if(!v||!st||st.n<3)return null;const k=v<st.q25?"below":v>st.q75?"above":"inline";return{k,diff:v/st.med-1};}
+const CK_WORD={below:"Below recent sales",inline:"In line with recent sales",above:"Above recent sales"};
+const CK_RWORD={below:"Below recent rents",inline:"In line with recent rents",above:"Above recent rents"};
+
+// HIST chunks the estimates need: today's month and every comparable sale's month.
+async function ckHist(days){if(!MS||!MS.ad)return;const need=new Set([Math.floor(TL/HCH)]);
+ for(const d of days){let i=MS.ad.findIndex(a=>a>=d);if(i<0)i=TL;need.add(Math.floor(i/HCH));}
+ await Promise.all([...need].map(c=>window.HIST&&window.HIST[c]?0:loadJS(`data/web/hist_${c}.js`).catch(()=>0)));}
+async function ckRents(){if(window.RB)return window.RB;try{await loadJS("data/web/rentb.js");}catch(e){}return window.RB||null;}
+
+async function ckRun(L){CHK.L=L;CHK.res=null;ckDraw();const res={L};
+ res.mode=L.mode==="rent"||/per\s*week|\bp\.?w\b|\/\s*w(ee)?k/i.test(L.price||"")?"rent":"sale";
+ res.price=ckPrice(L.price,res.mode==="rent");
+ res.loc=ckLoc(L.suburb,L.pc);
+ if(!res.loc){res.err="suburb";CHK.res=res;ckDraw();return;}
+ try{if(!(window.PR&&window.PR[res.loc]))await loadJS(`data/props/${pslug(res.loc)}.js`);}catch(e){res.err="file";CHK.res=res;ckDraw();return;}
+ const R=window.PR[res.loc],F=ckFind(R,L);res.R=R;res.F=F;
+ res.unit=F.p?F.p[5]===1:(!!L.unit||ckUnitType(L.type));res.seg=res.unit?"unit":"house";
+ res.pc=String(L.pc||(byKey[res.loc+"|"+res.seg]||[])[C.postcode]||"");
+ const pre=ckComps(R,res.loc,res.unit,F,L);   // first pass picks the sales; then load the history they need and price them
+ const nearDays=(res.unit?F.bld:F.onSt).flatMap(p=>p[7].map(s=>s[0]));
+ await ckHist([...pre.list.map(c=>c.s[0]),...nearDays,F.p&&ckLast(F.p)?ckLast(F.p)[0]:ckNow()]);
+ res.comps=ckComps(R,res.loc,res.unit,F,L);res.bld=res.unit?ckBuilding(res.loc,F):[];
+ res.near=res.unit?ckNear(res.loc,true,F.bld,F,10):ckNear(res.loc,false,F.onSt,F,5);
+ res.useBld=res.unit&&res.bld.length>=4;res.basis=res.useBld?res.bld:res.comps.list;res.st=ckStats(res.basis);
+ if(res.mode==="sale")res.ver=ckVerdict(res.price&&res.price.v,res.st);
+ const last=F.p&&ckLast(F.p);if(last){res.last=last;res.est=propEstimate(res.loc,res.unit,last[2],last[0]);}
+ const RB=await ckRents();res.rbAsof=RB&&RB.asof;
+ const bd=L.beds!=null&&L.beds!==""?Math.min(5,+L.beds):null,rk=res.pc+"|"+res.seg+"|";
+ res.rent=RB&&((bd!=null&&RB.r[rk+bd]&&{beds:bd,v:RB.r[rk+bd]})||(RB.r[rk+"*"]&&{beds:null,v:RB.r[rk+"*"]}))||null;
+ if(res.mode==="rent"&&res.rent&&res.price){const[n,a,m,b]=res.rent.v,v=res.price.v;res.ver={k:v<a?"below":v>b?"above":"inline",diff:v/m-1,rent:true};}
+ res.row=byKey[res.loc+"|"+res.seg]||null;
+ CHK.res=res;ckDraw();}
+
+/* ---------- budget, shared on this device ---------- */
+// The browser extension reads this (on this device only) to say whether a listing fits. Nothing is sent anywhere.
+function capSave(){try{const buy=maxP&&maxP.max&&maxP.max.price>0?Math.round(maxP.max.price):null,rent=rb&&rb.pw>0?Math.round(rb.pw):null;
+ const was=store.get("hs_cap")||{};if(was.buy===buy&&was.rent===rent)return;store.set("hs_cap",{buy,rent,t:Date.now()});
+ window.postMessage({plottedCap:{buy,rent}},location.origin);}catch(e){}}
+function ckFit(res){if(res.mode==="rent"){const pw=rb&&rb.pw>0?rb.pw:null;if(!pw||!res.price)return{none:true,rent:true};const r=res.price.v/pw;
+  return{k:r<=1?"in":r<=1.1?"stretch":"out",cap:pw,rent:true};}
+ const cap=maxP&&maxP.max&&maxP.max.price>0?maxP.max.price:null;if(!cap||!res.price)return{none:true};const r=res.price.v/cap;
+ return{k:r<=1?"in":r<=1.1?"stretch":"out",cap};}
+const CK_FIT={in:"Within your budget",stretch:"A stretch",out:"Over your budget"};
+
+/* ---------- page ---------- */
+const ckAddr=(R,p)=>`${p[2]?String(p[2]).replace(/\s+/g,"")+"/":""}${p[1]?p[1]+" ":""}${R.st[p[0]]}`;
+function ckHead(){const L=CHK.L;return`<header class="ck-top"><h2 class="sec">Check a listing</h2>
+ <p class="lede">Paste a Domain or realestate.com.au link, or type an address, to compare a listing's price with what similar homes nearby sold or leased for.</p>
+ <form class="ck-form" id="ckForm"><input id="ckIn" class="ck-in" placeholder="Listing link or address, e.g. 28/300A Burns Bay Rd, Lane Cove" autocomplete="off" aria-label="Listing link or address" value="${L&&!L._typed?"":esc(L&&L._raw||"")}">
+ <input id="ckP" class="ck-in ck-p" placeholder="Price (optional)" inputmode="decimal" aria-label="Asking price, optional" value="${L&&L._typed&&L.price?esc(L.price):""}">
+ <button class="ck-go" type="submit">Check</button></form>
+ <p class="ck-ext">Browsing on a computer? The <b>Plotted extension</b> shows this on every listing you open. <a href="extension.html" target="_blank" rel="noopener">Get the extension</a></p>
+ <p class="ck-msg" id="ckMsg" role="status"></p></header>`;}
+
+function ckDraw(){const el=$("tabCheck");if(!el)return;const L=CHK.L,res=CHK.res;
+ if(!L){el.innerHTML=`<div class="ck">${ckHead()}<div class="ck-empty"><p>Nothing to check yet. Try a listing link, or an address like <button class="linkbtn" data-ck-ex="22 Yangalla Street, Marsfield">22 Yangalla Street, Marsfield</button>.</p></div></div>`;return;}
+ const title2=L.addr||[L.unit?L.unit+"/":"",L.num?L.num+" ":"",L.street||"",L.suburb?", "+title(L.suburb):""].join("");
+ const facts=[L.type,L.beds!=null?L.beds+" bed":"",L.baths!=null?L.baths+" bath":"",L.cars!=null?L.cars+" car":"",L.land?Math.round(L.land)+" m² land":"",L.floor?Math.round(L.floor)+" m² floor":""].filter(Boolean).join(" · ");
+ let body="";
+ if(!res)body=`<p class="ck-wait">Looking up sales near this home…</p>`;
+ else if(res.err)body=`<div class="ck-empty"><p>${res.err==="suburb"?`Couldn't find ${L.suburb?"the suburb “"+esc(L.suburb)+"”":"a NSW suburb in that address"} in the sales records. Plotted covers NSW only. Try adding the suburb, e.g. “12 Smith St, Ryde”.`:"The sales file for this suburb didn't load. Try again in a moment."}</p></div>`;
+ else body=ckBody(res);
+ el.innerHTML=`<div class="ck">${ckHead()}<section class="ck-home"><p class="ck-kick">${L.src==="rea"?"From realestate.com.au":L.src==="domain"?"From Domain":"Your listing"}${L.mode==="rent"?" · for rent":L.mode==="sold"?" · sold":""}</p>
+ <h1 class="ck-h">${esc(title2)}</h1>${facts?`<p class="ck-facts">${esc(facts)}</p>`:""}${L.price?`<p class="ck-ask">${esc(L.price)}</p>`:""}</section>${body}</div>`;}
+
+function ckBody(res){const L=res.L,R=res.R,F=res.F,st=res.st,sub=title(res.loc.replace(/ \d{4}$/,"")),noun=res.unit?"units":"houses",rent=res.mode==="rent";
+ const rng=(a,b)=>`${money(a)} to ${money(b)}`;
+ // 1. the verdict
+ let ver="";
+ if(rent){const r=res.rent;if(!r)ver=`<p class="ck-note">No recent leases for similar homes in ${esc(res.pc)} to compare with.</p>`;
+  else{const[n,a,m,b]=r.v,lab=`${r.beds!=null?r.beds+(r.beds>=5?"+":"")+"-bed ":""}${noun} in ${esc(res.pc)}`;
+   ver=`<div class="ck-ver ${res.ver?"k-"+res.ver.k:""}">${res.ver?`<p class="ck-vk">${CK_RWORD[res.ver.k]}</p>`:`<p class="ck-vk">Recent rents</p>`}
+   <p class="ck-vs">${lab} leased for <b>$${a} to $${b} a week</b> (middle half of ${n.toLocaleString("en-AU")} new leases, median $${m}).${res.price?` This listing asks $${Math.round(res.price.v)}, ${pct(Math.abs(res.ver.diff),0)} ${res.ver.diff>=0?"above":"below"} the median.`:""}</p>
+   <p class="ck-src">NSW Fair Trading bond lodgements, 12 months to ${dt(res.rbAsof)}.${r.beds==null&&L.beds!=null?" Not enough leases at that bedroom count, so all sizes are shown.":""}</p></div>`;}}
+ else if(!st||st.n<3)ver=`<div class="ck-ver"><p class="ck-vk">Too few recent sales to compare</p><p class="ck-vs">Fewer than three similar ${noun} have sold nearby in the past two years.</p></div>`;
+ else{const conf=ckConf(st.n),basis=res.useBld?`units in this ${F.multi?"complex":"building"} (last 3 years)`:`${res.unit?"":"similar-sized "}${noun} in ${esc(sub)}${res.comps.months>12?" (last 2 years)":" (last 12 months)"}`;
+  ver=`<div class="ck-ver ${res.ver?"k-"+res.ver.k:""}">${res.ver?`<p class="ck-vk">${CK_WORD[res.ver.k]}</p>`:`<p class="ck-vk">What similar homes sold for</p>`}
+  <p class="ck-vs">${st.n} ${basis} sold for <b>${rng(st.q25,st.q75)}</b> in today's market (middle half; median ${money(st.med)}).${res.ver?` This listing's price is ${pct(Math.abs(res.ver.diff),0)} ${res.ver.diff>=0?"above":"below"} the median.`:res.price?"":" The listing shows no price, so there's nothing to compare it with yet."}</p>
+  <p class="ck-src">Evidence: <span class="ck-conf c-${conf}">${conf==="good"?"good":conf==="fair"?"fair":"few sales, treat with caution"}</span>${res.unit?". Sales records don't include bedrooms, so units of every size are compared":""}${!res.unit&&res.comps.tol?`. Land within ${Math.round(res.comps.tol*100)}% of ${Math.round(res.comps.land)} m²`:""}. Older sales moved to today with the suburb's median.</p></div>`;}
+ // 2. the home's own last sale, 3. the suburb, 4. budget
+ let cards="";
+ if(F.p){const s=res.last,e=res.est,ago=(ckNow()-s[0])/365.25;
+  cards+=`<div class="ck-card"><h3>This home's last sale</h3><p class="ck-big">${money(s[2])} <span>${ckMon(s[0])}</span></p>
+  ${e&&ago>=.5?`<p>${e.src==="suburb"?esc(sub)+" "+noun:"Prices in the area"} have moved ${signed(e.ch,0)} since, which puts it around <b>${money(e.v)}</b> today.</p>`:ago<.5?`<p>Sold in the last six months.</p>`:""}
+  ${F.p[7].length>1?`<p class="ck-mini">${F.p[7].length} recorded sales since 1990.</p>`:""}
+  <button class="linkbtn" data-ck-map>See it on the map →</button></div>`;}
+ else cards+=`<div class="ck-card"><h3>This home's last sale</h3><p>No recorded sale at this address since 1990${res.unit?" (or the unit number didn't match)":""}, so this compares with nearby sales only.</p></div>`;
+ const r=res.row;
+ if(r&&r[C.med_now])cards+=`<div class="ck-card"><h3>${esc(sub)} ${noun}</h3><p class="ck-big">${money(r[C.med_now])} <span>median, last 12 months</span></p>
+  <p>${r[C.growth_1y]!=null?`<span class="${cls(r[C.growth_1y])}">${signed(r[C.growth_1y],1)}</span> on a year ago`:""}${r[C.from_peak]!=null?`${r[C.growth_1y]!=null?", ":""}${Math.abs(r[C.from_peak])<.02?"near its recent peak":pct(Math.abs(r[C.from_peak]),0)+" below its recent peak"}`:""}.</p>
+  <p class="ck-mini">${r[C.n_now]} sales${r[C.rent_pw]?` · typical rent $${Math.round(r[C.rent_pw])} a week`:""}</p><button class="linkbtn" data-ck-sub>Suburb details →</button></div>`;
+ const fit=ckFit(res);
+ cards+=`<div class="ck-card ck-fit ${fit.k?"f-"+fit.k:""}"><h3>Your budget</h3>${fit.none?`<p>${res.price?"Set your numbers once and every check shows whether it fits.":"Add a price above to test it against your budget."}</p><button class="ck-go sm" data-ck-bud>${res.price?"Set your budget":"Your budget"}</button>`:
+  `<p class="ck-big">${CK_FIT[fit.k]}</p><p>${fit.rent?`Your rent limit is about $${Math.round(fit.cap)} a week.`:`Your borrowing and savings reach about <b>${money(fit.cap)}</b>.`}</p>${fit.rent?"":`<button class="ck-go sm" data-ck-plan>Plan this home →</button>`}`}</div>`;
+ // rental side for a sale listing
+ let rentLine="";
+ if(!rent&&res.rent){const[n,a,m,b]=res.rent.v,y=res.price?m*52/res.price.v:null;
+  rentLine=`<p class="ck-note">If rented out: ${res.rent.beds!=null?res.rent.beds+(res.rent.beds>=5?"+":"")+"-bed ":""}${noun} in ${esc(res.pc)} lease for $${a} to $${b} a week (median $${m})${y?`, a gross yield of about ${pct(y,1)} at this price`:""}.</p>`;}
+ // the sales behind it
+ const nearT=res.near&&res.near.length?`<section class="ck-list ck-near"><h3>${res.unit?(F.multi?"Sold in this complex":"Sold in this building"):"Sold on this street"}</h3>
+  <p class="ck-mini">${res.unit?`Every unit sale at ${esc(String(L.num||"").split("-")[0].replace(/\s*[a-z]$/i,""))} ${esc((F.bld[0]&&R.st[F.bld[0][0]])||L.street||"")}${F.multi?" (all its buildings)":""} in the last 10 years`:`Every house sale on ${esc(L.street||"")} in the last 5 years`}, newest first. Click a row to see it on the map.</p>
+  <div class="ck-tw"><table class="t ck-t"><thead><tr><th>Address</th><th>Sold</th>${res.unit?"":`<th class="n">Land</th>`}<th class="n">Price</th><th class="n">Today</th></tr></thead><tbody>${res.near.slice(0,30).map(c=>`<tr data-k="${R.p.indexOf(c.p)}"><td>${esc(ckAddr(R,c.p))}</td><td>${ckMon(c.s[0])}</td>${res.unit?"":`<td class="n">${c.p[6]?Math.round(c.p[6])+" m²":"–"}</td>`}<td class="n">${money(c.s[2])}</td><td class="n">${money(c.adj)}</td></tr>`).join("")}</tbody></table></div>
+  ${res.near.length>30?`<p class="ck-mini">Showing the latest 30 of ${res.near.length}.</p>`:""}</section>`:"";
+ const list=res.useBld?[]:(res.basis||[]);const rows=list.slice(0,20).map(c=>`<tr data-k="${R.p.indexOf(c.p)}"><td>${esc(ckAddr(R,c.p))}</td><td>${ckMon(c.s[0])}</td>${res.unit?"":`<td class="n">${c.p[6]?Math.round(c.p[6])+" m²":"–"}</td>`}<td class="n">${money(c.s[2])}</td><td class="n">${money(c.adj)}</td><td class="n">${c.d!=null&&!res.useBld?(c.d<1000?Math.round(c.d/10)*10+" m":(c.d/1000).toFixed(1)+" km"):""}</td></tr>`).join("");
+ const tbl=list.length?`<section class="ck-list"><h3>Similar sales nearby</h3><p class="ck-mini">The sales behind the comparison, nearest first. “Today” moves each price with the suburb's 12-month median since it sold.</p>
+  <div class="ck-tw"><table class="t ck-t"><thead><tr><th>Address</th><th>Sold</th>${res.unit?"":`<th class="n">Land</th>`}<th class="n">Price</th><th class="n">Today</th><th class="n">Away</th></tr></thead><tbody>${rows}</tbody></table></div></section>`:"";
+ const fine=`<p class="ck-fine">A comparison with recorded sales and leases, not a valuation or advice. It doesn't see condition, views, renovations or the listing's photos, and the sale records don't include bedrooms. Sales: NSW Valuer General, to ${dt(D.asof)}.</p>`;
+ return ver+`<div class="ck-cards">${cards}</div>`+rentLine+nearT+tbl+fine;}
+
+// Typed in: a Domain link (address in the link), a realestate.com.au link (suburb only), or an address.
+function ckParse(raw,price){const t=raw.trim();if(!t)return null;let m;
+ if((m=t.match(/domain\.com\.au\/([a-z0-9-]+)-(nsw|vic|qld|sa|wa|tas|act|nt)-(\d{4})-(\d{7,})/i))){const slug=m[1].split("-");
+  const L={src:"domain",id:m[4],pc:m[3],state:m[2].toUpperCase(),_raw:t};
+  // the slug is "28-300a-burns-bay-road-lane-cove": numbers first, then street, then suburb; split on the street type
+  const tp=slug.findIndex((w,i)=>i>0&&/^(street|st|road|rd|avenue|ave|av|drive|dr|place|pl|crescent|cres|close|cl|court|ct|parade|pde|highway|hwy|terrace|tce|circuit|cct|lane|la|ln|way|grove|gr|boulevard|bvd|boulevarde|esplanade|esp|square|sq|parkway|pwy|row|walk|rise|mews|loop|track)$/.test(w));
+  const nums=[];let i=0;while(i<slug.length&&/^\d+[a-z]?$/.test(slug[i]))nums.push(slug[i++]);
+  if(tp>0){L.street=slug.slice(i,tp+1).join(" ");L.suburb=slug.slice(tp+1).join(" ");}
+  if(nums.length>=2){L.unit=nums[0];L.num=nums[1];}else if(nums.length)L.num=nums[0];
+  L.addr=title(`${L.unit?L.unit+"/":""}${L.num||""} ${L.street||""}, ${L.suburb||""}`).replace(/\b(\d+)([a-z])\b/g,(m,a,b)=>a+b.toUpperCase());if(price)L.price=price,L._typed=1;return L;}
+ if((m=t.match(/realestate\.com\.au\/property-([a-z+]+)-([a-z]{2,3})-(.+)-(\d{6,})/i)))
+  return{src:"rea",id:m[4],type:m[1].replace(/\+/g," "),state:m[2].toUpperCase(),suburb:decodeURIComponent(m[3]).replace(/[+-]/g," "),_raw:t,_reaOnly:1,price:price||undefined,_typed:price?1:0};
+ // address: "28/300A Burns Bay Road, Lane Cove NSW 2066" or "22 Yangalla St Marsfield"
+ let s=t.replace(/\b(nsw|new south wales)\b/ig,"").replace(/\b\d{4}\b\s*$/,"").replace(/\s+/g," ").trim();const pcm=t.match(/\b(2\d{3})\b\s*$/);
+ const parts=s.split(",").map(x=>x.trim()).filter(Boolean);let sub=null,street=s;
+ if(parts.length>1){sub=parts[parts.length-1];street=parts.slice(0,-1).join(" ");}
+ else{const up=s.toUpperCase();let best="";for(const r of D.rows){const n=r[C.locality].replace(/ \d{4}$/,"");if(n.length>best.length&&up.endsWith(" "+n))best=n;}
+  if(best){sub=best;street=s.slice(0,s.length-best.length).trim();}}
+ const q=parseQ(street);return{src:"typed",unit:q.unit,num:q.num,street:q.rest,suburb:sub,pc:pcm?pcm[1]:"",addr:t,price:price||undefined,_raw:t,_typed:1};}
+
+function ckWire(){const el=$("tabCheck");if(!el||el._w)return;el._w=1;
+ el.addEventListener("submit",e=>{if(e.target.id!=="ckForm")return;e.preventDefault();const L=ckParse($("ckIn").value,$("ckP").value.trim());
+  if(!L){$("ckMsg").textContent="Paste a listing link or type an address.";return;}
+  if(L._reaOnly){$("ckMsg").textContent=`realestate.com.au links don't include the street. Type the address instead, or use the extension, which reads it from the listing.`;return;}
+  CHK.qs="";ckRun(L);});
+ el.addEventListener("click",e=>{const t=e.target,res=CHK.res;
+  if(t.dataset.ckEx){$("ckIn").value=t.dataset.ckEx;$("ckForm").requestSubmit();return;}
+  if(t.closest("[data-ck-bud]")){showTab("budget");return;}
+  if(t.closest("[data-ck-plan]")&&res&&res.price){B.price=Math.round(res.price.v/5000)*5000;B.dep=null;save();recompute();showTab("budget");return;}
+  if(t.closest("[data-ck-sub]")&&res){showTab("map");setTimeout(()=>{P_SEL=null;select(res.loc);},60);return;}
+  if(t.closest("[data-ck-map]")&&res&&res.F.p){const p=res.F.p;showTab("map");setTimeout(()=>openAddress(res.loc,res.R.st[p[0]],p[1],p[2],true),60);return;}
+  const tr=t.closest("tr[data-k]");if(tr&&res){const p=res.R.p[+tr.dataset.k];showTab("map");setTimeout(()=>openAddress(res.loc,res.R.st[p[0]],p[1],p[2],true),60);}});}
+
+// Opened from the extension: #check?src=rea&addr=...&beds=2&price=...
+function ckFromHash(h){const m=String(h||"").match(/^#check\?(.+)$/);if(!m)return null;const L={};
+ for(const kv of m[1].split("&")){const i=kv.indexOf("=");if(i<1)continue;try{L[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1));}catch(e){}}
+ for(const k of["beds","baths","cars","land","floor","lat","lon"])if(L[k]!=null&&L[k]!=="")L[k]=+L[k];return L.suburb||L.addr?L:null;}
+function ckShow(){ckWire();if(!CHK.L)ckDraw();}
+{const L=ckFromHash(location.hash);if(L){CHK.qs=location.hash.slice(6);ckRun(L);}
+ addEventListener("hashchange",()=>{const L=ckFromHash(location.hash);if(L){CHK.qs=location.hash.slice(6);ckRun(L);showTab("check","keep");}});}
 </script></body></html>
