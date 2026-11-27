@@ -1713,6 +1713,23 @@ header.pt .pl-home h1 mark{color:var(--hi-t);background:none;padding:0}
 @media(max-width:860px){header.top .tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}header.top .tabs::-webkit-scrollbar{display:none}
  header.top .tabs button{flex:1 0 auto;min-width:0;padding:0 5px;font-size:13px}}
 @media(max-width:400px){header.top .tabs button{padding:0 3px;font-size:12.5px}}
+/* A building's sales (06c-props-map, 27 Nov): chart, key, measure toggle, sales list, the "this building" line on a unit */
+.bch{display:block;margin:4px 0 6px}.bch svg{width:100%;height:auto;display:block;overflow:visible}
+.bch text{font:450 10.5px var(--mono);fill:var(--slate)}
+.bch .gl{stroke:var(--hair);stroke-width:1}
+.bch .dt{fill:var(--ink);fill-opacity:.38;cursor:pointer;transition:fill-opacity .12s}.bch .dt:hover{fill-opacity:1;fill:var(--hi-line)}
+.bch .md{fill:none;stroke:var(--hi-line);stroke-width:2.2;stroke-linejoin:round}.bch .mdp{fill:var(--hi-line);stroke:var(--sheet);stroke-width:1.2}
+.bch .sb{fill:none;stroke:var(--slate);stroke-width:1.4;stroke-dasharray:4 3;opacity:.8}
+.bkey{display:flex;flex-wrap:wrap;gap:4px 16px;font:450 12px var(--mono);color:var(--slate);margin-top:6px}
+.bkey i{display:inline-block;vertical-align:middle;margin-right:6px}
+.bkey .k-dt{width:7px;height:7px;border-radius:50%;background:var(--ink);opacity:.45}
+.bkey .k-md{width:16px;height:2px;background:var(--hi-line)}
+.bkey .k-sb{width:16px;border-top:1.5px dashed var(--slate)}
+.bseg{margin:0 0 8px}
+.bsl button{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--wash);padding:8px 0;font:14.5px var(--sans);color:var(--ink);cursor:pointer}
+.bsl button span{color:var(--slate);float:right}.bsl button b{font-weight:500}.bsl button:hover{color:var(--hi-t)}
+.bline{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border:1px solid var(--hair);border-radius:10px;padding:9px 12px;margin:8px 0 12px}
+.bline span{font:450 12.5px var(--mono);color:var(--slate)}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -2334,6 +2351,8 @@ function areaBox(){const bs=[];for(const r of D.rows)if(inArea(r)&&bbox[r[C.loca
  if(!bs.length)bs.push(...Object.values(bbox));return bs.reduce((a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])],[180,90,-180,-90]);}
 const all_b=areaBox();
 let map=null,ready=false,hoverId=null,opac=.72;
+// Suburb colours fade out as you zoom in to street level, where each home is its own icon (06c-props-map).
+const fillOp=()=>["interpolate",["linear"],["zoom"],PM_Z-.5,["case",["boolean",["feature-state","has"],false],opac,0],PM_Z,0];
 const hoverBar={setLngLat(){return this;},setHTML(h){const el=document.getElementById("hoverbar");el.innerHTML=h;el.hidden=false;return this;},addTo(){return this;},remove(){document.getElementById("hoverbar").hidden=true;}};
 const popupOld=window.maplibregl?new maplibregl.Popup({closeButton:false,closeOnClick:false,className:"tip",offset:12,maxWidth:"280px"}):null;
 function tipHtml(n){const r=rowFor(n),k=n+"|"+seg;
@@ -2358,21 +2377,23 @@ if(window.maplibregl){
   map.addLayer({id:"sat",type:"raster",source:"sat",layout:{visibility:"none"}},firstSym);
   map.addSource("sub",{type:"geojson",data:GEO});
   map.addLayer({id:"fill",type:"fill",source:"sub",paint:{"fill-color":["coalesce",["feature-state","c"],"#D9D7CF"],
-   "fill-opacity":["case",["boolean",["feature-state","has"],false],opac,0]}},firstSym);
+   "fill-opacity":fillOp()}},firstSym);
   {const cv=document.createElement("canvas");cv.width=cv.height=12;const cx=cv.getContext("2d");cx.strokeStyle="rgba(85,98,92,.38)";cx.lineWidth=1;cx.beginPath();for(const o of[-12,0,12]){cx.moveTo(o,12);cx.lineTo(o+12,0);}cx.stroke();
    map.addImage("hatch",cx.getImageData(0,0,12,12));
-   map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["case",["boolean",["feature-state","has"],false],0,.45]}},firstSym);}
+   map.addLayer({id:"nodata",type:"fill",source:"sub",paint:{"fill-pattern":"hatch","fill-opacity":["interpolate",["linear"],["zoom"],PM_Z-.5,["case",["boolean",["feature-state","has"],false],0,.45],PM_Z,0]}},firstSym);}
   map.addLayer({id:"edge",type:"line",source:"sub",paint:{"line-color":["case",["boolean",["feature-state","hover"],false],"#0E1A16","#FFFFFF"],
    "line-width":["interpolate",["linear"],["zoom"],9,["case",["boolean",["feature-state","hover"],false],1.8,.3],13,["case",["boolean",["feature-state","hover"],false],2.2,1]],"line-opacity":.9}},firstSym);
   map.addLayer({id:"sel",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":hiC(),"line-width":6}},firstSym);
   map.addLayer({id:"sel2",type:"line",source:"sub",filter:["==",["get","n"],""],paint:{"line-color":"#0E1A16","line-width":1.6}},firstSym);   // the chosen suburb: lime with a dark core
-  ready=true;paintMap();if(typeof plApply==="function")plApply();});
- map.on("mousemove","fill",e=>{if(spHover(e))return;const f=e.features[0];if(!f)return;map.getCanvas().style.cursor="pointer";
+  pmInit();ready=true;paintMap();if(typeof plApply==="function")plApply();});
+ map.on("mousemove","fill",e=>{if(spHover(e)||pmHover(e))return;
+  if(map.getZoom()>=PM_Z){map.getCanvas().style.cursor="";if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=null;hoverBar.remove();return;}   // street level: homes, not suburbs
+  const f=e.features[0];if(!f)return;map.getCanvas().style.cursor="pointer";
   if(hoverId!==f.id){if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=f.id;map.setFeatureState({source:"sub",id:hoverId},{hover:true});}
   hoverBar.setLngLat(e.lngLat).setHTML(tipHtml(f.properties.n)).addTo(map);});
  map.on("mouseleave","fill",()=>{map.getCanvas().style.cursor="";if(hoverId!=null)map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=null;hoverBar.remove();});
  map.on("click",e=>{if(spPop&&spPop.isOpen()&&!spAt(e))spPop.remove();const M=document.querySelector(".main.full.open:not(.pin)");if(M&&!map.queryRenderedFeatures(e.point,{layers:["fill"]}).length)M.classList.remove("open");});   // full width: clicking off a suburb slides the panel away
- map.on("click","fill",e=>{if(spClick(e)||plClick(e))return;const f=e.features[0];if(!f)return;
+ map.on("click","fill",e=>{if(spClick(e)||plClick(e)||pmClick(e))return;if(map.getZoom()>=PM_Z)return;const f=e.features[0];if(!f)return;
  // a click on a suburb clears any chosen sale or address pin
  const wasAddr=!!P_SEL;if(spCur!=null)spUnpin();if(P_SEL){P_SEL=null;if(pMarker)pMarker.remove();}
  if(f.properties.n===sel&&!wasAddr)closeSel();else select(f.properties.n,false);});
@@ -2392,20 +2413,20 @@ function spKeys(){if(!SPM||!MS||!MS.ad||!ready||map.getZoom()<SP_MINZ)return[];c
  return out;}
 function spLoad(key){if(spLoaded[key]||spLoading[key])return;spLoading[key]=1;spStatus();const el=document.createElement("script");el.src=`data/points/${key}.js`;
  el.onload=()=>{spLoading[key]=0;spAdd(key);};el.onerror=()=>{spLoading[key]=0;spErr=true;spStatus();};document.head.appendChild(el);}
-const spRad=()=>spMode==="week"?["interpolate",["linear"],["zoom"],9,3.5,12,5.5,15,8,17,10]:["interpolate",["linear"],["zoom"],9,1.6,12,3,15,6,17,9];
-function spPaint(){const mode=document.getElementById("spcol").value,rk=mode==="size"?"ra":"r";return{"circle-color":spFilt==="loss"?"#B23A48":spFilt==="odd"?"#5E4B8B":mode==="abs"
+// little house and apartment icons (06c-props-map), sized like the old dots; the past week's are bigger
+const spRad=()=>spMode==="week"?["interpolate",["linear"],["zoom"],9,.34,12,.52,15,.8,17,1.05]:["interpolate",["linear"],["zoom"],9,.2,12,.32,15,.62,17,.92];
+function spPaint(){const mode=document.getElementById("spcol").value,rk=mode==="size"?"ra":"r";return{"icon-color":spFilt==="loss"?"#B23A48":spFilt==="odd"?"#5E4B8B":mode==="abs"
   ?["interpolate",["linear"],["ln",["get","p"]],Math.log(6e5),HEX[0],Math.log(1.1e6),HEX[1],Math.log(1.8e6),HEX[2],Math.log(3e6),HEX[3],Math.log(5.5e6),HEX[4]]
   :["interpolate",["linear"],["get",rk],.7,HREL[0],.87,HREL[1],1,"#D8D2C2",1.18,HREL[3],1.45,HREL[4]],
- "circle-radius":spRad(),"circle-opacity":.92,
- "circle-stroke-color":"#0E1A16","circle-stroke-width":["interpolate",["linear"],["zoom"],10,.5,13,1.4,16,2]};}
+ "icon-opacity":.95,"icon-halo-color":"#0E1A16","icon-halo-width":["interpolate",["linear"],["zoom"],10,.4,13,1.1,16,1.7]};}
 // Like a listings map: every sale has a dark ring until you open it, then the ring goes (white). Remembered in this browser.
 const SEEN=(()=>{try{return JSON.parse(localStorage.getItem("hs_seen")||"{}")}catch(e){return{}}})();
 const spRing=y=>{const v=SEEN[y];return v&&v.length?["case",["in",["get","i"],["literal",v]],"#FFFFFF","#0E1A16"]:"#0E1A16";};
-function spSeen(y,i){const v=SEEN[y]||(SEEN[y]=[]);if(!v.includes(i)){v.push(i);try{localStorage.setItem("hs_seen",JSON.stringify(SEEN));}catch(e){}}try{map.setPaintProperty(spId(y),"circle-stroke-color",spRing(y));}catch(e){}}
+function spSeen(y,i){const v=SEEN[y]||(SEEN[y]=[]);if(!v.includes(i)){v.push(i);try{localStorage.setItem("hs_seen",JSON.stringify(SEEN));}catch(e){}}try{map.setPaintProperty(spId(y),"icon-halo-color",spRing(y));}catch(e){}}
 function spAdd(y){const P=window.SP&&window.SP[y];if(!P||!ready||spLoaded[y])return;const id="sp_"+y.replace(/[^0-9a-z]/gi,"_");LID[id]=y;const n=P.p.length,f=new Array(n);
  for(let i=0;i<n;i++)f[i]={type:"Feature",properties:{i,d:P.d[i],u:P.u[i],pp:(P.pp&&P.pp[i])||0,m:(P.m&&P.m[i])||1,r:P.r[i]??1,ra:(P.ra&&P.ra[i])??P.r[i]??1,p:P.p[i],a:(P.a&&P.a[i])||0},geometry:{type:"Point",coordinates:[150+P.x[i]/1e5,-34+P.y[i]/1e5]}};
  map.addSource(id,{type:"geojson",data:{type:"FeatureCollection",features:f}});
- map.addLayer({id,type:"circle",source:id,layout:{visibility:"none"},paint:spPaint()});map.setPaintProperty(id,"circle-stroke-color",spRing(y));
+ map.addLayer({id,type:"symbol",source:id,layout:{visibility:"none","icon-image":["case",["==",["get","u"],1],"pm-apt","pm-house"],"icon-size":spRad(),"icon-allow-overlap":true,"icon-ignore-placement":true},paint:spPaint()});map.setPaintProperty(id,"icon-halo-color",spRing(y));
  spLoaded[y]=1;spApply();sivSoon();}
 const spId=k=>"sp_"+k.replace(/[^0-9a-z]/gi,"_");
 function spLayers(){if(spMode==="off")return[];const ks=spKeys();return ks.filter(k=>spLoaded[k]).map(spId);}
@@ -2455,7 +2476,7 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
  h+="</dl>";
  if(ml>1)h+=`<div class="ln warn">Part of one sale of <b>${ml} properties</b> for ${dollars(P.p[i])} in total (about ${dollars(P.p[i]/ml)} each). Left out of medians and growth.</div>`;
  else if(ml<0)h+=`<div class="ln warn">Far from anything else sold in ${esc(title(loc))} that year: often a development site, a big holding or a family transfer. Left out of medians and growth.</div>`;
- h+=`<div class="ft"><a href="#" data-prop="1">Full history of this address</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;
+ h+=`<div class="ft"><a href="#" data-prop="1">Full history of this address</a>${unit?`<a href="#" data-bld="1">Every sale in this building</a>`:""}<a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;
  if(!pMarker)pMarker=new maplibregl.Marker({color:hiC()});pMarker.setLngLat(f.geometry.coordinates).addTo(map);spSeen(y,i);spCur=y+"|"+i;   // same lime pin as a searched address
  // The card sits beside the pin, never on it, and the map moves so the card is fully in view.
  spPop.setOffset({"bottom":[0,-44],"top":[0,8],"left":[16,-22],"right":[-16,-22],"bottom-left":[10,-40],"bottom-right":[-10,-40],"top-left":[10,6],"top-right":[-10,6]}).setLngLat(f.geometry.coordinates).setHTML(h);spSwap=true;spPop.addTo(map);spSwap=false;
@@ -2463,8 +2484,9 @@ function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P
   if(pr.top<mr.top+pad)dy=pr.top-mr.top-pad;else if(pr.bottom>mr.bottom-pad)dy=pr.bottom-mr.bottom+pad;
   if(pr.left<mr.left+pad)dx=pr.left-mr.left-pad;else if(pr.right>mr.right-pad)dx=pr.right-mr.right+pad;const pp=map.project(f.geometry.coordinates);if(pp.y<52)dy=Math.min(dy,pp.y-52);if(dx||dy)map.panBy([dx,dy],{duration:300});});
  const lk=spPop.getElement().querySelector("[data-sub]");lk&&lk.addEventListener("click",ev=>{ev.preventDefault();select(lk.dataset.sub,false);});
- const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spCur=null;spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});return true;}
-function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(ready)for(const y in spLoaded)try{map.setPaintProperty(spId(y),"circle-radius",spRad());}catch(e){}if(quiet){spApply();legend();return;}
+ const lp=spPop.getElement().querySelector("[data-prop]");lp&&lp.addEventListener("click",ev=>{ev.preventDefault();spCur=null;spPop.remove();openAddress(loc,P.st[P.s[i]],P.n[i],P.un[i]);});
+ const lb=spPop.getElement().querySelector("[data-bld]");lb&&lb.addEventListener("click",ev=>{ev.preventDefault();spCur=null;spPop.remove();pmOpenBldBy(loc,P.st[P.s[i]],P.n[i]);});return true;}
+function setSp(m,quiet){spMode=m;{const f=$("spfilt");if(f)f.hidden=m==="off";}$("spsw").value=m;document.getElementById("spopt").hidden=m==="off";if(ready)for(const y in spLoaded)try{map.setLayoutProperty(spId(y),"icon-size",spRad());}catch(e){}if(quiet){spApply();legend();return;}
  if(m==="off"&&spPop)spPop.remove();{const o=document.getElementById("opac");if(m!=="off"&&+o.value>40){o.value=30;setOpacity(.3);}else if(m==="off"&&+o.value<=30){o.value=72;setOpacity(.72);}}if(m!=="off"&&ready&&map.getZoom()<11)map.easeTo({zoom:11,duration:600});spApply();legend();}
 let sumT=0;if(window.maplibregl)setTimeout(()=>map&&map.on("moveend",()=>{if(spMode!=="off")spApply();if(!sel&&!P_SEL){clearTimeout(sumT);sumT=setTimeout(detail,150);}}),0);
 
@@ -2530,6 +2552,125 @@ function plClick(e){if(!ready)return false;const ls=["pl-sc","pl-st","pl-ho"].fi
 if(plPop)plPop.on("close",()=>{const s=ready&&map.getSource("pl-zone");if(s)s.setData(plFC([]));});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-pl]");if(!b)return;const k=b.dataset.pl;PL_ON[k]=!PL_ON[k];plSave();plApply();});
 plUI();
+/* ---------- every home on the map, zoomed in (Dan, 27 Nov) ----------
+   From zoom PM_Z the suburb colours fade out and every property with a recorded sale shows as a small house or
+   apartment-building icon, built from the suburb property files (data/props, loaded for the suburbs in view).
+   Click a house for its sale history; click a building for every sale in it and how its prices moved.
+   Below PM_Z a click picks a suburb, as before. Sale dots use the same two icons, in their price colours. */
+const PM_Z=14.5;
+let pmReveal=()=>{};   // 18-wiring sets this so the side panel slides in
+const pmDone={},pmBusy={};let pmFeat=[],pmT=0;
+// Icons are signed distance fields, so one image takes any colour and a ring (halo) like the old dots.
+function pmSdf(draw){const S=48,R=8,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d");x.fillStyle="#000";draw(x);
+ const a=x.getImageData(0,0,S,S).data,ins=new Uint8Array(S*S),edge=[];for(let i=0;i<S*S;i++)ins[i]=a[i*4+3]>127?1:0;
+ for(let y=0;y<S;y++)for(let X=0;X<S;X++){const i=y*S+X,v=ins[i];if((X>0&&ins[i-1]!==v)||(X<S-1&&ins[i+1]!==v)||(y>0&&ins[i-S]!==v)||(y<S-1&&ins[i+S]!==v))edge.push(X,y);}
+ const out=new Uint8Array(S*S*4);for(let y=0;y<S;y++)for(let X=0;X<S;X++){let d=1e9;for(let k=0;k<edge.length;k+=2){const dx=edge[k]-X,dy=edge[k+1]-y,q=dx*dx+dy*dy;if(q<d)d=q;}
+  const sd=(ins[y*S+X]?-1:1)*Math.sqrt(d),o=(y*S+X)*4;out[o]=out[o+1]=out[o+2]=255;out[o+3]=Math.max(0,Math.min(255,Math.round(255-255*(sd/R+.25))));}
+ return{width:S,height:S,data:out};}
+function pmIcons(){if(!map||map.hasImage("pm-house"))return;
+ map.addImage("pm-house",pmSdf(x=>{x.beginPath();x.moveTo(5,25);x.lineTo(24,8);x.lineTo(43,25);x.lineTo(38,25);x.lineTo(38,41);x.lineTo(10,41);x.lineTo(10,25);x.closePath();x.fill();
+  x.globalCompositeOperation="destination-out";x.fillRect(20.5,30,7,11);}),{sdf:true,pixelRatio:2});
+ map.addImage("pm-apt",pmSdf(x=>{x.fillRect(12,6,24,36);x.globalCompositeOperation="destination-out";
+  for(const wy of[11,19,27])for(const wx of[16.5,26.5])x.fillRect(wx,wy,5,4.5);x.fillRect(21,35,6,7);}),{sdf:true,pixelRatio:2});}
+const pmCol=()=>document.documentElement.dataset.theme==="dark"?"#A9A79E":"#77756D";
+function pmInit(){pmIcons();map.addSource("pm",{type:"geojson",data:{type:"FeatureCollection",features:[]}});
+ const m=(f,sz)=>typeof sz==="number"?sz*f:["*",f,sz];   // a building's icon grows a little with its number of units
+ const lay=(id,t,img,sz)=>map.addLayer({id,type:"symbol",source:"pm",minzoom:PM_Z-.01,filter:["==",["get","t"],t],
+  layout:{"icon-image":img,"icon-size":["interpolate",["linear"],["zoom"],PM_Z,m(.36,sz),16,m(.5,sz),17,m(.78,sz),18,m(1.1,sz)],"icon-allow-overlap":true,"icon-ignore-placement":true},
+  paint:{"icon-color":pmCol(),"icon-opacity":["interpolate",["linear"],["zoom"],PM_Z,0,PM_Z+.5,.8]}});
+ lay("pm-h",0,"pm-house",1);lay("pm-u",1,"pm-apt",["interpolate",["linear"],["get","n"],1,.9,20,1.15,150,1.45]);
+ map.on("moveend",pmView);pmView();}
+function pmTheme(){if(!ready)return;for(const l of["pm-h","pm-u"])if(map.getLayer(l))map.setPaintProperty(l,"icon-color",pmCol());}
+// Units are grouped into a building by street (any spelling) and the number's leading digits (300A and 300B are one complex).
+const pmNum=x=>{const s=String(x||"").toUpperCase().replace(/\s+/g,"");return(s.match(/^\d+/)||[s])[0];};
+function pmSk(R){return R._sk||(R._sk=R.st.map(x=>norm(x).join(" ")));}
+const pmBKey=(R,p)=>pmSk(R)[p[0]]+"|"+pmNum(p[1]);
+function pmGroups(R){if(R._bg)return R._bg;const g={};R.p.forEach((p,i)=>{if(p[5]===1)(g[pmBKey(R,p)]||(g[pmBKey(R,p)]=[])).push(i);});return R._bg=g;}
+const pmMid=v=>{const s=v.slice().sort((a,b)=>a-b);return s[s.length>>1];};
+function pmBuild(loc){const R=window.PR&&window.PR[loc];if(!R||pmDone[loc])return;pmDone[loc]=1;const pt=(x,y)=>({type:"Point",coordinates:[150+x/1e5,-34+y/1e5]});
+ R.p.forEach((p,i)=>{if(p[5]!==1&&p[3]!=null&&!(p[8]&&p[8][0]==="p"))pmFeat.push({type:"Feature",geometry:pt(p[3],p[4]),properties:{t:0,l:loc,i}});});
+ for(const[k,ix]of Object.entries(pmGroups(R))){const ps=ix.map(i=>R.p[i]).filter(p=>p[3]!=null);if(!ps.length)continue;
+  pmFeat.push({type:"Feature",geometry:pt(pmMid(ps.map(p=>p[3])),pmMid(ps.map(p=>p[4]))),properties:{t:1,l:loc,k,n:ix.length}});}
+ clearTimeout(pmT);pmT=setTimeout(()=>{const s=map.getSource("pm");s&&s.setData({type:"FeatureCollection",features:pmFeat});},60);}
+// load the property files of the suburbs in view (nearest the centre first, at most 12 at once)
+function pmView(){if(!map||!map.getSource("pm")||map.getZoom()<PM_Z-.5)return;const b=map.getBounds(),c=map.getCenter(),W=b.getWest(),E=b.getEast(),S=b.getSouth(),N=b.getNorth();
+ const ns=[];for(const n in bbox){const a=bbox[n];if(a[0]<=E&&a[2]>=W&&a[1]<=N&&a[3]>=S)ns.push([Math.hypot((a[0]+a[2])/2-c.lng,(a[1]+a[3])/2-c.lat),n]);}
+ ns.sort((x,y)=>x[0]-y[0]);for(const[,n]of ns.slice(0,12)){if(pmDone[n]||pmBusy[n])continue;
+  if(window.PR&&window.PR[n]){pmBuild(n);continue;}pmBusy[n]=1;loadJS(`data/props/${pslug(n)}.js`).then(()=>pmBuild(n)).catch(()=>{pmDone[n]=1;}).finally(()=>{pmBusy[n]=0;});}}
+function pmAt(e){if(!ready||map.getZoom()<PM_Z||!map.getLayer("pm-h"))return null;const b=5;return map.queryRenderedFeatures([[e.point.x-b,e.point.y-b],[e.point.x+b,e.point.y+b]],{layers:["pm-u","pm-h"]})[0]||null;}
+const pmAddr=(R,p)=>`${p[2]?p[2].replace(/\s+/g,"")+"/":""}${p[1]?p[1]+" ":""}${R.st[p[0]]}`;
+function pmBName(R,ix){const ps=ix.map(i=>R.p[i]),ns=[...new Set(ps.map(p=>String(p[1]).toUpperCase().replace(/\s+/g,"")))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+ return`${ns.length>1?ns[0]+"–"+ns[ns.length-1]:ns[0]} ${R.st[ps[0][0]]}`;}
+function pmHover(e){const f=pmAt(e);if(!f)return false;const{t,l,i,k}=f.properties,R=window.PR[l];if(!R)return false;map.getCanvas().style.cursor="pointer";
+ if(hoverId!=null){map.setFeatureState({source:"sub",id:hoverId},{hover:false});hoverId=null;}
+ if(t===1){const ix=pmGroups(R)[k]||[],n=ix.reduce((s,j)=>s+R.p[j][7].length,0);
+  hoverBar.setLngLat(e.lngLat).setHTML(`<b>${esc(pmBName(R,ix))}</b>${ix.length} ${ix.length===1?"unit":"units"} · ${n} ${n===1?"sale":"sales"} on record<br><span>${esc(title(l))} · click for every sale in the building</span>`).addTo(map);return true;}
+ const p=R.p[i],s=p[7][p[7].length-1];
+ hoverBar.setLngLat(e.lngLat).setHTML(`<b>${esc(pmAddr(R,p))}</b>Last sold ${dollars(s[2])}${s[3]>1?` <span>(${s[3]}-property sale)</span>`:""} · ${dday(s[0]).replace(/^\d+ /,"")}<br><span>${esc(title(l))} · ${p[7].length} ${p[7].length===1?"sale":"sales"} on record · click for the history</span>`).addTo(map);return true;}
+function pmPin(ll){if(!map)return;if(!pMarker)pMarker=new maplibregl.Marker({color:hiC()});pMarker.setLngLat(ll).addTo(map);}
+function pmShow(loc){sel=loc;paintMap();detail();pmReveal();if(window.innerWidth<1000)$("detail").scrollIntoView({behavior:"smooth"});}
+function pmOpenProp(loc,p){const R=window.PR[loc],sk=pmSk(R),nk=sk[p[0]];
+ P_SEL={loc,st:R.st[p[0]],num:p[1],unit:p[2],R,street:R.p.filter(q=>sk[q[0]]===nk),list:null,p,miss:false};if(p[3]!=null)pmPin([150+p[3]/1e5,-34+p[4]/1e5]);pmShow(loc);}
+function pmOpenBld(loc,k){const R=window.PR[loc],ix=pmGroups(R)[k];if(!ix)return false;const ps=ix.map(i=>R.p[i]),sk=pmSk(R),nk=sk[ps[0][0]],xy=ps.filter(p=>p[3]!=null);
+ P_SEL={loc,st:R.st[ps[0][0]],num:pmNum(ps[0][1]),unit:"",R,street:R.p.filter(q=>sk[q[0]]===nk),list:null,p:null,miss:false,bk:k,bld:true,bm:P_SEL&&P_SEL.bm||"p"};
+ if(xy.length)pmPin([150+pmMid(xy.map(p=>p[3]))/1e5,-34+pmMid(xy.map(p=>p[4]))/1e5]);pmShow(loc);return true;}
+// from a sale card: the building of a unit sale (street and number as recorded)
+async function pmOpenBldBy(loc,st,num){try{if(!(window.PR&&window.PR[loc]))await loadJS(`data/props/${pslug(loc)}.js`);}catch(e){return;}
+ const R=window.PR[loc];pmOpenBld(loc,norm(st).join(" ")+"|"+pmNum(num));}
+function pmClick(e){const f=pmAt(e);if(!f)return false;const{t,l,i,k}=f.properties;if(!window.PR[l])return false;hoverBar.remove();if(spCur!=null)spUnpin();
+ if(t===1)pmOpenBld(l,k);else pmOpenProp(l,window.PR[l].p[i]);return true;}
+
+/* ---------- a building's sales ---------- */
+function pmBldInfo(R,k){const ix=pmGroups(R)[k]||[],ps=ix.map(i=>R.p[i]),sales=[];
+ ps.forEach((p,pi)=>p[7].forEach((x,j)=>sales.push({p,k:ix[pi],x,pv:j?p[7][j-1]:null})));sales.sort((a,b)=>b.x[0]-a.x[0]);
+ return{ix,ps,sales,single:sales.filter(s=>!s.x[3])};}
+// "nice" axis steps
+function pmTicks(lo,hi,n){const raw=(hi-lo)/n,m=Math.pow(10,Math.floor(Math.log10(raw))),st=[1,2,2.5,5,10].map(f=>f*m).find(s=>s>=raw)||raw,out=[];for(let v=Math.ceil(lo/st)*st;v<=hi+1e-9;v+=st)out.push(v);return out;}
+const pmK=v=>v>=1e6?"$"+(v/1e6).toFixed(v>=1e7?0:1).replace(/\.0$/,"")+"m":v>=1e3?"$"+Math.round(v/1e3)+"k":"$"+Math.round(v);
+function pmChart(loc,B,mode){const now=MS&&MS.ad?MS.ad[TL]:B.single[0].x[0],pts=B.single.map(s=>({s,v:mode==="m2"?(s.p[6]>0?s.x[2]/s.p[6]:null):s.x[2]})).filter(o=>o.v>0&&!(o.s.x[3]<0));
+ if(pts.length<2)return`<p class="note">Too few single sales to draw a trend.</p>`;
+ const W=560,H=230,L=52,Rm=10,T=10,Bm=24,x0=Math.min(...pts.map(o=>o.s.x[0]))-60,x1=Math.max(now,...pts.map(o=>o.s.x[0]))+30;
+ // yearly median (years with 2+ sales), and the suburb's 12-month unit median for comparison (price mode)
+ const by={};for(const o of pts){const y=new Date(SP_EP+o.s.x[0]*864e5).getUTCFullYear();(by[y]||(by[y]=[])).push(o.v);}
+ const med=Object.entries(by).filter(([,v])=>v.length>=2).map(([y,v])=>{const s=v.slice().sort((a,b)=>a-b),m=s.length%2?s[s.length>>1]:(s[s.length/2-1]+s[s.length/2])/2;return[Date.UTC(+y,6,1)/864e5-SP_EP/864e5,m,v.length];}).filter(r=>r[0]<=now).sort((a,b)=>a[0]-b[0]);
+ const sub=[];if(mode!=="m2"&&MS&&MS.ad)for(let i=0;i<=TL;i+=3){const d=MS.ad[i];if(d<x0)continue;const v=sv(loc+"|unit",1,i);if(v)sub.push([d,v]);}
+ const vs=pts.map(o=>o.v).concat(med.map(r=>r[1]),sub.map(r=>r[1])).sort((a,b)=>a-b),lo0=vs[Math.floor(vs.length*.02)],hi0=vs[Math.ceil(vs.length*.98)-1];
+ const yt=pmTicks(lo0*.9,hi0*1.05,4),ylo=Math.min(yt[0],lo0*.9),yhi=Math.max(yt[yt.length-1],hi0*1.05);
+ const X=d=>L+(d-x0)/(x1-x0)*(W-L-Rm),Y=v=>T+(1-(Math.min(Math.max(v,ylo),yhi)-ylo)/(yhi-ylo))*(H-T-Bm);
+ const y0=new Date(SP_EP+x0*864e5).getUTCFullYear()+1,y1=new Date(SP_EP+x1*864e5).getUTCFullYear(),ystep=Math.max(1,Math.ceil((y1-y0+1)/6));
+ let g="";for(const v of yt)g+=`<line class="gl" x1="${L}" x2="${W-Rm}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+3.5}" text-anchor="end">${pmK(v)}</text>`;
+ for(let y=y0;y<=y1;y+=ystep){const d=Date.UTC(y,0,1)/864e5-SP_EP/864e5;g+=`<text x="${X(d)}" y="${H-6}" text-anchor="middle">${y}</text>`;}
+ const path=a=>a.map((r,j)=>`${j?"L":"M"}${X(r[0]).toFixed(1)},${Y(r[1]).toFixed(1)}`).join("");
+ if(sub.length>1)g+=`<path class="sb" d="${path(sub)}"/>`;
+ for(const o of pts){const u=o.s.p[2]?"Unit "+String(o.s.p[2]).replace(/\s+/g,""):"Unit";g+=`<circle class="dt" data-k="${o.s.k}" cx="${X(o.s.x[0]).toFixed(1)}" cy="${Y(o.v).toFixed(1)}" r="3.6"><title>${esc(u)} · ${dollars(o.s.x[2])}${mode==="m2"?` (${dollars(o.v)} a m²)`:""} · ${dday(o.s.x[0])}</title></circle>`;}
+ if(med.length>1)g+=`<path class="md" d="${path(med)}"/>`;for(const r of med)g+=`<circle class="mdp" cx="${X(r[0]).toFixed(1)}" cy="${Y(r[1]).toFixed(1)}" r="3"><title>${new Date(SP_EP+r[0]*864e5).getUTCFullYear()}: median ${mode==="m2"?dollars(r[1])+" a m²":dollars(r[1])} from ${r[2]} sales</title></circle>`;
+ return`<div class="bch"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sale prices in this building over time">${g}</svg>
+  <div class="bkey"><span><i class="k-dt"></i>One sale</span>${med.length>1?`<span><i class="k-md"></i>Median each year</span>`:""}${sub.length>1?`<span><i class="k-sb"></i>${esc(title(loc))} units (12-month median)</span>`:""}</div></div>`;}
+function pmBldHtml(S){const R=S.R,loc=S.loc,B=pmBldInfo(R,S.bk);if(!B.ps.length)return`<p class="empty">No units found.</p>`;
+ const back=`<p style="margin:0 0 10px">${S.street&&S.street.length>B.ps.length?`<button class="linkbtn" id="propStreet" style="margin-right:18px">← All ${S.street.length} homes on ${esc(S.st)}</button>`:""}<button class="linkbtn" id="propBack">${S.street&&S.street.length>B.ps.length?"":"← "}${esc(title(loc))} overview</button></p>`;
+ const now=MS&&MS.ad?MS.ad[TL]:B.sales[0].x[0],rec=B.single.filter(s=>s.x[0]>=now-3*365.25&&!(s.x[3]<0)).map(s=>s.x[2]);
+ const rs=B.single.filter(s=>s.pv&&!s.pv[3]&&s.x[0]-s.pv[0]>=365).map(s=>Math.pow(s.x[2]/s.pv[2],365.25/(s.x[0]-s.pv[0]))-1);
+ const ur=byKey[loc+"|unit"],sg=ur?ur[C.cagr_10y]:null,first=B.sales.length?new Date(SP_EP+B.sales[B.sales.length-1].x[0]*864e5).getUTCFullYear():null;
+ const hasA=B.single.filter(s=>s.p[6]>0).length>=B.single.length*.6,mode=hasA&&S.bm==="m2"?"m2":"p";
+ let h=back+`<div class="prop"><h2>${esc(pmBName(R,B.ix))}</h2><p class="sub">${esc(title(loc))} · ${new Set(B.ps.map(p=>String(p[1]).toUpperCase().replace(/\s+/g,""))).size>1?"Complex":"Apartment building"} · ${B.ps.length} ${B.ps.length===1?"unit":"units"} on record</p>
+  <div class="stats num"><div class="stat"><div class="v">${B.sales.length}</div><div class="l">Sales since ${first}</div></div>
+  <div class="stat"><div class="v">${rec.length?money(pmMid(rec)):"–"}</div><div class="l">Median sale, last 3 years${rec.length?` (${rec.length})`:""}</div></div>
+  <div class="stat"><div class="v ${rs.length>=3?cls(pmMid(rs)):""}">${rs.length>=3?signed(pmMid(rs),1):"–"}</div><div class="l">Resales, a year${rs.length?` (${rs.length})`:""}</div></div></div>
+  ${rs.length>=3?`<p class="note">When a unit here sold again, the typical change was <b>${signed(pmMid(rs),1)} a year</b> over ${rs.length} resales${sg!=null?`, against ${pct(sg)} a year for the median ${esc(title(loc))} unit over 10 years`:""}. Resales compare the same unit, so they're the steadier read on this building.</p>`:""}
+  <h3 class="tl-t">Sale prices over time</h3>${hasA?`<div class="seg bseg" role="group" aria-label="Chart measure"><button data-bm="p" aria-pressed="${mode==="p"}">Price</button><button data-bm="m2" aria-pressed="${mode==="m2"}">Price a m²</button></div>`:""}
+  ${pmChart(loc,B,mode)}<p class="note">The yearly median moves with which units happened to sell (a penthouse year looks like a jump).${mode==="m2"?" Price a m² uses the strata lot area, which can include parking and storage.":""} Click a dot for that unit.</p>
+  <h3 class="tl-t">Every sale, newest first</h3><div class="bsl">${B.sales.slice(0,400).map(s=>{const ok=s.pv&&!s.x[3]&&!s.pv[3],ch=ok?s.x[2]/s.pv[2]-1:null;
+   return`<button data-k="${s.k}">${esc(s.p[2]?"Unit "+String(s.p[2]).replace(/\s+/g,""):pmAddr(R,s.p))}<span>${dollars(s.x[2])}${s.x[3]>1?` (${s.x[3]} homes)`:""}${ch!=null?` <b class="${ch<0?"neg":"pos"}">${signed(ch,0)}</b>`:""} · ${dday(s.x[0]).replace(/^\d+ /,"")}</span></button>`;}).join("")}</div>
+  ${B.sales.length>400?`<p class="note">Showing the latest 400 of ${B.sales.length} sales.</p>`:""}
+  <p class="note">NSW Valuer General records from 1990. Units are grouped by street and number, so a complex with several street numbers (300A, 300B) shows as one.</p></div>`;
+ return h;}
+// the "this building" line on a unit's own page
+function pmBldLine(S){const p=S.p;if(!p||p[5]!==1)return"";const k=pmBKey(S.R,p),ix=pmGroups(S.R)[k]||[];if(ix.length<2)return"";
+ const n=ix.reduce((s,j)=>s+S.R.p[j][7].length,0);return`<p class="bline"><button class="linkbtn" id="propBld" data-bk="${esc(k)}">Every sale in this building →</button><span>${ix.length} units · ${n} sales</span></p>`;}
+function pmWire(el){const S=P_SEL;if(!S)return;
+ const ob=$("propBld");ob&&ob.addEventListener("click",()=>pmOpenBld(S.loc,ob.dataset.bk));
+ el.querySelectorAll("[data-bm]").forEach(b=>b.addEventListener("click",()=>{S.bm=b.dataset.bm;detail();}));
+ if(S.bld)el.querySelectorAll(".bsl button[data-k],.bch .dt[data-k]").forEach(b=>b.addEventListener("click",ev=>{ev.stopPropagation();pmOpenProp(S.loc,S.R.p[+b.dataset.k]);}));}
 /* ---------- address search ---------- */
 // data/props/streets.js lists every street with a recorded sale; data/props/<SUBURB>.js holds each property and its sales.
 const loadJS=src=>new Promise((res,rej)=>{const e=document.createElement("script");e.src=src;e.onload=res;e.onerror=rej;document.head.appendChild(e);});
@@ -2580,7 +2721,7 @@ function propEstimate(loc,unit,price,day){const rg=((byKey[loc+"|house"]||byKey[
  if(a==null||b==null){const m=(MS.mkt[rg]||MS.mkt.all)[unit?"unit":"house"];a=m[i]*1000;b=m[TL]*1000;src="sydney";}
  if(!a||!b)return null;return{v:price*b/a,ch:b/a-1,src,early};}
 const sAddr=a=>`${a[0]?a[0]+"/":""}${a[1]} ${a[2]}`;
-function propHtml(){const S=P_SEL,loc=S.loc;const stBack=S.p&&S.street&&S.street.length>1?`<button class="linkbtn" id="propStreet" style="margin-right:18px">← All ${S.street.length} homes on ${esc(S.st)}</button>`:"";
+function propHtml(){const S=P_SEL,loc=S.loc;if(S.bld&&S.R)return pmBldHtml(S);const stBack=S.p&&S.street&&S.street.length>1?`<button class="linkbtn" id="propStreet" style="margin-right:18px">← All ${S.street.length} homes on ${esc(S.st)}</button>`:"";
  const back=`<p style="margin:0 0 10px">${stBack}<button class="linkbtn" id="propBack">${stBack?"":"← "}${esc(title(loc))} overview</button></p>`;
  if(S.err)return back+`<h2>Address search unavailable</h2><p class="empty">The property files are missing. Run <code>python tools/build_points.py</code>.</p>`;
  const R=S.R,addr=p=>`${p[2]?p[2].replace(/\s+/g,"")+"/":""}${p[1]?p[1]+" ":""}${R.st[p[0]]}`;
@@ -2597,7 +2738,7 @@ function propHtml(){const S=P_SEL,loc=S.loc;const stBack=S.p&&S.street&&S.street
    <div class="tl-m">Settled ${dday(x[0])}${x[1]&&x[1]!==x[0]?` · contract ${dday(x[1])}`:""}</div>
    ${pv?`<div class="tl-m">${ok?`${ch<0?"Down":"Up"} ${dollars(Math.abs(x[2]-pv[2]))} on ${dollars(pv[2])}, held ${held}${pa!=null?` · <b class="${pa<0?"neg":"pos"}">${signed(pa,1)} a year</b>`:""}`:`Held ${held} since the sale before`}</div>`:`<div class="tl-m">First sale on record</div>`}
    ${x[3]>1?`<div class="tl-m">Total for ${x[3]} properties sold together, not this home alone.</div>`:x[3]<0?`<div class="tl-m">Unusual for the suburb that year, not in medians.</div>`:""}</div></li>`;});
- let h=back+`<div class="prop"><h2>${esc(addr(p))}</h2><p class="sub">${esc(title(loc))} · ${unit?"Unit (strata)":"House"}${p[6]?` · ${unit?"lot":"land"} ${p[6].toLocaleString("en-AU")} m²`:""}</p>`;
+ let h=back+`<div class="prop"><h2>${esc(addr(p))}</h2><p class="sub">${esc(title(loc))} · ${unit?"Unit (strata)":"House"}${p[6]?` · ${unit?"lot":"land"} ${p[6].toLocaleString("en-AU")} m²`:""}</p>`;h+=pmBldLine(S);
  if(sub&&sub[0]==="p")h+=`<div class="est"><div class="l" style="font-size:12.5px;color:var(--slate)">This lot was subdivided</div><p style="margin:4px 0 0">Around ${sub[1]} it was redeveloped as ${esc(sub[3])}: ${sub[4].map(a=>`<a href="#" data-sub="${esc(JSON.stringify(a))}">${esc(sAddr(a))}</a>`).join(", ")}${sub[2]>sub[4].length?` and ${sub[2]-sub[4].length} more`:""}. The home that sold here no longer exists, so there's no value estimate.</p><p class="note" style="margin:4px 0 0">Worked out from the sales records: the old property stopped selling and new ones appeared at the same number. The type of home is a best guess from titles and lot sizes.</p></div>`;
  else if(sub&&sub[0]==="c")h+=`<p class="note" style="margin:0 0 10px">Built after the original lot, ${esc(sAddr(sub[2]))}, was subdivided around ${sub[1]}. <a href="#" data-sub="${esc(JSON.stringify(sub[2]))}">See its earlier sales</a>.</p>`;
  if(est)h+=`<div class="est"><div class="l" style="font-size:12.5px;color:var(--slate)">Rough value today</div><div class="v num">${money(est.v)}</div><p class="note" style="margin:4px 0 0">The last sale of ${dollars(last[2])} moved with the ${est.src==="suburb"?esc(title(loc))+" median "+(unit?"unit":"house"):"regional median"} price since then (${signed(est.ch,0)}). Renovations, condition and the particular home can move it a long way either side.</p></div>`;
@@ -2611,7 +2752,7 @@ const HEX=["#F3EEDF","#E8C98F","#D08A4E","#A04A3E","#5B2435"],HREL=["#D11F2E","#
 function paintMap(){legend();spApply();if(!ready)return;
  for(const f of GEO.features){const n=f.properties.n,c=colour(rowFor(n),n+"|"+seg);map.setFeatureState({source:"sub",id:f.id},{c:c||"#D9D7CF",has:!!c});}
  map.setFilter("sel",["==",["get","n"],sel||""]);if(map.getLayer("sel2"))map.setFilter("sel2",["==",["get","n"],sel||""]);}
-function setOpacity(v){opac=v;if(ready){map.setPaintProperty("fill","fill-opacity",["case",["boolean",["feature-state","has"],false],opac,0]);}}
+function setOpacity(v){opac=v;if(ready){map.setPaintProperty("fill","fill-opacity",fillOp());}}
 
 /* ---------- budget planner ---------- */
 const $=id=>document.getElementById(id);
@@ -3078,7 +3219,7 @@ function detail(){const el=document.getElementById("detail");
  if(P_SEL){el.innerHTML=propHtml();const b=$("propBack");b&&b.addEventListener("click",()=>{P_SEL=null;if(pMarker)pMarker.remove();detail();});
   el.querySelectorAll("[data-sub]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const[u,n,st0]=JSON.parse(a.dataset.sub);
    const st=(P_SEL.R.st.find(x=>x.toUpperCase()===st0.toUpperCase()))||st0;openAddress(P_SEL.loc,st,n,u||"",true);}));
-  const sb=$("propStreet");sb&&sb.addEventListener("click",()=>{P_SEL.p=null;P_SEL.list=P_SEL.street;P_SEL.num=null;P_SEL.unit=null;P_SEL.miss=false;detail();});
+  pmWire(el);const sb=$("propStreet");sb&&sb.addEventListener("click",()=>{P_SEL.bld=false;P_SEL.p=null;P_SEL.list=P_SEL.street;P_SEL.num=null;P_SEL.unit=null;P_SEL.miss=false;detail();});
   el.querySelectorAll(".plist button").forEach(x=>x.addEventListener("click",()=>{const p=P_SEL.R.p[+x.dataset.k];P_SEL.p=p;P_SEL.list=null;
    if(p[3]!=null&&map){const ll=[150+p[3]/1e5,-34+p[4]/1e5];if(!pMarker)pMarker=new maplibregl.Marker({color:hiC()});pMarker.setLngLat(ll).addTo(map);map.flyTo({center:ll,zoom:16,duration:600});}detail();}));return;}
  if(!sel){inViewPanel(el);return;}
@@ -4215,8 +4356,8 @@ if(MS){TB.sl.max=TL;TB.sl.value=TL;drawSpark();timeUI();
 else TB.bar.hidden=true;
 
 if(SPM&&MS&&MS.ad&&window.maplibregl){$("spsw").addEventListener("change",e=>setSp(e.target.value));setSp("week",true);
- $("spfilt").addEventListener("change",e=>{spFilt=e.target.value;const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);$("spopt").hidden=spMode==="off"||spFilt!=="all";spApply();legend();detail();});
- document.getElementById("spcol").addEventListener("change",()=>{const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"circle-color",pt["circle-color"]);legend();});}
+ $("spfilt").addEventListener("change",e=>{spFilt=e.target.value;const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"icon-color",pt["icon-color"]);$("spopt").hidden=spMode==="off"||spFilt!=="all";spApply();legend();detail();});
+ document.getElementById("spcol").addEventListener("change",()=>{const pt=spPaint();for(const y in spLoaded)map.setPaintProperty(spId(y),"icon-color",pt["icon-color"]);legend();});}
 else document.querySelector(".spbar").hidden=true;
 
 /* ---------- tabs ---------- */
@@ -4390,6 +4531,7 @@ const IC_FULL='<path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stro
  select=function(...a){_sel(...a);if(isFull())MN.classList.add("open");sync();};
  closeSel=function(...a){_close(...a);if(!pinned())MN.classList.remove("open");sync();};
  openAddress=async function(...a){await _open(...a);if(isFull())MN.classList.add("open");sync();};
+ pmReveal=()=>{if(isFull())MN.classList.add("open");sync();};
  new MutationObserver(sync).observe(MN,{attributes:true,attributeFilter:["class"]});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open")&&!pinned())setOpen(false);});
  wide.addEventListener("change",()=>setFull(wide.matches));
@@ -4414,7 +4556,7 @@ document.querySelectorAll("#myrs [data-my]").forEach(b=>b.addEventListener("clic
  const paintBase=()=>{if(!map||!map.getStyle())return;for(const l of map.getStyle().layers){if(l.source!=="openmaptiles"&&l.type!=="background")continue;const p=dk(l);if(!p)continue;
   for(const[k,v]of Object.entries(p)){try{if(!(l.id+k in base))base[l.id+k]=map.getPaintProperty(l.id,k)??null;map.setPaintProperty(l.id,k,isDark()?v:base[l.id+k]);}catch(e){}}}};
  const sync=()=>{const d=isDark();$("themeBtn").setAttribute("aria-pressed",d);document.querySelector('meta[name=theme-color]').content=d?"#262624":"#FAF9F5";paintBase();
-  try{if(SIM&&!$("tabBudget").hidden)bxYear();}catch(e){}try{anDraw();}catch(e){}};
+  try{if(SIM&&!$("tabBudget").hidden)bxYear();}catch(e){}try{pmTheme();}catch(e){}try{anDraw();}catch(e){}};
  $("themeBtn").addEventListener("click",()=>{const d=!isDark();if(d)document.documentElement.dataset.theme="dark";else delete document.documentElement.dataset.theme;try{localStorage.setItem("hs_theme",d?"dark":"light");}catch(e){}sync();});
  if(map){if(map.loaded())paintBase();else map.on("load",()=>setTimeout(paintBase,0));map.on("styledata",()=>{if(isDark())setTimeout(paintBase,0);});}
  $("themeBtn").setAttribute("aria-pressed",isDark());}
