@@ -1,0 +1,1 @@
+window.RBM=window.RBM||{};window.RBM["249"]={"2490|house|3":["2022-02",860,880,860,860,855,855,800,795,795,795,788,780,750,765,780,780,788,780,770,760,770,770,785,850,870,800,800,825,850,860,875,880,null,null,null,870,870,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]};
