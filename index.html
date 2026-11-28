@@ -1790,6 +1790,18 @@ aside#detail{padding:20px 22px}
 .main.full.wide aside#detail{transition:width .25s ease,transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s}
 #detail .pbtn{width:auto;height:auto;white-space:nowrap;border-radius:999px;line-height:1.2}
 .tip.sale .ft{flex-wrap:wrap;gap:8px}.tip.sale .ft a{white-space:nowrap}
+/* Rent line chips and the Rents tab (28 Nov) */
+#detail .rchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+#detail .rchips button{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--mono);color:var(--slate);background:var(--sheet);border:1px solid var(--hair);border-radius:999px;padding:4px 10px;cursor:pointer}
+#detail .rchips button i{width:10px;height:10px;border-radius:50%;border:2px solid var(--c);background:transparent}
+#detail .rchips button[aria-pressed=true]{color:var(--ink);border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,var(--sheet))}
+#detail .rchips button[aria-pressed=true] i{background:var(--c)}
+#detail .rhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px}
+#detail .rtab{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 14px}
+#detail .rtab th{font:500 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--slate);text-align:left;padding:6px 6px 6px 0;border-bottom:1px solid var(--hair)}
+#detail .rtab td{padding:8px 6px 8px 0;border-bottom:1px solid var(--hair)}
+#detail .rtab tr.tot td{font-weight:600;border-bottom:0}
+#detail .rtab .muted{color:var(--slate)}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -3252,21 +3264,46 @@ function mline(ix,v,lo,hi,fmt,stroke,fill,shade,mk){if(v.filter(x=>x!=null).leng
   else if(mk.b==null&&ja>=0){mg=`<line x1="${X(ja).toFixed(1)}" x2="${X(ja).toFixed(1)}" y1="${T}" y2="${h-B_}" stroke="var(--slate)" stroke-width="1.2" stroke-dasharray="3 3"/>`;if(v[ja]!=null)mg+=`<circle cx="${X(ja).toFixed(1)}" cy="${Y(v[ja]).toFixed(1)}" r="4" fill="${stroke}" stroke="var(--sheet)" stroke-width="1.5"/>`;}}
  return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}${mg}${band}<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2"/><circle cx="${X(lj).toFixed(1)}" cy="${Y(v[lj]).toFixed(1)}" r="4" fill="${hiC()}" stroke="${stroke}" stroke-width="1.5"/></svg>`;}
 // Overview charts: always run to the latest month, with the month shown (dashed line) or the chosen period (shaded).
-let ovBeds="all";const RBM_L={};
+const RBM_L={};
 function rbmSeries(pc,sg,b,ix){const p3=String(pc).slice(0,3),R=window.RBM&&window.RBM[p3];
  if(!R){if(!RBM_L[p3]){RBM_L[p3]=1;loadJS(`data/web/rbm_${p3}.js`).then(()=>detail()).catch(()=>{RBM_L[p3]="err";detail();});}return RBM_L[p3]==="err"?"err":null;}
  const z=R[pc+"|"+sg+"|"+b];if(!z)return ix.map(()=>null);const[m0,...vals]=z,y0=+m0.slice(0,4),mo0=+m0.slice(5,7);
  return ix.map(i=>{const m=MS.m[i],k=(+m.slice(0,4)-y0)*12+(+m.slice(5,7)-mo0);return k>=0&&k<vals.length?vals[k]:null;});}
+// several lines on one monthly chart (rents by bedrooms), each with its own colour and hover row
+const BEDC={1:"#7A9CC6",2:"#3F51C7",3:"#1F8A70",4:"#C9650F"};
+function mlines(ix,S,fmt,mk){const all=S.flatMap(s=>s.v).filter(x=>x!=null);if(all.length<3)return'<p class="note">Too few leases for a chart.</p>';
+ const w=pwW(520),h=pwH(190),L0=54,R=40,T=12,B_=22,mn=Math.min(...all)*.95,mx=Math.max(...all)*1.04,X=j=>L0+j*(w-L0-R)/(ix.length-1),Y=x=>T+(h-T-B_)*(1-(x-mn)/(mx-mn));let g="";
+ for(let k=0;k<=2;k++){const y=mn+(mx-mn)*k/2;g+=`<line x1="${L0}" x2="${w-R}" y1="${Y(y).toFixed(1)}" y2="${Y(y).toFixed(1)}" stroke="#E6EAE2"/><text x="${L0-8}" y="${(Y(y)+3.5).toFixed(1)}" text-anchor="end">${fmt(y)}</text>`;}
+ const jan=ix.map((i,j)=>MS.m[i].endsWith("-01")?j:-1).filter(j=>j>=0),st=Math.ceil(jan.length/6);
+ jan.forEach((j,n)=>{if(n%st===0)g+=`<text x="${X(j).toFixed(1)}" y="${h-5}" text-anchor="middle">${MS.m[ix[j]].slice(0,4)}</text>`;});
+ if(mk){const ja=ix.indexOf(mk.a),jb=ix.indexOf(mk.b);if(mk.b!=null&&ja>=0&&jb>=ja)g+=`<rect x="${X(ja).toFixed(1)}" y="${T}" width="${Math.max(2,X(jb)-X(ja)).toFixed(1)}" height="${h-B_-T}" fill="rgba(${hiRGB()},.16)"/>`;
+  else if(mk.b==null&&ja>=0)g+=`<line x1="${X(ja).toFixed(1)}" x2="${X(ja).toFixed(1)}" y1="${T}" y2="${h-B_}" stroke="var(--slate)" stroke-width="1.2" stroke-dasharray="3 3"/>`;}
+ for(const s of S){let d="",pen=false;s.v.forEach((x,j)=>{if(x==null){pen=false;return;}d+=(pen?"L":"M")+X(j).toFixed(1)+","+Y(x).toFixed(1);pen=true;});
+  const lj=s.v.length-1-[...s.v].reverse().findIndex(x=>x!=null);if(!d)continue;
+  g+=`<path d="${d}" fill="none" stroke="${s.c}" stroke-width="${s.w||2}"${s.dash?' stroke-dasharray="4 3"':""}/>`;if(lj<s.v.length)g+=`<circle cx="${X(lj).toFixed(1)}" cy="${Y(s.v[lj]).toFixed(1)}" r="3" fill="${s.c}"/><text x="${(X(lj)+6).toFixed(1)}" y="${(Y(s.v[lj])+3.5).toFixed(1)}" style="fill:${s.c};font-weight:600">${s.short}</text>`;}
+ const hov={vw:w,t:T,b:h-B_,q:ix.map(i=>MS.m[i]),xs:ix.map((_,j)=>+X(j).toFixed(1)),lab:ix.map(i=>"12 months to "+mlabel(i)),
+  rows:ix.map((_,j)=>S.filter(s=>s.v[j]!=null).sort((a,b)=>b.v[j]-a.v[j]).map(s=>[s.c,+Y(s.v[j]).toFixed(1),`${s.name} ${fmt(s.v[j])}`]))};
+ return`<svg viewBox="0 0 ${w} ${h}" role="img" data-hov="${esc(JSON.stringify(hov))}">${g}</svg>`;}
 function ovCharts(r){const k=r[C.locality]+"|"+r[C.segment],rk=r[C.postcode]+"|"+r[C.segment],e=TL,n=ovYrs?ovYrs*12:TL;
  let s0=Math.max(0,e-n);if(RNG)s0=Math.min(s0,Math.max(0,RNG.a-6));else if(!isLatest())s0=Math.min(s0,Math.max(0,ti-12));
  const ix=[];for(let i=s0;i<=e;i++)ix.push(i);const mk=RNG?{a:RNG.a,b:RNG.b}:isLatest()?null:{a:ti};
  const pv=ix.map(i=>sv(k,1,i)),pl=ix.map(i=>sv(k,2,i)),ph=ix.map(i=>sv(k,3,i)),nul=ix.map(()=>null);
- let rvv=ovBeds==="all"?ix.map(i=>rv(rk,i)):rbmSeries(r[C.postcode],r[C.segment],ovBeds,ix);
+ const rc=rentChart(r[C.postcode],r[C.segment],ix,mk);
  const yb=`<span class="seg ovyrs" role="group" aria-label="Years shown">${[[5,"5 yrs"],[10,"10 yrs"],[0,"All"]].map(([y,l])=>`<button data-ovy="${y}" aria-pressed="${ovYrs===y}">${l}</button>`).join("")}</span>`;
- const bb=`<span class="seg ovyrs" role="group" aria-label="Bedrooms">${[["all","All"],["1","1 bed"],["2","2 bed"],["3","3+ bed"]].map(([b,l])=>`<button data-ovb="${b}" aria-pressed="${ovBeds===b}">${l}</button>`).join("")}</span>`;
- const rc=rvv==="err"?`<p class="note">Rents by bedrooms aren't available yet.</p>`:rvv==null?`<p class="note">Loading rents…</p>`:rvv.some(x=>x!=null)?mline(ix,rvv,nul,nul,v=>"$"+Math.round(v),"#1F6E68","none",false,mk):`<p class="note">${ovBeds==="all"?"No rent data for this postcode.":"Too few leases of this size here for a chart."}</p>`;
+ 
  return`<div class="chart"><div class="chd"><h3>Median price, 12 months to each month</h3>${yb}</div>${mline(ix,pv,pl,ph,money,"#0E1A16","rgba(14,26,22,.08)",false,mk)}</div>
- <div class="chart"><div class="chd"><h3>Weekly rent, new leases · postcode ${r[C.postcode]}</h3>${bb}</div>${rc}${ovBeds!=="all"?`<p class="note" style="margin:2px 0 0">${ovBeds==="3"?"3 or more":ovBeds} bedroom${ovBeds==="1"?"":"s"}, 12-month median. Rent records start in 2021.</p>`:""}</div>`;}
+ <div class="chart"><div class="chd"><h3>Weekly rent, new leases · postcode ${r[C.postcode]}</h3></div>${rc}</div>`;}
+// Rent lines: tap a chip to show or hide each one (all homes, 1, 2, 3, 4+ bedrooms), so any mix can be compared.
+let RLINES=new Set(["all"]);
+const RL=[["all","All homes","#1F6E68"],["1","1 bed",BEDC[1]],["2","2 bed",BEDC[2]],["3","3 bed",BEDC[3]],["4","4+ bed",BEDC[4]]];
+function rentChart(pc,sg,ix,mk){const anyB=[...RLINES].some(k=>k!=="all"),ss={};let st="ok";
+ if(anyB)for(const b of["1","2","3","4"])if(RLINES.has(b)){const v=rbmSeries(pc,sg,b,ix);if(v==="err")st="err";else if(v==null)st=st==="err"?st:"load";else ss[b]=v;}
+ const chips=`<div class="rchips">${RL.map(([k,l,c])=>`<button type="button" data-rl="${k}" aria-pressed="${RLINES.has(k)}" style="--c:${c}"><i></i>${l}</button>`).join("")}</div>`;
+ if(st==="err")return chips+`<p class="note">Rents by bedrooms aren't available yet.</p>`;if(st==="load")return chips+`<p class="note">Loading rents…</p>`;
+ const S=RL.filter(([k])=>RLINES.has(k)).map(([k,l,c])=>({name:l,short:k==="all"?"":k==="4"?"4+":k,c,v:k==="all"?ix.map(i=>rv(pc+"|"+sg,i)):ss[k],w:k==="all"?2.4:2}));
+ if(!S.length)return chips+`<p class="note">Tap a chip to show a line.</p>`;
+ return chips+(S.some(s=>s.v.some(x=>x!=null))?mlines(ix,S,v=>"$"+Math.round(v),mk):`<p class="note">No rent data for this postcode.</p>`)+
+  `<p class="note" style="margin:2px 0 0">Median weekly rent on new leases over the 12 months to each month${anyB?". 3 bed is exactly 3; 4+ is 4 or more. A line breaks where there were fewer than 10 leases":""}. Rent records start in 2021.</p>`;}
 function rangeStrip(label,v,fmt,col,mark,markLbl,note){let[mn,p10,p25,md,p75,p90,mx]=v;if(md==null||p25==null)return"";const half=p10==null;if(half){p10=p25-(p75-p25)*.6;p90=p75+(p75-p25)*.6;}
  const w=pwW(400),h=72,L0=48,R=48,lo=p10-(p90-p10)*.08,hi=p90+(p90-p10)*.08,X=x=>L0+(w-L0-R)*(Math.max(lo,Math.min(hi,x))-lo)/(hi-lo),y=30;
  let g=`<line x1="${X(p10)}" x2="${X(p90)}" y1="${y}" y2="${y}" stroke="#C9D0C7" stroke-width="4" stroke-linecap="round"/>
@@ -3304,7 +3341,7 @@ async function detailAsync(r){const tok=++detTok,loc=r[C.locality],u=seg==="unit
   else h+=`<p class="note">No rent records for this window: they start in 2021.</p>`;
   strip.innerHTML=h;}
  if(list){const chg=([x,p])=>{const j=p[7].indexOf(x),pv=j>0?p[7][j-1]:null;return pv&&!x[3]&&!pv[3]&&x[0]-pv[0]>=60?x[2]/pv[2]-1:null;};
-  const items=ws.map(w=>({x:w[0],p:w[0][2],pr:w[1],d:w[0][0],a:w[1][6]||0,m:w[0][3]?w[0][3]:1,c:chg(w)}));
+  const items=ws.map(w=>({x:w[0],p:w[0][2],pr:w[1],d:w[0][0],a:w[1][6]||0,m:w[0][3]?w[0][3]:1,c:chg(w),ad:[R.st[w[1][0]],w[1][1],w[1][2]]}));
   const losses=items.filter(it=>it.c!=null&&it.c<0).length,norm=items.filter(it=>it.m===1).map(it=>it.p).sort((a,b)=>a-b);
   const L=sfSort(items.filter(it=>sfShow(it)&&sfOk(it.p,it.a))),N=list.dataset.all?L.length:Math.min(L.length,150);
   list.innerHTML=!items.length?`<p class="note">No ${noun} sales recorded here from ${when}.</p>`:`<p class="note" style="margin:0 0 6px"><b>${items.length} ${noun} sale${items.length>1?"s":""}</b> settled ${when}${norm.length?`, median ${money(qtl(norm,.5))}`:""}. <b class="${losses?"neg":""}">${losses}</b> sold for less than the home's previous sale.</p>
@@ -3313,6 +3350,21 @@ async function detailAsync(r){const tok=++detTok,loc=r[C.locality],u=seg==="unit
   list.querySelectorAll("[data-i]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const p=L[+a.dataset.i].pr;openAddress(loc,R.st[p[0]],p[1],p[2]);}));
   sfWire(list,()=>{delete list.dataset.all;detailAsync(r);});
   const sa=$("salesAll");sa&&sa.addEventListener("click",()=>{list.dataset.all=1;detailAsync(r);});}}
+// Rents tab: every bedroom count in the postcode, houses and units, last 12 months (data/web/rentb.js), with a year earlier
+// from the monthly series (rbm). Postcode level: bond records give the postcode, not the suburb.
+let RSEG=null;
+function rentsTab(r){const pc=String(r[C.postcode]),sg=RSEG||seg;
+ if(!window.RB){if(!rentsTab.l){rentsTab.l=1;loadJS("data/web/rentb.js").then(()=>detail()).catch(()=>{rentsTab.l="err";detail();});}return`<p class="note">${rentsTab.l==="err"?"Rents by bedrooms aren't available.":"Loading rents…"}</p>`;}
+ const p3=pc.slice(0,3);if(!(window.RBM&&window.RBM[p3])&&!RBM_L[p3]){RBM_L[p3]=1;loadJS(`data/web/rbm_${p3}.js`).then(()=>detail()).catch(()=>{RBM_L[p3]="err";});}
+ const yago=(b,now)=>{const z=window.RBM&&window.RBM[p3]&&window.RBM[p3][`${pc}|${sg}|${Math.min(4,b)}`];if(!z||b>=4)return null;const v=z.slice(1),a=v[v.length-13];return a&&now?now/a-1:null;};
+ const rows=[["0","Studio"],["1","1 bedroom"],["2","2 bedrooms"],["3","3 bedrooms"],["4","4 bedrooms"],["5","5 or more"],["*","All homes"]].map(([b,l])=>{const v=window.RB.r[`${pc}|${sg}|${b}`];if(!v)return"";
+  const yc=b==="*"?null:yago(+b,v[2]);
+  return`<tr${b==="*"?' class="tot"':""}><td>${l}</td><td class="num">$${v[2].toLocaleString("en-AU")}</td><td class="num muted">$${v[1]}–$${v[3]}</td><td class="num muted">${v[0].toLocaleString("en-AU")}</td><td class="num ${yc==null?"":yc<0?"neg":"pos"}">${yc==null?"":signed(yc,0)}</td></tr>`;}).join("");
+ const ix=[];for(let i=Math.max(0,TL-60);i<=TL;i++)ix.push(i);
+ return`<div class="rhead"><span class="seg ovyrs" role="group" aria-label="Home type">${[["house","Houses"],["unit","Units"]].map(([k,l])=>`<button data-rseg="${k}" aria-pressed="${sg===k}">${l}</button>`).join("")}</span><span class="note">Postcode ${pc} · 12 months to ${new Date(window.RB.asof+"T00:00:00").toLocaleDateString("en-AU",{month:"short",year:"numeric"})}</span></div>
+  ${rows?`<table class="rtab"><tr><th>Bedrooms</th><th>Median a week</th><th>Middle half</th><th>Leases</th><th>On a year</th></tr>${rows}</table>`:`<p class="note">No ${sg==="unit"?"unit":"house"} leases recorded in this postcode in the last 12 months.</p>`}
+  <div class="chart"><div class="chd"><h3>Rent by bedrooms, 12 months to each month</h3></div>${rentChart(pc,sg,ix,null)}</div>
+  <p class="note">New bonds lodged with NSW Fair Trading. Each row needs 5+ leases; the middle half is the 25th to 75th percentile. Bond records give the postcode, not the suburb, so neighbouring suburbs that share ${pc} are included.</p>`;}
 // Your budget tab: how this suburb sits against the budget (today's prices and rents)
 function budgetTab(r,noun){const lim=buyLim(),unit=seg==="unit";
  if(!lim&&!rb)return`<div class="bud0"><p>Add your savings and income in <b>Your budget</b> to see whether homes here are within reach, what's left each month, and how many recent sales you could have bought.</p><button type="button" class="pbtn" data-gobud>Set up your budget</button></div>`;
@@ -3354,7 +3406,7 @@ function detail(){const el=document.getElementById("detail");
  if(!sel){inViewPanel(el);return;}
  const r=rowFor(sel);if(!r){thinPanel(el,sel);return;}
  const m=r._m,k=r[C.locality]+"|"+r[C.segment],rs=D.rent_series[r[C.postcode]+"|"+r[C.segment]],noun=seg==="house"?"house":"unit",unit=seg==="unit";
- if(dtab==="buyrent")dtab="overview";const tabs=[["overview","Overview"],["trends","Trends"],["sales","Sales"],["budget","Your budget"]];   // "Buy or rent" tab hidden until reworked (code kept below)
+ if(dtab==="buyrent")dtab="overview";const tabs=[["overview","Overview"],["trends","Trends"],["sales","Sales"],["rents","Rents"],["budget","Your budget"]];   // "Buy or rent" tab hidden until reworked (code kept below)
  let body="";
  if(dtab==="overview"){const pk=r[C.from_peak],pm=r[C.peak_months_ago];
   const pkTxt=pk==null?"":pk>-0.005?"Prices are at their 3-year high.":`Prices are ${pct(-pk,1)} below the 12-month median peak of ${money(r[C.med_now]/(1+pk))}, reached about ${pm>=12?Math.round(pm/12*2)/2+" years":pm+" months"} ago.`;
@@ -3381,6 +3433,7 @@ function detail(){const el=document.getElementById("detail");
     body+=`<p class="afford">On your budget: buying here leaves <b class="${mm.buyLeft<0?"warn":""}">${dollars(mm.buyLeft)}</b> a month after all costs, renting leaves <b class="${mm.rentLeft<0?"warn":""}">${dollars(mm.rentLeft)}</b>.${!pl.ok?` <span class="warn">Your cash doesn't cover the minimum deposit at this price.</span>`:pl.L>ML.bw.loan?` <span class="warn">That loan is more than the ${money(ML.bw.loan)} your income can service.</span>`:""}</p>`;}
    body+=`<p class="note">${m.mineUsed?"Uses your own cash as the deposit.":mine()?`Your cash doesn't cover the minimum deposit here, so this assumes a ${pct(A.deposit,0)} deposit.`:`Assumes a ${pct(A.deposit,0)} deposit; enter your cash on the Budget tab to use your own.`} Expected growth blends this suburb's 10-year record with Sydney's (Assumptions, on the Budget tab). Past growth doesn't promise future growth.</p>`;}}
  else if(dtab==="budget")body=budgetTab(r,noun);
+ else if(dtab==="rents")body=rentsTab(r);
  else if(dtab==="trends"){const L=k[0].match(/[A-Z]/)?k[0]:"_",DT=window.DET&&window.DET[L];if(!DT)detLoad(L);
  const zc=RNG&&zoomP,cr=pts=>{if(!zc||!pts)return pts;const a=qOf(RNG.a),b=qOf(RNG.b);return pts.filter(p=>p[0]>=a&&p[0]<=b);},mk=zc?null:tmark();
  const rsC=cr(rs);
@@ -3394,7 +3447,8 @@ function detail(){const el=document.getElementById("detail");
  <div class="dtabs" role="tablist">${tabs.map(([k2,l])=>`<button role="tab" data-dt="${k2}" aria-selected="${dtab===k2}">${l}</button>`).join("")}</div>${body}`;
  el.querySelectorAll("[data-dt]").forEach(b=>b.addEventListener("click",()=>{dtab=b.dataset.dt;detail();el.scrollTop=0;}));
  el.querySelectorAll("[data-ovy]").forEach(b=>b.addEventListener("click",()=>{ovYrs=+b.dataset.ovy;detail();}));
- el.querySelectorAll("[data-ovb]").forEach(b=>b.addEventListener("click",()=>{ovBeds=b.dataset.ovb;detail();}));
+ el.querySelectorAll("[data-rl]").forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.rl;if(RLINES.has(k))RLINES.delete(k);else RLINES.add(k);detail();}));
+ el.querySelectorAll("[data-rseg]").forEach(b=>b.addEventListener("click",()=>{RSEG=b.dataset.rseg;detail();}));
  el.querySelectorAll("[data-gobud]").forEach(b=>b.addEventListener("click",()=>showTab("budget")));
  bindPanel(el);if(MS&&MS.ad)detailAsync(r);}
 const whenTxt=()=>RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:`sales ${mshift(ti,-12)} to ${mlabel()}`;
@@ -3459,9 +3513,12 @@ const sfOn=()=>SF.pmin!=null||SF.pmax!=null||SF.amin!=null||SF.amax!=null;
 const sfOk=(p,a)=>(SF.pmin==null||p>=SF.pmin)&&(SF.pmax==null||p<=SF.pmax)&&(SF.amin==null||(a>0&&a>=SF.amin))&&(SF.amax==null||(a>0&&a<=SF.amax));
 function sfExpr(){const e=[];if(SF.pmin!=null)e.push([">=",["get","p"],SF.pmin]);if(SF.pmax!=null)e.push(["<=",["get","p"],SF.pmax]);
  if(SF.amin!=null)e.push([">=",["get","a"],SF.amin]);if(SF.amax!=null)e.push([">",["get","a"],0],["<=",["get","a"],SF.amax]);return e;}
-const SORTS=[["new","Newest first"],["old","Oldest first"],["phi","Price, high to low"],["plo","Price, low to high"],["gain","Biggest gain on last sale"],["loss","Biggest loss on last sale"],["ahi","Land, largest first"]];
-// items: {d: settle day, p: price, a: area, c: change on the previous sale or null}
-function sfSort(L){const k=SF.sort,nz=(v,s)=>v==null?Infinity:s*v;const f={new:(a,b)=>b.d-a.d,old:(a,b)=>a.d-b.d,phi:(a,b)=>b.p-a.p,plo:(a,b)=>a.p-b.p,
+const SORTS=[["addr","Address, A to Z"],["new","Newest first"],["old","Oldest first"],["phi","Price, high to low"],["plo","Price, low to high"],["gain","Biggest gain on last sale"],["loss","Biggest loss on last sale"],["ahi","Land, largest first"]];
+// items: {d: settle day, p: price, a: area, c: change on the previous sale or null, ad: [street, number, unit]}
+// Address order: street A to Z, then house number (12 before 102; 12A after 12), then unit number.
+const adKey=it=>{const[st,n,u]=it.ad||["","",""],num=String(n||""),un=String(u||"");return[String(st||"").toUpperCase(),parseInt(num)||0,num.toUpperCase(),parseInt(un)||0,un.toUpperCase()];};
+const adCmp=(a,b)=>{const x=a._ak||(a._ak=adKey(a)),y=b._ak||(b._ak=adKey(b));for(let i=0;i<5;i++){if(x[i]<y[i])return-1;if(x[i]>y[i])return 1;}return b.d-a.d;};
+function sfSort(L){const k=SF.sort,nz=(v,s)=>v==null?Infinity:s*v;const f={addr:adCmp,new:(a,b)=>b.d-a.d,old:(a,b)=>a.d-b.d,phi:(a,b)=>b.p-a.p,plo:(a,b)=>a.p-b.p,
  gain:(a,b)=>nz(a.c,-1)-nz(b.c,-1),loss:(a,b)=>nz(a.c,1)-nz(b.c,1),ahi:(a,b)=>(b.a||0)-(a.a||0)}[k]||((a,b)=>b.d-a.d);return L.sort(f);}
 function sfShow(it){return spFilt==="loss"?it.c!=null&&it.c<0:spFilt==="odd"?!!it.m&&it.m!==1:true;}
 function sfControls(unit){const v=x=>x==null?"":Number(x).toLocaleString("en-AU"),o=(k,l,cur)=>`<option value="${k}"${k===cur?" selected":""}>${l}</option>`;
@@ -3486,7 +3543,7 @@ function salesInView(){if(!ready||map.getZoom()<SP_MINZ)return`<p class="empty">
  const[lo,hi]=spWindow(),u=seg==="unit"?1:0,ok=spFiltFn(),bd=map.getBounds(),x0=(bd.getWest()-150)*1e5,x1=(bd.getEast()-150)*1e5,y0=(bd.getSouth()+34)*1e5,y1=(bd.getNorth()+34)*1e5,L=[];
  for(const y of spKeys()){const P=window.SP&&window.SP[y];if(!P)continue;for(let i=0;i<P.d.length;i++){const X=P.x[i],Y=P.y[i];
   if(X>=x0&&X<=x1&&Y>=y0&&Y<=y1&&P.d[i]>lo&&P.d[i]<=hi&&P.u[i]===u&&ok(P,i)&&sfOk(P.p[i],P.a[i]||0)){const pp=P.pp&&P.pp[i];
-   const m=(P.m&&P.m[i])||1;L.push({P,i,d:P.d[i],p:P.p[i],a:P.a[i]||0,m,c:pp>0&&m===1?P.p[i]/pp-1:null});}}}
+   const m=(P.m&&P.m[i])||1;L.push({P,i,d:P.d[i],p:P.p[i],a:P.a[i]||0,m,c:pp>0&&m===1?P.p[i]/pp-1:null,ad:[P.st[P.s[i]],P.n[i],P.un[i]]});}}}
  sfSort(L);sivL=L;const N=sivAll?L.length:Math.min(L.length,150),when=RNG?`${mlabel(RNG.a)} to ${mlabel(RNG.b)}`:spMode==="week"?`in the week to ${dday(MS.ad[ti])}`:spMode==="year"?`${mshift(ti,-12)} to ${mlabel()}`:`in the month to ${mlabel()}`;
  const loading=Object.values(spLoading).some(Boolean);
  return`<h2>Sales in view</h2><p class="sub">${seg==="unit"?"Units":"Houses"} · settled ${when}</p>${sfControls(u===1)}
