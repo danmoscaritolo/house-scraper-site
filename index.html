@@ -2092,6 +2092,12 @@ header.pt .pt-ask.pl-chips{padding-top:16px}
 header.pt .pt-ask.pl-chips button{background:transparent!important;box-shadow:none!important;padding:7px 14px}
 header.pt .pt-ask.pl-chips button b{font-size:14px;color:var(--slate)!important;font-weight:450}
 header.pt .pt-ask.pl-chips button:hover b{color:var(--ink)!important}
+/* rotating suggestions: a steady 2 x 2 grid so a swap never moves the other pills */
+header.pt .pt-ask.pl-chips.pl-sug{display:grid!important;grid-template-columns:repeat(2,minmax(0,310px));justify-content:center;gap:8px;max-width:none}
+header.pt .pl-sug button{justify-content:center;width:100%!important;transition:opacity .26s ease,transform .26s ease,border-color .15s!important}
+header.pt .pl-sug button b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header.pt .pl-sug button.out{opacity:0;transform:translateY(4px)}
+@media(max-width:720px){header.pt .pt-ask.pl-chips.pl-sug{grid-template-columns:minmax(0,1fr);width:100%}}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -2109,13 +2115,7 @@ header.pt .pt-ask.pl-chips button:hover b{color:var(--ink)!important}
 <p class="pl-sub" id="plSub">Every NSW home sale since 1990, on one map. See what really sold, street by street.</p>
 <div class="pl-hsrch" id="homeSrch"></div>
 <div class="pl-live" id="plLive" hidden></div>
-<div class="pt-ask pl-chips">
-<button id="askLoss"><span class="n">01</span><span><b>Who sold at a loss this week?</b><span class="s">Homes that settled for less than they last sold for, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="askStreet"><span class="n">03</span><span><b>What sold on my street?</b><span class="s">Type a street and see every sale on it since 1990.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="askPeak"><span class="n">04</span><span><b>Suburbs still below their peak</b><span class="s">How far each suburb sits under its recent high.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="askZone"><span class="n">05</span><span><b>Which school zone am I in?</b><span class="s">Public school intake zones and schools on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button data-goto="budget"><span class="n">06</span><span><b>Buy or keep renting?</b><span class="s">Your borrowing limit, then buying against renting over the years.</span></span><span class="go" aria-hidden="true">→</span></button>
-</div>
+<div class="pt-ask pl-chips pl-sug" id="plSug" aria-label="Things to try"></div>
 <div class="pl-hfoot"><div class="pt-stats num" id="ptStats"></div>
 <button class="pt-fresh" id="ptFresh" hidden></button></div>
 </section>
@@ -2469,7 +2469,7 @@ header.pt .pt-ask.pl-chips button:hover b{color:var(--ink)!important}
 
 </div>
 <footer>
-<div class="pt-foot"><span class="pt-logo"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></span><p>Asking prices are opinions. <mark>Sales are facts.</mark></p>
+<div class="pt-foot"><span class="pt-logo"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></span><p>Every sale, <mark>plotted.</mark></p>
 <small>Every figure here is a recorded sale or a lodged rental bond from NSW Government records. Nothing you type leaves your browser.</small></div>
 <details class="how"><summary>How the numbers work<span>Methods, definitions and what to watch for</span></summary>
 <dl>
@@ -2863,6 +2863,7 @@ function spUnpin(){spCur=null;if(spPop)spPop.remove();if(pMarker&&!P_SEL)pMarker
 if(spPop)spPop.on("close",()=>{if(spCur!=null&&!spSwap){spCur=null;if(pMarker&&!P_SEL)pMarker.remove();}});
 function spClick(e){const f=spAt(e);if(!f)return false;const y=LID[f.layer.id],P=window.SP[y],i=f.properties.i;hoverBar.remove();
  if(spCur===y+"|"+i&&spPop.isOpen()){spUnpin();return true;}
+ if(panelShown()){const lc=P.loc[P.l[i]];spUnpin();spSeen(y,i);if(pmPop)pmPop.remove();openAddress(lc,P.st[P.s[i]],P.n[i],P.un[i]);return true;}   // panel open: the sale's address goes to the panel
  const loc=P.loc[P.l[i]],unit=P.u[i]===1,noun=unit?"unit":"house",a=P.a[i],r=P.r[i],pp=P.pp[i],pd=P.pd[i];
  const row=(k,v)=>`<dt>${k}</dt><dd>${v}</dd>`,ml=P.m?P.m[i]:null,ra=P.ra?P.ra[i]:null,cmp=v=>Math.abs(v-1)<.03?"In line":`<span class="${v>1?"pos":"neg"}">${pct(Math.abs(v-1),0)} ${v>1?"above":"below"}</span>`;
  let h=`<b>${esc(spAddr(P,i))}</b><span>${esc(title(loc))} · ${unit?"Unit":"House"}</span><div class="pr num">${dollars(P.p[i])}</div><dl class="num">`;
@@ -2959,6 +2960,7 @@ plUI();
    Below PM_Z a click picks a suburb, as before. Sale dots use the same two icons, in their price colours. */
 const PM_Z=14.5;
 let pmReveal=()=>{};   // 18-wiring sets this so the side panel slides in
+let panelShown=()=>false;   // 18-wiring sets this: true when the side panel is open beside the map (wide screens)
 const pmDone={},pmBusy={};let pmFeat=[],pmT=0;
 // Icons are signed distance fields, so one image takes any colour and a ring (halo) like the old dots.
 function pmSdf(draw){const S=48,R=8,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d");x.fillStyle="#000";draw(x);
@@ -3028,12 +3030,34 @@ const pmIs=P=>P_SEL&&P_SEL.loc===P.l&&(P.t?P_SEL.bld&&P_SEL.bk===P.k:!P_SEL.bld&
 function pmClear(){if(!P_SEL)return;P_SEL=null;if(pMarker)pMarker.remove();if(pmPop)pmPop.remove();detail();}
 const pmPop=window.maplibregl?new maplibregl.Popup({closeButton:true,closeOnClick:false,className:"tip sale pm-pop",offset:10,maxWidth:"300px"}):null;
 function pmGo(P){if(P.t===1)pmOpenBld(P.l,P.k);else pmOpenProp(P.l,window.PR[P.l].p[P.i]);}
+// Dan, 28 Nov: with the side panel open, a click on any home goes straight to the panel; with it hidden (or on phones)
+// the home gets a small card on the map, and its "Full history" button opens the panel.
+let pmCard=null;
+function pmShowCard(f){const P=f.properties,R=window.PR[P.l],loc=P.l,ll=f.geometry.coordinates;if(!R)return;
+ const row=(k,v)=>`<dt>${k}</dt><dd>${v}</dd>`;let h;
+ if(P.t===1){const ix=pmGroups(R)[P.k]||[],B=pmBldInfo(R,P.k),n3=B.single.filter(s=>s.x[0]>=(MS&&MS.ad?MS.ad[TL]:0)-3*365.25&&!(s.x[3]<0)).map(s=>s.x[2]).sort((a,b)=>a-b);
+  const med=n3.length?n3[n3.length>>1]:null;
+  h=`<b>${esc(pmBName(R,ix))}</b><span>${esc(title(loc))} · Apartment building</span><dl class="num">`+row("Units with a sale",ix.length)+row("Sales on record",B.sales.length)+
+   (med?row("Median sale, last 3 years",`${money(med)} <small>${n3.length} sales</small>`):"")+`</dl><div class="ft"><a href="#" data-pmfull="1">Every sale in this building</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;}
+ else{const p=R.p[P.i],xs=p[7],s=xs[xs.length-1],b=xs.length>1?xs[xs.length-2]:null;
+  h=`<b>${esc(pmAddr(R,p))}</b><span>${esc(title(loc))} · House</span><div class="pr num">${dollars(s[2])}</div><dl class="num">`+row("Last sold",dday(s[0]))+
+   (s[3]>1?row("Note",`One sale of ${s[3]} properties`):"")+(b?row("Sold before that",`${dollars(b[2])} <small>${dday(b[0])}</small>`):row("Sold before that","No earlier sale on record"))+
+   row("Sales on record",xs.length)+`</dl><div class="ft"><a href="#" data-pmfull="1">Full history</a><a href="#" data-sub="${esc(loc)}">${esc(title(loc))} →</a></div>`;}
+ pmCard=P.l+"|"+P.t+"|"+(P.t?P.k:P.i);pmPin(ll);
+ pmPop.setLngLat(ll).setHTML(h).addTo(map);const el=pmPop.getElement();
+ el.querySelector("[data-pmfull]").addEventListener("click",ev=>{ev.preventDefault();pmCard=null;pmPop.remove();pmGo(P);});
+ el.querySelector("[data-sub]").addEventListener("click",ev=>{ev.preventDefault();pmCard=null;pmPop.remove();if(pMarker&&!P_SEL)pMarker.remove();select(loc,false);});}
+if(pmPop)pmPop.on("close",()=>{if(pmCard){pmCard=null;if(pMarker&&!P_SEL)pMarker.remove();}});
+function pmPick(f){const P=f.properties;if(pmIs(P)){pmClear();return;}
+ if(panelShown()){pmGo(P);return;}
+ const id=P.l+"|"+P.t+"|"+(P.t?P.k:P.i);if(pmCard===id&&pmPop.isOpen()){pmPop.remove();return;}
+ if(P_SEL){P_SEL=null;detail();}pmShowCard(f);}
 function pmClick(e){const fs=pmAll(e);if(!fs.length)return false;hoverBar.remove();if(spCur!=null)spUnpin();if(pmPop)pmPop.remove();
- if(fs.length===1){const P=fs[0].properties;if(pmIs(P))pmClear();else pmGo(P);return true;}   // clicking the chosen home again unselects it
+ if(fs.length===1){pmPick(fs[0]);return true;}   // clicking the chosen home again unselects it
  const line=P=>{const R=window.PR[P.l];if(P.t===1){const ix=pmGroups(R)[P.k]||[];return`<b>${esc(pmBName(R,ix))}</b><span>Apartment building · ${ix.length} ${ix.length===1?"unit":"units"}</span>`;}
   const p=R.p[P.i],s=p[7][p[7].length-1];return`<b>${esc(pmAddr(R,p))}</b><span>House · last sold ${money(s[2])}, ${dday(s[0]).replace(/^\d+ /,"")}</span>`;};
  pmPop.setLngLat(fs[0].geometry.coordinates).setHTML(`<div class="pm-h">${fs.length} homes at this spot</div>${fs.map((f,j)=>`<button type="button" class="pm-pick${pmIs(f.properties)?" on":""}" data-j="${j}">${line(f.properties)}</button>`).join("")}`).addTo(map);
- pmPop.getElement().querySelectorAll("[data-j]").forEach(b=>b.addEventListener("click",()=>{const P=fs[+b.dataset.j].properties;pmPop.remove();if(pmIs(P))pmClear();else pmGo(P);}));
+ pmPop.getElement().querySelectorAll("[data-j]").forEach(b=>b.addEventListener("click",()=>{pmCard=null;pmPop.remove();pmPick(fs[+b.dataset.j]);}));
  return true;}
 // a click on empty map at street level unselects the chosen home
 function pmBlank(e){if(!ready||map.getZoom()<PM_Z)return;const b=5,L=map.getStyle().layers.map(l=>l.id).filter(id=>/^(pm-|sp_|pl-)/.test(id)&&map.getLayoutProperty(id,"visibility")!=="none");
@@ -5054,6 +5078,7 @@ const IC_FULL='<path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stro
  closeSel=function(...a){_close(...a);if(!pinned())MN.classList.remove("open");sync();};
  openAddress=async function(...a){await _open(...a);if(isFull())MN.classList.add("open");sync();};
  pmReveal=()=>{if(isFull())MN.classList.add("open");sync();};
+ panelShown=()=>isFull()&&MN.classList.contains("open");
  new MutationObserver(sync).observe(MN,{attributes:true,attributeFilter:["class"]});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&MN.classList.contains("open")&&!pinned())setOpen(false);});
  wide.addEventListener("change",()=>setFull(wide.matches));
@@ -5157,15 +5182,8 @@ rFillAll();
  $("legend").addEventListener("click",e=>{if(e.target.closest(".lg-x,.lg-open")){lgMin=!lgMin;store.set("hs_lg",lgMin);legend();}});
  $("detail").addEventListener("click",e=>{const svg=e.target.closest&&e.target.closest(".chart svg[data-hov]");if(!svg||!MS)return;const hov=JSON.parse(svg.dataset.hov);if(!hov.q)return;
   const r=svg.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*hov.vw;let k=0;hov.xs.forEach((x,i)=>{if(Math.abs(x-vx)<Math.abs(hov.xs[k]-vx))k=i;});const i=qMonth(hov.q[k]);if(i==null)return;stopPlay();setTime(i);});
- document.querySelectorAll(".pt-ask button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll(".pt-ask button").forEach(x=>x.classList.toggle("pri",x===b))));
  $("ptFresh").addEventListener("click",()=>{showTab("map");if(isLatest&&!isLatest())setTime(TL);setSp("week");toMap();});
- // home shortcuts (25 Nov): weekly hooks first, then personal ones
- const atLatest=()=>{if(isLatest&&!isLatest())setTime(TL);};
- $("askLoss").addEventListener("click",()=>{showTab("map");atLatest();const f=$("spfilt");if(f&&f.value!=="loss"){f.value="loss";try{f.dispatchEvent(new Event("change"));}catch(e){}}setSp("week");toMap();if(map)map.flyTo({center:[151.0,-33.85],zoom:9.6,duration:900});});
- $("askMove")&&$("askMove").addEventListener("click",()=>{showTab("weekly");setTimeout(()=>{const m=$("wkMove");if(m)m.scrollIntoView({behavior:"smooth",block:"start"});},350);});
- $("askStreet").addEventListener("click",()=>{const f=$("find");if(!f)return;f.dataset.ph=f.dataset.ph||f.placeholder;f.placeholder="Type your street, e.g. Pyrmont St, Pyrmont";f.focus();f.addEventListener("blur",()=>{if(!f.value)f.placeholder=f.dataset.ph;},{once:true});});
- $("askPeak").addEventListener("click",()=>{showTab("map");const m=$("metric");if(m&&m.value!=="peak"){m.value="peak";m.dispatchEvent(new Event("change"));}toMap();});
- $("askZone").addEventListener("click",()=>{showTab("map");PL_ON.zP=true;PL_ON.sc=true;plSave();if(ready)plApply();else plUI();toMap();});}
+}
 
 /* ---------- Home: live headline and this week's cards (28 Nov) ---------- */
 // The hook is the answer to "is the market falling?", worked out the same way as the Snapshot headline (Greater Sydney
@@ -5182,15 +5200,56 @@ function plHome(tries=0){const M=typeof m3==="function"&&MS?m3("syd","house"):nu
  const ch=v=>v==null?"":`<i class="${v>.0005?"up":v<-.0005?"dn":""}">${v>=0?"+":"−"}${pct(Math.abs(v),1)}</i>`;
  const R=m3("reg","house"),mv=plMovers();
  const card=(attr,lab,big,line)=>`<button type="button" class="pl-lc" ${attr}><small>${lab}</small><b>${big}</b><span>${line}</span></button>`;
- let h=card('data-pl="weekly"',"Greater Sydney houses",money(M.now),`${ch(yy)} on a year`);
- if(R)h+=card('data-pl="weekly-reg"',"Regional NSW houses",money(R.now),`${ch(R.yoy)} on a year`);
+ let h=card('data-plgo="weekly"',"Greater Sydney houses",money(M.now),`${ch(yy)} on a year`);
+ if(R)h+=card('data-plgo="weekly-reg"',"Regional NSW houses",money(R.now),`${ch(R.yoy)} on a year`);
  if(mv){h+=card(`data-plsub="${esc(mv[0][0])}"`,"Rising most, 3 months",esc(title(mv[0][0])),`${ch(mv[0][1])} · ${money(mv[0][2])}`);
   h+=card(`data-plsub="${esc(mv[1][0])}"`,"Falling most, 3 months",esc(title(mv[1][0])),`${ch(mv[1][1])} · ${money(mv[1][2])}`);}
  $("plLive").innerHTML=h;$("plLive").hidden=false;}
 $("plLive").addEventListener("click",e=>{const b=e.target.closest(".pl-lc");if(!b)return;
  if(b.dataset.plsub){showTab("map");setTimeout(()=>select(b.dataset.plsub),60);return;}
- showTab("weekly");if(b.dataset.pl==="weekly-reg")setTimeout(()=>wkChooseArea("reg"),60);else if(AREA!=="syd")setTimeout(()=>wkChooseArea("syd"),60);});
+ showTab("weekly");if(b.dataset.plgo==="weekly-reg")setTimeout(()=>wkChooseArea("reg"),60);else if(AREA!=="syd")setTimeout(()=>wkChooseArea("syd"),60);});
 plHome();
+
+/* ---------- Home: rotating suggestions (Dan, 28 Nov) ---------- */
+// Explore-section ideas only (Snapshot, Map, Suburbs, Analysis). Four pills show at a time; every few seconds one
+// random pill swaps for a random idea not on screen and not just shown, so the order never settles into A/B/A/B.
+// Pauses while the pointer or focus is on the pills, when Home isn't showing, and for reduced motion.
+{const atLatest=()=>{if(isLatest&&!isLatest())setTime(TL);};
+ const metric=v=>{showTab("map");const m=$("metric");if(m&&m.value!==v){m.value=v;m.dispatchEvent(new Event("change"));}toMap();};
+ const place=(ks,ph)=>{showTab("map");ks.forEach(k=>PL_ON[k]=true);plSave();if(ready)plApply();else plUI();toMap();};
+ const ask=ph=>{const f=$("find");if(!f)return;f.dataset.ph=f.dataset.ph||f.placeholder;f.placeholder=ph;f.focus();f.addEventListener("blur",()=>{if(!f.value)f.placeholder=f.dataset.ph;},{once:true});};
+ const snap=(code,sec)=>{showTab("weekly");setTimeout(()=>{if(code&&AREA!==code)wkChooseArea(code);if(sec){const m=$(sec);if(m)m.scrollIntoView({behavior:"smooth",block:"start"});}},120);};
+ const ana=met=>{showTab("analysis");if(met)setTimeout(()=>{const s=$("tvMet");if(s&&s.value!==met){s.value=met;s.dispatchEvent(new Event("change"));}},150);};
+ const SUG=[
+  ["Who sold at a loss this week?",()=>{showTab("map");atLatest();const f=$("spfilt");if(f&&f.value!=="loss"){f.value="loss";try{f.dispatchEvent(new Event("change"));}catch(e){}}setSp("week");toMap();if(map)map.flyTo({center:[151.0,-33.85],zoom:9.6,duration:900});}],
+  ["What sold on my street?",()=>ask("Type your street, e.g. Pyrmont St, Pyrmont")],
+  ["What's my suburb's median?",()=>ask("Type your suburb, e.g. Marrickville")],
+  ["Every sale in my building",()=>ask("Type your building's address, e.g. 243 Pyrmont St")],
+  ["What sold near me this week?",()=>{showTab("map");atLatest();setSp("week");toMap();}],
+  ["This week's biggest movers",()=>snap(null,"wkMove")],
+  ["Is Sydney cheaper than a year ago?",()=>snap("syd")],
+  ["How is regional NSW tracking?",()=>snap("reg")],
+  ["Suburbs still below their peak",()=>metric("peak")],
+  ["Where prices rose most this year",()=>metric("g1")],
+  ["Best growth over 10 years",()=>metric("g10")],
+  ["Where rents pay best",()=>metric("yield")],
+  ["Which school zone am I in?",()=>place(["zP","sc"])],
+  ["Homes near a train station",()=>place(["st"])],
+  ["Every suburb in one table",()=>showTab("suburbs")],
+  ["How much money changes hands?",()=>ana("vol")]];
+ const el=$("plSug"),N=4,rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+ let shown=shuffle([...SUG.keys()]).slice(0,N),recent=[],lastSlot=-1,hold=false;
+ el.innerHTML=shown.map(k=>`<button type="button" data-sg="${k}"><b>${SUG[k][0]}</b></button>`).join("");
+ el.addEventListener("click",e=>{const b=e.target.closest("[data-sg]");if(b)SUG[+b.dataset.sg][1]();});
+ ["mouseenter","focusin"].forEach(t=>el.addEventListener(t,()=>hold=true));["mouseleave","focusout"].forEach(t=>el.addEventListener(t,()=>hold=false));
+ const swap=()=>{if(hold||document.hidden||document.body.dataset.view!=="market")return;
+  let s;do s=Math.random()*N|0;while(s===lastSlot&&N>1);lastSlot=s;
+  const pool=[...SUG.keys()].filter(k=>!shown.includes(k)&&!recent.includes(k)),k=pool[Math.random()*pool.length|0];if(k==null)return;
+  recent.push(shown[s]);if(recent.length>4)recent.shift();shown[s]=k;
+  const b=el.children[s];b.classList.add("out");setTimeout(()=>{b.dataset.sg=k;b.innerHTML=`<b>${SUG[k][0]}</b>`;b.classList.remove("out");},260);};
+ const tick=()=>{swap();setTimeout(tick,2200+Math.random()*1800);};   // 2.2-4 s, irregular on purpose
+ if(!rm)setTimeout(tick,3000);}
 // Plotted shell (prototype): search sits centre stage on Home and in the top bar elsewhere;
 // on wide screens the tabs live in a collapsible left sidebar (html[data-sb=mini], saved in hs_sb).
 (function(){
