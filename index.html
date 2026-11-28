@@ -2038,6 +2038,60 @@ body.pf-lock{overflow:hidden}
 /* Extension page mockup: the 0.6 dial */
 .ex-dial{display:block;width:100%;height:auto;margin:4px 0}
 .ex-dial text{font:500 10.5px ui-monospace,"SF Mono",Menlo,monospace;fill:#8F8D85}
+
+/* ---------- Snapshot as cards (28 Nov): numbered steps, one idea per card ---------- */
+.sn-step{display:flex;align-items:center;gap:10px;margin:0 0 16px;font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.sn-step b{display:inline-grid;place-items:center;min-width:26px;height:22px;padding:0 6px;border-radius:6px;background:var(--hi-soft);color:var(--hi-t);font:inherit;letter-spacing:.04em}
+.sn-step.sn-sub{margin:30px 0 14px}
+#tabWeekly .pt-kick.wk-head{margin-bottom:20px}
+#tabWeekly .wk-q{font-size:clamp(18px,1.6vw,22px)}
+#tabWeekly .wk-pick{font-size:clamp(22px,2.2vw,30px);padding:6px 14px}
+.sn-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.sn-card{background:var(--sheet);border:1px solid var(--hair);border-radius:16px;padding:24px 26px;box-sizing:border-box;min-width:0}
+.sn-lab{margin:0 0 14px;font:500 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+#tabWeekly header.pt .sn-verdict h2#ptH1{font-size:clamp(26px,2.3vw,36px);line-height:1.12;margin:0 0 16px}
+#tabWeekly .sn-verdict #headline{max-width:none;font-size:16px;line-height:1.55}
+.sn-chart .pt-labrow{margin-top:0}
+.sn-tiles{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0!important;border:0!important}
+.sn-tiles>div{background:var(--sheet);border:1px solid var(--hair)!important;border-radius:16px;padding:20px 22px!important}
+.sn-tiles small{color:var(--slate)}
+#tabWeekly .sn-tiles b{font-size:clamp(32px,3vw,44px);margin:12px 0 8px}
+.sn-tiles span{display:block;font:400 14px/1.4 var(--sans);color:var(--slate)}
+#tabWeekly .pt-cap{margin-top:16px}
+#tabWeekly .wk-move{padding-top:40px}
+@media(min-width:1180px){#tabWeekly>.wrap{margin-left:0;margin-right:0}}
+#tabWeekly .wk-move h2{font-size:clamp(22px,2vw,28px)}#tabWeekly .wk-move .v-head{border:0}
+.brew-h{font-size:clamp(28px,3vw,44px)}
+.sn-chart{display:flex;flex-direction:column}.sn-chart #ptFig{margin-top:auto;margin-bottom:auto}
+#tabWeekly .wk-move .v-head{margin-bottom:18px}
+@media(max-width:900px){.sn-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.sn-card{padding:20px}.sn-tiles{grid-template-columns:1fr}
+ .sn-tiles>div{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px;padding:16px 18px!important}
+ .sn-tiles>div small{grid-column:1}.sn-tiles>div span{grid-column:1;font-size:13px}
+ #tabWeekly .sn-tiles>div b{grid-column:2;grid-row:1/3;margin:0;font-size:30px}}
+
+/* ---------- Home hook (28 Nov): live headline + this week's cards ---------- */
+header.pt .pl-home h1#plH1{font-size:clamp(30px,3.4vw,50px)!important;font-weight:450!important;line-height:1.1;max-width:24ch;margin:0 auto 16px!important;text-wrap:balance}
+#plH1 mark{background:none;padding:0;color:var(--hi-t)}#plH1 mark.dn{color:var(--loss)}#plH1 mark.up{color:var(--gain)}
+.pl-sub{margin:-12px auto 30px;max-width:52ch;font:400 clamp(16px,1.3vw,19px)/1.5 var(--sans);color:var(--slate);text-wrap:balance}
+.pl-live-dot{display:inline-flex;align-items:center;gap:8px}
+.pl-kick span.pl-live-dot::before{content:"";width:7px;height:7px;margin:0 8px 0 0;border-radius:50%;background:var(--gain)!important;box-shadow:0 0 0 0 color-mix(in srgb,var(--gain) 60%,transparent);animation:plPulse 2.4s ease-out infinite}
+@keyframes plPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gain) 55%,transparent)}70%,100%{box-shadow:0 0 0 7px transparent}}
+@media(prefers-reduced-motion:reduce){.pl-live-dot::before{animation:none}}
+.pl-live{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:min(860px,100%);margin:22px auto 0}
+.pl-live[hidden]{display:none}
+.pl-lc{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;min-width:0;padding:14px 16px 13px;border-radius:14px;background:var(--sheet);border:1px solid var(--hair);color:var(--ink);cursor:pointer;font:inherit;box-shadow:0 10px 30px -22px rgba(0,0,0,.5);transition:transform .18s ease,border-color .15s}
+.pl-lc:hover{transform:translateY(-2px);border-color:var(--hi-line)}
+.pl-lc small{font:500 10.5px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pl-lc b{font:500 21px/1.15 var(--disp);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;font-variant-numeric:tabular-nums}
+.pl-lc span{font:400 13px var(--sans);color:var(--slate)}
+.pl-lc i{font-style:normal;font-weight:600}.pl-lc i.up{color:var(--gain)}.pl-lc i.dn{color:var(--loss)}
+header.pt .pt-ask.pl-chips{padding-top:16px}
+@media(max-width:820px){.pl-live{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){header.pt .pl-home h1#plH1{font-size:clamp(26px,7.4vw,36px)!important}.pl-sub{margin-bottom:22px}.pl-lc b{font-size:18px}.pl-lc small{white-space:normal;line-height:1.3}}
+header.pt .pt-ask.pl-chips button{background:transparent!important;box-shadow:none!important;padding:7px 14px}
+header.pt .pt-ask.pl-chips button b{font-size:14px;color:var(--slate)!important;font-weight:450}
+header.pt .pt-ask.pl-chips button:hover b{color:var(--ink)!important}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -2050,12 +2104,13 @@ body.pf-lock{overflow:hidden}
 <div id="tabMarket" role="tabpanel">
 <header class="pt"><div class="pl-planw"><svg class="pl-plan" viewBox="0 0 720 560" aria-hidden="true" focusable="false"><path class="pl-road" d="M20,330 L700,250 M30,392 L710,312"/><text class="pl-t pl-rd" transform="translate(365,326) rotate(-6.7)" text-anchor="middle">R O A D   ·   2 0 . 1 1 5   W I D E</text><path class="pl-lot" d="M20.0,330.0 L135.6,316.4 L150.5,59.8 L40.0,70.0Z"/><text class="pl-t pl-n" x="87" y="194" text-anchor="middle">11</text><text class="pl-t pl-d" transform="translate(78,315) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot pl-hl" d="M135.6,316.4 L230.8,305.2 L241.5,51.4 L150.5,59.8Z"/><text class="pl-t pl-n" x="190" y="183" text-anchor="middle">12</text><text class="pl-t pl-d" transform="translate(183,303) rotate(-6.7)" text-anchor="middle">10.53</text><circle class="pl-peg" cx="135.6" cy="316.4" r="4.5"/><circle class="pl-peg" cx="230.8" cy="305.2" r="4.5"/><circle class="pl-peg" cx="241.5" cy="51.4" r="4.5"/><circle class="pl-peg" cx="150.5" cy="59.8" r="4.5"/><text class="pl-t pl-tag" x="190" y="203" text-anchor="middle">SOLD</text><path class="pl-lot" d="M230.8,305.2 L332.8,293.2 L339.0,42.4 L241.5,51.4Z"/><text class="pl-t pl-n" x="286" y="173" text-anchor="middle">13</text><text class="pl-t pl-d" transform="translate(282,291) rotate(-6.7)" text-anchor="middle">11.29</text><path class="pl-lot" d="M332.8,293.2 L441.6,280.4 L443.0,32.8 L339.0,42.4Z"/><text class="pl-t pl-n" x="389" y="162" text-anchor="middle">14</text><text class="pl-t pl-d" transform="translate(387,279) rotate(-6.7)" text-anchor="middle">12.04</text><path class="pl-lot" d="M441.6,280.4 L557.2,266.8 L553.5,22.6 L443.0,32.8Z"/><text class="pl-t pl-n" x="499" y="151" text-anchor="middle">15</text><text class="pl-t pl-d" transform="translate(499,266) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot" d="M557.2,266.8 L700.0,250.0 L690.0,10.0 L553.5,22.6Z"/><text class="pl-t pl-n" x="625" y="137" text-anchor="middle">16</text><text class="pl-t pl-d" transform="translate(629,250) rotate(-6.7)" text-anchor="middle">15.80</text><path class="pl-lot" d="M30.0,392.0 L166.0,376.0 L152.0,526.0 L10.0,540.0Z"/><text class="pl-t pl-n" x="90" y="458" text-anchor="middle">21</text><text class="pl-t pl-d" transform="translate(98,400) rotate(-6.7)" text-anchor="middle">15.05</text><path class="pl-lot" d="M166.0,376.0 L281.6,362.4 L272.7,514.1 L152.0,526.0Z"/><text class="pl-t pl-n" x="218" y="445" text-anchor="middle">22</text><text class="pl-t pl-d" transform="translate(224,385) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot" d="M281.6,362.4 L404.0,348.0 L400.5,501.5 L272.7,514.1Z"/><text class="pl-t pl-n" x="340" y="432" text-anchor="middle">23</text><text class="pl-t pl-d" transform="translate(343,371) rotate(-6.7)" text-anchor="middle">13.54</text><path class="pl-lot" d="M404.0,348.0 L519.6,334.4 L521.2,489.6 L400.5,501.5Z"/><text class="pl-t pl-n" x="461" y="418" text-anchor="middle">24</text><text class="pl-t pl-d" transform="translate(462,357) rotate(-6.7)" text-anchor="middle">12.79</text><path class="pl-lot" d="M519.6,334.4 L710.0,312.0 L720.0,470.0 L521.2,489.6Z"/><text class="pl-t pl-n" x="618" y="402" text-anchor="middle">25</text><text class="pl-t pl-d" transform="translate(615,339) rotate(-6.7)" text-anchor="middle">21.07</text><g class="pl-north" transform="translate(660,96)"><path d="M0,-30 L9,8 L0,1 L-9,8Z"/><text class="pl-t" x="0" y="26" text-anchor="middle">N</text></g></svg></div><div class="wrap">
 <section class="pt-hero pt-home pl-home" aria-label="Plotted">
-<p class="pl-kick"><span>NSW</span><span>Sales since 1990</span><span>Rents since 2021</span></p>
-<h1>NSW property, <mark>plotted.</mark></h1>
+<p class="pl-kick" id="plKick"><span>NSW</span><span>Sales since 1990</span><span>Rents since 2021</span></p>
+<h1 id="plH1">NSW property, <mark>plotted.</mark></h1>
+<p class="pl-sub" id="plSub">Every NSW home sale since 1990, on one map. See what really sold, street by street.</p>
 <div class="pl-hsrch" id="homeSrch"></div>
+<div class="pl-live" id="plLive" hidden></div>
 <div class="pt-ask pl-chips">
 <button id="askLoss"><span class="n">01</span><span><b>Who sold at a loss this week?</b><span class="s">Homes that settled for less than they last sold for, on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
-<button id="askMove"><span class="n">02</span><span><b>This week’s biggest movers</b><span class="s">The suburbs whose prices shifted most.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askStreet"><span class="n">03</span><span><b>What sold on my street?</b><span class="s">Type a street and see every sale on it since 1990.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askPeak"><span class="n">04</span><span><b>Suburbs still below their peak</b><span class="s">How far each suburb sits under its recent high.</span></span><span class="go" aria-hidden="true">→</span></button>
 <button id="askZone"><span class="n">05</span><span><b>Which school zone am I in?</b><span class="s">Public school intake zones and schools on the map.</span></span><span class="go" aria-hidden="true">→</span></button>
@@ -2071,23 +2126,28 @@ body.pf-lock{overflow:hidden}
 
 <div id="tabWeekly" role="tabpanel" hidden>
 <section class="brew" aria-label="Your snapshot"><div class="wrap">
- <div class="brew-top"><span class="brew-cup" aria-hidden="true"><svg class="bc" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p class="brew-hi" id="brewHi">Good morning.</p><h1 class="brew-h">Here’s your snapshot.</h1><p class="brew-sub" id="brewSub"></p></div></div>
+ <div class="brew-top"><span class="brew-cup" aria-hidden="true"><svg class="bc" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><p class="brew-hi" id="brewHi">Good morning.</p><h1 class="brew-h">Here is your market snapshot.</h1><p class="brew-sub" id="brewSub"></p></div></div>
 </div></section>
 <header class="pt pt-wk"><div class="wrap">
-<section class="pt-mkt" aria-label="Which way is the market going?">
-<div class="pt-kick wk-head"><div class="wk-place"><span class="wk-q">Which way is the market going in</span><button type="button" id="wkPick" class="wk-pick" aria-haspopup="listbox" aria-expanded="false" aria-controls="wkPop"><span id="wkPickT">Greater Sydney</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span id="wkFav"></span><button type="button" id="wkClr" class="wk-clr" hidden></button><div class="wk-pop" id="wkPop" hidden><input id="wkQ" placeholder="Search a suburb or area" autocomplete="off" aria-label="Search a suburb or area"><div id="wkList" class="wk-list" role="listbox"></div></div></div><span class="pt-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ptArea" aria-label="Area"></select></span></div>
-<div class="pt-mgrid"><div class="pt-ans"><h2 id="ptH1"></h2><p id="headline"></p><div class="pt-tiles num" id="ptTiles"></div></div>
-<div class="pt-ev" id="ptEv"><div class="pt-labrow"><p class="pt-lab" id="ptLab"></p><span class="seg pt-yrs" role="group" aria-label="Years shown"><button data-pty="1" aria-pressed="true">1 yr</button><button data-pty="3" aria-pressed="false">3 yrs</button></span></div><p class="pt-now" id="ptNow"></p><div id="ptFig"></div></div></div>
+<section class="pt-mkt" aria-label="The market">
+<p class="sn-step"><b>01</b>The market</p>
+<div class="pt-kick wk-head"><div class="wk-place"><span class="wk-q">The market in</span><button type="button" id="wkPick" class="wk-pick" aria-haspopup="listbox" aria-expanded="false" aria-controls="wkPop"><span id="wkPickT">Greater Sydney</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span id="wkFav"></span><button type="button" id="wkClr" class="wk-clr" hidden></button><div class="wk-pop" id="wkPop" hidden><input id="wkQ" placeholder="Search a suburb or area" autocomplete="off" aria-label="Search a suburb or area"><div id="wkList" class="wk-list" role="listbox"></div></div></div><span class="pt-ctl"><span class="seg" role="group" aria-label="Dwelling type"><button data-seg="house" aria-pressed="true">Houses</button><button data-seg="unit" aria-pressed="false">Units</button></span><select id="ptArea" aria-label="Area"></select></span></div>
+<div class="sn-grid"><div class="pt-ans sn-card sn-verdict"><p class="sn-lab">In a sentence</p><h2 id="ptH1"></h2><p id="headline"></p></div>
+<div class="pt-ev sn-card sn-chart" id="ptEv"><div class="pt-labrow"><p class="pt-lab" id="ptLab"></p><span class="seg pt-yrs" role="group" aria-label="Years shown"><button data-pty="1" aria-pressed="true">1 yr</button><button data-pty="3" aria-pressed="false">3 yrs</button></span></div><p class="pt-now" id="ptNow"></p><div id="ptFig"></div></div></div>
+<p class="sn-step sn-sub">The three numbers that matter</p>
+<div class="pt-tiles num sn-tiles" id="ptTiles"></div>
 <details class="pt-cap"><summary>How this is worked out</summary><div id="ptCap"></div></details>
 </section>
 </div></header>
 <div class="wrap">
 <section class="wk-move wk-sales" id="wkSales" aria-label="Sales in this suburb" hidden>
+ <p class="sn-step"><b>02</b>What sold</p>
  <header class="v-head ws-head"><div><h2 class="sec" id="wsT">Sales</h2><p class="lede" id="wsL"></p></div><span class="seg ws-win" role="group" aria-label="Period"><button data-ws="wk">Week</button><button data-ws="mo">Month</button><button data-ws="q">3 months</button><button data-ws="yr">12 months</button></span></header>
  <div class="wk-cols ws-cols"><div class="wk-col"><h3 class="neu">Highest</h3><ol id="wsHi"></ol></div><div class="wk-col"><h3 class="neu">Lowest</h3><ol id="wsLo"></ol></div></div>
  <p class="note" id="wsN"></p>
 </section>
 <section class="wk-move" id="wkMove" aria-label="Biggest moves">
+ <p class="sn-step"><b>02</b>On the move</p>
  <header class="v-head"><h2 class="sec" id="wkT">Biggest moves, last 3 months</h2><p class="lede" id="wkL"></p></header>
  <div class="wk-cols"><div class="wk-col"><h3 class="up">Rising most</h3><ol id="wkUp"></ol></div><div class="wk-col"><h3 class="dn">Falling most</h3><ol id="wkDn"></ol></div></div>
  <p class="note" id="wkN"></p>
@@ -2409,7 +2469,7 @@ body.pf-lock{overflow:hidden}
 
 </div>
 <footer>
-<div class="pt-foot"><span class="pt-logo"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></span><p>No listings. No asking prices. <mark>Just what sold.</mark></p>
+<div class="pt-foot"><span class="pt-logo"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></span><p>Asking prices are opinions. <mark>Sales are facts.</mark></p>
 <small>Every figure here is a recorded sale or a lodged rental bond from NSW Government records. Nothing you type leaves your browser.</small></div>
 <details class="how"><summary>How the numbers work<span>Methods, definitions and what to watch for</span></summary>
 <dl>
@@ -3946,6 +4006,12 @@ const m3lab=i=>{const[y,m]=MS.m[i].split("-");return MON[+m-1]+" "+y;};
 // Colour rule for every price change in the headline: a fall is red, a rise (or being at the peak) is green, and
 // anything within 2% is "flat" and left plain. The tiles use the same red and green.
 let ptYrs=1;
+// The three tiles under the headline, one card each: the change, then the dollar figure it was measured against.
+function snTiles(fp,yy,pv,now,peak,peakLab,ago3){const cl=v=>v==null?"":v>.0005?"up":v<-.0005?"dn":"",was=v=>v==null?null:money(now/(1+v));
+ const t=(lab,v,c,line)=>`<div class="sn-tile"><small>${lab}</small><b class="${c}">${v}</b><span>${line}</span></div>`;
+ return t("From the peak",fp>-.0005?"At peak":signed(fp),fp<-.0005?"dn":"up",fp>-.0005?`The highest in 3 years`:`Peak was ${money(peak)} in ${peakLab}`)+
+  t("Against a year ago",yy==null?"–":signed(yy),cl(yy),yy==null?"Not enough sales a year ago":`Was ${was(yy)} a year ago`)+
+  t("Last 3 months",pv==null?"–":signed(pv),cl(pv),pv==null?"Not enough sales":`Was ${was(pv)} ${ago3} ago`);}
 function headline3(M,noun,asof,an){const fp=M.fromPeak,yy=M.yoy,cl=v=>v==null?"":v>.0005?"up":v<-.0005?"dn":"";
  const mk=(t,c)=>c?`<mark class="${c}">${t}</mark>`:t;
  const pk=fp>-M3_NEAR?mk("at their peak","up"):`${mk(`down ${Math.round(-fp*100)}%`,"dn")} from the peak`;
@@ -3954,9 +4020,7 @@ function headline3(M,noun,asof,an){const fp=M.fromPeak,yy=M.yoy,cl=v=>v==null?""
  $("headline").innerHTML=`The median ${noun} in ${an} is <b>${money(M.now)}</b>. `+
   (fp>-M3_NEAR?`That's at or near its highest in three years`:`That's ${pct(-fp)} below its peak of ${money(M.peak)} in ${m3lab(M.peakAt)}`)+
   (yy==null?".":`, and ${Math.abs(yy)<.0005?"level with":yy>0?pct(yy)+" above":pct(-yy)+" below"} a year ago.`);
- $("ptTiles").innerHTML=`<div><small>From the peak</small><b class="${fp<-.0005?"dn":""}">${fp>-.0005?"At peak":signed(fp)}</b><span>Peak: ${m3lab(M.peakAt)}</span></div>`+
-  `<div><small>On a year ago</small><b class="${cl(yy)}">${yy==null?"–":signed(yy)}</b><span>Against a year earlier</span></div>`+
-  `<div><small>Last 3 months</small><b class="${cl(M.prev)}">${M.prev==null?"–":signed(M.prev)}</b><span>Against the 3 months before</span></div>`;
+ $("ptTiles").innerHTML=snTiles(fp,yy,M.prev,M.now,M.peak,m3lab(M.peakAt),"3 months");
  ptLine3(M,noun,an);
  {const it=(k,v)=>`<div><dt>${k}</dt><dd>${v}</dd></div>`;$("ptCap").innerHTML=`<dl>`+
   it("The figure",`The 3-month median: the middle price of all ${noun} sales in ${an} that settled in each three months.`)+
@@ -4554,8 +4618,8 @@ function weekly(){const up=$("wkUp"),dn=$("wkDn");if(!up||!MS)return;const area=
  out.sort((x,y)=>y[1]-x[1]);const li=x=>`<li><button data-sub="${esc(x[0])}"><b>${esc(title(x[0]))}</b><span class="num ${x[1]>=0?"pos":"neg"}">${x[1]>=0?"+":""}${pct(x[1],1)}</span><small>${money(x[2])} · ${x[3]} sales a year</small></button></li>`;
  const top=out.slice(0,5),bot=out.slice(-5).reverse().filter(x=>!top.includes(x));
  up.innerHTML=top.map(li).join("")||"<li class=\"muted\">Not enough sales yet.</li>";dn.innerHTML=bot.map(li).join("")||"<li class=\"muted\">Not enough sales yet.</li>";
- $("wkT").textContent=`Biggest moves in ${area}, last 3 months`;
- $("wkL").textContent=`${title(noun)} in ${out.length} suburbs with ${WK_MIN} or more sales in the last year, ranked by how far their 12-month median price moved in the last three months (to ${mlabel(TL)}).`;
+ $("wkT").textContent=`Biggest price moves, last 3 months`;
+ $("wkL").textContent=`${title(noun)} in ${area}: ${out.length} suburbs with ${WK_MIN}+ sales a year, ranked by the change in their 12-month median since three months ago.`;
  $("wkN").textContent="A 12-month median moves slowly, so a 3% move in three months is a big one. Click a suburb to see it on the map.";}
 document.querySelector(".wk-cols").addEventListener("click",e=>{const b=e.target.closest("[data-sub]");if(!b)return;showTab("map");setTimeout(()=>select(b.dataset.sub),60);});
 {const _hl=headline;headline=function(...a){const r=_hl.apply(this,a);try{if(view==="weekly")weekly();}catch(e){}return r;};}
@@ -4607,9 +4671,7 @@ function wkSub(){const loc=WK_SUB,k=loc+"|"+seg,noun=seg==="unit"?"unit":"house"
   (fp>-M3_NEAR?`That's at or near its highest in three years`:`That's ${pct(-fp)} below its peak of ${money(pk*1000)} in ${m3lab(pi)}`)+
   (yy==null?".":`, and ${Math.abs(yy)<.0005?"level with":yy>0?pct(yy)+" above":pct(-yy)+" below"} a year earlier.`)+
   ` Based on ${n12} sales${n12<8?", so treat it with caution":""}.`;
- $("ptTiles").innerHTML=`<div><small>From the peak</small><b class="${fp<-.0005?"dn":""}">${fp>-.0005?"At peak":signed(fp)}</b><span>Peak: ${m3lab(pi)}</span></div>`+
-  `<div><small>On a year ago</small><b class="${cl(yy)}">${yy==null?"–":signed(yy)}</b><span>Against a year earlier</span></div>`+
-  `<div><small>Last 3 months</small><b class="${cl(pv)}">${pv==null?"–":signed(pv)}</b><span>12-month median, v 3 months ago</span></div>`;
+ $("ptTiles").innerHTML=snTiles(fp,yy,pv,now*1000,pk*1000,m3lab(pi),"3 months");
  $("ptEv").hidden=false;ptLine3({a,n:TL},noun,nm);
  const it=(t,v)=>`<div><dt>${t}</dt><dd>${v}</dd></div>`;
  $("ptCap").innerHTML=`<dl>`+it("The figure",`The 12-month median: the middle price of all ${noun} sales in ${esc(nm)} that settled in the 12 months to each month. A single suburb has too few sales for a 3-month median.`)+
@@ -4664,7 +4726,7 @@ setTimeout(()=>{let v2=false;try{v2=localStorage.getItem("hs_favs_v2")==="1";loc
 let brewTok=0;
 function brewHead(){const h=new Date().getHours();$("brewHi").textContent=h<12?"Good morning.":h<17?"Good afternoon.":"Good evening.";
  const d=MS&&MS.ad?new Date(SP_EP+MS.ad[TL]*864e5):null,ds=d?d.toLocaleDateString("en-AU",{day:"numeric",month:"long",timeZone:"UTC"}):"";
- $("brewSub").textContent=`What changed in NSW property this week, in about a minute. Sales settled to ${ds}.`;}
+ $("brewSub").textContent=`What moved in NSW property, in about a minute. Sales settled to ${ds}.`;}
 const brewMed=a=>{if(!a.length)return null;a.sort((x,y)=>x-y);const m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2;};
 function brewStats(R,u){const hi=MS.ad[TL],now=[],prev=[],wk=[];
  for(const p of R.p){if(!!p[5]!==u)continue;for(const x of p[7]){if(!x[2]||x[3]>1)continue;const d=x[0];
@@ -5100,10 +5162,35 @@ rFillAll();
  // home shortcuts (25 Nov): weekly hooks first, then personal ones
  const atLatest=()=>{if(isLatest&&!isLatest())setTime(TL);};
  $("askLoss").addEventListener("click",()=>{showTab("map");atLatest();const f=$("spfilt");if(f&&f.value!=="loss"){f.value="loss";try{f.dispatchEvent(new Event("change"));}catch(e){}}setSp("week");toMap();if(map)map.flyTo({center:[151.0,-33.85],zoom:9.6,duration:900});});
- $("askMove").addEventListener("click",()=>{showTab("weekly");setTimeout(()=>{const m=$("wkMove");if(m)m.scrollIntoView({behavior:"smooth",block:"start"});},350);});
+ $("askMove")&&$("askMove").addEventListener("click",()=>{showTab("weekly");setTimeout(()=>{const m=$("wkMove");if(m)m.scrollIntoView({behavior:"smooth",block:"start"});},350);});
  $("askStreet").addEventListener("click",()=>{const f=$("find");if(!f)return;f.dataset.ph=f.dataset.ph||f.placeholder;f.placeholder="Type your street, e.g. Pyrmont St, Pyrmont";f.focus();f.addEventListener("blur",()=>{if(!f.value)f.placeholder=f.dataset.ph;},{once:true});});
  $("askPeak").addEventListener("click",()=>{showTab("map");const m=$("metric");if(m&&m.value!=="peak"){m.value="peak";m.dispatchEvent(new Event("change"));}toMap();});
  $("askZone").addEventListener("click",()=>{showTab("map");PL_ON.zP=true;PL_ON.sc=true;plSave();if(ready)plApply();else plUI();toMap();});}
+
+/* ---------- Home: live headline and this week's cards (28 Nov) ---------- */
+// The hook is the answer to "is the market falling?", worked out the same way as the Snapshot headline (Greater Sydney
+// houses, 3-month medians), then four cards a visitor can click: the two big regions and the suburbs moving most.
+function plMovers(){const out=[];for(const r of D.rows){if(r[C.segment]!=="house"||!inSyd(r[C.postcode])||(r[C.n_now]||0)<WK_MIN)continue;
+  const k=r[C.locality]+"|house",a=sv(k,1,TL),b=sv(k,1,TL-3);if(!a||!b)continue;const ch=a/b-1;if(Math.abs(ch)>.15)continue;out.push([r[C.locality],ch,a]);}
+ out.sort((x,y)=>y[1]-x[1]);return out.length>1?[out[0],out[out.length-1]]:null;}
+function plHome(tries=0){const M=typeof m3==="function"&&MS?m3("syd","house"):null;
+ if(!M||typeof TL!=="number"||!MS.ad){if(tries<40)setTimeout(()=>plHome(tries+1),250);return;}
+ const fp=M.fromPeak,yy=M.yoy,mk=(t,c)=>`<mark class="${c}">${t}</mark>`;
+ $("plH1").innerHTML=fp>-M3_NEAR?`Sydney house prices are ${mk("at their peak","up")}.`:`Sydney house prices are ${mk(`down ${Math.round(-fp*100)}%`,"dn")} from the peak.`;
+ const d=new Date(SP_EP+MS.ad[TL]*864e5).toLocaleDateString("en-AU",{day:"numeric",month:"short",timeZone:"UTC"});
+ $("plKick").innerHTML=`<span class="pl-live-dot">Updated weekly</span><span>Sales to ${d}</span><span>NSW Government records</span>`;
+ const ch=v=>v==null?"":`<i class="${v>.0005?"up":v<-.0005?"dn":""}">${v>=0?"+":"−"}${pct(Math.abs(v),1)}</i>`;
+ const R=m3("reg","house"),mv=plMovers();
+ const card=(attr,lab,big,line)=>`<button type="button" class="pl-lc" ${attr}><small>${lab}</small><b>${big}</b><span>${line}</span></button>`;
+ let h=card('data-pl="weekly"',"Greater Sydney houses",money(M.now),`${ch(yy)} on a year`);
+ if(R)h+=card('data-pl="weekly-reg"',"Regional NSW houses",money(R.now),`${ch(R.yoy)} on a year`);
+ if(mv){h+=card(`data-plsub="${esc(mv[0][0])}"`,"Rising most, 3 months",esc(title(mv[0][0])),`${ch(mv[0][1])} · ${money(mv[0][2])}`);
+  h+=card(`data-plsub="${esc(mv[1][0])}"`,"Falling most, 3 months",esc(title(mv[1][0])),`${ch(mv[1][1])} · ${money(mv[1][2])}`);}
+ $("plLive").innerHTML=h;$("plLive").hidden=false;}
+$("plLive").addEventListener("click",e=>{const b=e.target.closest(".pl-lc");if(!b)return;
+ if(b.dataset.plsub){showTab("map");setTimeout(()=>select(b.dataset.plsub),60);return;}
+ showTab("weekly");if(b.dataset.pl==="weekly-reg")setTimeout(()=>wkChooseArea("reg"),60);else if(AREA!=="syd")setTimeout(()=>wkChooseArea("syd"),60);});
+plHome();
 // Plotted shell (prototype): search sits centre stage on Home and in the top bar elsewhere;
 // on wide screens the tabs live in a collapsible left sidebar (html[data-sb=mini], saved in hs_sb).
 (function(){
