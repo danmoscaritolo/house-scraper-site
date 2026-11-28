@@ -1802,10 +1802,52 @@ aside#detail{padding:20px 22px}
 #detail .rtab td{padding:8px 6px 8px 0;border-bottom:1px solid var(--hair)}
 #detail .rtab tr.tot td{font-weight:600;border-bottom:0}
 #detail .rtab .muted{color:var(--slate)}
+
+/* ===== Extension page (28 Nov): replaces Check a listing ===== */
+.ex{max-width:1080px;margin:0 auto;padding:8px 0 40px}
+.ex-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:center;margin:10px 0 34px}
+@media(max-width:900px){.ex-hero{grid-template-columns:1fr;gap:24px}}
+.ex-kick{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--slate);margin:0 0 10px}
+.ex-h{font:500 clamp(30px,4vw,44px)/1.08 var(--disp);letter-spacing:-.025em;margin:0 0 14px}
+.ex-lead{font-size:16.5px;line-height:1.6;color:var(--ink);margin:0 0 20px;max-width:52ch}
+.ex-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 14px}.ex-cta span{font-size:13px;color:var(--slate)}
+.ex-btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font:500 15px var(--sans);padding:12px 20px;border-radius:999px}
+.ex-btn:hover{opacity:.88}
+.ex-sites{font-size:13px;color:var(--slate);margin:0;max-width:52ch}
+.ex-shot{min-width:0}
+.ex-win{border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 70px -30px rgba(20,20,19,.45),0 0 0 1px rgba(20,20,19,.08)}
+.ex-bar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:#F1EFE9;border-bottom:1px solid #E3E1D7}
+.ex-bar i{width:10px;height:10px;border-radius:50%;background:#E0DDD3}.ex-bar i:first-child{background:#F1716B}.ex-bar i:nth-child(2){background:#F6C144}.ex-bar i:nth-child(3){background:#5DC560}
+.ex-bar span{flex:1;margin-left:10px;background:#fff;border-radius:999px;padding:4px 12px;font:12px var(--mono);color:#8F8D85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-page{position:relative;height:400px;padding:16px;background:#fff}
+.ex-photo{height:190px;border-radius:10px;background:linear-gradient(135deg,#C9D6E3,#E9E2D3 60%,#D7C9B4)}
+.ex-info{padding:14px 2px;display:flex;flex-direction:column;gap:5px;max-width:52%}
+.ex-info b{font:650 22px var(--sans);color:#141413}.ex-info span{font-size:13.5px;color:#2A2A28}.ex-info em{font-style:normal;font-size:12.5px;color:#5E5D59}
+.ex-info i{display:block;height:8px;border-radius:4px;background:#EFEDE5;margin-top:8px}.ex-info i.s{width:60%}
+.ex-card{position:absolute;right:14px;bottom:14px;width:228px;background:#fff;border-radius:16px;box-shadow:0 18px 40px -12px rgba(30,32,80,.4),0 0 0 1px rgba(30,32,80,.07);overflow:hidden;text-align:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#141413}
+.ex-ch{display:flex;align-items:center;gap:6px;padding:8px 10px;background:linear-gradient(120deg,#3F51C7,#6A4FD8 55%,#9B5DE5);color:#fff;font:600 12px ui-monospace,Menlo,monospace;text-align:left}
+.ex-ch span{flex:1}.ex-ch u{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.22)}
+.ex-card svg{display:block;width:150px;margin:6px auto 0}
+.ex-v{display:block;font:650 18px/1.1 inherit;color:#4F5BD5;margin-top:-4px}
+.ex-chip{display:inline-block;margin:5px 0 6px;padding:2px 8px;border-radius:999px;background:#EEF0FD;color:#4F5BD5;font-size:10.5px;font-weight:600}
+.ex-card p{font-size:10.5px;line-height:1.4;color:#4A4945;margin:0 10px 7px}.ex-card p b{color:#141413}
+.ex-fit{margin:0 10px 7px;padding:5px 8px;border-radius:9px;background:#E3F6EA;color:#0E7C3E;font-size:10.5px;font-weight:600;text-align:left}
+.ex-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 10px 10px}
+.ex-tiles div{background:#F6F5F1;border-radius:8px;padding:5px 4px;text-align:left}.ex-tiles small{display:block;font-size:8.5px;color:#8F8D85}.ex-tiles b{font-size:11px}
+.ex-cap{font-size:12.5px;color:var(--slate);margin:10px 2px 0}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:0 0 30px}
+.ex-c{background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:16px 18px}.ex-c b{font:500 15px var(--disp)}.ex-c p{margin:6px 0 0;font-size:14px;color:var(--slate);line-height:1.5}
+.ex-t{font:500 17px var(--disp);margin:28px 0 10px}
+.ex-steps{counter-reset:s;list-style:none;padding:0;margin:0}.ex-steps li{counter-increment:s;position:relative;padding:0 0 12px 38px;max-width:70ch;line-height:1.55}
+.ex-steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--paper);font:500 12px/24px var(--mono);text-align:center}
+.ex-note{max-width:72ch;line-height:1.6;color:var(--ink)}
+#tabExt code{font:13px var(--mono);background:var(--wash);border-radius:5px;padding:1px 5px}
+.ex-lk{background:none;border:0;padding:0;font:inherit;color:var(--hi-t);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+[data-theme=dark] .ex-win{box-shadow:0 30px 70px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
-<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="check" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5 12 2.5l1.5 9.5-9.5 1.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m5.5 8 1.8 1.8 3.4-3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Check a listing</span><span class="t-s">Check</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
+<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="extension" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 2.5h3v1.6a1.4 1.4 0 0 0 2.8 0V2.5h1.2v4h-1.6a1.4 1.4 0 0 0 0 2.8h1.6v4.2h-4.2v-1.6a1.4 1.4 0 0 0-2.8 0v1.6H2.5V9.3h1.6a1.4 1.4 0 0 0 0-2.8H2.5v-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="t-l">Extension</span><span class="t-s">Extension</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
 <div class="top-srch"><div class="field srch"><input id="find" placeholder="Search any NSW suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div></div>
 <div class="sb-foot"><button type="button" class="themeBtn" id="themeBtn" aria-label="Dark mode" title="Light or dark"><svg class="su" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="mo" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
 <button type="button" class="tourBtn" id="tourBtn">Tour</button></div>
@@ -2011,7 +2053,42 @@ aside#detail{padding:20px 22px}
  <div class="tbl"><table class="t"><thead></thead><tbody></tbody></table></div>
 </section>
 </div>
-<div id="tabCheck" role="tabpanel" hidden></div>
+<div id="tabCheck" hidden></div>
+<div id="tabExt" role="tabpanel" hidden><div class="ex">
+ <div class="ex-hero"><div class="ex-copy"><p class="ex-kick">Plotted for Chrome, Edge and Brave · version 0.4.1 · free</p>
+  <h2 class="ex-h">Check listings as you browse</h2>
+  <p class="ex-lead">Open a NSW listing on a major property listing site and a small Plotted card shows how the price compares with what similar homes nearby sold for, what sold in the same building or street, the home's last sale, the suburb's trend and whether it fits your budget.</p>
+  <p class="ex-cta"><a class="ex-btn" href="plotted-extension.zip" download>Download the extension</a><span>Chrome Web Store coming soon</span></p>
+  <p class="ex-sites">Works on listings at domain.com.au and realestate.com.au. Plotted isn't affiliated with or endorsed by either site.</p></div>
+ <div class="ex-shot" aria-label="Example: the Plotted card on a listing page">
+  <div class="ex-win"><div class="ex-bar"><i></i><i></i><i></i><span>listings.example.com.au/12-sample-street-sampleton</span></div>
+   <div class="ex-page"><div class="ex-photo"></div><div class="ex-info"><b>$1,080,000</b><span>5/12 Sample Street, Sampleton NSW</span><em>2 bed · 2 bath · 1 car · Apartment</em><i></i><i></i><i class="s"></i></div>
+    <div class="ex-card"><div class="ex-ch"><span>plotted</span><u></u><u></u></div>
+     <svg viewBox="0 0 220 128" aria-hidden="true"><path d="M26 100 A84 84 0 0 1 60.7 32.2" stroke="#BDEBCF" stroke-width="16" fill="none"/><path d="M60.7 32.2 A84 84 0 0 1 159.3 32.2" stroke="#D5D9FA" stroke-width="16" fill="none"/><path d="M159.3 32.2 A84 84 0 0 1 194 100" stroke="#FBD0D1" stroke-width="16" fill="none"/><line x1="110" y1="100" x2="98" y2="40" stroke="#4F5BD5" stroke-width="4" stroke-linecap="round"/><circle cx="110" cy="100" r="8" fill="#4F5BD5"/><circle cx="110" cy="100" r="3" fill="#fff"/><circle cx="95.5" cy="18" r="7" fill="#fff" stroke="#4F5BD5" stroke-width="3"/></svg>
+     <b class="ex-v">6% below</b><span class="ex-chip">In line with similar sales</span>
+     <p>14 units in this building sold for <b>$980k–$1.32m</b>, median <b>$1.15m</b>.</p>
+     <div class="ex-fit">Within your budget</div>
+     <div class="ex-tiles"><div><small>Last sold</small><b>$720k</b></div><div><small>Suburb units</small><b>$1.10m</b></div><div><small>Rent, 2-bed</small><b>$1000/wk</b></div></div></div></div></div>
+  <p class="ex-cap">Illustration with a made-up listing. The card sits in the corner of the listing page; minimise or close it any time.</p></div></div>
+ <div class="ex-grid">
+  <div class="ex-c"><b>Is the price in line?</b><p>Below, in line with or above recent sales of similar homes nearby, moved to today's market. For rentals, compared with leases of the same number of bedrooms.</p></div>
+  <div class="ex-c"><b>What sold right here?</b><p>Recent sales in the same apartment building, or on the same street for houses.</p></div>
+  <div class="ex-c"><b>Can I afford it?</b><p>Within, a stretch or over the limit you set in Your budget, worked out on your device.</p></div></div>
+ <h3 class="ex-t">Install (2 minutes)</h3>
+ <ol class="ex-steps"><li>Download the extension and unzip it. You get a folder called <code>plotted-extension</code>.</li>
+  <li>In Chrome, go to <code>chrome://extensions</code> (in Edge, <code>edge://extensions</code>) and turn on <b>Developer mode</b>.</li>
+  <li>Click <b>Load unpacked</b> and choose the unzipped folder.</li>
+  <li>Open a NSW listing. The card appears in the bottom-right corner.</li>
+  <li>Optional: set up <button type="button" class="ex-lk" data-goto="budget">Your budget</button> once, in the same browser, so cards can say whether a price fits.</li></ol>
+ <p class="ex-note">To update, download the new version, replace the folder and press reload on the extension in <code>chrome://extensions</code>.</p>
+ <h3 class="ex-t">How it works</h3>
+ <p class="ex-note">The extension reads the facts shown on the listing you have open (address, type, bedrooms, bathrooms, car spaces, size and the price as displayed) and compares them with NSW Valuer General sales and NSW Fair Trading rental bonds, the same public data as this website. It's a comparison with recorded sales, not a valuation or advice, and it can't see a home's condition, views or renovations.</p>
+ <h3 class="ex-t">Privacy</h3>
+ <p class="ex-note">No account and no tracking. The extension doesn't record which listings you look at or collect listing data from your browsing, and your budget limits stay on your device. Details are in the <a href="privacy.html">Privacy policy</a>.</p>
+ <h3 class="ex-t">Phones</h3>
+ <p class="ex-note">Phone browsers don't run extensions. On a phone, search the address on the <button type="button" class="ex-lk" data-goto="map">map</button> to see every recorded sale of the home and what sold nearby.</p>
+</div></div>
+
 <div id="tabBudget" role="tabpanel" hidden>
 <div class="bx">
  <header class="bx-top">
@@ -4548,16 +4625,15 @@ else document.querySelector(".spbar").hidden=true;
 
 /* ---------- tabs ---------- */
 // Views, one at a time: Home (the logo), Weekly, Map, Analysis, Suburbs, Your budget. Each has its own address (#map, #analysis, #suburbs, #budget) so back and links work.
-const VIEWS={market:"tabMarket",weekly:"tabWeekly",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",check:"tabCheck",budget:"tabBudget"};let view="market";
-function showTab(t,how){t=String(t||"").split("?")[0];if(!VIEWS[t])t="market";if(typeof tourS!=="undefined"&&tourS)tourEnd();const was=view;view=t;
+const VIEWS={market:"tabMarket",weekly:"tabWeekly",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",extension:"tabExt",budget:"tabBudget"};let view="market";
+function showTab(t,how){t=String(t||"").split("?")[0];if(t==="check")t="extension";if(!VIEWS[t])t="market";/* the Check a listing page became the Extension page (28 Nov) */if(typeof tourS!=="undefined"&&tourS)tourEnd();const was=view;view=t;
  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
  for(const[k,id]of Object.entries(VIEWS))$(id).hidden=k!==t;document.body.dataset.view=t;
- if(how!=="pop"){const h=t==="market"?location.pathname+location.search:"#"+t+(t==="check"&&typeof CHK!=="undefined"&&CHK.qs?CHK.qs:"");try{if(how==="init"||t===was)history.replaceState(null,"",h);else history.pushState(null,"",h);}catch(e){}}
+ if(how!=="pop"){const h=t==="market"?location.pathname+location.search:"#"+t;try{if(how==="init"||t===was)history.replaceState(null,"",h);else history.pushState(null,"",h);}catch(e){}}
  if(t!==was&&how!=="keep")scrollTo(0,0);
  if(t==="map"&&map){map.resize();setTimeout(()=>map.resize(),0);}
  if(t==="suburbs"&&typeof market==="function"&&was!=="suburbs")setTimeout(()=>{try{market();}catch(e){}},0);
  if(t==="budget")planUI();
- if(t==="check"&&typeof ckShow==="function")ckShow();
  if(t==="analysis")setTimeout(anDraw,0);
  if(t==="weekly")setTimeout(()=>{try{headline();}catch(e){}weekly();},0);
  setTimeout(()=>{if(typeof tourS==="undefined"||tourS)return;if(t==="budget"&&SIM&&!store.get("hs_tour_budget"))tourStart("budget");
@@ -4572,7 +4648,7 @@ document.querySelector("#tabSuburbs .t tbody").addEventListener("click",e=>{if(e
 document.querySelector("#tabSuburbs .t tbody").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.closest("tr[data-n]"))showTab("map");},true);
 $("ctaPlay")&&$("ctaPlay").addEventListener("click",()=>{showTab("map");if(metric!=="price"&&metric!=="g1"){metric="price";$("metric").value="price";}
  setTimeout(()=>{stopPlay();setTime(Math.max(0,TL-36));TB.play.click();},500);});
-setTimeout(()=>showTab((location.hash||"").slice(1)||"market","init"),0);
+setTimeout(()=>{if(/^#check\?/.test(location.hash))return;showTab((location.hash||"").slice(1)||"market","init");},0);   // #check?... (from the extension) opens the home on the map: 22-check
 try{history.scrollRestoration="manual";}catch(e){}addEventListener("load",()=>setTimeout(()=>scrollTo(0,0),0));   // #map would otherwise jump to the map element  // deferred: showTab reads tour state declared further down
 
 $("layersBtn").addEventListener("click",()=>{const o=$("lpanel").hidden;$("lpanel").hidden=!o;$("layersBtn").setAttribute("aria-expanded",o);});
@@ -5188,6 +5264,13 @@ function ckFromHash(h){const m=String(h||"").match(/^#check\?(.+)$/);if(!m)retur
  for(const kv of m[1].split("&")){const i=kv.indexOf("=");if(i<1)continue;try{L[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1));}catch(e){}}
  for(const k of["beds","baths","cars","land","floor","lat","lon"])if(L[k]!=null&&L[k]!=="")L[k]=+L[k];return L.suburb||L.addr?L:null;}
 function ckShow(){ckWire();if(!CHK.L)ckDraw();}
-{const L=ckFromHash(location.hash);if(L){CHK.qs=location.hash.slice(6);ckRun(L);}
- addEventListener("hashchange",()=>{const L=ckFromHash(location.hash);if(L){CHK.qs=location.hash.slice(6);ckRun(L);showTab("check","keep");}});}
+// The extension's "Open the full check" link (#check?...): the Check page is gone (Dan, 28 Nov), so open the home on the
+// map instead: the home's own history, or its building for a unit we can't pin down, or else the suburb.
+async function ckToMap(L){showTab("map","init");const loc=ckLoc(L.suburb,L.pc);if(!loc)return;
+ let R;try{if(!(window.PR&&window.PR[loc]))await loadJS(`data/props/${pslug(loc)}.js`);R=window.PR[loc];}catch(e){select(loc);return;}
+ const F=ckFind(R,L);if(F.p){openAddress(loc,R.st[F.p[0]],F.p[1],F.p[2],true);return;}
+ if(F.bld&&F.bld.length&&typeof pmOpenBld==="function"){if(map&&F.lx!=null)map.jumpTo({center:[150+F.lx/1e5,-34+F.ly/1e5],zoom:16.5});pmOpenBld(loc,pmBKey(R,F.bld[0]));return;}
+ if(map&&F.lx!=null)map.flyTo({center:[150+F.lx/1e5,-34+F.ly/1e5],zoom:16.5,duration:800});select(loc,F.lx==null);}
+{const go=()=>{const L=ckFromHash(location.hash);if(!L)return;try{history.replaceState(null,"","#map");}catch(e){}const run=()=>ckToMap(L);if(map&&!ready)map.once("load",()=>setTimeout(run,0));else setTimeout(run,0);};
+ go();addEventListener("hashchange",go);}
 </script></body></html>
