@@ -2029,6 +2029,15 @@ body.pf-lock{overflow:hidden}
  .pf-chartw{padding:14px 12px 10px}.pf-ck{grid-template-columns:repeat(2,1fr)}.pf-row.three{grid-template-columns:repeat(3,1fr)}.pf-sum{grid-template-columns:repeat(2,1fr)}
  .pf-head{align-items:flex-start}.pf-modal{top:4vh}
  .pf-card{grid-template-columns:4px minmax(0,1fr) 16px;gap:10px 14px}.pf-bar{grid-row:1/4}.pf-cv{grid-column:2;grid-row:2;flex-direction:row;align-items:baseline;gap:10px}.pf-ck{grid-column:2;grid-row:3}.pf-go{grid-column:3;grid-row:1/4}.pf-step{grid-template-columns:1fr auto}.pf-pc{grid-column:1/-1}}
+.pf-vm{margin:0 0 14px}.pf-vm+.pf-row{margin:0 0 14px}.pf-ev.own{color:var(--hi-t)}.pf-vm button{font:500 13px var(--sans);padding:7px 14px}
+.pf-warn{margin:0 0 14px;padding:12px 14px;border-radius:10px;background:rgba(201,101,15,.09);border:1px solid rgba(201,101,15,.28);font-size:13.5px;line-height:1.5}
+.pf-warn b{font-weight:600}
+.pf-wl{stroke:var(--slate);stroke-width:1;stroke-dasharray:3 3}
+.pf-dot.own{fill:var(--hi);stroke:var(--sheet);stroke-width:2}
+
+/* Extension page mockup: the 0.6 dial */
+.ex-dial{display:block;width:100%;height:auto;margin:4px 0}
+.ex-dial text{font:500 10.5px ui-monospace,"SF Mono",Menlo,monospace;fill:#8F8D85}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
@@ -2240,7 +2249,7 @@ body.pf-lock{overflow:hidden}
 </div>
 <div id="tabCheck" hidden></div>
 <div id="tabExt" role="tabpanel" hidden><div class="ex">
- <div class="ex-hero"><div class="ex-copy"><p class="ex-kick">Plotted for Chrome, Edge and Brave · version 0.5 · free</p>
+ <div class="ex-hero"><div class="ex-copy"><p class="ex-kick">Plotted for Chrome, Edge and Brave · version 0.6 · free</p>
   <h2 class="ex-h">Check listings as you browse</h2>
   <p class="ex-lead">Open a NSW listing on a major property listing site and a small Plotted card shows how the price compares with what similar homes nearby sold for, what sold in the same building or street, the home's last sale, the suburb's trend and whether it fits your budget.</p>
   <p class="ex-cta"><a class="ex-btn" href="plotted-extension.zip" download>Download the extension</a><span>Chrome Web Store coming soon</span></p>
@@ -2248,7 +2257,7 @@ body.pf-lock{overflow:hidden}
  <div class="ex-shot" aria-label="Example: the Plotted card on a listing page">
   <div class="ex-win"><div class="ex-bar"><i></i><i></i><i></i><span>listings.example.com.au/12-sample-street-sampleton</span></div>
    <div class="ex-page"><div class="ex-photo"></div><div class="ex-info"><b>$1,080,000</b><span>5/12 Sample Street, Sampleton NSW</span><em>2 bed · 2 bath · 1 car · Apartment</em><i></i><i></i><i class="s"></i></div>
-    <div class="ex-card"><div class="ex-ch"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><circle cx="23.5" cy="5.5" r="4" fill="#3F51C7"/></svg><span>plotted</span><u></u><u></u></div><div class="ex-cb"><span class="ex-k">In line with similar sales</span><b class="ex-v">6% below the median</b><svg viewBox="0 0 300 92" aria-hidden="true"><rect x="62.5" y="24" width="148.8" height="40" rx="6" fill="#3F51C7" fill-opacity=".09"/><line x1="10" x2="290" y1="64" y2="64" stroke="#E3E1D7"/><circle cx="77" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="77" cy="51" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="119" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="119" cy="51" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="133" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="133" cy="51" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="140" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="147" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="175" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="182" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="196" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="203" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="210" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><circle cx="252" cy="58" r="2.8" fill="#8F8D85" fill-opacity=".75"/><line x1="136.9" x2="136.9" y1="22" y2="68" stroke="#141413" stroke-width="1.2" stroke-dasharray="2 2"/><text x="136.9" y="82" text-anchor="middle">median $1.15m</text><text x="10" y="82">$860k</text><text x="290" y="82" text-anchor="end">$1.50m</text><line x1="106.2" x2="106.2" y1="18" y2="68" stroke="#3F51C7" stroke-width="2.5"/><rect x="60.2" y="0" width="92" height="16" rx="8" fill="#3F51C7"/><text class="lt" x="106.2" y="11.5" text-anchor="middle">this one $1.08m</text></svg><p>Each dot is one of <b>14 units in this building</b>, priced in today's market.</p><div class="ex-fit"><i></i>Within your budget</div><div class="ex-tiles"><div><small>LAST SOLD</small><b>$720k</b></div><div><small>SAMPLETON UNITS</small><b>$1.10m</b></div><div><small>RENT, 2-BED</small><b>$1000/wk</b></div></div><div class="ex-sl"><div class="ex-tb"><b>This building 27</b><span>Sampleton 199</span></div><div class="ex-r"><span>12/12 Sample St</span><span>$1.21m Sep 2025</span></div><div class="ex-r"><span>8/12 Sample St</span><span>$1.05m Jul 2025</span></div></div></div></div></div></div>
+    <div class="ex-card"><div class="ex-ch"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><circle cx="23.5" cy="5.5" r="4" fill="#3F51C7"/></svg><span>plotted</span><u></u><u></u></div><div class="ex-cb"><span class="ex-k">In line with similar sales</span><b class="ex-v">6% below the median</b><svg class="ex-dial" viewBox="0 0 300 158" aria-hidden="true"><path d="M42.0 136.0 A108 108 0 0 1 88.4 47.3" fill="none" stroke="#167A49" stroke-width="16"/><path d="M91.8 45.0 A108 108 0 0 1 209.0 45.6" fill="none" stroke="#D9D6CC" stroke-width="16"/><path d="M212.4 47.8 A108 108 0 0 1 258.0 136.0" fill="none" stroke="#C2372B" stroke-width="16"/><line x1="150.0" y1="40.0" x2="150.0" y2="19.0" stroke="#141413" stroke-width="1.5"/><text x="150.0" y="11.0" text-anchor="middle">median $1.15m</text><text x="42" y="154" text-anchor="middle">−30%</text><text x="258" y="154" text-anchor="middle">+30%</text><line x1="150" y1="136" x2="123.4" y2="54.2" stroke="#141413" stroke-width="3.5" stroke-linecap="round"/><circle cx="150" cy="136" r="7" fill="#141413"/><circle cx="150" cy="136" r="2.5" fill="#3F51C7"/></svg><p>Against <b>14 units in this building</b>, priced in today's market. Grey is their middle half.</p><div class="ex-fit"><i></i>Within your budget</div><div class="ex-tiles"><div><small>LAST SOLD</small><b>$720k</b></div><div><small>SAMPLETON UNITS</small><b>$1.10m</b></div><div><small>RENT, 2-BED</small><b>$1000/wk</b></div></div><div class="ex-sl"><div class="ex-tb"><b>This building 27</b><span>Sampleton 199</span></div><div class="ex-r"><span>12/12 Sample St</span><span>$1.21m Sep 2025</span></div><div class="ex-r"><span>8/12 Sample St</span><span>$1.05m Jul 2025</span></div></div></div></div></div></div>
   <p class="ex-cap">Illustration with a made-up listing. The card sits in the corner of the listing page; minimise or close it any time.</p></div></div>
  <div class="ex-grid">
   <div class="ex-c"><b>Is the price in line?</b><p>Below, in line with or above recent sales of similar homes nearby, moved to today's market. For rentals, compared with leases of the same number of bedrooms.</p></div>
@@ -5458,9 +5467,9 @@ async function ckToMap(L){showTab("map","init");const loc=ckLoc(L.suburb,L.pc);i
  go();addEventListener("hashchange",go);}
 /* ---------- portfolio ---------- */
 // The homes you own, kept in this browser only (localStorage hs_pf; export/import as a file). No account, nothing sent.
-// Value: a known price for the home (its latest recorded sale, your purchase or your own valuation, whichever is latest
-// unless you pick one) moved month by month with the suburb's 12-month median for that type (the region's where the
-// suburb is thin or jumps), plus any changes you've made since (an extra bedroom, a renovation). Monthly points.
+// Value: a path pinned through every known price from the purchase on (the purchase, later recorded sales, and your own
+// value if you override), following the suburb's 12-month median for that type (the region's where the suburb is thin or
+// jumps) between and after them. A renovation or rebuild after the last known price is flagged until a value includes it.
 const PF_DEF={v:1,props:[]};
 let PF=store.get("hs_pf");if(!PF||!Array.isArray(PF.props))PF={...PF_DEF,props:[]};
 const pfSave=()=>store.set("hs_pf",PF);
@@ -5477,7 +5486,7 @@ const pfRg=h=>((byKey[h.loc+"|"+pfSeg(h)]||byKey[h.loc+"|house"]||byKey[h.loc+"|
 const pfPc=h=>((byKey[h.loc+"|"+pfSeg(h)]||byKey[h.loc+"|house"]||byKey[h.loc+"|unit"])||[])[C.postcode]||null;
 const pfNew=()=>{const used=new Set(PF.props.map(h=>h.c));let c=0;while(used.has(c)&&c<8)c++;
  return{id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),c:c%8,name:"",loc:"",st:"",num:"",unit:"",uflag:false,use:"home",
-  buy:{d:"",p:null},val:null,anchor:"auto",adj:{beds:0,baths:0,cars:0,other:0,d:pfToday(),pb:null,pba:4,pc:3},
+  buy:{d:"",p:null},val:null,vmode:"est",works:{t:"",y:null},
   loan:{bal:null,rate:6.2,io:false,yrs:25,off:null,rep:null},rent:{pw:null,fee:7,costs:null},det:{beds:null,baths:null,cars:null,land:null,view:"",beach:null}};};
 
 // ---------- data the estimates need ----------
@@ -5490,12 +5499,12 @@ function pfRec(h){const R=window.PR&&window.PR[h.loc];if(!R||!h.st)return null;c
  return c.find(p=>h.rk&&p[7].some(x=>x[0]===h.rk[0]&&x[2]===h.rk[1]))||c.sort((a,b)=>b[7].length-a[7].length)[0];}
 async function pfLoad(){if(!MS)return;let d0=Infinity;for(const h of PF.props){const a=pfDay(h.buy.d);if(a!=null)d0=Math.min(d0,a);}
  const i0=isFinite(d0)?pfMi(d0):Math.max(0,TL-12),need=[];for(let c=Math.floor(Math.max(0,i0-1)/HCH);c<=Math.floor(TL/HCH);c++)if(!(window.HIST&&window.HIST[c]))need.push(c);
- await Promise.all([...need.map(c=>loadJS(`data/web/hist_${c}.js`).catch(()=>0)),...PF.props.map(h=>pfRecLoad(h)),PF.props.some(h=>h.use==="inv"||h.adj.beds)?ckRents():0]);}
+ await Promise.all([...need.map(c=>loadJS(`data/web/hist_${c}.js`).catch(()=>0)),...PF.props.map(h=>pfRecLoad(h)),PF.props.some(h=>h.use==="inv")?ckRents():0]);}
 
 // Month-by-month index for a home: suburb 12-month median, chained; a month the suburb has no figure, or jumps more
 // than 8% (thin suburbs), takes the region's change instead. Returns idx[i] and the share of months on suburb figures.
-function pfIndex(h){const k=h.loc+"|"+pfSeg(h),reg=(MS.mkt[pfRg(h)]||MS.mkt.all)[pfSeg(h)],idx=new Array(TL+1).fill(null);let sub=0,n=0;idx[0]=1;
- let prev=sv(k,1,0);for(let i=1;i<=TL;i++){const v=sv(k,1,i);let r=null;if(v&&prev){r=v/prev;if(Math.abs(r-1)>.08)r=null;}
+function pfIndex(h,i0=0){const k=h.loc+"|"+pfSeg(h),reg=(MS.mkt[pfRg(h)]||MS.mkt.all)[pfSeg(h)],idx=new Array(TL+1).fill(null);let sub=0,n=0;idx[i0]=1;
+ let prev=sv(k,1,i0);for(let i=i0+1;i<=TL;i++){const v=sv(k,1,i);let r=null;if(v&&prev){r=v/prev;if(Math.abs(r-1)>.08)r=null;}
   if(r==null){r=reg[i]&&reg[i-1]?reg[i]/reg[i-1]:1;}else sub++;n++;idx[i]=idx[i-1]*r;prev=v;}
  return{idx,share:n?sub/n:0};}
 // Prices this home can start from: your purchase, each recorded single sale, your own valuation
@@ -5505,17 +5514,31 @@ function pfAnchors(h){const out=[],rec=pfRec(h);
  else if(bd!=null&&h.buy.p>0){const a=out.find(a=>Math.abs(a.d-bd)<45&&Math.abs(a.p-h.buy.p)<1);a.t="Your purchase (recorded sale)";}
  if(h.val&&h.val.p>0&&pfDay(h.val.d)!=null)out.push({k:"val",d:pfDay(h.val.d),p:h.val.p,t:"Your valuation"});
  return out.sort((a,b)=>a.d-b.d);}
-function pfBedPct(h){if(h.adj.pb!=null)return{v:h.adj.pb/100,auto:false};const b=Math.max(1,Math.min(3,h.det.beds||(h.uflag?2:3))),pc=pfPc(h),R=window.RB&&window.RB.r;
- if(R&&pc){const a=R[`${pc}|${pfSeg(h)}|${b}`],c=R[`${pc}|${pfSeg(h)}|${b+1}`];if(a&&c&&a[0]>=10&&c[0]>=6&&a[2]>0){const v=Math.max(.03,Math.min(.2,c[2]/a[2]-1));return{v,auto:true,b,pc};}}
- return{v:.08,auto:true,b:null};}
-function pfAdjF(h){const a=h.adj;return(1+pfBedPct(h).v*(a.beds||0))*(1+(a.pba||0)/100*(a.baths||0))*(1+(a.pc||0)/100*(a.cars||0))*(1+(a.other||0)/100);}
+const pfWorksDay=h=>h.works&&h.works.t&&h.works.y>1900?pfDay(`${Math.round(h.works.y)}-07-01`):null;
+const PF_WORKS={reno:"renovation",rebuilt:"rebuild"},PF_PREM=.38;
+// Pins: the purchase, recorded single sales after it, and your own value when "My own value" is on (same month: the later wins).
+// Between two pins the path follows the index, bent evenly so it meets both; if works finished between them, it follows the
+// index from the first pin up to the works and from the second pin back to them (a step at completion). After the last pin: the index.
 function pfCalc(h){if(!MS)return null;const bd=pfDay(h.buy.d);if(bd==null||!(h.buy.p>0))return null;
- const A=pfAnchors(h);let an=h.anchor!=="auto"&&A.find(a=>a.k===h.anchor);if(!an)an=A[A.length-1];if(!an)return null;
- const{idx,share}=pfIndex(h),ia=pfMi(an.d),ib=pfMi(bd),adjI=pfMi(pfDay(h.adj.d)),f=pfAdjF(h),adjOn=f!==1&&pfDay(h.adj.d)>an.d;
- const v=new Array(TL+1).fill(null);for(let i=ib;i<=TL;i++)v[i]=an.p*idx[i]/idx[ia]*(adjOn&&i>=adjI?f:1);
- const yrs=Math.max(0,(MS.ad[TL]-an.d)/365.25),band=Math.min(.25,.06+.006*yrs+(share<.8?.04:0)+(an.k==="val"?-.01:0));
- const now=v[TL],ev=band<.1?"good":band<.16?"fair":"rough";
- return{v,now,lo:now*(1-band),hi:now*(1+band),band,ev,an,anchors:A,share,ib,adj:adjOn?now-now/f:0,early:bd<MS.ad[0]-200};}
+ const ib=pfMi(bd),A=pfAnchors(h),{idx,share}=pfIndex(h,ib),wd=pfWorksDay(h),wi=wd!=null?pfMi(wd):null;
+ let pins=[{d:bd,p:h.buy.p,t:"Your purchase"}];for(const a of A)if(a.k!=="buy"&&a.k!=="val"&&a.d>bd+45)pins.push(a);
+ if(h.vmode==="own"&&h.val&&h.val.p>0&&pfDay(h.val.d)!=null)pins.push({d:Math.max(bd,pfDay(h.val.d)),p:h.val.p,t:"Your own value",own:true});
+ pins.sort((a,b)=>a.d-b.d);pins=pins.map(x=>({...x,i:pfMi(x.d)}));pins=pins.filter((x,k)=>!(pins[k+1]&&pins[k+1].i===x.i));
+ const v=new Array(TL+1).fill(null);
+ for(let k=0;k<pins.length;k++){const a=pins[k],b=pins[k+1],end=b?b.i:TL;
+  for(let i=a.i;i<=end;i++){if(!b){v[i]=a.p*idx[i]/idx[a.i];continue;}
+   if(wi!=null&&wi>a.i&&wi<=b.i)v[i]=i<wi?a.p*idx[i]/idx[a.i]:b.p*idx[i]/idx[b.i];
+   else{const kk=(b.p/idx[b.i])/(a.p/idx[a.i]),f=b.i>a.i?(i-a.i)/(b.i-a.i):1;v[i]=a.p*idx[i]/idx[a.i]*Math.pow(kk,f);}}}
+ for(let i=ib;i<pins[0].i;i++)v[i]=pins[0].p*idx[i]/idx[pins[0].i];
+ const last=pins[pins.length-1],miss=wd!=null&&wd>last.d;
+ // Houses bought well above (below) their suburb's median typically lose (gain) part of that gap: on 2002-2026 repeat sales,
+ // 38% of the log gap at purchase has gone by the next sale, most of it within the first year or two (tools/premium_test.py:
+ // typical error 12.0% -> 10.9% on 2025-26 resales). Units showed no gain, so they're left alone; your own value is never adjusted.
+ let prem=null;if(!last.own&&!h.uflag){const m=sv(h.loc+"|house",1,last.i);if(m>0){prem=Math.max(-1.2,Math.min(1.2,Math.log(last.p/m)));
+  for(let i=last.i+1;i<=TL;i++)v[i]*=Math.exp(-PF_PREM*prem*Math.min(1,(i-last.i)/12));}}
+ const yrs=Math.max(0,(MS.ad[TL]-last.d)/365.25),band=Math.min(.25,(last.own?.04:.06)+.006*yrs+(share<.8?.04:0)+(miss?.06:0));
+ const now=v[TL],ev=miss?"rough":band<.1?"good":band<.16?"fair":"rough";
+ return{v,now,lo:now*(1-band),hi:now*(1+band),band,ev,an:last,pins,anchors:A,share,ib,miss,wd,prem,early:bd<MS.ad[0]-200};}
 function pfMoney(h,val){const L=h.loan,bal=L.bal||0,off=Math.min(L.off||0,bal),r=(L.rate||0)/100,net=Math.max(0,bal-off);
  const rep=L.rep>0?L.rep:bal<=0?0:L.io?net*r/12:bal*pmt(r,Math.max(1,L.yrs||25)),int=net*r;
  const inv=h.use==="inv",rentY=inv?(h.rent.pw||0)*52:0,fee=inv?rentY*(h.rent.fee||0)/100:0,costs=h.rent.costs||0;
@@ -5562,7 +5585,7 @@ function pfRender(){const el=$("pf");if(!el||view!=="portfolio")return;const L=P
  <p class="pf-priv">Saved in this browser only, nothing is sent to Plotted. Export a file to keep a copy. A rough guide from public sales records, not a valuation or financial advice.</p></div>`;
  pfChart();pfModal();}
 function pfCard(h){const s=PFS[h.id],m=s?pfMoney(h,s.now):null,g=s?s.now-h.buy.p:null,yrs=s?(MS.ad[TL]-pfDay(h.buy.d))/365.25:0,pa=s&&yrs>=1&&h.buy.p>0?Math.pow(s.now/h.buy.p,1/yrs)-1:null;
- const sub=[title(h.loc),h.uflag?"Unit":"House",h.use==="inv"?"Investment":"Home"].join(" · ");
+ const sub=[title(h.loc),h.uflag?"Unit":"House",h.use==="inv"?"Investment":"Home"].join(" · ")+(s&&s.miss?" · "+(h.works.t==="rebuilt"?"Rebuild":"Renovation")+" not in estimate":"");
  const kv=(l,v,c="")=>`<div><span>${l}</span><b class="num ${c}">${v}</b></div>`;
  return`<button class="pf-card" data-open="${h.id}"><i class="pf-bar" style="background:var(--pf${h.c+1})"></i><div class="pf-cm"><b class="pf-cn">${esc(pfName(h))}</b><span class="pf-cs">${esc(sub)}</span></div>
  ${s?`<div class="pf-cv"><b class="num">${money(s.now)}</b><span class="num ${g>=0?"pos":"neg"}">${g>=0?"+":"−"}${money(Math.abs(g)).slice(0)}${pa!=null?` · ${signed(pa,1)} a yr`:""}</span></div>
@@ -5616,17 +5639,18 @@ function pfDrawer(){let d=$("pfDr");const h=PF.props.find(x=>x.id===PFV.open);
  if(T==="value"&&s)pfMini(h,s);}
 const pfF=(lab,f,v,o={})=>`<label class="pf-f${o.w?" w":""}"><span>${lab}</span><input data-f="${f}" ${o.type==="date"?`type="date"`:`type="text" inputmode="decimal"`} value="${v==null?"":esc(o.type==="date"?v:o.money?Number(v).toLocaleString("en-AU"):v)}" placeholder="${o.ph||""}">${o.suf?`<em>${o.suf}</em>`:""}${o.hint?`<small>${o.hint}</small>`:""}</label>`;
 function pfValTab(h,s){if(!s)return`<p class="pf-empty2">Add the purchase date and price under Details to see an estimate.</p>${pfDetTab(h,s)}`;
- const a=h.adj,bp=pfBedPct(h),A=s.anchors,step=(k,l,pc,pk,auto)=>`<div class="pf-step"><span class="l">${l}</span><span class="pf-sp"><button data-st="${k}" data-d="-1" aria-label="Fewer">−</button><b class="num">${a[k]>0?"+":""}${a[k]||0}</b><button data-st="${k}" data-d="1" aria-label="More">+</button></span><label class="pf-pc"><input data-f="${pk}" type="text" inputmode="decimal" value="${pc}"><em>% each</em></label>${auto?`<small>${auto}</small>`:""}</div>`;
- return`<div class="pf-est"><span class="l">Estimated value</span><b class="num">${money(s.now)}</b><span class="s">Likely ${money(s.lo)} to ${money(s.hi)} · <span class="pf-ev ${s.ev}">${{good:"Good evidence",fair:"Fair evidence",rough:"Rough"}[s.ev]}</span></span>
- <p class="pf-how">${dollars(s.an.p)} (${s.an.t.toLowerCase()}, ${dday(s.an.d).replace(/^\d+ /,"")}) moved with ${s.share>=.8?`the ${esc(title(h.loc))} median ${pfSeg(h)} price`:`the ${esc(title(h.loc))} median where it has enough sales, else the regional median`} since then${s.adj?`, plus ${money(s.adj)} for your changes`:""}. Condition and the particular home can move it either way.</p></div>
+ const own=h.vmode==="own",later=s.pins.filter(x=>x.t==="Recorded sale").length,w=h.works&&h.works.t?PF_WORKS[h.works.t]:"";
+ const how=own&&s.an.own?`Your value of ${dollars(s.an.p)} at ${dday(s.an.d).replace(/^\d+ /,"")}${s.an.i<TL?`, moved with the ${esc(title(h.loc))} median ${pfSeg(h)} price since`:""}. From your purchase to then, the line follows the market's ups and downs and meets your figure.`
+  :`Your purchase of ${dollars(h.buy.p)}${later?` and ${later} later recorded ${later===1?"sale":"sales"}`:""}, moved with ${s.share>=.8?`the ${esc(title(h.loc))} median ${pfSeg(h)} price`:`the ${esc(title(h.loc))} median where it has enough sales, else the regional median`}.${s.prem!=null&&Math.abs(s.prem)>=.1?` The last known price was ${pct(Math.abs(Math.exp(s.prem)-1),0)} ${s.prem>0?"above":"below"} the suburb's median house price; houses like that usually keep only about 60% of the gap, so the estimate allows for that.`:""} Condition and the particular home can move it either way.`;
+ return`<div class="seg pf-vm" role="group" aria-label="Value from"><button data-vmode="est" aria-pressed="${!own}">Plotted estimate</button><button data-vmode="own" aria-pressed="${own}">My own value</button></div>
+ ${own?`<div class="pf-row">${pfF("Your value","val.p",h.val&&h.val.p,{money:1,ph:"e.g. a bank or agent figure"})}${pfF("As at","val.d",h.val&&h.val.d||pfToday(),{type:"date"})}</div>`:""}
+ ${s.miss?`<div class="pf-warn"><b>Your ${w} in ${Math.round(h.works.y)} isn't in this figure yet.</b> No sale or value since then includes it, so this is the home as it was. ${own?"Set your value above (as at after the works) to include it.":`<button class="pf-lk" data-vmode="own">Add your own value</button> to include it.`}</div>`:""}
+ <div class="pf-est"><span class="l">${own&&s.an.own?"Your value, moved to today":"Estimated value"}</span><b class="num">${money(s.now)}</b><span class="s">Likely ${money(s.lo)} to ${money(s.hi)} · <span class="pf-ev ${s.an.own?"own":s.ev}">${s.an.own?"Your figure":{good:"Good evidence",fair:"Fair evidence",rough:"Rough"}[s.ev]}</span></span>
+ <p class="pf-how">${how}</p></div>
  <div class="pf-mini" id="pfMini"></div>
- <h4 class="pf-t4">Start from</h4><div class="pf-anc">${A.slice().reverse().map(x=>`<label class="pf-ar2"><input type="radio" name="pfAn" value="${x.k}" ${s.an.k===x.k?"checked":""}><span><b>${x.t}</b><small>${dday(x.d)}</small></span><b class="num">${dollars(x.p)}</b></label>`).join("")}
-  <label class="pf-ar2"><input type="radio" name="pfAn" value="auto" ${h.anchor==="auto"?"checked":""}><span><b>Always the latest</b><small>Moves to a new sale or valuation automatically</small></span></label></div>
- <div class="pf-row">${pfF("Your own valuation","val.p",h.val&&h.val.p,{money:1,ph:"e.g. a bank or agent figure"})}${pfF("Valued on","val.d",h.val&&h.val.d,{type:"date"})}</div>
- <h4 class="pf-t4">Changes since then</h4><p class="pf-sm">Bedrooms, bathrooms or car spaces added (or removed) after the starting price, and anything else as a percentage.</p>
- ${step("beds","Bedrooms",bp.auto?Math.round(bp.v*100):h.adj.pb,"adj.pb",bp.auto&&bp.b?`From rents of ${bp.b} v ${bp.b+1} bedroom ${pfSeg(h)}s in postcode ${bp.pc}`:"")}
- ${step("baths","Bathrooms",a.pba,"adj.pba")}${step("cars","Car spaces",a.pc,"adj.pc")}
- <div class="pf-row">${pfF("Anything else","adj.other",a.other||"",{suf:"%",ph:"0",hint:"Renovation, condition, a new kitchen"})}${pfF("Done on","adj.d",a.d,{type:"date"})}</div>`;}
+ ${s.anchors.filter(a=>a.k.startsWith("sale")).length?`<h4 class="pf-t4">Recorded sales of this home</h4><div class="pf-anc">${s.anchors.filter(a=>a.k.startsWith("sale")).reverse().map(x=>`<div class="pf-ar2"><span><b>${x.t.replace("Recorded sale","Sold")}</b><small>${dday(x.d)}</small></span><b class="num">${dollars(x.p)}</b></div>`).join("")}</div>`:""}
+ <h4 class="pf-t4">Since you bought</h4>${pfWorksF(h)}`;}
+const pfWorksF=h=>`<div class="pf-row"><div class="pf-f"><span>Works</span><div class="seg">${[["","Nothing major"],["reno","Renovated"],["rebuilt","Rebuilt"]].map(([k,l])=>`<button data-works="${k}" aria-pressed="${(h.works&&h.works.t||"")===k}">${l}</button>`).join("")}</div></div>${h.works&&h.works.t?pfF("Year finished","works.y",h.works.y,{ph:String(new Date().getFullYear())}):""}</div>`;
 function pfMoneyTab(h,s){const m=pfMoney(h,s&&s.now),inv=h.use==="inv",c=pfCgt(h,s&&s.now),L=h.loan;
  const sug=pfRentSug(h);
  return`<div class="seg pf-use" role="group" aria-label="Use"><button data-use="home" aria-pressed="${!inv}">Home I live in</button><button data-use="inv" aria-pressed="${inv}">Investment</button></div>
@@ -5646,19 +5670,22 @@ function pfDetTab(h,s){const d=h.det,rec=pfRec(h),last=rec?rec[7].filter(x=>!x[3
  return`<h4 class="pf-t4">Purchase</h4><div class="pf-row">${pfF("Bought on","buy.d",h.buy.d,{type:"date"})}${pfF("Price paid","buy.p",h.buy.p,{money:1})}</div>
  ${last&&!(h.buy.p>0)?`<p class="pf-sm">Last recorded sale: ${dollars(last[2])} on ${dday(last[0])}. <button class="pf-lk" data-pf="uselast">Use it</button></p>`:""}
  <div class="pf-row"><div class="pf-f"><span>Type</span><div class="seg"><button data-ut="0" aria-pressed="${!h.uflag}">House</button><button data-ut="1" aria-pressed="${h.uflag}">Unit or apartment</button></div></div></div>
+ <h4 class="pf-t4">Since you bought</h4>${pfWorksF(h)}
  <h4 class="pf-t4">The home</h4><div class="pf-row three">${pfF("Bedrooms","det.beds",d.beds)}${pfF("Bathrooms","det.baths",d.baths)}${pfF("Car spaces","det.cars",d.cars)}</div>
  <div class="pf-row">${pfF(h.uflag?"Lot size":"Land size","det.land",d.land!=null?d.land:rec&&rec[6]?rec[6]:"",{suf:"m²"})}${pfF("Distance to the beach or water","det.beach",d.beach,{suf:"m"})}</div>
  <div class="pf-row"><div class="pf-f w"><span>Views</span><div class="seg">${[["","None"],["part","Glimpse"],["water","Water view"],["elev","Elevated, district"]].map(([k,l])=>`<button data-view="${k}" aria-pressed="${d.view===k}">${l}</button>`).join("")}</div></div></div>
- <p class="pf-sm">The estimate starts from this home's own price, which already reflects its views, position and size. These details set the bedroom figures and suggested rent, and will feed a finer estimate later.</p>`;}
+ <p class="pf-sm">The estimate starts from this home's own price, which already reflects its views, position and size. These details set the suggested rent and will feed a finer estimate later.</p>`;}
 // this home alone: value line from the purchase month, recorded sales as dots
 function pfMini(h,s){const box=$("pfMini");if(!box)return;const W=Math.max(280,box.clientWidth||440),H=150,l=8,r=8,t=12,b=20,i0=s.ib,N=Math.max(2,TL-i0);
- const vs=s.v.slice(i0).filter(v=>v!=null),rec=pfRec(h),dots=(rec?rec[7].filter(x=>!x[3]):[]).filter(x=>pfMi(x[0])>=i0),lo=Math.min(...vs,s.lo,...dots.map(x=>x[2]))*.97,hi=Math.max(...vs,s.hi,...dots.map(x=>x[2]))*1.03;
+ const vs=s.v.slice(i0).filter(v=>v!=null),rec=pfRec(h),dots=(rec?rec[7].filter(x=>!x[3]):[]).filter(x=>pfMi(x[0])>=i0),lo=Math.min(...vs,s.lo,...dots.map(x=>x[2]),...s.pins.map(z=>z.p))*.97,hi=Math.max(...vs,s.hi,...dots.map(x=>x[2]),...s.pins.map(z=>z.p))*1.03;
  const x=i=>l+(i-i0)/N*(W-r-70-l),y=v=>t+(1-(v-lo)/(hi-lo))*(H-t-b);let d="";for(let i=i0;i<=TL;i++)d+=(i===i0?"M":"L")+x(i).toFixed(1)+","+y(s.v[i]).toFixed(1);
  const yl=W-r-70;
  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true"><path d="${d}" fill="none" style="stroke:var(--pf${h.c+1})" stroke-width="2"/>
  ${dots.map(z=>`<circle cx="${x(pfMi(z[0]))}" cy="${y(z[2])}" r="4.5" class="pf-dot"><title>Sold ${dollars(z[2])}, ${dday(z[0])}</title></circle>`).join("")}
+ ${s.wd!=null&&pfMi(s.wd)>=i0?`<line x1="${x(pfMi(s.wd))}" x2="${x(pfMi(s.wd))}" y1="${t}" y2="${H-b}" class="pf-wl"/><text x="${x(pfMi(s.wd))+4}" y="${t+9}" class="pf-ax">${h.works.t==="rebuilt"?"Rebuilt":"Renovated"}</text>`:""}
+ ${s.pins.filter(z=>z.own).map(z=>`<circle cx="${x(z.i)}" cy="${y(z.p)}" r="4.5" class="pf-dot own"><title>Your value ${dollars(z.p)}</title></circle>`).join("")}
  <line x1="${yl}" x2="${yl}" y1="${y(s.hi)}" y2="${y(s.lo)}" style="stroke:var(--pf${h.c+1})" stroke-width="6" stroke-linecap="round" opacity=".25"/><circle cx="${yl}" cy="${y(s.now)}" r="4.5" style="fill:var(--pf${h.c+1})" class="pf-end"/>
- <text x="${yl+12}" y="${y(s.now)+4}" class="pf-ax pf-ink">${money(s.now)}</text><text x="${yl+12}" y="${y(s.hi)+4}" class="pf-ax">${money(s.hi)}</text><text x="${yl+12}" y="${y(s.lo)+4}" class="pf-ax">${money(s.lo)}</text>
+ <text x="${yl+12}" y="${y(s.now)+4}" class="pf-ax pf-ink">${money(s.now)}</text>${y(s.now)-y(s.hi)>=12?`<text x="${yl+12}" y="${y(s.hi)+4}" class="pf-ax">${money(s.hi)}</text><text x="${yl+12}" y="${y(s.lo)+4}" class="pf-ax">${money(s.lo)}</text>`:""}
  <text x="${l}" y="${H-5}" class="pf-ax">${MON[+MS.m[i0].slice(5)-1]} ${MS.m[i0].slice(0,4)}</text><text x="${yl}" y="${H-5}" text-anchor="middle" class="pf-ax">Now</text></svg>`;}
 
 // ---------- add a home ----------
@@ -5672,6 +5699,8 @@ function pfModal(){let m=$("pfAdd");const A=PFV.add;if(!A){if(m)m.remove();retur
   <div class="pf-f"><span>Use</span><div class="seg"><button data-use="home" aria-pressed="${h.use==="home"}">Home I live in</button><button data-use="inv" aria-pressed="${h.use==="inv"}">Investment</button></div></div></div>
   <div class="pf-row">${pfF("Bought on","buy.d",h.buy.d,{type:"date"})}${pfF("Price paid","buy.p",h.buy.p,{money:1})}</div>
   ${A.rec&&A.last?`<p class="pf-sm">Last recorded sale: ${dollars(A.last[2])} on ${dday(A.last[0])}. ${h.buy.p===A.last[2]?"Filled in above.":`<button class="pf-lk" data-pf="uselast">Use it</button>`}</p>`:""}
+  ${pfWorksF(h)}
+  <div class="pf-row">${pfF("Loan remaining","loan.bal",h.loan.bal,{money:1,ph:"0"})}${pfF("Interest rate","loan.rate",h.loan.rate,{suf:"%"})}</div>
   <div class="pf-row">${pfF("Name (optional)","name",h.name,{ph:"e.g. The flat"})}</div>
   <p class="pf-ctas"><button class="pf-btn pri" data-pf="save" ${pfDay(h.buy.d)!=null&&h.buy.p>0?"":"disabled"}>Add to portfolio</button><button class="pf-btn" data-pf="cancel">Cancel</button></p>`:"";
  m.innerHTML=`<div class="pf-scrim" data-pf="cancel"></div><div class="pf-modal" role="dialog" aria-label="Add a property"><div class="pf-ph"><div><p class="pf-kick">Add a property</p><h3>${h?"The purchase":"Where is it?"}</h3></div><button class="pf-x" data-pf="cancel" aria-label="Close">×</button></div>${h?step2:step1}</div>`;
@@ -5696,8 +5725,8 @@ function pfDemo(){const mk=(loc,uflag,use,d,p,o={})=>{const h=pfNew();Object.ass
 
 // ---------- events ----------
 const pfSet=(h,f,raw)=>{const[a,b]=f.split(".");const isD=/\.d$/.test(f);let v=isD?raw:f==="name"?raw.trim():pfNum(raw);
- if(a==="val"){h.val=h.val||{d:"",p:null};h.val[b]=v;if(!(h.val.p>0)&&!h.val.d)h.val=null;}else if(b)h[a][b]=v;else h[a]=v;
- if(f==="adj.pb"&&v!=null)h.adj.pb=v;};
+ if(a==="val"){h.val=h.val||{d:"",p:null};h.val[b]=v;if(!(h.val.p>0)&&!h.val.d)h.val=null;}else if(a==="works"){h.works=h.works||{t:"",y:null};h.works[b]=v;}else if(b)h[a][b]=v;else h[a]=v;
+};
 function pfRefresh(h,soft){PFS[h.id]=pfCalc(h);pfSave();if(soft)return;const scroll=document.querySelector(".pf-body")&&document.querySelector(".pf-body").scrollTop;pfDrawer();const b=document.querySelector(".pf-body");if(b&&scroll)b.scrollTop=scroll;pfRender();}
 document.addEventListener("click",e=>{if(view!=="portfolio")return;const t=e.target.closest("button,[data-pf],input[type=radio]");if(!t)return;
  const H=()=>PF.props.find(x=>x.id===PFV.open),A=PFV.add,ah=A&&A.h,cur=ah||H();const k=t.dataset.pf;
@@ -5724,9 +5753,8 @@ document.addEventListener("click",e=>{if(view!=="portfolio")return;const t=e.tar
  if(t.dataset.use){cur.use=t.dataset.use;if(ah)pfModal();else{pfRefresh(cur);if(cur.use==="inv")ckRents().then(()=>pfDrawer());}return;}
  if(t.dataset.io!=null){cur.loan.io=t.dataset.io==="1";pfRefresh(cur);return;}
  if(t.dataset.view!=null){cur.det.view=t.dataset.view;pfRefresh(cur);return;}
- if(t.dataset.st){cur.adj[t.dataset.st]=Math.max(-3,Math.min(5,(cur.adj[t.dataset.st]||0)+(+t.dataset.d)));if(cur.adj[t.dataset.st]===0&&false)return;
-  if(!cur.adj.d)cur.adj.d=pfToday();pfRefresh(cur);return;}
- if(t.name==="pfAn"){cur.anchor=t.value;pfRefresh(cur);return;}});
+ if(t.dataset.works!=null){cur.works=cur.works||{t:"",y:null};cur.works.t=t.dataset.works;if(ah)pfModal();else pfRefresh(cur);return;}
+ if(t.dataset.vmode){cur.vmode=t.dataset.vmode;if(cur.vmode==="own"){cur.val=cur.val||{d:pfToday(),p:null};if(!cur.val.d)cur.val.d=pfToday();}pfRefresh(cur);if(cur.vmode==="own")setTimeout(()=>{const i=document.querySelector('[data-f="val.p"]');i&&i.focus();},30);return;}});
 let pfQT=0,pfQS=0;
 document.addEventListener("input",e=>{const t=e.target;if(view!=="portfolio")return;
  if(t.id==="pfQ"){const A=PFV.add;A.q=t.value;clearTimeout(pfQT);pfQT=setTimeout(async()=>{const my=++pfQS,r=await suggest(t.value);if(my!==pfQS||!PFV.add)return;A.sugg=r;A.pick=null;
@@ -5738,7 +5766,7 @@ document.addEventListener("input",e=>{const t=e.target;if(view!=="portfolio")ret
  clearTimeout(t._pf);t._pf=setTimeout(()=>{pfRefresh(cur,true);pfLive(cur);},250);});
 document.addEventListener("change",e=>{const t=e.target;if(view!=="portfolio")return;
  if(t.id==="pfImp"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!Array.isArray(o.props))throw 0;
-  const ok=o.props.filter(h=>h&&h.loc&&h.buy);for(const h of ok){const base=pfNew();for(const k of["buy","adj","loan","rent","det"])h[k]={...base[k],...(h[k]||{})};h.id=h.id||base.id;}
+  const ok=o.props.filter(h=>h&&h.loc&&h.buy);for(const h of ok){const base=pfNew();for(const k of["buy","works","loan","rent","det"])h[k]={...base[k],...(h[k]||{})};h.vmode=h.vmode||"est";h.id=h.id||base.id;}
   if(PF.props.length&&!confirm(`Replace your ${PF.props.length} saved ${PF.props.length===1?"home":"homes"} with the ${ok.length} in this file?`))return;
   PF={v:1,props:ok};pfSave();PFV.menu=false;pfUI();}catch(err){alert("That file isn't a Plotted portfolio export.");}};rd.readAsText(t.files[0]);return;}
  const f=t.dataset.f;if(!f)return;const cur=PF.props.find(x=>x.id===PFV.open);if(cur&&!(PFV.add&&PFV.add.h))pfRefresh(cur);});
