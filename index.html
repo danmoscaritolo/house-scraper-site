@@ -1848,12 +1848,193 @@ aside#detail{padding:20px 22px}
 #tabExt code{font:13px var(--mono);background:var(--wash);border-radius:5px;padding:1px 5px}
 .ex-lk{background:none;border:0;padding:0;font:inherit;color:var(--hi-t);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 [data-theme=dark] .ex-win{box-shadow:0 30px 70px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
+
+/* Sidebar groups and the extension promo (28 Nov) */
+.sb-lab,.sb-ext{display:none}
+@media(min-width:1001px){
+ header.top .tabs .t-ext{display:none}
+ .sb-lab{display:block;font:500 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist);padding:16px 12px 6px;white-space:nowrap}
+ .sb-foot{flex-wrap:wrap;border-top:0;padding-top:0}
+ .sb-foot .themeBtn{margin-left:4px}
+ .sb-ext{display:flex;align-items:center;gap:11px;width:100%;box-sizing:border-box;margin:0 0 12px;padding:12px;border:1px solid var(--hair);border-radius:12px;background:var(--sheet);color:var(--ink);cursor:pointer;text-align:left;font:inherit;transition:border-color .15s,box-shadow .15s}
+ .sb-ext:hover,.sb-ext.on{border-color:var(--hi-line);box-shadow:0 0 0 3px var(--hi-soft)}
+ .sb-ext-ic{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:9px;background:var(--hi-soft);color:var(--hi-t)}
+ .sb-ext-ic svg{width:18px;height:18px}
+ .sb-ext-t{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+ .sb-ext-t b{font:500 13.5px var(--sans);white-space:nowrap}
+ .sb-ext-t small{font-size:12px;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .sb-ext-go{color:var(--slate);font-size:15px}.sb-ext:hover .sb-ext-go{color:var(--hi-t)}
+ html[data-sb=mini] header.top .tabs .sb-lab{display:block;font-size:0;padding:10px 0 4px;margin:0 14px;border-top:1px solid var(--hair)}
+ html[data-sb=mini] header.top .tabs .sb-lab:first-of-type{display:none}
+ html[data-sb=mini] .sb-ext{padding:6px;justify-content:center;border-radius:10px;margin-bottom:10px}
+ html[data-sb=mini] .sb-ext-t,html[data-sb=mini] .sb-ext-go{display:none}
+ html[data-sb=mini] .sb-foot .themeBtn{margin-left:0}
+}
+
+/* Portfolio (28 Nov, 23-portfolio.js). Series colours checked for colour-blind separation (light on white, dark on #30302E). */
+:root{--pf1:#3F51C7;--pf2:#D9772E;--pf3:#1F8A70;--pf4:#C49A1A;--pf5:#C04C7E;--pf6:#4C9AD9;--pf7:#6E8E2E;--pf8:#7B5EA7}
+[data-theme=dark]{--pf1:#6B7BE0;--pf2:#E0843C;--pf3:#2FA585;--pf4:#B8901E;--pf5:#D9659A;--pf6:#4F98D6;--pf7:#86A84A;--pf8:#A08AD6}
+.pf-wrap{max-width:1180px;margin:0 auto;padding:44px 40px 64px}
+.pf-kick{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--hi-t);margin:0 0 8px}
+.pf-h{font:500 clamp(30px,3.4vw,46px)/1.04 var(--disp);letter-spacing:-.025em;margin:0;color:var(--ink)}
+.pf-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.pf-acts{display:flex;gap:8px;align-items:center}
+.pf-btn{font:500 14px var(--sans);height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--hair);background:var(--sheet);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.pf-btn:hover{border-color:var(--hi-line)}
+.pf-btn.pri{background:var(--ink);color:var(--paper);border-color:var(--ink)}.pf-btn.pri:hover{background:var(--hi);border-color:var(--hi);color:var(--on-hi)}
+.pf-btn.pri:disabled{opacity:.35;cursor:default;background:var(--ink);border-color:var(--ink)}
+.pf-btn.big{height:48px;padding:0 22px;font-size:15px;border-radius:12px}
+.pf-btn.icon{width:40px;padding:0;justify-content:center;font-size:18px}
+.pf-menu{position:relative}
+.pf-pop{position:absolute;right:0;top:46px;z-index:30;min-width:200px;background:var(--sheet);border:1px solid var(--hair);border-radius:12px;padding:6px;box-shadow:0 12px 30px rgba(20,20,19,.12);display:flex;flex-direction:column}
+.pf-pop button,.pf-pop label{font:500 14px var(--sans);text-align:left;padding:9px 12px;border:0;background:none;color:var(--ink);border-radius:8px;cursor:pointer}
+.pf-pop button:hover,.pf-pop label:hover{background:var(--wash)}.pf-pop .neg{color:var(--loss)}
+.pf-lk{font:500 13.5px var(--sans);border:0;background:none;color:var(--hi-t);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.pf-lk.neg{color:var(--loss)}
+.pf .pos{color:var(--gain)}.pf .neg,.pf-dr .neg{color:var(--loss)}
+.pf-wait{color:var(--slate)}
+/* empty */
+.pf-empty{max-width:760px;margin:6vh auto 0;text-align:center}
+.pf-empty .pf-h{font-size:clamp(36px,4.6vw,60px)}
+.pf-lede{font-size:17px;line-height:1.55;color:var(--slate);margin:18px auto 0;max-width:56ch}
+.pf-ctas{display:flex;gap:10px;justify-content:center;margin:28px 0 0;flex-wrap:wrap}
+.pf-modal .pf-ctas{justify-content:flex-start}
+.pf-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:52px 0 0;text-align:left}
+.pf-feats div{border-top:1px solid var(--ink);padding-top:12px}
+.pf-feats b{font:500 13px var(--mono);letter-spacing:.04em}.pf-feats p{margin:6px 0 0;color:var(--slate);font-size:14px;line-height:1.5}
+.pf-priv{font-size:13px;color:var(--slate);margin:40px 0 0}
+.pf-empty .pf-priv{margin-top:36px}
+.pf-demo{display:flex;gap:14px;align-items:center;justify-content:space-between;background:var(--hi-soft);border-radius:10px;padding:10px 14px;margin:-8px 0 24px;font-size:14px}
+/* top: hero + tiles */
+.pf-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr);gap:20px;align-items:stretch}
+.pf-hero{background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.pf-hero .l,.pf-tile .l,.pf-est .l,.pf-cgt .l{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.pf-hero>b{font:500 clamp(40px,4.4vw,58px)/1 var(--disp);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pf-hero .s{font-size:14px;color:var(--slate);line-height:1.5}.pf-hero .s b{font-weight:600}
+.pf-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--hair);border-radius:14px;background:var(--sheet);overflow:hidden}
+.pf-tile{padding:16px 20px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.pf-tile:nth-child(2n){border-right:0}.pf-tile:nth-child(n+3){border-bottom:0}
+.pf-tile .v{font:500 26px/1.1 var(--disp);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.pf-tile .v.pos{color:var(--gain)}.pf-tile .v.neg{color:var(--loss)}
+.pf-tile .s{font-size:13px;color:var(--slate)}
+/* chart */
+.pf-chartw{margin:20px 0 0;background:var(--sheet);border:1px solid var(--hair);border-radius:14px;padding:18px 20px 12px}
+.pf-chd{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.pf-leg{display:flex;flex-wrap:wrap;gap:6px}
+.pf-chip{display:inline-flex;align-items:center;gap:7px;font:500 13px var(--sans);color:var(--ink);background:none;border:1px solid var(--hair);border-radius:99px;padding:4px 11px 4px 9px;cursor:pointer}
+.pf-chip i{width:10px;height:10px;border-radius:3px;flex:none}
+.pf-chip.off{color:var(--mist)}.pf-chip.off i{opacity:.25}
+.pf-chip.paid{cursor:default;border-color:transparent;color:var(--slate)}.pf-chip.paid i{height:0;width:16px;border-top:2px dashed var(--ink);border-radius:0;opacity:.7}
+.pf-rng button{font:500 12.5px var(--mono);padding:4px 10px}
+.pf-rng button[aria-pressed=true],.pf-dr .seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.pf-chart{position:relative;min-height:230px}
+.pf-chart svg{display:block;overflow:visible}
+.pf-gl{stroke:var(--hair);stroke-width:1}
+.pf-ax{font:500 11px var(--mono);fill:var(--slate)}.pf-ink{fill:var(--ink);font-weight:600}
+.pf-ar{fill-opacity:.88}
+.pf-edge{fill:none;stroke:var(--sheet);stroke-width:2}
+.pf-paid{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-dasharray:5 4;opacity:.7}
+.pf-end{fill:var(--ink);stroke:var(--sheet);stroke-width:2}
+.pf-x{stroke:var(--ink);stroke-width:1;opacity:.5}
+.pf-tip{position:absolute;top:6px;z-index:5;min-width:200px;background:var(--sheet);border:1px solid var(--hair);border-radius:10px;padding:10px 12px;box-shadow:0 8px 22px rgba(20,20,19,.12);pointer-events:none;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.pf-tip b{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-bottom:2px}
+.pf-tip span{display:flex;align-items:center;gap:7px}.pf-tip i{width:9px;height:9px;border-radius:2px;flex:none}
+.pf-tip em{font-style:normal;margin-left:auto;padding-left:14px;font-variant-numeric:tabular-nums}
+.pf-tip .tot{border-top:1px solid var(--hair);padding-top:5px;margin-top:2px;font-weight:600}.pf-tip .pd{color:var(--slate)}
+.pf-note{font-size:12.5px;color:var(--slate);margin:8px 0 0}
+/* list */
+.pf-t{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin:36px 0 12px}
+.pf-list{display:flex;flex-direction:column;gap:8px}
+.pf-card{display:grid;grid-template-columns:4px minmax(0,1.4fr) minmax(0,.9fr) minmax(0,2fr) 16px;align-items:center;gap:20px;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:12px;padding:14px 18px 14px 14px;cursor:pointer;transition:border-color .15s,transform .15s}
+.pf-card:hover{border-color:var(--hi-line)}
+.pf-bar{align-self:stretch;border-radius:3px;width:4px}
+.pf-cm{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pf-cn{font:500 16px var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-cs{font-size:13px;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-cv{display:flex;flex-direction:column;gap:2px}.pf-cv b{font:500 20px var(--disp);letter-spacing:-.02em}.pf-cv span{font-size:13px}
+.pf-miss{color:var(--slate)}
+.pf-ck{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pf-ck div{display:flex;flex-direction:column;gap:2px}.pf-ck span{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}.pf-ck b{font-weight:500;font-size:14.5px}
+.pf-go{color:var(--slate);font-size:22px;line-height:1}
+/* drawer and modal */
+body.pf-lock{overflow:hidden}
+.pf-dr{position:fixed;inset:0;z-index:200;pointer-events:none}
+.pf-dr.on{pointer-events:auto}
+.pf-scrim{position:absolute;inset:0;background:rgba(20,20,19,.32);opacity:0;transition:opacity .2s}
+.pf-dr.on .pf-scrim{opacity:1}
+.pf-panel{position:absolute;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--paper);border-left:1px solid var(--hair);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease;box-shadow:-20px 0 50px rgba(20,20,19,.12)}
+.pf-dr.on .pf-panel{transform:none}
+.pf-ph{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 14px}
+.pf-ph>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pf-ph h3{font:500 24px var(--disp);margin:0;letter-spacing:-.02em}
+.pf-ph .pf-bar{height:44px}
+.pf-ph input.pf-nm{font:500 22px var(--disp);letter-spacing:-.02em;border:0;background:transparent;box-shadow:none;height:auto;color:var(--ink);padding:2px 0;border-bottom:1px dashed transparent;width:100%}
+.pf-ph input.pf-nm:hover,.pf-ph input.pf-nm:focus{border-bottom-color:var(--hair);outline:0}
+.pf-x{font-size:24px;line-height:1;border:0;background:none;color:var(--slate);cursor:pointer;padding:2px 6px;border-radius:8px}.pf-x:hover{background:var(--wash);color:var(--ink)}
+.pf-tabs{display:flex;gap:4px;padding:0 22px;border-bottom:1px solid var(--hair)}
+.pf-tabs button{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate);background:none;border:0;border-bottom:2px solid transparent;padding:10px 10px 11px;margin-bottom:-1px;cursor:pointer}
+.pf-tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--hi-line)}
+.pf-body{flex:1;overflow:auto;padding:20px 22px 28px}
+.pf-pf{padding:12px 22px;border-top:1px solid var(--hair)}
+.pf-est{background:var(--sheet);border:1px solid var(--hair);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.pf-est>b{font:500 38px/1.05 var(--disp);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pf-est .s{font-size:13.5px;color:var(--slate)}
+.pf-ev{font-weight:600}.pf-ev.good{color:var(--gain)}.pf-ev.fair{color:var(--hi-t)}.pf-ev.rough{color:var(--rent,#C9650F)}
+.pf-how{font-size:13px;color:var(--slate);line-height:1.5;margin:6px 0 0}
+.pf-mini{margin:14px 0 0}.pf-mini svg{display:block}
+.pf-dot{fill:var(--sheet);stroke:var(--ink);stroke-width:1.6}
+.pf-t4{font:500 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin:26px 0 10px}
+.pf-anc{display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:12px;background:var(--sheet);overflow:hidden}
+.pf-ar2{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--hair);cursor:pointer;font-size:14px}
+.pf-ar2:last-child{border-bottom:0}.pf-ar2:hover{background:var(--wash)}
+.pf-ar2>span{flex:1;display:flex;flex-direction:column}.pf-ar2>span b{font-weight:500}.pf-ar2 small{color:var(--slate);font-size:12.5px}
+.pf-ar2>b{font-weight:500}.pf-ar2 input{accent-color:var(--hi)}
+.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 0}
+.pf-row.three{grid-template-columns:repeat(3,1fr)}
+.pf-f{display:flex;flex-direction:column;gap:6px;position:relative;font:500 12.5px var(--sans);color:var(--slate);min-width:0}
+.pf-f.w{grid-column:1/-1}
+.pf-f input{font:500 15px var(--sans);color:var(--ink);background:var(--sheet);border:1px solid var(--hair);border-radius:9px;height:42px;padding:0 12px;width:100%;box-sizing:border-box;font-variant-numeric:tabular-nums}
+.pf-f input:focus{outline:0;border-color:var(--hi-line);box-shadow:0 0 0 3px var(--hi-soft)}
+.pf-f em{position:absolute;right:12px;top:34px;font-style:normal;color:var(--slate);font-size:14px;pointer-events:none}
+.pf-f small{font-weight:400;font-size:12px}
+.pf-f .seg{align-self:flex-start;flex-wrap:wrap}
+.pf-dr .seg button,.pf-use button{font:500 13px var(--sans);padding:7px 12px}
+.pf-sm{font-size:13px;color:var(--slate);line-height:1.5;margin:10px 0 0}
+.pf-step{display:grid;grid-template-columns:1fr auto 120px;align-items:center;gap:6px 14px;padding:10px 0;border-bottom:1px solid var(--hair)}
+.pf-step .l{font-size:14.5px}
+.pf-step small{grid-column:1/-1;font-size:12px;color:var(--slate);margin-top:-2px}
+.pf-sp{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:9px;background:var(--sheet)}
+.pf-sp button{width:34px;height:34px;border:0;background:none;color:var(--ink);font-size:17px;cursor:pointer;border-radius:8px}.pf-sp button:hover{background:var(--wash)}
+.pf-sp b{min-width:28px;text-align:center;font-weight:500}
+.pf-pc{position:relative}.pf-pc input{width:100%;box-sizing:border-box;height:36px;border:1px solid var(--hair);border-radius:9px;background:var(--sheet);color:var(--ink);font:500 14px var(--sans);padding:0 62px 0 10px}
+.pf-pc em{position:absolute;right:10px;top:9px;font-style:normal;font-size:12.5px;color:var(--slate)}
+.pf-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:24px 0 0;border:1px solid var(--hair);border-radius:12px;background:var(--sheet);overflow:hidden}
+.pf-sum div{padding:12px 14px;display:flex;flex-direction:column;gap:3px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:0 -1px -1px 0}
+.pf-sum span{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}.pf-sum b{font:500 18px var(--disp);letter-spacing:-.01em}
+.pf-cgt{margin:14px 0 0;border:1px solid var(--hair);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.pf-cgt>b{font:500 24px var(--disp)}
+.pf-empty2{color:var(--slate)}
+.pf-modal{position:absolute;left:50%;top:9vh;transform:translateX(-50%);width:min(560px,calc(100% - 28px));max-height:82vh;overflow:auto;background:var(--paper);border:1px solid var(--hair);border-radius:16px;box-shadow:0 24px 60px rgba(20,20,19,.2);padding:0 22px 22px}
+.pf-modal .pf-ph{padding:20px 0 6px}
+.pf-modal .pf-kick{margin-bottom:4px}
+.pf-sug{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column}
+.pf-sug button,.pf-pick button{display:flex;justify-content:space-between;gap:10px;width:100%;text-align:left;font:500 14.5px var(--sans);color:var(--ink);background:none;border:0;border-bottom:1px solid var(--hair);padding:11px 4px;cursor:pointer}
+.pf-sug button:hover,.pf-pick button:hover{color:var(--hi-t)}
+.pf-sug span,.pf-pick span{color:var(--slate);font-weight:400;font-size:13px}
+.pf-pick{max-height:300px;overflow:auto;margin-top:6px}
+.pf-found{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;background:var(--sheet);border:1px solid var(--hair);border-radius:12px;padding:12px 14px;margin-top:8px}
+.pf-found b{font-weight:600}.pf-found span{color:var(--slate);font-size:13.5px;flex:1}
+@media(max-width:1000px){.pf-top{grid-template-columns:1fr}.pf-card{grid-template-columns:4px minmax(0,1fr) auto 16px}.pf-ck{grid-column:2/4;grid-row:2}}
+@media(max-width:720px){.pf-wrap{padding:26px 16px 48px}.pf-feats{grid-template-columns:1fr;margin-top:36px}.pf-tile .v{font-size:21px}.pf-tile{padding:13px 14px}
+ .pf-chartw{padding:14px 12px 10px}.pf-ck{grid-template-columns:repeat(2,1fr)}.pf-row.three{grid-template-columns:repeat(3,1fr)}.pf-sum{grid-template-columns:repeat(2,1fr)}
+ .pf-head{align-items:flex-start}.pf-modal{top:4vh}
+ .pf-card{grid-template-columns:4px minmax(0,1fr) 16px;gap:10px 14px}.pf-bar{grid-row:1/4}.pf-cv{grid-column:2;grid-row:2;flex-direction:row;align-items:baseline;gap:10px}.pf-ck{grid-column:2;grid-row:3}.pf-go{grid-column:3;grid-row:1/4}.pf-step{grid-template-columns:1fr auto}.pf-pc{grid-column:1/-1}}
 </style></head><body>
 <header class="top"><div class="top-in">
 <div class="sb-head"><button type="button" class="pt-logo top-logo" data-tab="market" aria-label="Plotted, home"><svg class="pl-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10.5 23.5 5.5 27 25 8 27.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5 10.5 27 25" stroke="currentColor" stroke-width="1" stroke-dasharray="1.6 2.2" opacity=".55"/><circle cx="23.5" cy="5.5" r="4" class="pl-dot"/></svg><span class="pl-word">plotted</span></button><button type="button" class="sbBtn" id="sbBtn" aria-label="Collapse sidebar" title="Collapse sidebar"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
-<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="extension" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 2.5h3v1.6a1.4 1.4 0 0 0 2.8 0V2.5h1.2v4h-1.6a1.4 1.4 0 0 0 0 2.8h1.6v4.2h-4.2v-1.6a1.4 1.4 0 0 0-2.8 0v1.6H2.5V9.3h1.6a1.4 1.4 0 0 0 0-2.8H2.5v-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="t-l">Extension</span><span class="t-s">Extension</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button></nav>
+<button type="button" class="sb-new" id="sbSearch"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.4 10.4 3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span></button><nav class="tabs" role="tablist"><button role="tab" data-tab="market" aria-selected="false" class="t-home"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></button><span class="sb-lab" aria-hidden="true">Explore</span><button role="tab" data-tab="weekly" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5V3.2C2 2.5 2.5 2 3.2 2H5M11 2h1.8c.7 0 1.2.5 1.2 1.2V5M14 11v1.8c0 .7-.5 1.2-1.2 1.2H11M5 14H3.2C2.5 14 2 13.5 2 12.8V11M4.8 10.2 7 8l1.6 1.4 2.6-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Snapshot</span><span class="t-s">Snapshot</span></button><button role="tab" data-tab="map" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5 5.5 2l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5zM5.5 2v10.5M10.5 3.5V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Map</span></button><button role="tab" data-tab="suburbs" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h1M6 3.5h8M2 8h1M6 8h8M2 12.5h1M6 12.5h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Suburbs</span></button><button role="tab" data-tab="analysis" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 1.5v3M4.5 11v3.5M3 4.5h3V11H3zM11.5 2.5V5M11.5 10v3.5M10 5h3v5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis</span></button><span class="sb-lab" aria-hidden="true">Yours</span><button role="tab" data-tab="portfolio" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5.5h12v8H2zM6 5.5V3.5h4v2M2 9h12M7 9v1.5h2V9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="t-l">Portfolio</span><span class="t-s">Portfolio</span></button><button role="tab" data-tab="budget" aria-selected="false"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h9v13h-9zM5.5 4h5M5.5 7.5h1M8 7.5h1M10.5 7.5h0M5.5 10h1M8 10h1M5.5 12.5h1M8 12.5h1M10.5 10v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-l">Your budget</span><span class="t-s">Budget</span></button><button role="tab" data-tab="extension" aria-selected="false" class="t-ext"><svg class="ti" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 2.5h3v1.6a1.4 1.4 0 0 0 2.8 0V2.5h1.2v4h-1.6a1.4 1.4 0 0 0 0 2.8h1.6v4.2h-4.2v-1.6a1.4 1.4 0 0 0-2.8 0v1.6H2.5V9.3h1.6a1.4 1.4 0 0 0 0-2.8H2.5v-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="t-l">Extension</span><span class="t-s">Extension</span></button></nav>
 <div class="top-srch"><div class="field srch"><input id="find" placeholder="Search any NSW suburb or street address" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugg" aria-label="Search a suburb or address"><ul id="sugg" role="listbox" hidden></ul></div></div>
-<div class="sb-foot"><button type="button" class="themeBtn" id="themeBtn" aria-label="Dark mode" title="Light or dark"><svg class="su" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="mo" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+<div class="sb-foot"><button type="button" class="sb-ext" data-tab="extension" title="Plotted for Chrome"><span class="sb-ext-ic"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 2.5h3v1.6a1.4 1.4 0 0 0 2.8 0V2.5h1.2v4h-1.6a1.4 1.4 0 0 0 0 2.8h1.6v4.2h-4.2v-1.6a1.4 1.4 0 0 0-2.8 0v1.6H2.5V9.3h1.6a1.4 1.4 0 0 0 0-2.8H2.5v-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span><span class="sb-ext-t"><b>Get the extension</b><small>Check listing prices</small></span><span class="sb-ext-go" aria-hidden="true">→</span></button><button type="button" class="themeBtn" id="themeBtn" aria-label="Dark mode" title="Light or dark"><svg class="su" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="mo" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
 <button type="button" class="tourBtn" id="tourBtn">Tour</button></div>
 </div></header>
 
@@ -2087,6 +2268,8 @@ aside#detail{padding:20px 22px}
  <h3 class="ex-t">Phones</h3>
  <p class="ex-note">Phone browsers don't run extensions. On a phone, search the address on the <button type="button" class="ex-lk" data-goto="map">map</button> to see every recorded sale of the home and what sold nearby.</p>
 </div></div>
+
+<div id="tabPort" role="tabpanel" hidden><div class="pf" id="pf"></div></div>
 
 <div id="tabBudget" role="tabpanel" hidden>
 <div class="bx">
@@ -4623,16 +4806,17 @@ if(SPM&&MS&&MS.ad&&window.maplibregl){$("spsw").addEventListener("change",e=>set
 else document.querySelector(".spbar").hidden=true;
 
 /* ---------- tabs ---------- */
-// Views, one at a time: Home (the logo), Weekly, Map, Analysis, Suburbs, Your budget. Each has its own address (#map, #analysis, #suburbs, #budget) so back and links work.
-const VIEWS={market:"tabMarket",weekly:"tabWeekly",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",extension:"tabExt",budget:"tabBudget"};let view="market";
+// Views, one at a time: Home (the logo), Snapshot, Map, Suburbs, Analysis, Portfolio, Your budget, Extension. Each has its own address (#map, #analysis, #suburbs, #budget) so back and links work.
+const VIEWS={market:"tabMarket",weekly:"tabWeekly",map:"tabMap",analysis:"tabAnalysis",suburbs:"tabSuburbs",extension:"tabExt",portfolio:"tabPort",budget:"tabBudget"};let view="market";
 function showTab(t,how){t=String(t||"").split("?")[0];if(t==="check")t="extension";if(!VIEWS[t])t="market";/* the Check a listing page became the Extension page (28 Nov) */if(typeof tourS!=="undefined"&&tourS)tourEnd();const was=view;view=t;
- document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+ document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));document.querySelectorAll(".sb-ext").forEach(b=>b.classList.toggle("on",t==="extension"));
  for(const[k,id]of Object.entries(VIEWS))$(id).hidden=k!==t;document.body.dataset.view=t;
  if(how!=="pop"){const h=t==="market"?location.pathname+location.search:"#"+t;try{if(how==="init"||t===was)history.replaceState(null,"",h);else history.pushState(null,"",h);}catch(e){}}
  if(t!==was&&how!=="keep")scrollTo(0,0);
  if(t==="map"&&map){map.resize();setTimeout(()=>map.resize(),0);}
  if(t==="suburbs"&&typeof market==="function"&&was!=="suburbs")setTimeout(()=>{try{market();}catch(e){}},0);
  if(t==="budget")planUI();
+ if(t==="portfolio"&&typeof pfUI==="function")pfUI();
  if(t==="analysis")setTimeout(anDraw,0);
  if(t==="weekly")setTimeout(()=>{try{headline();}catch(e){}weekly();},0);
  setTimeout(()=>{if(typeof tourS==="undefined"||tourS)return;if(t==="budget"&&SIM&&!store.get("hs_tour_budget"))tourStart("budget");
@@ -5272,4 +5456,296 @@ async function ckToMap(L){showTab("map","init");const loc=ckLoc(L.suburb,L.pc);i
  if(map&&F.lx!=null)map.flyTo({center:[150+F.lx/1e5,-34+F.ly/1e5],zoom:16.5,duration:800});select(loc,F.lx==null);}
 {const go=()=>{const L=ckFromHash(location.hash);if(!L)return;try{history.replaceState(null,"","#map");}catch(e){}const run=()=>ckToMap(L);if(map&&!ready)map.once("load",()=>setTimeout(run,0));else setTimeout(run,0);};
  go();addEventListener("hashchange",go);}
+/* ---------- portfolio ---------- */
+// The homes you own, kept in this browser only (localStorage hs_pf; export/import as a file). No account, nothing sent.
+// Value: a known price for the home (its latest recorded sale, your purchase or your own valuation, whichever is latest
+// unless you pick one) moved month by month with the suburb's 12-month median for that type (the region's where the
+// suburb is thin or jumps), plus any changes you've made since (an extra bedroom, a renovation). Monthly points.
+const PF_DEF={v:1,props:[]};
+let PF=store.get("hs_pf");if(!PF||!Array.isArray(PF.props))PF={...PF_DEF,props:[]};
+const pfSave=()=>store.set("hs_pf",PF);
+const PFV={range:"all",hide:{},open:null,tab:"value",add:null,menu:false};
+const PFS={};   // computed series per home id
+const pfDay=s=>{const t=Date.parse(String(s||"")+"T00:00:00Z");return isFinite(t)?Math.round((t-SP_EP)/864e5):null;};
+const pfIso=d=>new Date(SP_EP+d*864e5).toISOString().slice(0,10);
+const pfToday=()=>new Date().toISOString().slice(0,10);
+const pfMi=d=>{if(!MS)return 0;if(d==null)return TL;const i=MS.ad.findIndex(a=>a>=d);return i<0?TL:i;};
+const pfNum=v=>{const n=parseNum(v);return n==null||!isFinite(n)?null:n;};
+const pfName=h=>h.name||(h.st?`${h.unit?h.unit+"/":""}${h.num?h.num+" ":""}${title(h.st)}`:`${h.uflag?"Unit":"House"} in ${title(h.loc)}`);
+const pfSeg=h=>h.uflag?"unit":"house";
+const pfRg=h=>((byKey[h.loc+"|"+pfSeg(h)]||byKey[h.loc+"|house"]||byKey[h.loc+"|unit"])||[])[C.region]||"all";
+const pfPc=h=>((byKey[h.loc+"|"+pfSeg(h)]||byKey[h.loc+"|house"]||byKey[h.loc+"|unit"])||[])[C.postcode]||null;
+const pfNew=()=>{const used=new Set(PF.props.map(h=>h.c));let c=0;while(used.has(c)&&c<8)c++;
+ return{id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),c:c%8,name:"",loc:"",st:"",num:"",unit:"",uflag:false,use:"home",
+  buy:{d:"",p:null},val:null,anchor:"auto",adj:{beds:0,baths:0,cars:0,other:0,d:pfToday(),pb:null,pba:4,pc:3},
+  loan:{bal:null,rate:6.2,io:false,yrs:25,off:null,rep:null},rent:{pw:null,fee:7,costs:null},det:{beds:null,baths:null,cars:null,land:null,view:"",beach:null}};};
+
+// ---------- data the estimates need ----------
+async function pfRecLoad(h){if(!h.st)return null;try{if(!(window.PR&&window.PR[h.loc]))await loadJS(`data/props/${pslug(h.loc)}.js`);}catch(e){return null;}
+ return pfRec(h);}
+function pfRec(h){const R=window.PR&&window.PR[h.loc];if(!R||!h.st)return null;const nk=norm(h.st).join(" ");
+ const sis=new Set(R.st.map((x,i)=>norm(x).join(" ")===nk?i:-1).filter(i=>i>=0));
+ const c=R.p.filter(p=>sis.has(p[0])&&String(p[1]).toUpperCase()===String(h.num).toUpperCase()&&uNorm(p[2])===uNorm(h.unit));
+ if(c.length<2)return c[0]||null;   // two records at one number (street spelt two ways): the one picked holds sale h.rk
+ return c.find(p=>h.rk&&p[7].some(x=>x[0]===h.rk[0]&&x[2]===h.rk[1]))||c.sort((a,b)=>b[7].length-a[7].length)[0];}
+async function pfLoad(){if(!MS)return;let d0=Infinity;for(const h of PF.props){const a=pfDay(h.buy.d);if(a!=null)d0=Math.min(d0,a);}
+ const i0=isFinite(d0)?pfMi(d0):Math.max(0,TL-12),need=[];for(let c=Math.floor(Math.max(0,i0-1)/HCH);c<=Math.floor(TL/HCH);c++)if(!(window.HIST&&window.HIST[c]))need.push(c);
+ await Promise.all([...need.map(c=>loadJS(`data/web/hist_${c}.js`).catch(()=>0)),...PF.props.map(h=>pfRecLoad(h)),PF.props.some(h=>h.use==="inv"||h.adj.beds)?ckRents():0]);}
+
+// Month-by-month index for a home: suburb 12-month median, chained; a month the suburb has no figure, or jumps more
+// than 8% (thin suburbs), takes the region's change instead. Returns idx[i] and the share of months on suburb figures.
+function pfIndex(h){const k=h.loc+"|"+pfSeg(h),reg=(MS.mkt[pfRg(h)]||MS.mkt.all)[pfSeg(h)],idx=new Array(TL+1).fill(null);let sub=0,n=0;idx[0]=1;
+ let prev=sv(k,1,0);for(let i=1;i<=TL;i++){const v=sv(k,1,i);let r=null;if(v&&prev){r=v/prev;if(Math.abs(r-1)>.08)r=null;}
+  if(r==null){r=reg[i]&&reg[i-1]?reg[i]/reg[i-1]:1;}else sub++;n++;idx[i]=idx[i-1]*r;prev=v;}
+ return{idx,share:n?sub/n:0};}
+// Prices this home can start from: your purchase, each recorded single sale, your own valuation
+function pfAnchors(h){const out=[],rec=pfRec(h);
+ if(rec)for(const x of rec[7])if(!x[3])out.push({k:"sale:"+x[0],d:x[0],p:x[2],t:"Recorded sale"});
+ const bd=pfDay(h.buy.d);if(bd!=null&&h.buy.p>0&&!out.some(a=>Math.abs(a.d-bd)<45&&Math.abs(a.p-h.buy.p)<1))out.push({k:"buy",d:bd,p:h.buy.p,t:"Your purchase"});
+ else if(bd!=null&&h.buy.p>0){const a=out.find(a=>Math.abs(a.d-bd)<45&&Math.abs(a.p-h.buy.p)<1);a.t="Your purchase (recorded sale)";}
+ if(h.val&&h.val.p>0&&pfDay(h.val.d)!=null)out.push({k:"val",d:pfDay(h.val.d),p:h.val.p,t:"Your valuation"});
+ return out.sort((a,b)=>a.d-b.d);}
+function pfBedPct(h){if(h.adj.pb!=null)return{v:h.adj.pb/100,auto:false};const b=Math.max(1,Math.min(3,h.det.beds||(h.uflag?2:3))),pc=pfPc(h),R=window.RB&&window.RB.r;
+ if(R&&pc){const a=R[`${pc}|${pfSeg(h)}|${b}`],c=R[`${pc}|${pfSeg(h)}|${b+1}`];if(a&&c&&a[0]>=10&&c[0]>=6&&a[2]>0){const v=Math.max(.03,Math.min(.2,c[2]/a[2]-1));return{v,auto:true,b,pc};}}
+ return{v:.08,auto:true,b:null};}
+function pfAdjF(h){const a=h.adj;return(1+pfBedPct(h).v*(a.beds||0))*(1+(a.pba||0)/100*(a.baths||0))*(1+(a.pc||0)/100*(a.cars||0))*(1+(a.other||0)/100);}
+function pfCalc(h){if(!MS)return null;const bd=pfDay(h.buy.d);if(bd==null||!(h.buy.p>0))return null;
+ const A=pfAnchors(h);let an=h.anchor!=="auto"&&A.find(a=>a.k===h.anchor);if(!an)an=A[A.length-1];if(!an)return null;
+ const{idx,share}=pfIndex(h),ia=pfMi(an.d),ib=pfMi(bd),adjI=pfMi(pfDay(h.adj.d)),f=pfAdjF(h),adjOn=f!==1&&pfDay(h.adj.d)>an.d;
+ const v=new Array(TL+1).fill(null);for(let i=ib;i<=TL;i++)v[i]=an.p*idx[i]/idx[ia]*(adjOn&&i>=adjI?f:1);
+ const yrs=Math.max(0,(MS.ad[TL]-an.d)/365.25),band=Math.min(.25,.06+.006*yrs+(share<.8?.04:0)+(an.k==="val"?-.01:0));
+ const now=v[TL],ev=band<.1?"good":band<.16?"fair":"rough";
+ return{v,now,lo:now*(1-band),hi:now*(1+band),band,ev,an,anchors:A,share,ib,adj:adjOn?now-now/f:0,early:bd<MS.ad[0]-200};}
+function pfMoney(h,val){const L=h.loan,bal=L.bal||0,off=Math.min(L.off||0,bal),r=(L.rate||0)/100,net=Math.max(0,bal-off);
+ const rep=L.rep>0?L.rep:bal<=0?0:L.io?net*r/12:bal*pmt(r,Math.max(1,L.yrs||25)),int=net*r;
+ const inv=h.use==="inv",rentY=inv?(h.rent.pw||0)*52:0,fee=inv?rentY*(h.rent.fee||0)/100:0,costs=h.rent.costs||0;
+ const cash=(rentY-fee-costs)/12-rep;
+ return{bal,off,rep,int,rentY,netY:rentY-fee-costs,cash,gross:val&&rentY?rentY/val:null,net:val&&rentY?(rentY-fee-costs)/val:null,lvr:val?bal/val:null,eq:val!=null?val-bal:null};}
+function pfCgt(h,val){if(h.use!=="inv"||!(val>0))return null;const cb=h.buy.p+dutyFull(h.buy.p)+2000,sell=val*.022,gain=val-sell-cb,held=(MS.ad[TL]-pfDay(h.buy.d))>=365;
+ const rate=B.inc1?marginal(B.inc1):.39,tax=Math.max(0,gain)*(held?.5:1)*rate;return{cb,sell,gain,held,rate,tax,own:!!B.inc1};}
+
+// ---------- rendering ----------
+function pfUI(){const el=$("pf");if(!el)return;if(!MS){el.innerHTML=`<p class="empty">Monthly figures are missing from this build.</p>`;return;}
+ if(!PF.props.length){el.innerHTML=pfEmpty();pfModal();return;}
+ el.innerHTML=`<div class="pf-wrap pf-loading">${pfHead()}<p class="pf-wait">Working out values…</p></div>`;pfModal();
+ pfLoad().then(()=>{for(const h of PF.props)PFS[h.id]=pfCalc(h);pfRender();});}
+function pfHead(){return`<div class="pf-head"><div><p class="pf-kick">Portfolio</p><h2 class="pf-h">Your homes, plotted.</h2></div>
+ <div class="pf-acts"><button class="pf-btn pri" data-pf="add">+ Add a property</button><div class="pf-menu"><button class="pf-btn icon" data-pf="menu" aria-label="More" aria-expanded="${PFV.menu}">⋯</button>
+ ${PFV.menu?`<div class="pf-pop"><button data-pf="export">Export to a file</button><label>Import a file<input type="file" accept=".json,application/json" id="pfImp" hidden></label><button data-pf="clear" class="neg">Remove all</button></div>`:""}</div></div></div>`;}
+function pfEmpty(){return`<div class="pf-wrap"><div class="pf-empty">
+ <p class="pf-kick">Portfolio</p><h2 class="pf-h">Your homes, plotted.</h2>
+ <p class="pf-lede">Add the homes you own to see what they're likely worth today, your equity and loans, and how the whole portfolio has moved since you bought. Estimates come from what homes in the same suburb have sold for.</p>
+ <p class="pf-ctas"><button class="pf-btn pri big" data-pf="add">+ Add a property</button><button class="pf-btn big" data-pf="demo">Try an example</button></p>
+ <div class="pf-feats"><div><b>Value over time</b><p>Each home from the day you bought it, moved with its suburb's sales, with a range.</p></div>
+ <div><b>Equity and loans</b><p>Loan balance, rate and repayments give equity, LVR and what you could borrow against.</p></div>
+ <div><b>Investments</b><p>Rent, costs, yield, monthly cash flow and a rough capital gains figure.</p></div></div>
+ <p class="pf-priv">Saved in this browser only. Nothing is sent to Plotted. Export a file to keep a copy or move it to another device.</p></div></div>`;}
+function pfTotals(list){const t={val:0,lo:0,hi:0,paid:0,bal:0,off:0,rentY:0,netY:0,cash:0,inv:0,invVal:0,n:0};
+ for(const h of list){const s=PFS[h.id];if(!s)continue;const m=pfMoney(h,s.now);t.n++;t.val+=s.now;t.lo+=s.lo;t.hi+=s.hi;t.paid+=h.buy.p;t.bal+=m.bal;t.off+=m.off;t.cash+=m.cash;
+  if(h.use==="inv"){t.inv++;t.invVal+=s.now;t.rentY+=m.rentY;t.netY+=m.netY;}}
+ t.eq=t.val-t.bal;t.lvr=t.val?t.bal/t.val:null;t.use=Math.max(0,t.val*.8-t.bal);return t;}
+function pfRender(){const el=$("pf");if(!el||view!=="portfolio")return;const L=PF.props,t=pfTotals(L),gain=t.val-t.paid;
+ const demo=L.some(h=>h.demo);
+ const tile=(l,v,s,c="")=>`<div class="pf-tile"><span class="l">${l}</span><b class="v num ${c}">${v}</b>${s?`<span class="s">${s}</span>`:""}</div>`;
+ el.innerHTML=`<div class="pf-wrap">${pfHead()}
+ ${demo?`<div class="pf-demo"><span>This is an example portfolio with made-up purchases.</span><button class="pf-lk" data-pf="clear">Clear it and add your own</button></div>`:""}
+ <section class="pf-top"><div class="pf-hero"><span class="l">Estimated value, ${L.length} ${L.length===1?"home":"homes"}</span><b class="num">${money(t.val)}</b>
+  <span class="s">Likely ${money(t.lo)} to ${money(t.hi)} · ${gain>=0?"up":"down"} <b class="${gain>=0?"pos":"neg"}">${dollars(Math.abs(gain))}</b> on the ${money(t.paid)} you paid</span></div>
+ <div class="pf-tiles">${tile("Equity",money(t.eq),t.bal?`After ${money(t.bal)} of loans`:"No loans entered")}
+  ${tile("Loan to value",t.bal?pct(t.lvr,0):"–",t.bal?(t.lvr>.8?"Above 80%":"Usable equity "+money(t.use)):"Add a loan to see it")}
+  ${t.inv?tile("Rent a year",money(t.rentY),t.invVal?`Gross yield ${pct(t.rentY/t.invVal,1)}`:""):tile("Change since bought",signed(t.paid?gain/t.paid:null,0),"Across all homes",gain>=0?"pos":"neg")}
+  ${tile("Cash flow a month",(t.cash>=0?"+":"−")+dollars(Math.abs(t.cash)).replace("−",""),t.inv?"Rent less costs and repayments":"Loan repayments",t.cash>=0?"pos":"neg")}</div></section>
+ <section class="pf-chartw"><div class="pf-chd"><div class="pf-leg">${L.map(h=>`<button class="pf-chip${PFV.hide[h.id]?" off":""}" data-hide="${h.id}" aria-pressed="${!PFV.hide[h.id]}"><i style="background:var(--pf${h.c+1})"></i>${esc(pfName(h))}</button>`).join("")}<span class="pf-chip paid"><i></i>What you paid</span></div>
+  <span class="seg pf-rng" role="group" aria-label="Period">${[["1","1 yr"],["5","5 yrs"],["all","Since bought"]].map(([k,l])=>`<button data-rng="${k}" aria-pressed="${PFV.range===k}">${l}</button>`).join("")}</span></div>
+  <div class="pf-chart" id="pfChart"></div><p class="pf-note">Monthly estimates from NSW Valuer General sales to ${dday(MS.ad[TL]).replace(/^\d+ /,"")}. Shaded by home, stacked.</p></section>
+ <section class="pf-list"><h3 class="pf-t">Your properties</h3>${L.map(pfCard).join("")}</section>
+ <p class="pf-priv">Saved in this browser only, nothing is sent to Plotted. Export a file to keep a copy. A rough guide from public sales records, not a valuation or financial advice.</p></div>`;
+ pfChart();pfModal();}
+function pfCard(h){const s=PFS[h.id],m=s?pfMoney(h,s.now):null,g=s?s.now-h.buy.p:null,yrs=s?(MS.ad[TL]-pfDay(h.buy.d))/365.25:0,pa=s&&yrs>=1&&h.buy.p>0?Math.pow(s.now/h.buy.p,1/yrs)-1:null;
+ const sub=[title(h.loc),h.uflag?"Unit":"House",h.use==="inv"?"Investment":"Home"].join(" · ");
+ const kv=(l,v,c="")=>`<div><span>${l}</span><b class="num ${c}">${v}</b></div>`;
+ return`<button class="pf-card" data-open="${h.id}"><i class="pf-bar" style="background:var(--pf${h.c+1})"></i><div class="pf-cm"><b class="pf-cn">${esc(pfName(h))}</b><span class="pf-cs">${esc(sub)}</span></div>
+ ${s?`<div class="pf-cv"><b class="num">${money(s.now)}</b><span class="num ${g>=0?"pos":"neg"}">${g>=0?"+":"−"}${money(Math.abs(g)).slice(0)}${pa!=null?` · ${signed(pa,1)} a yr`:""}</span></div>
+ <div class="pf-ck">${kv("Loan",m.bal?money(m.bal):"–")}${kv("Equity",money(m.eq))}${kv("LVR",m.bal?pct(m.lvr,0):"–")}${h.use==="inv"?kv("Yield",m.gross?pct(m.gross,1):"–"):kv("Bought",dday(pfDay(h.buy.d)).replace(/^\d+ /,""))}</div>`
+ :`<div class="pf-cv"><span class="pf-miss">Add the purchase date and price</span></div>`}<span class="pf-go" aria-hidden="true">›</span></button>`;}
+
+const pfAx=v=>!v?"$0":v>=1e6?"$"+(+(v/1e6).toFixed(2))+"m":"$"+Math.round(v/1e3)+"k";
+// Stacked area of every visible home's value, the dashed line of what you paid, hover for the month
+function pfChart(){const box=$("pfChart");if(!box)return;const L=PF.props.filter(h=>PFS[h.id]&&!PFV.hide[h.id]);
+ const all=PF.props.filter(h=>PFS[h.id]);if(!all.length){box.innerHTML="";return;}
+ let i0=Math.min(...all.map(h=>PFS[h.id].ib));if(PFV.range==="1")i0=Math.max(i0,TL-12);else if(PFV.range==="5")i0=Math.max(i0,TL-60);if(TL-i0<2)i0=Math.max(0,TL-2);
+ const W=Math.max(300,box.clientWidth||800),H=W<560?230:300,l=W<560?44:58,r=12,t=14,b=26,cum=[],paid=[];
+ for(let i=i0;i<=TL;i++){let c=0;const row=[];for(const h of L){const v=PFS[h.id].v[i]||0;row.push([c,c+v]);c+=v;}cum.push(row);
+  let p=0;for(const h of L)if(PFS[h.id].v[i]!=null)p+=h.buy.p;paid.push(p);}
+ const top=Math.max(1,...cum.map(rw=>rw.length?rw[rw.length-1][1]:0),...paid);
+ const step=(()=>{const raw=top/4,mg=Math.pow(10,Math.floor(Math.log10(raw)));for(const m of[1,2,2.5,5,10])if(raw<=m*mg)return m*mg;return 10*mg;})(),ymax=Math.ceil(top*1.06/step)*step;
+ const N=TL-i0,x=i=>l+(i-i0)/N*(W-l-r),y=v=>t+(1-v/ymax)*(H-t-b);
+ let g="";for(let v=0;v<=ymax+1;v+=step)g+=`<line x1="${l}" x2="${W-r}" y1="${y(v)}" y2="${y(v)}" class="pf-gl"/><text x="${l-8}" y="${y(v)+4}" text-anchor="end" class="pf-ax">${pfAx(v)}</text>`;
+ const yrsN=N/12,every=yrsN>20?5:yrsN>8?2:1;
+ for(let i=i0;i<=TL;i++){const[yy,mm]=MS.m[i].split("-");if(N<=14?true:mm==="01"&&(+yy)%every===0){if(N<=14&&(+mm-1)%3)continue;
+  g+=`<text x="${x(i)}" y="${H-6}" text-anchor="middle" class="pf-ax">${N<=14?MON[+mm-1]+" "+yy.slice(2):yy}</text>`;}}
+ let areas="";L.forEach((h,k)=>{let up="",dn="",on=false,seg=[];
+  const flush=()=>{if(seg.length<1)return;up=seg.map(([i,a,b2],j)=>(j?"L":"M")+x(i).toFixed(1)+","+y(b2).toFixed(1)).join("");dn=seg.slice().reverse().map(([i,a])=>"L"+x(i).toFixed(1)+","+y(a).toFixed(1)).join("");
+   areas+=`<path d="${up}${dn}Z" style="fill:var(--pf${h.c+1})" class="pf-ar"/><path d="${up}" class="pf-edge"/>`;seg=[];};
+  for(let i=i0;i<=TL;i++){const held=PFS[h.id].v[i]!=null,[a,b2]=cum[i-i0][k];if(held)seg.push([i,a,b2]);else flush();}flush();});
+ let pd="";for(let i=i0;i<=TL;i++){const v=paid[i-i0];pd+=(i===i0?"M":"L")+x(i).toFixed(1)+","+y(v).toFixed(1);if(i<TL&&paid[i+1-i0]!==v)pd+="L"+x(i+1).toFixed(1)+","+y(v).toFixed(1);}
+ const tot=cum[N].length?cum[N][cum[N].length-1][1]:0;
+ box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Estimated value of your homes over time">${g}${areas}<path d="${pd}" class="pf-paid"/>
+  ${L.length?`<circle cx="${x(TL)}" cy="${y(tot)}" r="4" class="pf-end"/>`:""}<line class="pf-x" id="pfX" y1="${t}" y2="${H-b}" visibility="hidden"/><rect x="${l}" y="${t}" width="${W-l-r}" height="${H-t-b}" fill="transparent" id="pfHit"/></svg><div class="pf-tip" id="pfTip" hidden></div>`;
+ const hit=$("pfHit"),tip=$("pfTip"),xl=$("pfX");
+ const mv=e=>{const bx=box.getBoundingClientRect(),px=(e.touches?e.touches[0].clientX:e.clientX)-bx.left,i=Math.max(i0,Math.min(TL,Math.round(i0+(px-l)/(W-l-r)*N)));
+  xl.setAttribute("x1",x(i));xl.setAttribute("x2",x(i));xl.setAttribute("visibility","visible");
+  const rows=L.filter(h=>PFS[h.id].v[i]!=null).reverse(),sum=rows.reduce((s,h)=>s+PFS[h.id].v[i],0);
+  tip.innerHTML=`<b>${MON[+MS.m[i].slice(5)-1]} ${MS.m[i].slice(0,4)}</b>${rows.map(h=>`<span><i style="background:var(--pf${h.c+1})"></i>${esc(pfName(h))}<em class="num">${money(PFS[h.id].v[i])}</em></span>`).join("")}
+   <span class="tot">Total<em class="num">${money(sum)}</em></span><span class="pd">You paid<em class="num">${money(paid[i-i0])}</em></span>`;
+  tip.hidden=false;const tw=tip.offsetWidth;let lx=x(i)+14;if(lx+tw>W)lx=x(i)-tw-14;tip.style.left=Math.max(0,lx)+"px";};
+ hit.addEventListener("mousemove",mv);hit.addEventListener("touchmove",mv,{passive:true});hit.addEventListener("touchstart",mv,{passive:true});
+ hit.addEventListener("mouseleave",()=>{tip.hidden=true;xl.setAttribute("visibility","hidden");});}
+
+// ---------- one home: drawer with Value / Loan and rent / Details ----------
+function pfDrawer(){let d=$("pfDr");const h=PF.props.find(x=>x.id===PFV.open);
+ if(!h){if(d){d.classList.remove("on");document.body.classList.remove("pf-lock");}return;}
+ if(!d){d=document.createElement("div");d.id="pfDr";d.className="pf-dr";document.body.appendChild(d);}
+ const s=PFS[h.id],T=PFV.tab;
+ d.innerHTML=`<div class="pf-scrim" data-pf="close"></div><aside class="pf-panel" role="dialog" aria-label="${esc(pfName(h))}">
+ <div class="pf-ph"><i class="pf-bar" style="background:var(--pf${h.c+1})"></i><div><input class="pf-nm" data-f="name" value="${esc(h.name)}" placeholder="${esc(pfName({...h,name:""}))}" aria-label="Name"><span class="pf-cs">${esc(h.st?`${pfName({...h,name:""})}, ${title(h.loc)}`:title(h.loc))}</span></div><button class="pf-x" data-pf="close" aria-label="Close">×</button></div>
+ <div class="pf-tabs" role="tablist">${[["value","Value"],["money","Loan and rent"],["det","Details"]].map(([k,l])=>`<button role="tab" data-tab2="${k}" aria-selected="${T===k}">${l}</button>`).join("")}</div>
+ <div class="pf-body">${T==="value"?pfValTab(h,s):T==="money"?pfMoneyTab(h,s):pfDetTab(h,s)}</div>
+ <div class="pf-pf"><button class="pf-lk neg" data-pf="del">Remove this home</button></div></aside>`;
+ d.classList.add("on");document.body.classList.add("pf-lock");
+ if(T==="value"&&s)pfMini(h,s);}
+const pfF=(lab,f,v,o={})=>`<label class="pf-f${o.w?" w":""}"><span>${lab}</span><input data-f="${f}" ${o.type==="date"?`type="date"`:`type="text" inputmode="decimal"`} value="${v==null?"":esc(o.type==="date"?v:o.money?Number(v).toLocaleString("en-AU"):v)}" placeholder="${o.ph||""}">${o.suf?`<em>${o.suf}</em>`:""}${o.hint?`<small>${o.hint}</small>`:""}</label>`;
+function pfValTab(h,s){if(!s)return`<p class="pf-empty2">Add the purchase date and price under Details to see an estimate.</p>${pfDetTab(h,s)}`;
+ const a=h.adj,bp=pfBedPct(h),A=s.anchors,step=(k,l,pc,pk,auto)=>`<div class="pf-step"><span class="l">${l}</span><span class="pf-sp"><button data-st="${k}" data-d="-1" aria-label="Fewer">−</button><b class="num">${a[k]>0?"+":""}${a[k]||0}</b><button data-st="${k}" data-d="1" aria-label="More">+</button></span><label class="pf-pc"><input data-f="${pk}" type="text" inputmode="decimal" value="${pc}"><em>% each</em></label>${auto?`<small>${auto}</small>`:""}</div>`;
+ return`<div class="pf-est"><span class="l">Estimated value</span><b class="num">${money(s.now)}</b><span class="s">Likely ${money(s.lo)} to ${money(s.hi)} · <span class="pf-ev ${s.ev}">${{good:"Good evidence",fair:"Fair evidence",rough:"Rough"}[s.ev]}</span></span>
+ <p class="pf-how">${dollars(s.an.p)} (${s.an.t.toLowerCase()}, ${dday(s.an.d).replace(/^\d+ /,"")}) moved with ${s.share>=.8?`the ${esc(title(h.loc))} median ${pfSeg(h)} price`:`the ${esc(title(h.loc))} median where it has enough sales, else the regional median`} since then${s.adj?`, plus ${money(s.adj)} for your changes`:""}. Condition and the particular home can move it either way.</p></div>
+ <div class="pf-mini" id="pfMini"></div>
+ <h4 class="pf-t4">Start from</h4><div class="pf-anc">${A.slice().reverse().map(x=>`<label class="pf-ar2"><input type="radio" name="pfAn" value="${x.k}" ${s.an.k===x.k?"checked":""}><span><b>${x.t}</b><small>${dday(x.d)}</small></span><b class="num">${dollars(x.p)}</b></label>`).join("")}
+  <label class="pf-ar2"><input type="radio" name="pfAn" value="auto" ${h.anchor==="auto"?"checked":""}><span><b>Always the latest</b><small>Moves to a new sale or valuation automatically</small></span></label></div>
+ <div class="pf-row">${pfF("Your own valuation","val.p",h.val&&h.val.p,{money:1,ph:"e.g. a bank or agent figure"})}${pfF("Valued on","val.d",h.val&&h.val.d,{type:"date"})}</div>
+ <h4 class="pf-t4">Changes since then</h4><p class="pf-sm">Bedrooms, bathrooms or car spaces added (or removed) after the starting price, and anything else as a percentage.</p>
+ ${step("beds","Bedrooms",bp.auto?Math.round(bp.v*100):h.adj.pb,"adj.pb",bp.auto&&bp.b?`From rents of ${bp.b} v ${bp.b+1} bedroom ${pfSeg(h)}s in postcode ${bp.pc}`:"")}
+ ${step("baths","Bathrooms",a.pba,"adj.pba")}${step("cars","Car spaces",a.pc,"adj.pc")}
+ <div class="pf-row">${pfF("Anything else","adj.other",a.other||"",{suf:"%",ph:"0",hint:"Renovation, condition, a new kitchen"})}${pfF("Done on","adj.d",a.d,{type:"date"})}</div>`;}
+function pfMoneyTab(h,s){const m=pfMoney(h,s&&s.now),inv=h.use==="inv",c=pfCgt(h,s&&s.now),L=h.loan;
+ const sug=pfRentSug(h);
+ return`<div class="seg pf-use" role="group" aria-label="Use"><button data-use="home" aria-pressed="${!inv}">Home I live in</button><button data-use="inv" aria-pressed="${inv}">Investment</button></div>
+ <h4 class="pf-t4">Loan</h4><div class="pf-row">${pfF("Balance owing","loan.bal",L.bal,{money:1,ph:"0"})}${pfF("Interest rate","loan.rate",L.rate,{suf:"%"})}</div>
+ <div class="pf-row"><div class="pf-f"><span>Repayments</span><div class="seg"><button data-io="0" aria-pressed="${!L.io}">P&amp;I</button><button data-io="1" aria-pressed="${!!L.io}">Interest only</button></div></div>${L.io?"":pfF("Years left","loan.yrs",L.yrs)}</div>
+ <div class="pf-row">${pfF("Offset balance","loan.off",L.off,{money:1,ph:"0"})}${pfF("Repayment a month","loan.rep",L.rep,{money:1,ph:m.rep?Math.round(m.rep).toLocaleString("en-AU"):"",hint:L.rep?"Your figure":"Worked out; type your own to override"})}</div>
+ ${inv?`<h4 class="pf-t4">Rent and costs</h4><div class="pf-row">${pfF("Rent a week","rent.pw",h.rent.pw,{money:1,ph:sug?String(sug.v):""})}${pfF("Agent fee","rent.fee",h.rent.fee,{suf:"%"})}</div>
+ ${sug?`<p class="pf-sm">Typical new lease for ${sug.lab}: <b>${dollars(sug.v)} a week</b> (middle half ${dollars(sug.lo)} to ${dollars(sug.hi)}). ${h.rent.pw?"":`<button class="pf-lk" data-pf="usesug">Use it</button>`}</p>`:""}
+ <div class="pf-row">${pfF("Other costs a year","rent.costs",h.rent.costs,{money:1,ph:"0",hint:"Strata, council rates, insurance, repairs"})}</div>`:""}
+ <div class="pf-sum">${[["Equity",money(m.eq)],["Loan to value",m.bal?pct(m.lvr,0):"–"],["Interest a year",m.bal?dollars(m.int):"–"],
+  ...(inv?[["Gross yield",m.gross?pct(m.gross,1):"–"],["Net yield",m.net!=null?pct(m.net,1):"–"]]:[]),["Cash flow a month",(m.cash>=0?"+":"−")+dollars(Math.abs(m.cash)).replace("−","")]].map(([l,v])=>`<div><span>${l}</span><b class="num">${v}</b></div>`).join("")}</div>
+ ${inv&&c?`<div class="pf-cgt"><span class="l">Rough capital gains tax if sold today</span><b class="num">${dollars(c.tax)}</b><p class="pf-sm">${c.gain>0?`Gain of ${dollars(c.gain)} after selling costs (about ${dollars(c.sell)}) on a cost base of ${dollars(c.cb)} (price, stamp duty, legal costs)${c.held?", halved for holding over a year":""}, taxed at ${pct(c.rate,0)}${c.own?" from your income in Your budget":" (set your income in Your budget for your own rate)"}.`:`No gain once selling costs (about ${dollars(c.sell)}) and the cost base of ${dollars(c.cb)} (price, stamp duty, legal costs) are taken off: a loss of ${dollars(-c.gain)} you could carry forward against future gains.`} Current rules; the changes from 1 July 2027 aren't included. Not tax advice.</p></div>`:""}
+ ${!inv?`<p class="pf-sm">A home you live in is usually free of capital gains tax.</p>`:""}`;}
+function pfRentSug(h){const R=window.RB&&window.RB.r,pc=pfPc(h);if(!R||!pc)return null;const b=Math.min(4,h.det.beds||(h.uflag?2:3)),k=`${pc}|${pfSeg(h)}|${b}`,r=R[k];
+ if(!r||r[0]<6)return null;return{v:r[2],lo:r[1],hi:r[3],lab:`${b}${b===4?"+":""} bedroom ${pfSeg(h)}s in postcode ${pc}${h.det.beds?"":" (set bedrooms under Details)"}`};}
+function pfDetTab(h,s){const d=h.det,rec=pfRec(h),last=rec?rec[7].filter(x=>!x[3]).slice(-1)[0]:null;
+ return`<h4 class="pf-t4">Purchase</h4><div class="pf-row">${pfF("Bought on","buy.d",h.buy.d,{type:"date"})}${pfF("Price paid","buy.p",h.buy.p,{money:1})}</div>
+ ${last&&!(h.buy.p>0)?`<p class="pf-sm">Last recorded sale: ${dollars(last[2])} on ${dday(last[0])}. <button class="pf-lk" data-pf="uselast">Use it</button></p>`:""}
+ <div class="pf-row"><div class="pf-f"><span>Type</span><div class="seg"><button data-ut="0" aria-pressed="${!h.uflag}">House</button><button data-ut="1" aria-pressed="${h.uflag}">Unit or apartment</button></div></div></div>
+ <h4 class="pf-t4">The home</h4><div class="pf-row three">${pfF("Bedrooms","det.beds",d.beds)}${pfF("Bathrooms","det.baths",d.baths)}${pfF("Car spaces","det.cars",d.cars)}</div>
+ <div class="pf-row">${pfF(h.uflag?"Lot size":"Land size","det.land",d.land!=null?d.land:rec&&rec[6]?rec[6]:"",{suf:"m²"})}${pfF("Distance to the beach or water","det.beach",d.beach,{suf:"m"})}</div>
+ <div class="pf-row"><div class="pf-f w"><span>Views</span><div class="seg">${[["","None"],["part","Glimpse"],["water","Water view"],["elev","Elevated, district"]].map(([k,l])=>`<button data-view="${k}" aria-pressed="${d.view===k}">${l}</button>`).join("")}</div></div></div>
+ <p class="pf-sm">The estimate starts from this home's own price, which already reflects its views, position and size. These details set the bedroom figures and suggested rent, and will feed a finer estimate later.</p>`;}
+// this home alone: value line from the purchase month, recorded sales as dots
+function pfMini(h,s){const box=$("pfMini");if(!box)return;const W=Math.max(280,box.clientWidth||440),H=150,l=8,r=8,t=12,b=20,i0=s.ib,N=Math.max(2,TL-i0);
+ const vs=s.v.slice(i0).filter(v=>v!=null),rec=pfRec(h),dots=(rec?rec[7].filter(x=>!x[3]):[]).filter(x=>pfMi(x[0])>=i0),lo=Math.min(...vs,s.lo,...dots.map(x=>x[2]))*.97,hi=Math.max(...vs,s.hi,...dots.map(x=>x[2]))*1.03;
+ const x=i=>l+(i-i0)/N*(W-r-70-l),y=v=>t+(1-(v-lo)/(hi-lo))*(H-t-b);let d="";for(let i=i0;i<=TL;i++)d+=(i===i0?"M":"L")+x(i).toFixed(1)+","+y(s.v[i]).toFixed(1);
+ const yl=W-r-70;
+ box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true"><path d="${d}" fill="none" style="stroke:var(--pf${h.c+1})" stroke-width="2"/>
+ ${dots.map(z=>`<circle cx="${x(pfMi(z[0]))}" cy="${y(z[2])}" r="4.5" class="pf-dot"><title>Sold ${dollars(z[2])}, ${dday(z[0])}</title></circle>`).join("")}
+ <line x1="${yl}" x2="${yl}" y1="${y(s.hi)}" y2="${y(s.lo)}" style="stroke:var(--pf${h.c+1})" stroke-width="6" stroke-linecap="round" opacity=".25"/><circle cx="${yl}" cy="${y(s.now)}" r="4.5" style="fill:var(--pf${h.c+1})" class="pf-end"/>
+ <text x="${yl+12}" y="${y(s.now)+4}" class="pf-ax pf-ink">${money(s.now)}</text><text x="${yl+12}" y="${y(s.hi)+4}" class="pf-ax">${money(s.hi)}</text><text x="${yl+12}" y="${y(s.lo)+4}" class="pf-ax">${money(s.lo)}</text>
+ <text x="${l}" y="${H-5}" class="pf-ax">${MON[+MS.m[i0].slice(5)-1]} ${MS.m[i0].slice(0,4)}</text><text x="${yl}" y="${H-5}" text-anchor="middle" class="pf-ax">Now</text></svg>`;}
+
+// ---------- add a home ----------
+function pfModal(){let m=$("pfAdd");const A=PFV.add;if(!A){if(m)m.remove();return;}
+ if(!m){m=document.createElement("div");m.id="pfAdd";m.className="pf-dr on";document.body.appendChild(m);}
+ const step1=`<label class="pf-f w"><span>Address or suburb</span><input id="pfQ" autocomplete="off" placeholder="e.g. 12 Smith St, Newtown" value="${esc(A.q||"")}"></label><ul class="pf-sug" id="pfSug">${(A.sugg||[]).map((x,i)=>`<li><button data-sg="${i}">${x.type==="sub"?`${esc(title(x.loc))}<span>suburb</span>`:`${x.unit?esc(x.unit)+"/":""}${x.num?esc(x.num)+" ":""}${esc(x.st)}, ${esc(title(x.loc))}${x.num?"":"<span>add the number</span>"}`}</button></li>`).join("")}</ul>
+  ${A.pick?`<div class="pf-pick"><p class="pf-sm">${A.pick.length} homes at this number. Which one?</p>${A.pick.slice(0,80).map((p,i)=>`<button data-pk="${i}">${p[2]?esc(p[2])+"/":""}${esc(p[1])} ${esc(A.R.st[p[0]])}<span>${p[5]===1?"unit":"house"} · ${p[7].length} ${p[7].length===1?"sale":"sales"}, last ${money(p[7][p[7].length-1][2])} in ${dday(p[7][p[7].length-1][0]).slice(-4)}</span></button>`).join("")}</div>`:""}
+  <p class="pf-sm">Pick a suburb if the home has no recorded sale (a new build) or you'd rather not give the street.</p>`;
+ const h=A.h,step2=h?`<div class="pf-found"><b>${esc(pfName(h))}</b><span>${esc(title(h.loc))}${A.rec?` · ${A.rec[7].length} recorded ${A.rec[7].length===1?"sale":"sales"}`:h.st?" · no recorded sale at this address":" · suburb only"}</span><button class="pf-lk" data-pf="back">Change</button></div>
+  <div class="pf-row"><div class="pf-f"><span>Type</span><div class="seg"><button data-ut="0" aria-pressed="${!h.uflag}">House</button><button data-ut="1" aria-pressed="${h.uflag}">Unit</button></div></div>
+  <div class="pf-f"><span>Use</span><div class="seg"><button data-use="home" aria-pressed="${h.use==="home"}">Home I live in</button><button data-use="inv" aria-pressed="${h.use==="inv"}">Investment</button></div></div></div>
+  <div class="pf-row">${pfF("Bought on","buy.d",h.buy.d,{type:"date"})}${pfF("Price paid","buy.p",h.buy.p,{money:1})}</div>
+  ${A.rec&&A.last?`<p class="pf-sm">Last recorded sale: ${dollars(A.last[2])} on ${dday(A.last[0])}. ${h.buy.p===A.last[2]?"Filled in above.":`<button class="pf-lk" data-pf="uselast">Use it</button>`}</p>`:""}
+  <div class="pf-row">${pfF("Name (optional)","name",h.name,{ph:"e.g. The flat"})}</div>
+  <p class="pf-ctas"><button class="pf-btn pri" data-pf="save" ${pfDay(h.buy.d)!=null&&h.buy.p>0?"":"disabled"}>Add to portfolio</button><button class="pf-btn" data-pf="cancel">Cancel</button></p>`:"";
+ m.innerHTML=`<div class="pf-scrim" data-pf="cancel"></div><div class="pf-modal" role="dialog" aria-label="Add a property"><div class="pf-ph"><div><p class="pf-kick">Add a property</p><h3>${h?"The purchase":"Where is it?"}</h3></div><button class="pf-x" data-pf="cancel" aria-label="Close">×</button></div>${h?step2:step1}</div>`;
+ document.body.classList.add("pf-lock");
+ if(!h){const q=$("pfQ");q.focus();q.setSelectionRange(q.value.length,q.value.length);}}
+async function pfPickSugg(x){const A=PFV.add,h=pfNew();h.loc=x.loc;
+ if(x.type==="addr"){h.st=x.st;h.num=x.num||"";h.unit=x.unit||"";
+  try{if(!(window.PR&&window.PR[x.loc]))await loadJS(`data/props/${pslug(x.loc)}.js`);}catch(e){}
+  const R=window.PR&&window.PR[x.loc];if(R&&x.num){const nk=norm(x.st).join(" "),sis=new Set(R.st.map((s,i)=>norm(s).join(" ")===nk?i:-1).filter(i=>i>=0));
+   let c=R.p.filter(p=>sis.has(p[0])&&String(p[1]).toUpperCase()===String(x.num).toUpperCase());if(x.unit)c=c.filter(p=>uNorm(p[2])===uNorm(x.unit));
+   if(c.length>1){A.pick=c;A.R=R;A.base=h;pfModal();return;}if(c.length===1)return pfPickRec(h,c[0],R);}
+  else if(!x.num){A.q=`${x.st}, ${title(x.loc)}`;A.sugg=[];pfModal();const q=$("pfQ");q.value="";q.placeholder=`Add the number: e.g. 12 ${x.st}`;return;}}
+ h.uflag=false;A.h=h;A.rec=null;pfModal();}
+function pfPickRec(h,p,R){const A=PFV.add;h.st=R.st[p[0]];h.num=p[1];h.unit=p[2]||"";h.uflag=p[5]===1;if(p[6])h.det.land=p[6];
+ const last=p[7].filter(x=>!x[3]).slice(-1)[0]||null;A.rec=p;A.last=last;const lx=p[7][p[7].length-1];h.rk=[lx[0],lx[2]];if(last){h.buy.d=pfIso(last[0]);h.buy.p=last[2];}A.h=h;A.pick=null;pfModal();}
+function pfDemo(){const mk=(loc,uflag,use,d,p,o={})=>{const h=pfNew();Object.assign(h,{loc,uflag,use,demo:true,buy:{d,p},...o});PF.props.push(h);return h;};
+ const okL=l=>byKey[l+"|house"]||byKey[l+"|unit"];const a=okL("NEWTOWN")?"NEWTOWN":Object.keys(bbox)[0],b=okL("BONDI")?"BONDI":a,c=okL("WOLLONGONG")?"WOLLONGONG":a;
+ mk(a,false,"home","2016-03-12",1150000,{name:"Our place",loan:{bal:620000,rate:6.1,io:false,yrs:19,off:45000,rep:null}});
+ mk(b,true,"inv","2020-08-21",780000,{name:"Bondi unit",det:{beds:2,baths:1,cars:1,land:null,view:"",beach:600},loan:{bal:560000,rate:6.5,io:true,yrs:25,off:0,rep:null},rent:{pw:1020,fee:6.5,costs:7200}});
+ mk(c,true,"inv","2023-02-10",640000,{name:"Wollongong unit",det:{beds:2,baths:1,cars:1,land:null,view:"",beach:null},loan:{bal:505000,rate:6.4,io:false,yrs:28,off:0,rep:null},rent:{pw:600,fee:7,costs:5800}});
+ pfSave();pfUI();}
+
+// ---------- events ----------
+const pfSet=(h,f,raw)=>{const[a,b]=f.split(".");const isD=/\.d$/.test(f);let v=isD?raw:f==="name"?raw.trim():pfNum(raw);
+ if(a==="val"){h.val=h.val||{d:"",p:null};h.val[b]=v;if(!(h.val.p>0)&&!h.val.d)h.val=null;}else if(b)h[a][b]=v;else h[a]=v;
+ if(f==="adj.pb"&&v!=null)h.adj.pb=v;};
+function pfRefresh(h,soft){PFS[h.id]=pfCalc(h);pfSave();if(soft)return;const scroll=document.querySelector(".pf-body")&&document.querySelector(".pf-body").scrollTop;pfDrawer();const b=document.querySelector(".pf-body");if(b&&scroll)b.scrollTop=scroll;pfRender();}
+document.addEventListener("click",e=>{if(view!=="portfolio")return;const t=e.target.closest("button,[data-pf],input[type=radio]");if(!t)return;
+ const H=()=>PF.props.find(x=>x.id===PFV.open),A=PFV.add,ah=A&&A.h,cur=ah||H();const k=t.dataset.pf;
+ if(k==="add"){PFV.add={q:"",sugg:[]};PFV.menu=false;pfModal();return;}
+ if(k==="demo"){pfDemo();return;}
+ if(k==="menu"){PFV.menu=!PFV.menu;pfUI();return;}
+ if(k==="export"){const blob=new Blob([JSON.stringify({plotted:"portfolio",saved:pfToday(),...PF},null,1)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`plotted-portfolio-${pfToday()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);PFV.menu=false;pfRender();return;}
+ if(k==="clear"){if(PF.props.some(h=>!h.demo)&&!confirm("Remove every home from your portfolio in this browser? Export a file first if you want a copy."))return;PF={v:1,props:[]};pfSave();PFV.menu=false;PFV.open=null;pfDrawer();pfUI();return;}
+ if(k==="close"){PFV.open=null;pfDrawer();return;}
+ if(k==="cancel"){PFV.add=null;document.body.classList.remove("pf-lock");pfModal();return;}
+ if(k==="back"){PFV.add={q:"",sugg:[]};pfModal();return;}
+ if(k==="save"&&ah){PF.props.push(ah);pfSave();PFV.add=null;document.body.classList.remove("pf-lock");pfModal();pfUI();return;}
+ if(k==="del"){const h=H();if(h&&confirm(`Remove ${pfName(h)} from your portfolio?`)){PF.props=PF.props.filter(x=>x!==h);pfSave();PFV.open=null;pfDrawer();pfUI();}return;}
+ if(k==="uselast"&&cur){const rec=A&&A.rec||pfRec(cur),last=rec&&rec[7].filter(x=>!x[3]).slice(-1)[0];if(last){cur.buy.d=pfIso(last[0]);cur.buy.p=last[2];}if(ah)pfModal();else pfRefresh(cur);return;}
+ if(k==="usesug"&&cur){const s=pfRentSug(cur);if(s){cur.rent.pw=s.v;pfRefresh(cur);}return;}
+ if(t.dataset.sg!=null&&A){pfPickSugg(A.sugg[+t.dataset.sg]);return;}
+ if(t.dataset.pk!=null&&A){pfPickRec(A.base,A.pick[+t.dataset.pk],A.R);return;}
+ if(t.dataset.open){PFV.open=t.dataset.open;PFV.tab=PFS[t.dataset.open]?"value":"det";pfDrawer();return;}
+ if(t.dataset.tab2){PFV.tab=t.dataset.tab2;pfDrawer();return;}
+ if(t.dataset.hide){PFV.hide[t.dataset.hide]=!PFV.hide[t.dataset.hide];pfRender();return;}
+ if(t.dataset.rng){PFV.range=t.dataset.rng;pfRender();return;}
+ if(!cur)return;
+ if(t.dataset.ut!=null){cur.uflag=t.dataset.ut==="1";if(ah)pfModal();else pfRefresh(cur);return;}
+ if(t.dataset.use){cur.use=t.dataset.use;if(ah)pfModal();else{pfRefresh(cur);if(cur.use==="inv")ckRents().then(()=>pfDrawer());}return;}
+ if(t.dataset.io!=null){cur.loan.io=t.dataset.io==="1";pfRefresh(cur);return;}
+ if(t.dataset.view!=null){cur.det.view=t.dataset.view;pfRefresh(cur);return;}
+ if(t.dataset.st){cur.adj[t.dataset.st]=Math.max(-3,Math.min(5,(cur.adj[t.dataset.st]||0)+(+t.dataset.d)));if(cur.adj[t.dataset.st]===0&&false)return;
+  if(!cur.adj.d)cur.adj.d=pfToday();pfRefresh(cur);return;}
+ if(t.name==="pfAn"){cur.anchor=t.value;pfRefresh(cur);return;}});
+let pfQT=0,pfQS=0;
+document.addEventListener("input",e=>{const t=e.target;if(view!=="portfolio")return;
+ if(t.id==="pfQ"){const A=PFV.add;A.q=t.value;clearTimeout(pfQT);pfQT=setTimeout(async()=>{const my=++pfQS,r=await suggest(t.value);if(my!==pfQS||!PFV.add)return;A.sugg=r;A.pick=null;
+  const ul=$("pfSug");if(ul)ul.innerHTML=r.map((x,i)=>`<li><button data-sg="${i}">${x.type==="sub"?`${esc(title(x.loc))}<span>suburb</span>`:`${x.unit?esc(x.unit)+"/":""}${x.num?esc(x.num)+" ":""}${esc(x.st)}, ${esc(title(x.loc))}${x.num?"":"<span>add the number</span>"}`}</button></li>`).join("");},140);return;}
+ const f=t.dataset.f;if(!f)return;const A=PFV.add,cur=A&&A.h||PF.props.find(x=>x.id===PFV.open);if(!cur)return;
+ if(t.type!=="date"&&/\.(p|bal|off|rep|pw|costs)$/.test(f))liveFmt(t);
+ pfSet(cur,f,t.value);
+ if(A&&A.h){const sv2=document.querySelector('[data-pf="save"]');if(sv2)sv2.disabled=!(pfDay(cur.buy.d)!=null&&cur.buy.p>0);return;}
+ clearTimeout(t._pf);t._pf=setTimeout(()=>{pfRefresh(cur,true);pfLive(cur);},250);});
+document.addEventListener("change",e=>{const t=e.target;if(view!=="portfolio")return;
+ if(t.id==="pfImp"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!Array.isArray(o.props))throw 0;
+  const ok=o.props.filter(h=>h&&h.loc&&h.buy);for(const h of ok){const base=pfNew();for(const k of["buy","adj","loan","rent","det"])h[k]={...base[k],...(h[k]||{})};h.id=h.id||base.id;}
+  if(PF.props.length&&!confirm(`Replace your ${PF.props.length} saved ${PF.props.length===1?"home":"homes"} with the ${ok.length} in this file?`))return;
+  PF={v:1,props:ok};pfSave();PFV.menu=false;pfUI();}catch(err){alert("That file isn't a Plotted portfolio export.");}};rd.readAsText(t.files[0]);return;}
+ const f=t.dataset.f;if(!f)return;const cur=PF.props.find(x=>x.id===PFV.open);if(cur&&!(PFV.add&&PFV.add.h))pfRefresh(cur);});
+// while typing: refresh the figures in place, rebuild only on blur (change) so the field keeps focus
+function pfLive(h){const s=PFS[h.id],est=document.querySelector(".pf-est b");if(est&&s)est.textContent=money(s.now);
+ const sum=document.querySelector(".pf-sum");if(sum&&PFV.tab==="money"){const tmp=document.createElement("div");tmp.innerHTML=pfMoneyTab(h,s);const n=tmp.querySelector(".pf-sum");if(n)sum.innerHTML=n.innerHTML;}}
+addEventListener("keydown",e=>{if(e.key!=="Escape"||view!=="portfolio")return;if(PFV.add){PFV.add=null;document.body.classList.remove("pf-lock");pfModal();}else if(PFV.open){PFV.open=null;pfDrawer();}});
+let pfRT=0;addEventListener("resize",()=>{if(view!=="portfolio")return;clearTimeout(pfRT);pfRT=setTimeout(()=>{pfChart();const h=PF.props.find(x=>x.id===PFV.open);if(h&&PFS[h.id]&&PFV.tab==="value")pfMini(h,PFS[h.id]);},150);});
+{const st=showTab;showTab=function(t,how){if(t!=="portfolio"){PFV.open=null;PFV.add=null;const d=$("pfDr");if(d)d.classList.remove("on");const m=$("pfAdd");if(m)m.remove();document.body.classList.remove("pf-lock");}st(t,how);};}
 </script></body></html>
